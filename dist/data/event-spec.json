@@ -1,0 +1,172 @@
+{
+  "version": "0.2.0",
+  "status": "實作草案，與已確認設計分開；可直接作為首版資料契約",
+  "required_event_fields": [
+    "id",
+    "title",
+    "text",
+    "kind",
+    "bindings",
+    "options"
+  ],
+  "required_option_fields": [
+    "id",
+    "label",
+    "requires",
+    "effects",
+    "result_text"
+  ],
+  "kinds": [
+    "normal",
+    "followup",
+    "former_companion",
+    "building"
+  ],
+  "allowed_effect_operations": {
+    "resource": "調整 fuel、scrap、medicine；支付必須足額，不得扣為負數。",
+    "world_minutes": "增加遊戲時間。",
+    "oracle": "擲指定神諭；每個結果只處理一次，抽取結果存入事件實例。",
+    "open_service": "開啟指定事件服務；garage 才能改造車輛，離開事件立即關閉。其他商店與旅館價格仍為草案。",
+    "recruit": "將事件人物加入隊伍，必須有空座位。",
+    "offer_recruit": "提出加入選項；沒有空位時不能直接加入。",
+    "combat": "轉交人物或車戰系統，具體戰鬥數值待實作，不以文字宣稱完成。",
+    "reveal_history": "使用本局既有世界歷史，不能重新抽取相互矛盾的歷史。",
+    "schedule_followup": "保存事件與人物引用，eligible_after_stop 至少為 origin_stop + 1。",
+    "heal": "回復生命值至上限；不是體力。",
+    "damage": "扣除目標生命值，歸零後交由失能規則處理。",
+    "stamina_cost": "操作前選擇體力足夠角色，不能扣負數。",
+    "travel_cost": "額外燃料成本，不增加旅程進度；不足時停止並轉入困境流程。",
+    "resource_loss": "遭遇損失扣至零，不得負值；缺油轉入停車流程。",
+    "attempt_escape": "交由戰鬥系統判定逃離，判定規則待實作。",
+    "npc_interaction": "先判斷 NPC 態度；敵對或掠奪直接開戰。其餘進入共用交談、交易、攻擊等互動；service 只在當次事件有效。",
+    "event_check": "使用 check 指定的事件檢定；依角色特性解鎖處理方式，成功失敗只執行一側 effects。難度與機率尚未定義，未實作前不得自動判成功。"
+  },
+  "runtime_state": [
+    "seed",
+    "progress",
+    "stop_index",
+    "world_minutes",
+    "resources",
+    "party",
+    "vehicle",
+    "world.history",
+    "departed_characters",
+    "pending_followups",
+    "current_stop"
+  ],
+  "event_instance_fields": [
+    "instance_id",
+    "event_id",
+    "stop_index",
+    "bound_actor_ids",
+    "oracle_results",
+    "resolved",
+    "selected_option_id"
+  ],
+  "provisional_defaults": {
+    "event_selection": "每格擲一次 road_event D100；可重複事件模板，但每次建立獨立實例",
+    "resolution_order": "依生成順序處理，選項只能結算一次；先檢查全部支付條件再套用效果",
+    "later_events": "開始停靠時快照可用的歷史後續；同次停靠新建立的後續不得納入追加事件。",
+    "followup_selection": "取消先前 20% 後續與 10% 重逢的優先抽取草案；尚待整合至好壞各半主表，未整合前不啟用這兩個模板。",
+    "followup_not_guaranteed": "未抽中的後續留待將來；不能在本次新增事件格追觸發",
+    "resource_failure": "完成當次停靠後的缺油搜索與結局規則待定，不沿用直接終局的草案；不保證找到燃料或新車。",
+    "garage": "暫定支付 2 scrap 恢復 10 車輛生命值；安裝公共背包內改裝支付 1 scrap 並占用格位。必須處於 garage 服務；實際數值可調",
+    "history": "外星入侵篇只生成 invasion_history 表；保存結果，其他背景歷史不得混入本篇",
+    "oracle_value_dispatch": "equipment 加入公共背包；vehicle 提出換車選擇且檢查座位、必要時遣散同伴，不自動安裝改裝；enemy 提供戰鬥特徵；ending 顯示並結束；其他 value 作為生成欄位",
+    "building_context": "建築探索與公路事件使用各自事件計數，保存外層停靠進度；共享 stop_index，進入建築不能讓同停靠的劇情後續提前合資格。建築結束後回到原公路停靠流程。此計數與返回方式為實作草案。"
+  },
+  "invariants": [
+    "同次停靠的事件沒有主從關係",
+    "後續事件只可在更晚的 stop_index 出現",
+    "已生成的人物保持身分與歷史",
+    "不保證有油或可用車輛",
+    "抵達 100 優先結束，不再生成停靠事件",
+    "瀏覽文字與選項不自行推進時間",
+    "改造僅限修車廠事件內",
+    "對話與神諭不呼叫 AI",
+    "建築探索不是新的公路前進；不自動套用 D10 行車與燃油消耗",
+    "NPC 態度為敵對或掠奪時直接開戰，優先於事件內交談、交易及招募選項"
+  ],
+  "not_implemented": [
+    "畫面與操作",
+    "遊戲狀態機",
+    "戰鬥結算",
+    "服務介面",
+    "存檔",
+    "完整歷史因果產生器",
+    "離隊與重逢態度的完整規則",
+    "100 個事件的服務、傷害、逃跑與睡眠處理器",
+    "夜間體力正式換算",
+    "歷史後續整合進 50% 好壞主表",
+    "公路建築入口及建築事件介面",
+    "共用 NPC 互動與態度分支",
+    "優缺點觸發與數值效果執行器",
+    "四屬性與 ESP 資源模型",
+    "超能力學習、使用與效果系統",
+    "建築事件檢定與 NPC 互動處理器"
+  ],
+  "confirmed_rules": {
+    "event_chain": {
+      "first_event_guaranteed": true,
+      "continuation_d100_thresholds": [
+        75,
+        50,
+        25
+      ],
+      "stop_on_first_failure": true,
+      "max_events": 4
+    },
+    "food_enabled": false,
+    "main_oracle": "100 個獨立結果，50 個有利、50 個不利",
+    "sleep": "全員無體力則無人守夜，全員睡眠；遇戰鬥敵方先攻一輪，受攻擊者醒來，未受攻擊者繼續睡",
+    "building_exploration": {
+      "enabled": true,
+      "entry": "公路事件遇到建築物後進入",
+      "oracle_target_entries": 100,
+      "die": "D100",
+      "continuation_d100_thresholds": [
+        75,
+        50,
+        25
+      ],
+      "max_events": 4,
+      "character_combat_can_trigger": true,
+      "presentation": "事件式，無步行地圖",
+      "content_status": "已建立 100 項通用事件，包含商店、危險、戰鬥、物資與無事發生"
+    },
+    "positive_events_can_have_hostile_npcs": true,
+    "variable_run_length_accepted": true,
+    "character_stats": {
+      "core_attribute_count": 4,
+      "hp_and_esp_are_not_core_attributes": true,
+      "characters_can_learn_psychic_powers": true,
+      "stamina_retained_as_separate_resource": true
+    },
+    "psychic_learning": {
+      "factors": [
+        "race",
+        "level"
+      ],
+      "profession_affects_learning": false
+    },
+    "character_combat_style": "一般 JRPG 指令式回合戰鬥，以 EarthBound 為參考，不增加額外即時操作或特殊戰鬥小遊戲"
+  },
+  "npc_identity": {
+    "default_generation": {
+      "name": "npc_name",
+      "nickname": "npc_nickname",
+      "attitude": "npc_attitude",
+      "race": "npc_race",
+      "profession": "npc_profession",
+      "flaw": "npc_flaw"
+    },
+    "display_name": "「{nickname}」{name}",
+    "apply_to": "所有新生成且可互動的 NPC，包括商人、技師、旅館人員與招募者；群體只為具名代表生成身分",
+    "persistence": "以 actor_id 保存姓名與外號，後續事件綁定同一 actor_id",
+    "template_field": "{npc.display_name}",
+    "uniqueness": "不同 NPC 可抽到同一組合，身分以 actor_id 區分；不把組合數當成獨特人物故事數",
+    "generation_extension": "姓名、外號、12 種族、20 職業與態度分別生成；身分保存"
+  },
+  "npc_behavior_spec": "data/npc-spec.json",
+  "trait_spec": "data/traits.json"
+}

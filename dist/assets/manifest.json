@@ -1,0 +1,1467 @@
+{
+  "style": "原創低解析度像素；整數座標 SVG，縮放不模糊",
+  "portraits": {
+    "human": "portraits/human.svg",
+    "alien": "portraits/alien.svg",
+    "mutant": "portraits/mutant.svg",
+    "synth": "portraits/synth.svg",
+    "uplift": "portraits/uplift.svg",
+    "chitin": "portraits/chitin.svg",
+    "mycelial": "portraits/mycelial.svg",
+    "crystal": "portraits/crystal.svg",
+    "amphibian": "portraits/amphibian.svg",
+    "mimic": "portraits/mimic.svg",
+    "symbiote": "portraits/symbiote.svg",
+    "lumen": "portraits/lumen.svg"
+  },
+  "characters": {
+    "human_driver": "characters/human_driver.svg",
+    "human_mechanic": "characters/human_mechanic.svg",
+    "human_medic": "characters/human_medic.svg",
+    "human_soldier": "characters/human_soldier.svg",
+    "human_scout": "characters/human_scout.svg",
+    "human_merchant": "characters/human_merchant.svg",
+    "human_scavenger": "characters/human_scavenger.svg",
+    "human_engineer": "characters/human_engineer.svg",
+    "human_researcher": "characters/human_researcher.svg",
+    "human_hacker": "characters/human_hacker.svg",
+    "human_hunter": "characters/human_hunter.svg",
+    "human_guard": "characters/human_guard.svg",
+    "human_courier": "characters/human_courier.svg",
+    "human_diplomat": "characters/human_diplomat.svg",
+    "human_historian": "characters/human_historian.svg",
+    "human_locksmith": "characters/human_locksmith.svg",
+    "human_demolition": "characters/human_demolition.svg",
+    "human_chemist": "characters/human_chemist.svg",
+    "human_electrician": "characters/human_electrician.svg",
+    "human_performer": "characters/human_performer.svg",
+    "alien_driver": "characters/alien_driver.svg",
+    "alien_mechanic": "characters/alien_mechanic.svg",
+    "alien_medic": "characters/alien_medic.svg",
+    "alien_soldier": "characters/alien_soldier.svg",
+    "alien_scout": "characters/alien_scout.svg",
+    "alien_merchant": "characters/alien_merchant.svg",
+    "alien_scavenger": "characters/alien_scavenger.svg",
+    "alien_engineer": "characters/alien_engineer.svg",
+    "alien_researcher": "characters/alien_researcher.svg",
+    "alien_hacker": "characters/alien_hacker.svg",
+    "alien_hunter": "characters/alien_hunter.svg",
+    "alien_guard": "characters/alien_guard.svg",
+    "alien_courier": "characters/alien_courier.svg",
+    "alien_diplomat": "characters/alien_diplomat.svg",
+    "alien_historian": "characters/alien_historian.svg",
+    "alien_locksmith": "characters/alien_locksmith.svg",
+    "alien_demolition": "characters/alien_demolition.svg",
+    "alien_chemist": "characters/alien_chemist.svg",
+    "alien_electrician": "characters/alien_electrician.svg",
+    "alien_performer": "characters/alien_performer.svg",
+    "mutant_driver": "characters/mutant_driver.svg",
+    "mutant_mechanic": "characters/mutant_mechanic.svg",
+    "mutant_medic": "characters/mutant_medic.svg",
+    "mutant_soldier": "characters/mutant_soldier.svg",
+    "mutant_scout": "characters/mutant_scout.svg",
+    "mutant_merchant": "characters/mutant_merchant.svg",
+    "mutant_scavenger": "characters/mutant_scavenger.svg",
+    "mutant_engineer": "characters/mutant_engineer.svg",
+    "mutant_researcher": "characters/mutant_researcher.svg",
+    "mutant_hacker": "characters/mutant_hacker.svg",
+    "mutant_hunter": "characters/mutant_hunter.svg",
+    "mutant_guard": "characters/mutant_guard.svg",
+    "mutant_courier": "characters/mutant_courier.svg",
+    "mutant_diplomat": "characters/mutant_diplomat.svg",
+    "mutant_historian": "characters/mutant_historian.svg",
+    "mutant_locksmith": "characters/mutant_locksmith.svg",
+    "mutant_demolition": "characters/mutant_demolition.svg",
+    "mutant_chemist": "characters/mutant_chemist.svg",
+    "mutant_electrician": "characters/mutant_electrician.svg",
+    "mutant_performer": "characters/mutant_performer.svg",
+    "synth_driver": "characters/synth_driver.svg",
+    "synth_mechanic": "characters/synth_mechanic.svg",
+    "synth_medic": "characters/synth_medic.svg",
+    "synth_soldier": "characters/synth_soldier.svg",
+    "synth_scout": "characters/synth_scout.svg",
+    "synth_merchant": "characters/synth_merchant.svg",
+    "synth_scavenger": "characters/synth_scavenger.svg",
+    "synth_engineer": "characters/synth_engineer.svg",
+    "synth_researcher": "characters/synth_researcher.svg",
+    "synth_hacker": "characters/synth_hacker.svg",
+    "synth_hunter": "characters/synth_hunter.svg",
+    "synth_guard": "characters/synth_guard.svg",
+    "synth_courier": "characters/synth_courier.svg",
+    "synth_diplomat": "characters/synth_diplomat.svg",
+    "synth_historian": "characters/synth_historian.svg",
+    "synth_locksmith": "characters/synth_locksmith.svg",
+    "synth_demolition": "characters/synth_demolition.svg",
+    "synth_chemist": "characters/synth_chemist.svg",
+    "synth_electrician": "characters/synth_electrician.svg",
+    "synth_performer": "characters/synth_performer.svg",
+    "uplift_driver": "characters/uplift_driver.svg",
+    "uplift_mechanic": "characters/uplift_mechanic.svg",
+    "uplift_medic": "characters/uplift_medic.svg",
+    "uplift_soldier": "characters/uplift_soldier.svg",
+    "uplift_scout": "characters/uplift_scout.svg",
+    "uplift_merchant": "characters/uplift_merchant.svg",
+    "uplift_scavenger": "characters/uplift_scavenger.svg",
+    "uplift_engineer": "characters/uplift_engineer.svg",
+    "uplift_researcher": "characters/uplift_researcher.svg",
+    "uplift_hacker": "characters/uplift_hacker.svg",
+    "uplift_hunter": "characters/uplift_hunter.svg",
+    "uplift_guard": "characters/uplift_guard.svg",
+    "uplift_courier": "characters/uplift_courier.svg",
+    "uplift_diplomat": "characters/uplift_diplomat.svg",
+    "uplift_historian": "characters/uplift_historian.svg",
+    "uplift_locksmith": "characters/uplift_locksmith.svg",
+    "uplift_demolition": "characters/uplift_demolition.svg",
+    "uplift_chemist": "characters/uplift_chemist.svg",
+    "uplift_electrician": "characters/uplift_electrician.svg",
+    "uplift_performer": "characters/uplift_performer.svg",
+    "chitin_driver": "characters/chitin_driver.svg",
+    "chitin_mechanic": "characters/chitin_mechanic.svg",
+    "chitin_medic": "characters/chitin_medic.svg",
+    "chitin_soldier": "characters/chitin_soldier.svg",
+    "chitin_scout": "characters/chitin_scout.svg",
+    "chitin_merchant": "characters/chitin_merchant.svg",
+    "chitin_scavenger": "characters/chitin_scavenger.svg",
+    "chitin_engineer": "characters/chitin_engineer.svg",
+    "chitin_researcher": "characters/chitin_researcher.svg",
+    "chitin_hacker": "characters/chitin_hacker.svg",
+    "chitin_hunter": "characters/chitin_hunter.svg",
+    "chitin_guard": "characters/chitin_guard.svg",
+    "chitin_courier": "characters/chitin_courier.svg",
+    "chitin_diplomat": "characters/chitin_diplomat.svg",
+    "chitin_historian": "characters/chitin_historian.svg",
+    "chitin_locksmith": "characters/chitin_locksmith.svg",
+    "chitin_demolition": "characters/chitin_demolition.svg",
+    "chitin_chemist": "characters/chitin_chemist.svg",
+    "chitin_electrician": "characters/chitin_electrician.svg",
+    "chitin_performer": "characters/chitin_performer.svg",
+    "mycelial_driver": "characters/mycelial_driver.svg",
+    "mycelial_mechanic": "characters/mycelial_mechanic.svg",
+    "mycelial_medic": "characters/mycelial_medic.svg",
+    "mycelial_soldier": "characters/mycelial_soldier.svg",
+    "mycelial_scout": "characters/mycelial_scout.svg",
+    "mycelial_merchant": "characters/mycelial_merchant.svg",
+    "mycelial_scavenger": "characters/mycelial_scavenger.svg",
+    "mycelial_engineer": "characters/mycelial_engineer.svg",
+    "mycelial_researcher": "characters/mycelial_researcher.svg",
+    "mycelial_hacker": "characters/mycelial_hacker.svg",
+    "mycelial_hunter": "characters/mycelial_hunter.svg",
+    "mycelial_guard": "characters/mycelial_guard.svg",
+    "mycelial_courier": "characters/mycelial_courier.svg",
+    "mycelial_diplomat": "characters/mycelial_diplomat.svg",
+    "mycelial_historian": "characters/mycelial_historian.svg",
+    "mycelial_locksmith": "characters/mycelial_locksmith.svg",
+    "mycelial_demolition": "characters/mycelial_demolition.svg",
+    "mycelial_chemist": "characters/mycelial_chemist.svg",
+    "mycelial_electrician": "characters/mycelial_electrician.svg",
+    "mycelial_performer": "characters/mycelial_performer.svg",
+    "crystal_driver": "characters/crystal_driver.svg",
+    "crystal_mechanic": "characters/crystal_mechanic.svg",
+    "crystal_medic": "characters/crystal_medic.svg",
+    "crystal_soldier": "characters/crystal_soldier.svg",
+    "crystal_scout": "characters/crystal_scout.svg",
+    "crystal_merchant": "characters/crystal_merchant.svg",
+    "crystal_scavenger": "characters/crystal_scavenger.svg",
+    "crystal_engineer": "characters/crystal_engineer.svg",
+    "crystal_researcher": "characters/crystal_researcher.svg",
+    "crystal_hacker": "characters/crystal_hacker.svg",
+    "crystal_hunter": "characters/crystal_hunter.svg",
+    "crystal_guard": "characters/crystal_guard.svg",
+    "crystal_courier": "characters/crystal_courier.svg",
+    "crystal_diplomat": "characters/crystal_diplomat.svg",
+    "crystal_historian": "characters/crystal_historian.svg",
+    "crystal_locksmith": "characters/crystal_locksmith.svg",
+    "crystal_demolition": "characters/crystal_demolition.svg",
+    "crystal_chemist": "characters/crystal_chemist.svg",
+    "crystal_electrician": "characters/crystal_electrician.svg",
+    "crystal_performer": "characters/crystal_performer.svg",
+    "amphibian_driver": "characters/amphibian_driver.svg",
+    "amphibian_mechanic": "characters/amphibian_mechanic.svg",
+    "amphibian_medic": "characters/amphibian_medic.svg",
+    "amphibian_soldier": "characters/amphibian_soldier.svg",
+    "amphibian_scout": "characters/amphibian_scout.svg",
+    "amphibian_merchant": "characters/amphibian_merchant.svg",
+    "amphibian_scavenger": "characters/amphibian_scavenger.svg",
+    "amphibian_engineer": "characters/amphibian_engineer.svg",
+    "amphibian_researcher": "characters/amphibian_researcher.svg",
+    "amphibian_hacker": "characters/amphibian_hacker.svg",
+    "amphibian_hunter": "characters/amphibian_hunter.svg",
+    "amphibian_guard": "characters/amphibian_guard.svg",
+    "amphibian_courier": "characters/amphibian_courier.svg",
+    "amphibian_diplomat": "characters/amphibian_diplomat.svg",
+    "amphibian_historian": "characters/amphibian_historian.svg",
+    "amphibian_locksmith": "characters/amphibian_locksmith.svg",
+    "amphibian_demolition": "characters/amphibian_demolition.svg",
+    "amphibian_chemist": "characters/amphibian_chemist.svg",
+    "amphibian_electrician": "characters/amphibian_electrician.svg",
+    "amphibian_performer": "characters/amphibian_performer.svg",
+    "mimic_driver": "characters/mimic_driver.svg",
+    "mimic_mechanic": "characters/mimic_mechanic.svg",
+    "mimic_medic": "characters/mimic_medic.svg",
+    "mimic_soldier": "characters/mimic_soldier.svg",
+    "mimic_scout": "characters/mimic_scout.svg",
+    "mimic_merchant": "characters/mimic_merchant.svg",
+    "mimic_scavenger": "characters/mimic_scavenger.svg",
+    "mimic_engineer": "characters/mimic_engineer.svg",
+    "mimic_researcher": "characters/mimic_researcher.svg",
+    "mimic_hacker": "characters/mimic_hacker.svg",
+    "mimic_hunter": "characters/mimic_hunter.svg",
+    "mimic_guard": "characters/mimic_guard.svg",
+    "mimic_courier": "characters/mimic_courier.svg",
+    "mimic_diplomat": "characters/mimic_diplomat.svg",
+    "mimic_historian": "characters/mimic_historian.svg",
+    "mimic_locksmith": "characters/mimic_locksmith.svg",
+    "mimic_demolition": "characters/mimic_demolition.svg",
+    "mimic_chemist": "characters/mimic_chemist.svg",
+    "mimic_electrician": "characters/mimic_electrician.svg",
+    "mimic_performer": "characters/mimic_performer.svg",
+    "symbiote_driver": "characters/symbiote_driver.svg",
+    "symbiote_mechanic": "characters/symbiote_mechanic.svg",
+    "symbiote_medic": "characters/symbiote_medic.svg",
+    "symbiote_soldier": "characters/symbiote_soldier.svg",
+    "symbiote_scout": "characters/symbiote_scout.svg",
+    "symbiote_merchant": "characters/symbiote_merchant.svg",
+    "symbiote_scavenger": "characters/symbiote_scavenger.svg",
+    "symbiote_engineer": "characters/symbiote_engineer.svg",
+    "symbiote_researcher": "characters/symbiote_researcher.svg",
+    "symbiote_hacker": "characters/symbiote_hacker.svg",
+    "symbiote_hunter": "characters/symbiote_hunter.svg",
+    "symbiote_guard": "characters/symbiote_guard.svg",
+    "symbiote_courier": "characters/symbiote_courier.svg",
+    "symbiote_diplomat": "characters/symbiote_diplomat.svg",
+    "symbiote_historian": "characters/symbiote_historian.svg",
+    "symbiote_locksmith": "characters/symbiote_locksmith.svg",
+    "symbiote_demolition": "characters/symbiote_demolition.svg",
+    "symbiote_chemist": "characters/symbiote_chemist.svg",
+    "symbiote_electrician": "characters/symbiote_electrician.svg",
+    "symbiote_performer": "characters/symbiote_performer.svg",
+    "lumen_driver": "characters/lumen_driver.svg",
+    "lumen_mechanic": "characters/lumen_mechanic.svg",
+    "lumen_medic": "characters/lumen_medic.svg",
+    "lumen_soldier": "characters/lumen_soldier.svg",
+    "lumen_scout": "characters/lumen_scout.svg",
+    "lumen_merchant": "characters/lumen_merchant.svg",
+    "lumen_scavenger": "characters/lumen_scavenger.svg",
+    "lumen_engineer": "characters/lumen_engineer.svg",
+    "lumen_researcher": "characters/lumen_researcher.svg",
+    "lumen_hacker": "characters/lumen_hacker.svg",
+    "lumen_hunter": "characters/lumen_hunter.svg",
+    "lumen_guard": "characters/lumen_guard.svg",
+    "lumen_courier": "characters/lumen_courier.svg",
+    "lumen_diplomat": "characters/lumen_diplomat.svg",
+    "lumen_historian": "characters/lumen_historian.svg",
+    "lumen_locksmith": "characters/lumen_locksmith.svg",
+    "lumen_demolition": "characters/lumen_demolition.svg",
+    "lumen_chemist": "characters/lumen_chemist.svg",
+    "lumen_electrician": "characters/lumen_electrician.svg",
+    "lumen_performer": "characters/lumen_performer.svg"
+  },
+  "vehicles": {
+    "compact": {
+      "name": "單座小車",
+      "image": "vehicles/compact.svg",
+      "windows": [
+        {
+          "x": 69,
+          "y": 25,
+          "width": 15,
+          "height": 11
+        }
+      ],
+      "seats": 1,
+      "maxHealth": 24,
+      "modSlots": 2,
+      "variants": {
+        "2": {
+          "image": "vehicles/compact_seats2.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 55,
+              "height": 17
+            },
+            {
+              "x": 79,
+              "y": 14,
+              "width": 55,
+              "height": 17
+            }
+          ]
+        },
+        "3": {
+          "image": "vehicles/compact_seats3.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            },
+            {
+              "x": 59,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            },
+            {
+              "x": 97,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "sedan": {
+      "name": "舊轎車",
+      "image": "vehicles/sedan.svg",
+      "windows": [
+        {
+          "x": 40,
+          "y": 23,
+          "width": 16,
+          "height": 12
+        },
+        {
+          "x": 62,
+          "y": 23,
+          "width": 16,
+          "height": 12
+        },
+        {
+          "x": 84,
+          "y": 23,
+          "width": 16,
+          "height": 12
+        }
+      ],
+      "seats": 3,
+      "maxHealth": 30,
+      "modSlots": 2,
+      "variants": {
+        "4": {
+          "image": "vehicles/sedan_seats4.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 50,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 79,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 108,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            }
+          ]
+        },
+        "5": {
+          "image": "vehicles/sedan_seats5.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 44,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 67,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 90,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 113,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "van": {
+      "name": "旅行廂型車",
+      "image": "vehicles/van.svg",
+      "windows": [
+        {
+          "x": 31,
+          "y": 18,
+          "width": 14,
+          "height": 15
+        },
+        {
+          "x": 50,
+          "y": 18,
+          "width": 14,
+          "height": 15
+        },
+        {
+          "x": 69,
+          "y": 18,
+          "width": 14,
+          "height": 15
+        },
+        {
+          "x": 88,
+          "y": 18,
+          "width": 14,
+          "height": 15
+        },
+        {
+          "x": 107,
+          "y": 18,
+          "width": 14,
+          "height": 15
+        }
+      ],
+      "seats": 5,
+      "maxHealth": 40,
+      "modSlots": 3,
+      "variants": {
+        "6": {
+          "image": "vehicles/van_seats6.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 40,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 59,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 78,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 97,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 116,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            }
+          ]
+        },
+        "7": {
+          "image": "vehicles/van_seats7.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 37,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 53,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 69,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 85,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 101,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 117,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            }
+          ]
+        },
+        "8": {
+          "image": "vehicles/van_seats8.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 35,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 49,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 63,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 77,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 91,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 105,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            },
+            {
+              "x": 119,
+              "y": 14,
+              "width": 11,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "pickup": {
+      "name": "拾荒皮卡",
+      "image": "vehicles/pickup.svg",
+      "windows": [
+        {
+          "x": 83,
+          "y": 21,
+          "width": 14,
+          "height": 13
+        },
+        {
+          "x": 103,
+          "y": 21,
+          "width": 14,
+          "height": 13
+        }
+      ],
+      "seats": 2,
+      "maxHealth": 35,
+      "modSlots": 2,
+      "variants": {
+        "3": {
+          "image": "vehicles/pickup_seats3.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            },
+            {
+              "x": 59,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            },
+            {
+              "x": 97,
+              "y": 14,
+              "width": 35,
+              "height": 17
+            }
+          ]
+        },
+        "4": {
+          "image": "vehicles/pickup_seats4.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 50,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 79,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 108,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "bus": {
+      "name": "避難巴士",
+      "image": "vehicles/bus.svg",
+      "windows": [
+        {
+          "x": 23,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 37,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 51,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 65,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 79,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 93,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 107,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        },
+        {
+          "x": 121,
+          "y": 14,
+          "width": 10,
+          "height": 17
+        }
+      ],
+      "seats": 8,
+      "maxHealth": 55,
+      "modSlots": 3,
+      "variants": {
+        "9": {
+          "image": "vehicles/bus_seats9.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 33,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 45,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 57,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 69,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 81,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 93,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 105,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            },
+            {
+              "x": 117,
+              "y": 14,
+              "width": 9,
+              "height": 17
+            }
+          ]
+        },
+        "10": {
+          "image": "vehicles/bus_seats10.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 32,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 43,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 54,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 65,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 76,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 87,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 98,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 109,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            },
+            {
+              "x": 120,
+              "y": 14,
+              "width": 8,
+              "height": 17
+            }
+          ]
+        },
+        "11": {
+          "image": "vehicles/bus_seats11.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 31,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 41,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 51,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 61,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 71,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 81,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 91,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 101,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 111,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            },
+            {
+              "x": 121,
+              "y": 14,
+              "width": 7,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "armored": {
+      "name": "裝甲運輸車",
+      "image": "vehicles/armored.svg",
+      "windows": [
+        {
+          "x": 32,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 56,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 80,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 104,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        }
+      ],
+      "seats": 4,
+      "maxHealth": 65,
+      "modSlots": 3,
+      "variants": {
+        "5": {
+          "image": "vehicles/armored_seats5.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 44,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 67,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 90,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 113,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            }
+          ]
+        },
+        "6": {
+          "image": "vehicles/armored_seats6.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 40,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 59,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 78,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 97,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 116,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            }
+          ]
+        },
+        "7": {
+          "image": "vehicles/armored_seats7.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 37,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 53,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 69,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 85,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 101,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 117,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "rover": {
+      "name": "外星巡行車",
+      "image": "vehicles/rover.svg",
+      "windows": [
+        {
+          "x": 42,
+          "y": 21,
+          "width": 19,
+          "height": 11
+        },
+        {
+          "x": 68,
+          "y": 21,
+          "width": 19,
+          "height": 11
+        },
+        {
+          "x": 94,
+          "y": 21,
+          "width": 19,
+          "height": 11
+        }
+      ],
+      "seats": 3,
+      "maxHealth": 45,
+      "modSlots": 2,
+      "variants": {
+        "4": {
+          "image": "vehicles/rover_seats4.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 50,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 79,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            },
+            {
+              "x": 108,
+              "y": 14,
+              "width": 26,
+              "height": 17
+            }
+          ]
+        },
+        "5": {
+          "image": "vehicles/rover_seats5.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 44,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 67,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 90,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 113,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            }
+          ]
+        }
+      }
+    },
+    "ambulance": {
+      "name": "救護車",
+      "image": "vehicles/ambulance.svg",
+      "windows": [
+        {
+          "x": 32,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 56,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 80,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        },
+        {
+          "x": 104,
+          "y": 18,
+          "width": 16,
+          "height": 14
+        }
+      ],
+      "seats": 4,
+      "maxHealth": 38,
+      "modSlots": 3,
+      "variants": {
+        "5": {
+          "image": "vehicles/ambulance_seats5.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 44,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 67,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 90,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            },
+            {
+              "x": 113,
+              "y": 14,
+              "width": 20,
+              "height": 17
+            }
+          ]
+        },
+        "6": {
+          "image": "vehicles/ambulance_seats6.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 40,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 59,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 78,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 97,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            },
+            {
+              "x": 116,
+              "y": 14,
+              "width": 16,
+              "height": 17
+            }
+          ]
+        },
+        "7": {
+          "image": "vehicles/ambulance_seats7.svg",
+          "windows": [
+            {
+              "x": 21,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 37,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 53,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 69,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 85,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 101,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            },
+            {
+              "x": 117,
+              "y": 14,
+              "width": 13,
+              "height": 17
+            }
+          ]
+        }
+      }
+    }
+  },
+  "enemies": {
+    "raider": {
+      "name": "公路掠奪者",
+      "image": "enemies/raider.svg",
+      "machine": false
+    },
+    "soldier": {
+      "name": "佔領軍士兵",
+      "image": "enemies/soldier.svg",
+      "machine": false
+    },
+    "mutant": {
+      "name": "狂暴變種人",
+      "image": "enemies/mutant.svg",
+      "machine": false
+    },
+    "infected": {
+      "name": "感染者",
+      "image": "enemies/infected.svg",
+      "machine": false
+    },
+    "crawler": {
+      "name": "寄生爬行者",
+      "image": "enemies/crawler.svg",
+      "machine": false
+    },
+    "hound": {
+      "name": "變異獵犬",
+      "image": "enemies/hound.svg",
+      "machine": false
+    },
+    "nest": {
+      "name": "孵化母體",
+      "image": "enemies/nest.svg",
+      "machine": false
+    },
+    "swarm": {
+      "name": "孢子蟲群",
+      "image": "enemies/swarm.svg",
+      "machine": false
+    },
+    "drone": {
+      "name": "巡邏無人機",
+      "image": "enemies/drone.svg",
+      "machine": true
+    },
+    "turret": {
+      "name": "防衛砲台",
+      "image": "enemies/turret.svg",
+      "machine": true
+    },
+    "worker": {
+      "name": "失控工程機",
+      "image": "enemies/worker.svg",
+      "machine": true
+    },
+    "sentinel": {
+      "name": "外星守衛",
+      "image": "enemies/sentinel.svg",
+      "machine": false
+    },
+    "lurker": {
+      "name": "暗處伏擊者",
+      "image": "enemies/lurker.svg",
+      "machine": false
+    },
+    "brute": {
+      "name": "甲殼巨獸",
+      "image": "enemies/brute.svg",
+      "machine": false
+    },
+    "wing": {
+      "name": "變異飛獸",
+      "image": "enemies/wing.svg",
+      "machine": false
+    },
+    "parasite": {
+      "name": "寄生觸手",
+      "image": "enemies/parasite.svg",
+      "machine": false
+    }
+  },
+  "scenes": {
+    "salt_dawn": "scenes/salt_dawn.svg",
+    "salt_morning": "scenes/salt_morning.svg",
+    "salt_afternoon": "scenes/salt_afternoon.svg",
+    "salt_night": "scenes/salt_night.svg",
+    "city_dawn": "scenes/city_dawn.svg",
+    "city_morning": "scenes/city_morning.svg",
+    "city_afternoon": "scenes/city_afternoon.svg",
+    "city_night": "scenes/city_night.svg",
+    "forest_dawn": "scenes/forest_dawn.svg",
+    "forest_morning": "scenes/forest_morning.svg",
+    "forest_afternoon": "scenes/forest_afternoon.svg",
+    "forest_night": "scenes/forest_night.svg",
+    "alien_dawn": "scenes/alien_dawn.svg",
+    "alien_morning": "scenes/alien_morning.svg",
+    "alien_afternoon": "scenes/alien_afternoon.svg",
+    "alien_night": "scenes/alien_night.svg",
+    "oasis_dawn": "scenes/oasis_dawn.svg",
+    "oasis_morning": "scenes/oasis_morning.svg",
+    "oasis_afternoon": "scenes/oasis_afternoon.svg",
+    "oasis_night": "scenes/oasis_night.svg",
+    "warehouse": "scenes/warehouse.svg",
+    "clinic": "scenes/clinic.svg",
+    "garage": "scenes/garage.svg",
+    "shop": "scenes/shop.svg",
+    "hotel": "scenes/hotel.svg",
+    "laboratory": "scenes/laboratory.svg",
+    "ruin": "scenes/ruin.svg",
+    "nest": "scenes/nest.svg"
+  },
+  "icons": {
+    "fuel": "icons/fuel.svg",
+    "medicine": "icons/medicine.svg",
+    "scrap": "icons/scrap.svg",
+    "esp": "icons/esp.svg",
+    "health": "icons/health.svg",
+    "stamina": "icons/stamina.svg",
+    "weapon": "icons/weapon.svg",
+    "armor": "icons/armor.svg",
+    "accessory": "icons/accessory.svg",
+    "seat": "icons/seat.svg",
+    "shield": "icons/shield.svg",
+    "radio": "icons/radio.svg",
+    "book": "icons/book.svg",
+    "chest": "icons/chest.svg",
+    "sleep": "icons/sleep.svg",
+    "dice": "icons/dice.svg"
+  },
+  "mods": {
+    "gun": "mods/gun.svg",
+    "armor": "mods/armor.svg",
+    "seat": "mods/seat.svg",
+    "lamp": "mods/lamp.svg"
+  }
+}

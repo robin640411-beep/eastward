@@ -1,0 +1,222 @@
+{
+  "version": "0.1.0",
+  "background": "alien_invasion",
+  "status": "12 種族與 20 職業各連結唯一優點，效果見 traits.json；數值為試玩草案",
+  "race_term": "遊戲中的可交談智慧族群分類；外星人專指先遣族，不泛指所有地外種族",
+  "races": [
+    {
+      "id": "human",
+      "name": "人類",
+      "origin": "地球原生人類，散居在殘存聚落與公路車隊。",
+      "specialty": "熟悉舊世界設備與人類遺跡",
+      "advantage_id": "race_human"
+    },
+    {
+      "id": "alien",
+      "name": "外星人",
+      "origin": "俗稱「先遣族」的入侵主族；個體可能是佔領者、逃兵或流亡者。",
+      "specialty": "熟悉入侵軍的語言與科技",
+      "advantage_id": "race_alien"
+    },
+    {
+      "id": "mutant",
+      "name": "變種人",
+      "origin": "受外星改造物質影響的人類後裔，身體構造出現穩定變異。",
+      "specialty": "適應污染區域",
+      "advantage_id": "race_mutant"
+    },
+    {
+      "id": "synth",
+      "name": "合成人",
+      "origin": "地球製造、具有自主意識的人工生命，戰後已脫離原主人。",
+      "specialty": "分析電子系統",
+      "advantage_id": "race_synth"
+    },
+    {
+      "id": "uplift",
+      "name": "啟智獸族",
+      "origin": "外星實驗賦予地球獸類語言與自我意識形成的族群。",
+      "specialty": "嗅覺與聽覺敏銳",
+      "advantage_id": "race_uplift"
+    },
+    {
+      "id": "chitin",
+      "name": "甲殼族",
+      "origin": "隨入侵艦隊來到地球的外星族群，擁有堅硬外骨骼。",
+      "specialty": "身體防護",
+      "advantage_id": "race_chitin"
+    },
+    {
+      "id": "mycelial",
+      "name": "菌絲族",
+      "origin": "具有個體意識的外星菌絲集合體，依靠寄生外殼移動。",
+      "specialty": "感知生物分泌物",
+      "advantage_id": "race_mycelial"
+    },
+    {
+      "id": "crystal",
+      "name": "晶核族",
+      "origin": "以礦物晶格維持意識的外星生命，借助節肢狀肢體行動。",
+      "specialty": "感應能量異常",
+      "advantage_id": "race_crystal"
+    },
+    {
+      "id": "amphibian",
+      "name": "潮生族",
+      "origin": "兩棲外星族群，被迫在地球陸地上建立新生活。",
+      "specialty": "適應潮濕與淹水設施",
+      "advantage_id": "race_amphibian"
+    },
+    {
+      "id": "mimic",
+      "name": "擬形族",
+      "origin": "能改變表層輪廓與色彩的外星生命，偽裝需要專注。",
+      "specialty": "外觀偽裝",
+      "advantage_id": "race_mimic"
+    },
+    {
+      "id": "symbiote",
+      "name": "共生族",
+      "origin": "地球宿主與外星共生體融合後形成具有雙重感知的個體。",
+      "specialty": "感知宿主的生理變化",
+      "advantage_id": "race_symbiote"
+    },
+    {
+      "id": "lumen",
+      "name": "光膜族",
+      "origin": "身體包覆發光薄膜的外星族群，可控制自身的發光強度。",
+      "specialty": "昏暗環境辨識",
+      "advantage_id": "race_lumen"
+    }
+  ],
+  "professions": [
+    {
+      "id": "driver",
+      "name": "駕駛",
+      "specialty": "長途駕駛、危險路段判斷",
+      "advantage_id": "profession_driver"
+    },
+    {
+      "id": "mechanic",
+      "name": "技師",
+      "specialty": "車輛維修與機械診斷",
+      "advantage_id": "profession_mechanic"
+    },
+    {
+      "id": "medic",
+      "name": "醫護",
+      "specialty": "傷勢處理與醫藥知識",
+      "advantage_id": "profession_medic"
+    },
+    {
+      "id": "soldier",
+      "name": "士兵",
+      "specialty": "直接交戰與戰術執行",
+      "advantage_id": "profession_soldier"
+    },
+    {
+      "id": "scout",
+      "name": "斥候",
+      "specialty": "警戒與觀察",
+      "advantage_id": "profession_scout"
+    },
+    {
+      "id": "merchant",
+      "name": "商人",
+      "specialty": "物資交換與估價",
+      "advantage_id": "profession_merchant"
+    },
+    {
+      "id": "scavenger",
+      "name": "拾荒者",
+      "specialty": "辨認廢墟中的可用物資",
+      "advantage_id": "profession_scavenger"
+    },
+    {
+      "id": "engineer",
+      "name": "工程師",
+      "specialty": "設施與能源裝置",
+      "advantage_id": "profession_engineer"
+    },
+    {
+      "id": "researcher",
+      "name": "研究員",
+      "specialty": "外星生物與科學資料",
+      "advantage_id": "profession_researcher"
+    },
+    {
+      "id": "hacker",
+      "name": "駭客",
+      "specialty": "數位終端與電子鎖",
+      "advantage_id": "profession_hacker"
+    },
+    {
+      "id": "hunter",
+      "name": "獵人",
+      "specialty": "追蹤與野生生物習性",
+      "advantage_id": "profession_hunter"
+    },
+    {
+      "id": "guard",
+      "name": "守衛",
+      "specialty": "防衛與值勤",
+      "advantage_id": "profession_guard"
+    },
+    {
+      "id": "courier",
+      "name": "信使",
+      "specialty": "道路消息與傳遞物件",
+      "advantage_id": "profession_courier"
+    },
+    {
+      "id": "diplomat",
+      "name": "交涉員",
+      "specialty": "語言與團體協調",
+      "advantage_id": "profession_diplomat"
+    },
+    {
+      "id": "historian",
+      "name": "記錄員",
+      "specialty": "書籍、口述史與災難線索",
+      "advantage_id": "profession_historian"
+    },
+    {
+      "id": "locksmith",
+      "name": "鎖匠",
+      "specialty": "機械鎖與封閉容器",
+      "advantage_id": "profession_locksmith"
+    },
+    {
+      "id": "demolition",
+      "name": "爆破手",
+      "specialty": "爆炸物與危險裝置",
+      "advantage_id": "profession_demolition"
+    },
+    {
+      "id": "chemist",
+      "name": "藥劑師",
+      "specialty": "化學污染與藥品辨識",
+      "advantage_id": "profession_chemist"
+    },
+    {
+      "id": "electrician",
+      "name": "電工",
+      "specialty": "供電線路與電器",
+      "advantage_id": "profession_electrician"
+    },
+    {
+      "id": "performer",
+      "name": "藝人",
+      "specialty": "表演、故事與人際交流",
+      "advantage_id": "profession_performer"
+    }
+  ],
+  "combination_rules": {
+    "all_race_profession_pairs_allowed": true,
+    "attitude_independent_of_race_and_profession": true,
+    "race_does_not_determine_faction": true,
+    "names_and_nicknames": "使用既有兩張 D100 表作為通用稱呼",
+    "physiology": "所有種族沿用生命、體力、睡眠與座位機制；不因合成人或晶核族而自動免除睡眠和守夜規則",
+    "abilities_do_not_bypass_garage_requirement": true
+  }
+}

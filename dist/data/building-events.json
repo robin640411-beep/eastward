@@ -1,0 +1,3142 @@
+{
+  "version": "0.1.0",
+  "status": "100 種通用建築事件已編寫，尚未接上介面或執行器",
+  "empty_event_rule": "什麼也沒有仍占用本次事件一次，正常判定下一個獨立事件，不自動補抽",
+  "distribution_note": "本表包含無事發生，不套用公路的 50/50 分類；建築比例尚未定案",
+  "events": [
+    {
+      "id": "building_001",
+      "title": "未拆封木箱",
+      "text": "牆角有一只封條完整的木箱。",
+      "kind": "building",
+      "d100": 1,
+      "category": "supplies",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_002",
+      "title": "急救壁櫃",
+      "text": "壁櫃內留著封裝藥品。",
+      "kind": "building",
+      "d100": 2,
+      "category": "medicine",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_003",
+      "title": "金屬工具箱",
+      "text": "工作檯下有可回收的工具材料。",
+      "kind": "building",
+      "d100": 3,
+      "category": "scrap",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_004",
+      "title": "備用燃料桶",
+      "text": "儲藏間內有一桶密封燃料。",
+      "kind": "building",
+      "d100": 4,
+      "category": "fuel",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "fuel",
+              "amount": 5
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_005",
+      "title": "上鎖衣櫃",
+      "text": "衣櫃中露出裝備的邊角，門卻鎖住了。",
+      "kind": "building",
+      "d100": 5,
+      "category": "locked",
+      "bindings": {},
+      "options": [
+        {
+          "id": "open",
+          "label": "嘗試打開",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "mechanical_lock",
+              "success_effects": [
+                {
+                  "op": "oracle",
+                  "table": "equipment"
+                }
+              ],
+              "failure_effects": []
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_006",
+      "title": "廢棄軍械櫃",
+      "text": "敞開的櫃門後仍掛著裝備。",
+      "kind": "building",
+      "d100": 6,
+      "category": "equipment",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_007",
+      "title": "行李堆",
+      "text": "遺留行李裡夾著一只未打開的用品袋。",
+      "kind": "building",
+      "d100": 7,
+      "category": "supplies",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_008",
+      "title": "維修備料架",
+      "text": "架子上放著未被取走的零件。",
+      "kind": "building",
+      "d100": 8,
+      "category": "scrap",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_009",
+      "title": "病房藥盒",
+      "text": "床邊抽屜裡有保存完整的藥盒。",
+      "kind": "building",
+      "d100": 9,
+      "category": "medicine",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_010",
+      "title": "封存補給櫃",
+      "text": "補給櫃沒有上鎖，裡面的物品仍能使用。",
+      "kind": "building",
+      "d100": 10,
+      "category": "supplies",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_011",
+      "title": "隱藏夾層",
+      "text": "破裂牆板後露出藏起的裝備。",
+      "kind": "building",
+      "d100": 11,
+      "category": "equipment",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_012",
+      "title": "清潔間儲物桶",
+      "text": "桶裡裝著可用的機械材料。",
+      "kind": "building",
+      "d100": 12,
+      "category": "scrap",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_013",
+      "title": "防水收納袋",
+      "text": "漏水房間中，一只防水袋仍然完好。",
+      "kind": "building",
+      "d100": 13,
+      "category": "supplies",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_014",
+      "title": "工作服口袋",
+      "text": "掛在牆上的工作服裡有小包藥品。",
+      "kind": "building",
+      "d100": 14,
+      "category": "medicine",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收取物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_015",
+      "title": "倉庫封箱",
+      "text": "儲藏區還有一箱沒有被搬走的貨物。",
+      "kind": "building",
+      "d100": 15,
+      "category": "supplies",
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "查看物品",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_016",
+      "title": "櫃台雜貨店",
+      "text": "倖存者把櫃台改成小商店。",
+      "kind": "building",
+      "d100": 16,
+      "category": "shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_017",
+      "title": "屋內藥房",
+      "text": "藥師守著上鎖的貨櫃，願意交易。",
+      "kind": "building",
+      "d100": 17,
+      "category": "pharmacy",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "pharmacy"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_018",
+      "title": "裝備交換室",
+      "text": "屋內的人展示可以交換的裝備。",
+      "kind": "building",
+      "d100": 18,
+      "category": "equipment_shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "equipment_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_019",
+      "title": "室內燃料販售點",
+      "text": "店主將安全封存的燃料排在牆邊。",
+      "kind": "building",
+      "d100": 19,
+      "category": "fuel_shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "fuel_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_020",
+      "title": "修車工坊",
+      "text": "這裡保留維修架，技師提供修車廠服務。",
+      "kind": "building",
+      "d100": 20,
+      "category": "garage",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "garage"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_021",
+      "title": "臨時診所",
+      "text": "醫護在房間裡替過路者治療。",
+      "kind": "building",
+      "d100": 21,
+      "category": "clinic",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "clinic"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_022",
+      "title": "收費客房",
+      "text": "接待員展示可供睡眠的房間。",
+      "kind": "building",
+      "d100": 22,
+      "category": "hotel",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "hotel"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_023",
+      "title": "零件攤位",
+      "text": "商人把備料室改成交易攤位。",
+      "kind": "building",
+      "d100": 23,
+      "category": "shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_024",
+      "title": "巡迴商人",
+      "text": "商人正在空房中整理商品。",
+      "kind": "building",
+      "d100": 24,
+      "category": "shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_025",
+      "title": "車庫車商",
+      "text": "有人在建築附屬車庫販售可用車輛。",
+      "kind": "building",
+      "d100": 25,
+      "category": "vehicle_shop",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "與店主互動",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "service": "vehicle_shop"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_026",
+      "title": "獨居倖存者",
+      "text": "屋主停下手上的工作，注視來客。",
+      "kind": "building",
+      "d100": 26,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_027",
+      "title": "躲藏的逃兵",
+      "text": "穿著舊制服的人從門後現身。",
+      "kind": "building",
+      "d100": 27,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_028",
+      "title": "受傷旅人",
+      "text": "一名旅人坐在地上，傷口仍在滲血。",
+      "kind": "building",
+      "d100": 28,
+      "category": "aid",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "help",
+          "label": "嘗試幫助",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "aid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_029",
+      "title": "被困技師",
+      "text": "倒下的櫃子卡住了一名技師。",
+      "kind": "building",
+      "d100": 29,
+      "category": "rescue",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "help",
+          "label": "嘗試幫助",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "rescue"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_030",
+      "title": "外星流亡者",
+      "text": "一名離開原陣營的外星人正在此處避難。",
+      "kind": "building",
+      "d100": 30,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_031",
+      "title": "變種人住客",
+      "text": "住客用布遮住變異部位，並未先表明態度。",
+      "kind": "building",
+      "d100": 31,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_032",
+      "title": "潛伏拾荒者",
+      "text": "正在搜索的人發現了你們。",
+      "kind": "building",
+      "d100": 32,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_033",
+      "title": "失散信使",
+      "text": "信使攥著信袋，詢問外面的道路。",
+      "kind": "building",
+      "d100": 33,
+      "category": "npc",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "npc"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_034",
+      "title": "睡著的陌生人",
+      "text": "有人蜷縮在角落，隨身物品緊靠身體。",
+      "kind": "building",
+      "d100": 34,
+      "category": "sleeper",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "sleeper"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_035",
+      "title": "等待車隊的人",
+      "text": "一名旅人希望找到同行者。",
+      "kind": "building",
+      "d100": 35,
+      "category": "recruit",
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "talk",
+          "label": "接觸對方",
+          "requires": [],
+          "effects": [
+            {
+              "op": "npc_interaction",
+              "actor": "npc",
+              "context": "recruit"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "building_036",
+      "title": "舊日筆記",
+      "text": "筆記記錄了入侵初期的生活。",
+      "kind": "building",
+      "d100": 36,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_037",
+      "title": "避難名冊",
+      "text": "名冊旁留下了撤離註記。",
+      "kind": "building",
+      "d100": 37,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_038",
+      "title": "外星命令終端",
+      "text": "終端保存著佔領部隊的舊命令。",
+      "kind": "building",
+      "d100": 38,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_039",
+      "title": "倖存者錄音",
+      "text": "播放器仍能讀出一段口述紀錄。",
+      "kind": "building",
+      "d100": 39,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_040",
+      "title": "災前報紙",
+      "text": "報紙描述了人類首次接觸外星勢力的消息。",
+      "kind": "building",
+      "d100": 40,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_041",
+      "title": "破裂研究檔案",
+      "text": "檔案留下了外星改造物質的記錄。",
+      "kind": "building",
+      "d100": 41,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_042",
+      "title": "牆面路線圖",
+      "text": "路線圖上有早期撤離隊伍的手寫註記。",
+      "kind": "building",
+      "d100": 42,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_043",
+      "title": "孩子的畫冊",
+      "text": "畫冊留下了城市被佔領時的景象。",
+      "kind": "building",
+      "d100": 43,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_044",
+      "title": "求救留言",
+      "text": "門背的留言記錄了等待救援的人。",
+      "kind": "building",
+      "d100": 44,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_045",
+      "title": "舊廣播設備",
+      "text": "接上殘存電源後，設備播放一段歷史錄音。",
+      "kind": "building",
+      "d100": 45,
+      "category": "history",
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "閱讀紀錄",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_046",
+      "title": "地板塌陷",
+      "text": "腳下地板突然碎裂，隊員跌向下層。",
+      "kind": "building",
+      "d100": 46,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_047",
+      "title": "天花板落物",
+      "text": "鬆動材料從天花板砸落。",
+      "kind": "building",
+      "d100": 47,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_048",
+      "title": "樓梯斷裂",
+      "text": "樓梯承重不足，踩上去便崩斷。",
+      "kind": "building",
+      "d100": 48,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_049",
+      "title": "破碎玻璃",
+      "text": "暗處的尖銳碎片劃傷經過的人。",
+      "kind": "building",
+      "d100": 49,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_050",
+      "title": "倒塌書架",
+      "text": "高大的書架突然傾倒。",
+      "kind": "building",
+      "d100": 50,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_051",
+      "title": "鬆動吊燈",
+      "text": "固定件斷裂，吊燈落向隊伍。",
+      "kind": "building",
+      "d100": 51,
+      "category": "damage",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "確認傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "selected_explorer",
+              "amount": 2
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_052",
+      "title": "帶電積水",
+      "text": "電線浸在積水裡，通道不安全。",
+      "kind": "building",
+      "d100": 52,
+      "category": "electric",
+      "bindings": {},
+      "options": [
+        {
+          "id": "handle",
+          "label": "嘗試安全處理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "electric",
+              "success_effects": [],
+              "failure_effects": [
+                {
+                  "op": "damage",
+                  "target": "selected_explorer",
+                  "amount": 3
+                }
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_053",
+      "title": "外露電纜",
+      "text": "鬆脫的電纜不斷閃出火花。",
+      "kind": "building",
+      "d100": 53,
+      "category": "electric",
+      "bindings": {},
+      "options": [
+        {
+          "id": "handle",
+          "label": "嘗試安全處理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "electric",
+              "success_effects": [],
+              "failure_effects": [
+                {
+                  "op": "damage",
+                  "target": "selected_explorer",
+                  "amount": 3
+                }
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_054",
+      "title": "刺激性氣體",
+      "text": "容器洩漏，刺鼻氣體充滿房間。",
+      "kind": "building",
+      "d100": 54,
+      "category": "pollution",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "脫離污染區",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "exploring_party",
+              "amount": 2,
+              "tags": [
+                "pollution"
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_055",
+      "title": "有毒孢子",
+      "text": "受驚的菌落向空氣釋放孢子。",
+      "kind": "building",
+      "d100": 55,
+      "category": "pollution",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "脫離污染區",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "exploring_party",
+              "amount": 2,
+              "tags": [
+                "pollution"
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_056",
+      "title": "化學殘液",
+      "text": "地面的殘液濺到角色身上。",
+      "kind": "building",
+      "d100": 56,
+      "category": "pollution",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "脫離污染區",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "exploring_party",
+              "amount": 2,
+              "tags": [
+                "pollution"
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_057",
+      "title": "失控噴霧",
+      "text": "仍在運作的裝置向通道噴出有害物質。",
+      "kind": "building",
+      "d100": 57,
+      "category": "pollution",
+      "bindings": {},
+      "options": [
+        {
+          "id": "resolve",
+          "label": "脫離污染區",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "exploring_party",
+              "amount": 2,
+              "tags": [
+                "pollution"
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_058",
+      "title": "絆線警報",
+      "text": "一條細線連著嘈雜的警報裝置。",
+      "kind": "building",
+      "d100": 58,
+      "category": "alarm",
+      "bindings": {},
+      "options": [
+        {
+          "id": "handle",
+          "label": "嘗試安全處理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "alarm",
+              "success_effects": [],
+              "failure_effects": [
+                {
+                  "op": "world_minutes",
+                  "amount": 10
+                }
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_059",
+      "title": "門後爆炸物",
+      "text": "門鉸鏈旁藏著引爆線。",
+      "kind": "building",
+      "d100": 59,
+      "category": "explosive",
+      "bindings": {},
+      "options": [
+        {
+          "id": "handle",
+          "label": "嘗試安全處理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "explosive",
+              "success_effects": [],
+              "failure_effects": [
+                {
+                  "op": "damage",
+                  "target": "selected_explorer",
+                  "amount": 3
+                }
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_060",
+      "title": "壓力陷阱",
+      "text": "地板上的壓板連著爆炸裝置。",
+      "kind": "building",
+      "d100": 60,
+      "category": "explosive",
+      "bindings": {},
+      "options": [
+        {
+          "id": "handle",
+          "label": "嘗試安全處理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "explosive",
+              "success_effects": [],
+              "failure_effects": [
+                {
+                  "op": "damage",
+                  "target": "selected_explorer",
+                  "amount": 3
+                }
+              ]
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_061",
+      "title": "倒塌通道",
+      "text": "碎石堵住了通往下一個房間的路。",
+      "kind": "building",
+      "d100": 61,
+      "category": "clear",
+      "bindings": {},
+      "options": [
+        {
+          "id": "pass",
+          "label": "嘗試通過",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_explorer",
+              "amount": 2,
+              "tags": [
+                "clear"
+              ]
+            },
+            {
+              "op": "world_minutes",
+              "amount": 10
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_062",
+      "title": "淹水房間",
+      "text": "積水蓋過膝蓋，仍可嘗試涉水通過。",
+      "kind": "building",
+      "d100": 62,
+      "category": "wade",
+      "bindings": {},
+      "options": [
+        {
+          "id": "pass",
+          "label": "嘗試通過",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_explorer",
+              "amount": 2,
+              "tags": [
+                "wade"
+              ]
+            },
+            {
+              "op": "world_minutes",
+              "amount": 10
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_063",
+      "title": "卡死防火門",
+      "text": "門扇變形，需要費力推開。",
+      "kind": "building",
+      "d100": 63,
+      "category": "clear",
+      "bindings": {},
+      "options": [
+        {
+          "id": "pass",
+          "label": "嘗試通過",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_explorer",
+              "amount": 2,
+              "tags": [
+                "clear"
+              ]
+            },
+            {
+              "op": "world_minutes",
+              "amount": 10
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_064",
+      "title": "狹窄維修道",
+      "text": "狹小通道需要屈身緩慢通過。",
+      "kind": "building",
+      "d100": 64,
+      "category": "crawl",
+      "bindings": {},
+      "options": [
+        {
+          "id": "pass",
+          "label": "嘗試通過",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_explorer",
+              "amount": 2,
+              "tags": [
+                "crawl"
+              ]
+            },
+            {
+              "op": "world_minutes",
+              "amount": 10
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_065",
+      "title": "漆黑儲藏室",
+      "text": "燈具全數損壞，難以辨識物品。",
+      "kind": "building",
+      "d100": 65,
+      "category": "dark",
+      "bindings": {},
+      "options": [
+        {
+          "id": "search",
+          "label": "摸黑搜索",
+          "requires": [],
+          "effects": [
+            {
+              "op": "event_check",
+              "check": "dark_search",
+              "success_effects": [
+                {
+                  "op": "oracle",
+                  "table": "supplies"
+                }
+              ],
+              "failure_effects": []
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "skip",
+          "label": "不處理這個發現",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_066",
+      "title": "怪物巢穴",
+      "text": "築巢的生物因你們進入而發動攻擊。",
+      "kind": "building",
+      "d100": 66,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_067",
+      "title": "孵化室",
+      "text": "容器內的生物掙脫束縛，撲向隊伍。",
+      "kind": "building",
+      "d100": 67,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_068",
+      "title": "感染者群",
+      "text": "幾個感染者從房間深處湧出。",
+      "kind": "building",
+      "d100": 68,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_069",
+      "title": "食腐獸",
+      "text": "躲在雜物堆中的生物突然竄出。",
+      "kind": "building",
+      "d100": 69,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_070",
+      "title": "巢穴守衛",
+      "text": "大型生物擋在通道中，準備攻擊。",
+      "kind": "building",
+      "d100": 70,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_071",
+      "title": "寄生生物群",
+      "text": "寄生生物從破裂管道中掉落。",
+      "kind": "building",
+      "d100": 71,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_072",
+      "title": "敵軍巡查",
+      "text": "佔領軍巡查隊在走廊發現你們。",
+      "kind": "building",
+      "d100": 72,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_073",
+      "title": "自動防衛機",
+      "text": "防衛機辨識到入侵者，開始瞄準。",
+      "kind": "building",
+      "d100": 73,
+      "category": "machine_combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "machine"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_074",
+      "title": "失控機械工",
+      "text": "維修機械向活物揮動工具。",
+      "kind": "building",
+      "d100": 74,
+      "category": "machine_combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "machine"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_075",
+      "title": "武裝伏兵",
+      "text": "藏在隔間後的武裝者包圍隊伍。",
+      "kind": "building",
+      "d100": 75,
+      "category": "combat",
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy",
+              "enemy_category": "biological_or_humanoid"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃跑",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_076",
+      "title": "空房間",
+      "text": "房內只有灰塵，沒有物品、人物或危險。",
+      "kind": "building",
+      "d100": 76,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_077",
+      "title": "被搜空的貨架",
+      "text": "每一格貨架都已被清空。",
+      "kind": "building",
+      "d100": 77,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_078",
+      "title": "空藥櫃",
+      "text": "藥品包裝散落一地，沒有能使用的內容物。",
+      "kind": "building",
+      "d100": 78,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_079",
+      "title": "已開啟的保險箱",
+      "text": "保險箱裡只剩空隔板。",
+      "kind": "building",
+      "d100": 79,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_080",
+      "title": "乾涸儲油槽",
+      "text": "槽底只有乾掉的污漬，找不到燃料。",
+      "kind": "building",
+      "d100": 80,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_081",
+      "title": "報廢發電機",
+      "text": "機器早已拆空，無法回收任何零件。",
+      "kind": "building",
+      "d100": 81,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_082",
+      "title": "堵死的出口",
+      "text": "出口被永久封住，這裡沒有其他發現。",
+      "kind": "building",
+      "d100": 82,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_083",
+      "title": "褪色廣告",
+      "text": "牆上只有無法辨認的廣告碎片。",
+      "kind": "building",
+      "d100": 83,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_084",
+      "title": "損壞終端",
+      "text": "記憶裝置已被移走，無法取得紀錄。",
+      "kind": "building",
+      "d100": 84,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_085",
+      "title": "無人櫃台",
+      "text": "櫃台後空無一人，也沒有留下物資。",
+      "kind": "building",
+      "d100": 85,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_086",
+      "title": "空行李箱",
+      "text": "箱子被打開過，裡面沒有東西。",
+      "kind": "building",
+      "d100": 86,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_087",
+      "title": "乾燥水池",
+      "text": "池底只有沙塵，沒有值得取走的物件。",
+      "kind": "building",
+      "d100": 87,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_088",
+      "title": "廢棄浴室",
+      "text": "設備損壞，沒有可用物資。",
+      "kind": "building",
+      "d100": 88,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_089",
+      "title": "結束營業的店鋪",
+      "text": "招牌仍在，商品早已搬走。",
+      "kind": "building",
+      "d100": 89,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_090",
+      "title": "空置病床",
+      "text": "床架與破床單之外沒有任何收穫。",
+      "kind": "building",
+      "d100": 90,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_091",
+      "title": "倒放的桌椅",
+      "text": "家具被堆在牆邊，沒有藏著物品。",
+      "kind": "building",
+      "d100": 91,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_092",
+      "title": "剝落壁畫",
+      "text": "牆面的圖像已無法辨識。",
+      "kind": "building",
+      "d100": 92,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_093",
+      "title": "只有回聲的走廊",
+      "text": "走到盡頭，只看見一面牆。",
+      "kind": "building",
+      "d100": 93,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_094",
+      "title": "破碎展示櫃",
+      "text": "玻璃早已碎裂，展品也不知去向。",
+      "kind": "building",
+      "d100": 94,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_095",
+      "title": "搬空的辦公室",
+      "text": "抽屜都被拉開，文件和物品已經移走。",
+      "kind": "building",
+      "d100": 95,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_096",
+      "title": "熄滅的爐房",
+      "text": "爐子早已冷卻，也沒有剩餘燃料。",
+      "kind": "building",
+      "d100": 96,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_097",
+      "title": "空車庫",
+      "text": "地面留著輪胎痕跡，但車輛已經離開。",
+      "kind": "building",
+      "d100": 97,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_098",
+      "title": "褪色路標牌",
+      "text": "存放在室內的牌子不再提供有效資訊。",
+      "kind": "building",
+      "d100": 98,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_099",
+      "title": "被撕毀的書頁",
+      "text": "書頁破損嚴重，無法拼出有用內容。",
+      "kind": "building",
+      "d100": 99,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    },
+    {
+      "id": "building_100",
+      "title": "塵封隔間",
+      "text": "隔間從未存放物資，搜索一無所獲。",
+      "kind": "building",
+      "d100": 100,
+      "category": "empty",
+      "bindings": {},
+      "options": [
+        {
+          "id": "continue",
+          "label": "確認一無所獲",
+          "requires": [],
+          "effects": [],
+          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
+        }
+      ],
+      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+    }
+  ]
+}

@@ -1,0 +1,3620 @@
+{
+  "version": "0.2.0",
+  "status": "100 個公路主事件＋2 個歷史人物後續模板；尚未接遊戲引擎",
+  "events": [
+    {
+      "id": "road_001",
+      "title": "加油站",
+      "text": "地下油槽仍有燃料，站主掛出營業牌。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 1,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "fuel_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_002",
+      "title": "路邊旅館",
+      "text": "旅館有能上鎖的房間，接待員正在登記住客。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 2,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "hotel"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_003",
+      "title": "流動雜貨店",
+      "text": "一輛貨車展開側板，販售旅行用品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 3,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_004",
+      "title": "修車廠",
+      "text": "技師打開鐵門，提供維修與改裝服務。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 4,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "garage"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_005",
+      "title": "藥品攤",
+      "text": "藥師將封裝藥品擺在遮陽布下。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 5,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "pharmacy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_006",
+      "title": "廢棄救護車",
+      "text": "車門敞開，急救櫃裡仍有封好的藥箱。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 6,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_007",
+      "title": "完整備用車",
+      "text": "車主留下鑰匙和轉讓字條，車內還有汽油。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 7,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "vehicle"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_008",
+      "title": "公路救援隊",
+      "text": "救援車停在路肩，願意替旅人修補車身。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 8,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "accept",
+          "label": "接受幫助",
+          "requires": [],
+          "effects": [
+            {
+              "op": "heal",
+              "target": "vehicle",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "婉拒",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_009",
+      "title": "油罐車商人",
+      "text": "司機願意用燃料交換可用廢料。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 9,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "fuel_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_010",
+      "title": "友善車隊",
+      "text": "車隊邀請你併排停靠，交換旅途消息與用品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 10,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_011",
+      "title": "未拆封補給箱",
+      "text": "貨架倒在路邊，一只封箱仍完好無損。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 11,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_012",
+      "title": "行李箱寶藏",
+      "text": "路肩的行李箱藏著一件保存良好的裝備。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 12,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_013",
+      "title": "工具鐵櫃",
+      "text": "維修亭的鐵櫃沒有上鎖，裡面留著工具。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 13,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_014",
+      "title": "太陽能求助亭",
+      "text": "仍在運作的終端顯示附近公路的歷史留言。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 14,
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_015",
+      "title": "公共急救站",
+      "text": "志工正在替路過的人處理傷口。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 15,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "accept",
+          "label": "接受幫助",
+          "requires": [],
+          "effects": [
+            {
+              "op": "heal",
+              "target": "selected_character",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "婉拒",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_016",
+      "title": "順路醫護",
+      "text": "背著醫療袋的旅人希望搭車向東。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 16,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "attitude": "npc_attitude",
+          "nickname": "npc_nickname",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "invite",
+          "label": "邀請同行",
+          "requires": [
+            {
+              "free_seats": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "recruit",
+              "actor": "npc"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "道別",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_017",
+      "title": "退休駕駛",
+      "text": "老司機提著行李，願意加入你的旅程。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 17,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "attitude": "npc_attitude",
+          "nickname": "npc_nickname",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "invite",
+          "label": "邀請同行",
+          "requires": [
+            {
+              "free_seats": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "recruit",
+              "actor": "npc"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "道別",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_018",
+      "title": "變種嚮導",
+      "text": "一名熟悉公路的變種人提出同行。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 18,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "attitude": "npc_attitude",
+          "nickname": "npc_nickname",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "invite",
+          "label": "邀請同行",
+          "requires": [
+            {
+              "free_seats": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "recruit",
+              "actor": "npc"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "道別",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_019",
+      "title": "尋找隊伍的守夜人",
+      "text": "獨行旅人願意輪班看守停靠的車輛。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 19,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "attitude": "npc_attitude",
+          "nickname": "npc_nickname",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "invite",
+          "label": "邀請同行",
+          "requires": [
+            {
+              "free_seats": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "recruit",
+              "actor": "npc"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "道別",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_020",
+      "title": "電台維修員",
+      "text": "修理廣播的人正在尋找能載他離開的車。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 20,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "attitude": "npc_attitude",
+          "nickname": "npc_nickname",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "invite",
+          "label": "邀請同行",
+          "requires": [
+            {
+              "free_seats": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "recruit",
+              "actor": "npc"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "道別",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_021",
+      "title": "廢車回收場",
+      "text": "場主販售整理過的車輛，也收購零件。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 21,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "vehicle_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_022",
+      "title": "輪胎堆中的零件箱",
+      "text": "舊輪胎下壓著一箱未生鏽的配件材料。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 22,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_023",
+      "title": "橋下贈物架",
+      "text": "旅人留下的架子上寫著「需要就拿」。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 23,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_024",
+      "title": "避難所醫藥櫃",
+      "text": "路邊小屋的醫藥櫃仍留有封裝藥品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 24,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_025",
+      "title": "軍用儲物箱",
+      "text": "被遺忘的箱子裡有一件防護裝備。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 25,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_026",
+      "title": "隧道管理室",
+      "text": "管理室留下道路工程的備料。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 26,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_027",
+      "title": "摩托車郵差",
+      "text": "郵差停下休息，讓你閱讀沿途收集的舊信。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 27,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_028",
+      "title": "公路書車",
+      "text": "老人把書架固定在車廂裡，分享災前紀錄。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 28,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_029",
+      "title": "舊報紙攤",
+      "text": "防水布下保存著災難發生前後的報紙。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 29,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_030",
+      "title": "倖存者紀念牆",
+      "text": "牆上的刻字記錄了這條路曾經歷的災變。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 30,
+      "bindings": {},
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_031",
+      "title": "善意燃料贈送",
+      "text": "準備定居的旅人送出最後一桶汽油。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 31,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "fuel",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_032",
+      "title": "廢棄發電機油桶",
+      "text": "路邊機房外有一桶仍可使用的燃料。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 32,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "fuel",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_033",
+      "title": "卸貨平台藥箱",
+      "text": "散落的貨物中有一箱封好的急救用品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 33,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_034",
+      "title": "露天裝備市場",
+      "text": "倖存者在停車坪交換武器與衣物。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 34,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "equipment_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_035",
+      "title": "二手車攤",
+      "text": "賣家允許檢查幾輛仍能行駛的車。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 35,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "vehicle_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_036",
+      "title": "專門改裝店",
+      "text": "店主展示座椅、裝甲與車載設備的安裝服務。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 36,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "garage"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_037",
+      "title": "義務修車棚",
+      "text": "幾名技師正替過路者修復受損車身。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 37,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "accept",
+          "label": "接受幫助",
+          "requires": [],
+          "effects": [
+            {
+              "op": "heal",
+              "target": "vehicle",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "婉拒",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_038",
+      "title": "路邊診所",
+      "text": "醫師仍在看診，可支付費用接受治療。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 38,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "clinic"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_039",
+      "title": "安全休息庭院",
+      "text": "看守者提供停車與輪班警戒服務。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 39,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "hotel"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_040",
+      "title": "有守衛的驛站",
+      "text": "驛站有床位，守衛巡視車輛出入口。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 40,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "hotel"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_041",
+      "title": "舊友贈送物資",
+      "text": "認識你車隊的人留下了一只用品包。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 41,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_042",
+      "title": "貨運貨櫃",
+      "text": "封條破裂的貨櫃內仍留有可用裝備。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 42,
+      "bindings": {},
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_043",
+      "title": "撞開的保險箱",
+      "text": "被撞開的箱體裡放著交換用的金屬材料。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 43,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_044",
+      "title": "流動藥房",
+      "text": "藥師的車停在路邊，出售治療傷口的用品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 44,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "pharmacy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_045",
+      "title": "修復中的校車",
+      "text": "工匠正在出售一輛恢復行駛能力的舊車。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 45,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "vehicle_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_046",
+      "title": "商隊酬謝",
+      "text": "商隊正在分送多出的旅行用品。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 46,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "inspect",
+          "label": "查看並領取或選擇",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "supplies"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_047",
+      "title": "被遺留的燃料拖車",
+      "text": "拖車不能行駛，但密封油桶仍然完整。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 47,
+      "bindings": {},
+      "options": [
+        {
+          "id": "take",
+          "label": "收下物資",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "fuel",
+              "amount": 5
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "留下物資",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_048",
+      "title": "倉庫清倉",
+      "text": "路邊商店準備搬遷，願意交換庫存。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 48,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "service",
+          "label": "查看服務",
+          "requires": [],
+          "effects": [
+            {
+              "op": "open_service",
+              "service": "general_shop"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "leave",
+          "label": "不使用服務",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_049",
+      "title": "倖存者口述紀錄",
+      "text": "老人願意講述自己經歷的世界崩潰過程。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 49,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "read",
+          "label": "了解這段歷史",
+          "requires": [],
+          "effects": [
+            {
+              "op": "reveal_history",
+              "source": "world.history"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_050",
+      "title": "東方無線電",
+      "text": "一個清晰訊號傳來樂園的傳聞，留下了希望。",
+      "kind": "normal",
+      "polarity": "good",
+      "d100": 50,
+      "bindings": {},
+      "options": [
+        {
+          "id": "listen",
+          "label": "聽完廣播",
+          "requires": [],
+          "effects": [],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_051",
+      "title": "掠奪車隊",
+      "text": "裝甲車橫停在路上，車上的人要求交出物資。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 51,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "vehicle",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "vehicle"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_052",
+      "title": "假收費站",
+      "text": "持械者架起欄杆，強迫過路車繳納通行費。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 52,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "scrap",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_053",
+      "title": "殭屍堵路",
+      "text": "僵硬的身影擠在車前，正在拍打玻璃。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 53,
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_054",
+      "title": "碎石落坡",
+      "text": "落石堵住道路，需要清理才能通過。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 54,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_055",
+      "title": "道路塌陷",
+      "text": "前方路面下陷，只剩狹窄的繞行路線。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 55,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_056",
+      "title": "橋梁斷裂",
+      "text": "橋面斷成兩截，你必須沿河繞路。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 56,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_057",
+      "title": "濃霧封路",
+      "text": "霧中看不清道路邊緣，貿然前進容易撞車。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 57,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_058",
+      "title": "沙塵暴",
+      "text": "風沙吞沒道路，細砂敲打車窗。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 58,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_059",
+      "title": "酸雨",
+      "text": "刺鼻雨水落在車身上，必須盡快找到遮蔽。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 59,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_060",
+      "title": "結冰路面",
+      "text": "輪胎在冰上打滑，車輛偏向護欄。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 60,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_061",
+      "title": "散落尖鐵",
+      "text": "路上散著尖銳金屬，底盤被猛烈刮擦。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 61,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_062",
+      "title": "傾倒貨車",
+      "text": "橫倒貨車阻擋道路，貨物壓住通道。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 62,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_063",
+      "title": "燃油滲漏",
+      "text": "停靠時發現油路漏出汽油。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 63,
+      "bindings": {},
+      "options": [
+        {
+          "id": "check",
+          "label": "確認燃料損失",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource_loss",
+              "key": "fuel",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_064",
+      "title": "引擎過熱",
+      "text": "引擎冒煙，必須熄火等待冷卻。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 64,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_065",
+      "title": "電路短路",
+      "text": "焦味從儀表板後傳來，車身受到損傷。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 65,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_066",
+      "title": "野火蔓延",
+      "text": "火勢逼近公路，原本的路線已不可通行。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 66,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_067",
+      "title": "洪水漫路",
+      "text": "混濁的水淹沒車輪，前方深度無法判斷。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 67,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_068",
+      "title": "巨獸攔路",
+      "text": "一頭變異巨獸佔據路中央。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 68,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_069",
+      "title": "追獵車",
+      "text": "後方車輛持續逼近，車載武器已轉向你。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 69,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "vehicle",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "vehicle"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_070",
+      "title": "冒牌救援車",
+      "text": "救援標誌下伸出槍口，對方要求投降。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 70,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "vehicle",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "vehicle"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_071",
+      "title": "假商隊伏擊",
+      "text": "交易旗幟收起後，幾名武裝者包圍車子。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 71,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_072",
+      "title": "武裝封鎖線",
+      "text": "檢查哨拒絕放行，要求繳納物資。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 72,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "scrap",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_073",
+      "title": "失控車輛",
+      "text": "一輛無人控制的車撞向你的側面。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 73,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_074",
+      "title": "隧道坍塌",
+      "text": "隧道入口落下混凝土，無法照原路通行。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 74,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_075",
+      "title": "有毒氣體",
+      "text": "廢棄管線洩漏氣體，必須繞過受污染路段。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 75,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_076",
+      "title": "刺藤路障",
+      "text": "堅韌藤蔓纏住護欄並伸進車道。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 76,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_077",
+      "title": "變異蟲群",
+      "text": "大量蟲子聚集在車窗與進氣口周圍。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 77,
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_078",
+      "title": "敵對摩托幫",
+      "text": "摩托車圍住你的車，要求留下零件。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 78,
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "vehicle",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "vehicle"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_079",
+      "title": "狙擊威脅",
+      "text": "遠處槍聲響起，子彈擊中車旁路牌。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 79,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_080",
+      "title": "搶匪索取藥品",
+      "text": "一群人堵住路，指著公共背包要求交貨。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 80,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "medicine",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_081",
+      "title": "破損導航路牌",
+      "text": "路牌被人改動，誤導你開入死路。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 81,
+      "bindings": {},
+      "options": [
+        {
+          "id": "check",
+          "label": "確認燃料損失",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource_loss",
+              "key": "fuel",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_082",
+      "title": "燃燒的油槽",
+      "text": "路邊油槽爆燃，必須離開原路線。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 82,
+      "bindings": {},
+      "options": [
+        {
+          "id": "detour",
+          "label": "尋找繞行路線",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_083",
+      "title": "崩落電纜",
+      "text": "電纜橫在路面，不時跳出火花。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 83,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_084",
+      "title": "鬆動車體",
+      "text": "車身連接處傳來異響，損傷已經擴大。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 84,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_085",
+      "title": "塵土窒息",
+      "text": "突然捲起的粉塵使車內眾人劇烈咳嗽。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 85,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認人員傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "party",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_086",
+      "title": "病變孢子",
+      "text": "空氣中漂浮的孢子刺激皮膚與眼睛。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 86,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認人員傷勢",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "party",
+              "amount": 2
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_087",
+      "title": "路旁爆炸",
+      "text": "遺留裝置突然爆開，碎片掃過車體。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 87,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_088",
+      "title": "橋頭伏擊",
+      "text": "車輛通過橋頭時，武裝者從掩體後現身。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 88,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_089",
+      "title": "追索過路費",
+      "text": "一輛武裝車追來，聲稱你欠了通行費。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 89,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "scrap",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_090",
+      "title": "車窗遭襲",
+      "text": "變異飛行生物撲向擋風玻璃。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 90,
+      "bindings": {},
+      "options": [
+        {
+          "id": "assess",
+          "label": "確認車輛損傷",
+          "requires": [],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "vehicle",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_091",
+      "title": "道路泥濘",
+      "text": "輪胎陷在軟泥中，需要出力推車。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 91,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_092",
+      "title": "倒下的巨樹",
+      "text": "巨木橫跨整條公路，需要搬開障礙。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 92,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_093",
+      "title": "陌生人的恐嚇",
+      "text": "持械者威脅要破壞車輛，索取交換物資。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 93,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "scrap",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_094",
+      "title": "空曠路段槍戰",
+      "text": "兩派交火封住道路，你只能等待或冒險通過。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 94,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_095",
+      "title": "黑煙遮蔽",
+      "text": "焚燒廢料的煙幕覆蓋道路。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 95,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_096",
+      "title": "暴走的感染者",
+      "text": "感染者聽見引擎聲，朝車輛衝來。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 96,
+      "bindings": {},
+      "options": [
+        {
+          "id": "fight",
+          "label": "迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "escape",
+          "label": "嘗試逃離",
+          "requires": [],
+          "effects": [
+            {
+              "op": "attempt_escape",
+              "mode": "character"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_097",
+      "title": "報廢車陣",
+      "text": "路面被故意堆起的廢車堵住。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 97,
+      "bindings": {},
+      "options": [
+        {
+          "id": "work",
+          "label": "出力清理",
+          "requires": [],
+          "effects": [
+            {
+              "op": "stamina_cost",
+              "target": "selected_character",
+              "amount": 3
+            },
+            {
+              "op": "world_minutes",
+              "amount": 30
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "detour",
+          "label": "嘗試繞行",
+          "requires": [],
+          "effects": [
+            {
+              "op": "travel_cost",
+              "fuel": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_098",
+      "title": "公路強制徵用",
+      "text": "武裝團體要求繳出物資作為通行代價。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 98,
+      "bindings": {
+        "npc": {
+          "name": "npc_name",
+          "nickname": "npc_nickname",
+          "attitude": "npc_attitude",
+          "race": "npc_race",
+          "profession": "npc_profession",
+          "flaw": "npc_flaw"
+        }
+      },
+      "options": [
+        {
+          "id": "pay",
+          "label": "交出物資",
+          "requires": [
+            {
+              "resource": "scrap",
+              "minimum": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": -1
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        },
+        {
+          "id": "refuse",
+          "label": "拒絕並迎戰",
+          "requires": [],
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_table": "enemy"
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "road_099",
+      "title": "破裂的油桶",
+      "text": "備用燃料容器損壞，部分汽油已經流失。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 99,
+      "bindings": {},
+      "options": [
+        {
+          "id": "check",
+          "label": "確認燃料損失",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource_loss",
+              "key": "fuel",
+              "amount": 3
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "road_100",
+      "title": "暴雨與雷擊",
+      "text": "強風打落路旁設施，擋住前進方向。",
+      "kind": "normal",
+      "polarity": "bad",
+      "d100": 100,
+      "bindings": {},
+      "options": [
+        {
+          "id": "wait",
+          "label": "停車等候安全時機",
+          "requires": [],
+          "effects": [
+            {
+              "op": "world_minutes",
+              "amount": 60
+            }
+          ],
+          "result_text": "依選項結算；具體數值屬試玩草案。"
+        }
+      ],
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+    },
+    {
+      "id": "grateful_traveler",
+      "title": "熟悉的招呼聲",
+      "text": "{npc.display_name}從路旁向你揮手，認出了曾經幫忙的車。",
+      "kind": "followup",
+      "bindings": {
+        "npc": {
+          "source": "followup.actor"
+        }
+      },
+      "options": [
+        {
+          "id": "accept",
+          "label": "接受回禮",
+          "requires": [],
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 3
+            }
+          ],
+          "result_text": "對方遞來藥品，沒有再要求什麼。"
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "你們收起目光，準備繼續旅程。"
+        }
+      ],
+      "npc_display": "{npc.display_name}"
+    },
+    {
+      "id": "former_companion",
+      "title": "再次相遇",
+      "text": "路邊那張臉，是曾經坐在你車裡的人。",
+      "kind": "former_companion",
+      "bindings": {
+        "npc": {
+          "source": "eligible_departed_companion"
+        }
+      },
+      "options": [
+        {
+          "id": "approach",
+          "label": "上前交談",
+          "requires": [],
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "reunion"
+            }
+          ],
+          "result_text": ""
+        },
+        {
+          "id": "leave",
+          "label": "離開",
+          "requires": [],
+          "effects": [],
+          "result_text": "你們收起目光，準備繼續旅程。"
+        }
+      ],
+      "npc_display": "{npc.display_name}"
+    }
+  ]
+}

@@ -1,0 +1,2813 @@
+{
+  "version": "0.2.0",
+  "status": "主表 100 項各占 1%，好壞各 50%；其他抽取與效果數值仍為草案",
+  "tables": [
+    {
+      "id": "road_event",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "event": "road_001",
+          "polarity": "good"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "event": "road_002",
+          "polarity": "good"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "event": "road_003",
+          "polarity": "good"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "event": "road_004",
+          "polarity": "good"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "event": "road_005",
+          "polarity": "good"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "event": "road_006",
+          "polarity": "good"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "event": "road_007",
+          "polarity": "good"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "event": "road_008",
+          "polarity": "good"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "event": "road_009",
+          "polarity": "good"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "event": "road_010",
+          "polarity": "good"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "event": "road_011",
+          "polarity": "good"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "event": "road_012",
+          "polarity": "good"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "event": "road_013",
+          "polarity": "good"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "event": "road_014",
+          "polarity": "good"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "event": "road_015",
+          "polarity": "good"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "event": "road_016",
+          "polarity": "good"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "event": "road_017",
+          "polarity": "good"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "event": "road_018",
+          "polarity": "good"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "event": "road_019",
+          "polarity": "good"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "event": "road_020",
+          "polarity": "good"
+        },
+        {
+          "min": 21,
+          "max": 21,
+          "event": "road_021",
+          "polarity": "good"
+        },
+        {
+          "min": 22,
+          "max": 22,
+          "event": "road_022",
+          "polarity": "good"
+        },
+        {
+          "min": 23,
+          "max": 23,
+          "event": "road_023",
+          "polarity": "good"
+        },
+        {
+          "min": 24,
+          "max": 24,
+          "event": "road_024",
+          "polarity": "good"
+        },
+        {
+          "min": 25,
+          "max": 25,
+          "event": "road_025",
+          "polarity": "good"
+        },
+        {
+          "min": 26,
+          "max": 26,
+          "event": "road_026",
+          "polarity": "good"
+        },
+        {
+          "min": 27,
+          "max": 27,
+          "event": "road_027",
+          "polarity": "good"
+        },
+        {
+          "min": 28,
+          "max": 28,
+          "event": "road_028",
+          "polarity": "good"
+        },
+        {
+          "min": 29,
+          "max": 29,
+          "event": "road_029",
+          "polarity": "good"
+        },
+        {
+          "min": 30,
+          "max": 30,
+          "event": "road_030",
+          "polarity": "good"
+        },
+        {
+          "min": 31,
+          "max": 31,
+          "event": "road_031",
+          "polarity": "good"
+        },
+        {
+          "min": 32,
+          "max": 32,
+          "event": "road_032",
+          "polarity": "good"
+        },
+        {
+          "min": 33,
+          "max": 33,
+          "event": "road_033",
+          "polarity": "good"
+        },
+        {
+          "min": 34,
+          "max": 34,
+          "event": "road_034",
+          "polarity": "good"
+        },
+        {
+          "min": 35,
+          "max": 35,
+          "event": "road_035",
+          "polarity": "good"
+        },
+        {
+          "min": 36,
+          "max": 36,
+          "event": "road_036",
+          "polarity": "good"
+        },
+        {
+          "min": 37,
+          "max": 37,
+          "event": "road_037",
+          "polarity": "good"
+        },
+        {
+          "min": 38,
+          "max": 38,
+          "event": "road_038",
+          "polarity": "good"
+        },
+        {
+          "min": 39,
+          "max": 39,
+          "event": "road_039",
+          "polarity": "good"
+        },
+        {
+          "min": 40,
+          "max": 40,
+          "event": "road_040",
+          "polarity": "good"
+        },
+        {
+          "min": 41,
+          "max": 41,
+          "event": "road_041",
+          "polarity": "good"
+        },
+        {
+          "min": 42,
+          "max": 42,
+          "event": "road_042",
+          "polarity": "good"
+        },
+        {
+          "min": 43,
+          "max": 43,
+          "event": "road_043",
+          "polarity": "good"
+        },
+        {
+          "min": 44,
+          "max": 44,
+          "event": "road_044",
+          "polarity": "good"
+        },
+        {
+          "min": 45,
+          "max": 45,
+          "event": "road_045",
+          "polarity": "good"
+        },
+        {
+          "min": 46,
+          "max": 46,
+          "event": "road_046",
+          "polarity": "good"
+        },
+        {
+          "min": 47,
+          "max": 47,
+          "event": "road_047",
+          "polarity": "good"
+        },
+        {
+          "min": 48,
+          "max": 48,
+          "event": "road_048",
+          "polarity": "good"
+        },
+        {
+          "min": 49,
+          "max": 49,
+          "event": "road_049",
+          "polarity": "good"
+        },
+        {
+          "min": 50,
+          "max": 50,
+          "event": "road_050",
+          "polarity": "good"
+        },
+        {
+          "min": 51,
+          "max": 51,
+          "event": "road_051",
+          "polarity": "bad"
+        },
+        {
+          "min": 52,
+          "max": 52,
+          "event": "road_052",
+          "polarity": "bad"
+        },
+        {
+          "min": 53,
+          "max": 53,
+          "event": "road_053",
+          "polarity": "bad"
+        },
+        {
+          "min": 54,
+          "max": 54,
+          "event": "road_054",
+          "polarity": "bad"
+        },
+        {
+          "min": 55,
+          "max": 55,
+          "event": "road_055",
+          "polarity": "bad"
+        },
+        {
+          "min": 56,
+          "max": 56,
+          "event": "road_056",
+          "polarity": "bad"
+        },
+        {
+          "min": 57,
+          "max": 57,
+          "event": "road_057",
+          "polarity": "bad"
+        },
+        {
+          "min": 58,
+          "max": 58,
+          "event": "road_058",
+          "polarity": "bad"
+        },
+        {
+          "min": 59,
+          "max": 59,
+          "event": "road_059",
+          "polarity": "bad"
+        },
+        {
+          "min": 60,
+          "max": 60,
+          "event": "road_060",
+          "polarity": "bad"
+        },
+        {
+          "min": 61,
+          "max": 61,
+          "event": "road_061",
+          "polarity": "bad"
+        },
+        {
+          "min": 62,
+          "max": 62,
+          "event": "road_062",
+          "polarity": "bad"
+        },
+        {
+          "min": 63,
+          "max": 63,
+          "event": "road_063",
+          "polarity": "bad"
+        },
+        {
+          "min": 64,
+          "max": 64,
+          "event": "road_064",
+          "polarity": "bad"
+        },
+        {
+          "min": 65,
+          "max": 65,
+          "event": "road_065",
+          "polarity": "bad"
+        },
+        {
+          "min": 66,
+          "max": 66,
+          "event": "road_066",
+          "polarity": "bad"
+        },
+        {
+          "min": 67,
+          "max": 67,
+          "event": "road_067",
+          "polarity": "bad"
+        },
+        {
+          "min": 68,
+          "max": 68,
+          "event": "road_068",
+          "polarity": "bad"
+        },
+        {
+          "min": 69,
+          "max": 69,
+          "event": "road_069",
+          "polarity": "bad"
+        },
+        {
+          "min": 70,
+          "max": 70,
+          "event": "road_070",
+          "polarity": "bad"
+        },
+        {
+          "min": 71,
+          "max": 71,
+          "event": "road_071",
+          "polarity": "bad"
+        },
+        {
+          "min": 72,
+          "max": 72,
+          "event": "road_072",
+          "polarity": "bad"
+        },
+        {
+          "min": 73,
+          "max": 73,
+          "event": "road_073",
+          "polarity": "bad"
+        },
+        {
+          "min": 74,
+          "max": 74,
+          "event": "road_074",
+          "polarity": "bad"
+        },
+        {
+          "min": 75,
+          "max": 75,
+          "event": "road_075",
+          "polarity": "bad"
+        },
+        {
+          "min": 76,
+          "max": 76,
+          "event": "road_076",
+          "polarity": "bad"
+        },
+        {
+          "min": 77,
+          "max": 77,
+          "event": "road_077",
+          "polarity": "bad"
+        },
+        {
+          "min": 78,
+          "max": 78,
+          "event": "road_078",
+          "polarity": "bad"
+        },
+        {
+          "min": 79,
+          "max": 79,
+          "event": "road_079",
+          "polarity": "bad"
+        },
+        {
+          "min": 80,
+          "max": 80,
+          "event": "road_080",
+          "polarity": "bad"
+        },
+        {
+          "min": 81,
+          "max": 81,
+          "event": "road_081",
+          "polarity": "bad"
+        },
+        {
+          "min": 82,
+          "max": 82,
+          "event": "road_082",
+          "polarity": "bad"
+        },
+        {
+          "min": 83,
+          "max": 83,
+          "event": "road_083",
+          "polarity": "bad"
+        },
+        {
+          "min": 84,
+          "max": 84,
+          "event": "road_084",
+          "polarity": "bad"
+        },
+        {
+          "min": 85,
+          "max": 85,
+          "event": "road_085",
+          "polarity": "bad"
+        },
+        {
+          "min": 86,
+          "max": 86,
+          "event": "road_086",
+          "polarity": "bad"
+        },
+        {
+          "min": 87,
+          "max": 87,
+          "event": "road_087",
+          "polarity": "bad"
+        },
+        {
+          "min": 88,
+          "max": 88,
+          "event": "road_088",
+          "polarity": "bad"
+        },
+        {
+          "min": 89,
+          "max": 89,
+          "event": "road_089",
+          "polarity": "bad"
+        },
+        {
+          "min": 90,
+          "max": 90,
+          "event": "road_090",
+          "polarity": "bad"
+        },
+        {
+          "min": 91,
+          "max": 91,
+          "event": "road_091",
+          "polarity": "bad"
+        },
+        {
+          "min": 92,
+          "max": 92,
+          "event": "road_092",
+          "polarity": "bad"
+        },
+        {
+          "min": 93,
+          "max": 93,
+          "event": "road_093",
+          "polarity": "bad"
+        },
+        {
+          "min": 94,
+          "max": 94,
+          "event": "road_094",
+          "polarity": "bad"
+        },
+        {
+          "min": 95,
+          "max": 95,
+          "event": "road_095",
+          "polarity": "bad"
+        },
+        {
+          "min": 96,
+          "max": 96,
+          "event": "road_096",
+          "polarity": "bad"
+        },
+        {
+          "min": 97,
+          "max": 97,
+          "event": "road_097",
+          "polarity": "bad"
+        },
+        {
+          "min": 98,
+          "max": 98,
+          "event": "road_098",
+          "polarity": "bad"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "event": "road_099",
+          "polarity": "bad"
+        },
+        {
+          "min": 100,
+          "max": 100,
+          "event": "road_100",
+          "polarity": "bad"
+        }
+      ]
+    },
+    {
+      "id": "npc_attitude",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 15,
+          "value": "敵對"
+        },
+        {
+          "min": 16,
+          "max": 30,
+          "value": "掠奪"
+        },
+        {
+          "min": 31,
+          "max": 50,
+          "value": "同情"
+        },
+        {
+          "min": 51,
+          "max": 70,
+          "value": "友善"
+        },
+        {
+          "min": 71,
+          "max": 85,
+          "value": "戒備"
+        },
+        {
+          "min": 86,
+          "max": 100,
+          "value": "冷淡"
+        }
+      ],
+      "status": "態度行為見 npc-spec.json；下列區間為暫定草案，使用前需依事件條件篩選"
+    },
+    {
+      "id": "supplies",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 40,
+          "text": "找到藥品。",
+          "effects": [
+            {
+              "op": "resource",
+              "key": "medicine",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "min": 41,
+          "max": 75,
+          "text": "找到廢料。",
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "min": 76,
+          "max": 100,
+          "text": "找到裝備。",
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "equipment"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salvage",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 45,
+          "text": "油箱空了，車輛也無法使用。",
+          "effects": []
+        },
+        {
+          "min": 46,
+          "max": 70,
+          "text": "抽出少量殘油。",
+          "effects": [
+            {
+              "op": "resource",
+              "key": "fuel",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "min": 71,
+          "max": 85,
+          "text": "找到可拆下的廢料。",
+          "effects": [
+            {
+              "op": "resource",
+              "key": "scrap",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "min": 86,
+          "max": 100,
+          "text": "引擎仍能發動。",
+          "effects": [
+            {
+              "op": "oracle",
+              "table": "vehicle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equipment",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 35,
+          "value": {
+            "id": "club",
+            "name": "球棒",
+            "slot": "武器"
+          }
+        },
+        {
+          "min": 36,
+          "max": 65,
+          "value": {
+            "id": "coat",
+            "name": "厚外套",
+            "slot": "防具"
+          }
+        },
+        {
+          "min": 66,
+          "max": 100,
+          "value": {
+            "id": "tools",
+            "name": "工具組",
+            "slot": "配件"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vehicle",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 40,
+          "value": {
+            "id": "compact",
+            "name": "單座改裝小車",
+            "seats": 1,
+            "max_health": 20,
+            "mod_slots": 2,
+            "fuel": 6
+          }
+        },
+        {
+          "min": 41,
+          "max": 75,
+          "value": {
+            "id": "sedan",
+            "name": "老舊轎車",
+            "seats": 3,
+            "max_health": 30,
+            "mod_slots": 2,
+            "fuel": 8
+          }
+        },
+        {
+          "min": 76,
+          "max": 100,
+          "value": {
+            "id": "van",
+            "name": "廂型車",
+            "seats": 5,
+            "max_health": 40,
+            "mod_slots": 3,
+            "fuel": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "enemy",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 35,
+          "value": {
+            "trait": "受傷",
+            "intent": "驅逐"
+          }
+        },
+        {
+          "min": 36,
+          "max": 70,
+          "value": {
+            "trait": "飢餓",
+            "intent": "奪取物資"
+          }
+        },
+        {
+          "min": 71,
+          "max": 100,
+          "value": {
+            "trait": "頑強",
+            "intent": "追擊"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reunion",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 40,
+          "text": "對方願意再次同行。",
+          "effects": [
+            {
+              "op": "offer_recruit",
+              "actor": "npc"
+            }
+          ]
+        },
+        {
+          "min": 41,
+          "max": 75,
+          "text": "對方只想各走各的路。",
+          "effects": []
+        },
+        {
+          "min": 76,
+          "max": 100,
+          "text": "對方將舊怨化作敵意。",
+          "effects": [
+            {
+              "op": "combat",
+              "mode": "character",
+              "enemy_actor": "npc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stranded_ending",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 30,
+          "value": "你們在路旁搭起住處。車再也沒有向東開，但生活仍然繼續。"
+        },
+        {
+          "min": 31,
+          "max": 60,
+          "value": "你們放棄車輛，跟隨另一群旅人離開。通往綠洲的這段旅程到此結束。"
+        },
+        {
+          "min": 61,
+          "max": 85,
+          "value": "日子消磨了最後的補給。後來經過的人只看見一輛空車。"
+        },
+        {
+          "min": 86,
+          "max": 100,
+          "value": "你們在附近找到容身之處。很多年後，你仍會望向東方。"
+        }
+      ]
+    },
+    {
+      "id": "history_seed",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 25,
+          "value": {
+            "cause": "核戰",
+            "process": "能源爭端演變為報復性核打擊",
+            "trace": "最後一份報紙仍在否認戰爭已經開始。"
+          }
+        },
+        {
+          "min": 26,
+          "max": 50,
+          "value": {
+            "cause": "失控感染",
+            "process": "隱瞞的感染隨撤離人潮擴散",
+            "trace": "醫院日誌停在封鎖解除的前一天。"
+          }
+        },
+        {
+          "min": 51,
+          "max": 75,
+          "value": {
+            "cause": "生態崩潰",
+            "process": "糧食鏈斷裂引發飢荒與城市解體",
+            "trace": "農業報告最後只剩逐年下修的產量。"
+          }
+        },
+        {
+          "min": 76,
+          "max": 100,
+          "value": {
+            "cause": "生物實驗外洩",
+            "process": "軍事實驗流入民間並改變倖存者",
+            "trace": "研究檔案裡，每次事故都被標為可控制。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "departure_fate",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 30,
+          "value": "留在路邊聚落"
+        },
+        {
+          "min": 31,
+          "max": 60,
+          "value": "加入其他旅行者"
+        },
+        {
+          "min": 61,
+          "max": 80,
+          "value": "獨自向東旅行"
+        },
+        {
+          "min": 81,
+          "max": 100,
+          "value": "失去消息"
+        }
+      ]
+    },
+    {
+      "id": "npc_name",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "value": "林秋"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "value": "陳遠"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "value": "周河"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "value": "沈石"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "value": "許安"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "value": "吳青"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "value": "葉晴"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "value": "蘇禾"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "value": "江嵐"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "value": "方寧"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "value": "陸川"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "value": "宋雨"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "value": "顧言"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "value": "唐朔"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "value": "蕭然"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "value": "白露"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "value": "程墨"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "value": "韓冬"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "value": "羅星"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "value": "杜衡"
+        },
+        {
+          "min": 21,
+          "max": 21,
+          "value": "高原"
+        },
+        {
+          "min": 22,
+          "max": 22,
+          "value": "潘岳"
+        },
+        {
+          "min": 23,
+          "max": 23,
+          "value": "蔡琳"
+        },
+        {
+          "min": 24,
+          "max": 24,
+          "value": "鄭松"
+        },
+        {
+          "min": 25,
+          "max": 25,
+          "value": "梁月"
+        },
+        {
+          "min": 26,
+          "max": 26,
+          "value": "黃澄"
+        },
+        {
+          "min": 27,
+          "max": 27,
+          "value": "趙霖"
+        },
+        {
+          "min": 28,
+          "max": 28,
+          "value": "孫默"
+        },
+        {
+          "min": 29,
+          "max": 29,
+          "value": "李遙"
+        },
+        {
+          "min": 30,
+          "max": 30,
+          "value": "王弦"
+        },
+        {
+          "min": 31,
+          "max": 31,
+          "value": "徐朗"
+        },
+        {
+          "min": 32,
+          "max": 32,
+          "value": "馬岑"
+        },
+        {
+          "min": 33,
+          "max": 33,
+          "value": "何舟"
+        },
+        {
+          "min": 34,
+          "max": 34,
+          "value": "郭萍"
+        },
+        {
+          "min": 35,
+          "max": 35,
+          "value": "朱雁"
+        },
+        {
+          "min": 36,
+          "max": 36,
+          "value": "胡楓"
+        },
+        {
+          "min": 37,
+          "max": 37,
+          "value": "張帆"
+        },
+        {
+          "min": 38,
+          "max": 38,
+          "value": "劉淮"
+        },
+        {
+          "min": 39,
+          "max": 39,
+          "value": "楊杉"
+        },
+        {
+          "min": 40,
+          "max": 40,
+          "value": "曾溪"
+        },
+        {
+          "min": 41,
+          "max": 41,
+          "value": "謝岩"
+        },
+        {
+          "min": 42,
+          "max": 42,
+          "value": "廖雪"
+        },
+        {
+          "min": 43,
+          "max": 43,
+          "value": "鍾晨"
+        },
+        {
+          "min": 44,
+          "max": 44,
+          "value": "彭海"
+        },
+        {
+          "min": 45,
+          "max": 45,
+          "value": "袁野"
+        },
+        {
+          "min": 46,
+          "max": 46,
+          "value": "董薇"
+        },
+        {
+          "min": 47,
+          "max": 47,
+          "value": "余笙"
+        },
+        {
+          "min": 48,
+          "max": 48,
+          "value": "傅城"
+        },
+        {
+          "min": 49,
+          "max": 49,
+          "value": "石榆"
+        },
+        {
+          "min": 50,
+          "max": 50,
+          "value": "段霞"
+        },
+        {
+          "min": 51,
+          "max": 51,
+          "value": "夏泉"
+        },
+        {
+          "min": 52,
+          "max": 52,
+          "value": "秦峰"
+        },
+        {
+          "min": 53,
+          "max": 53,
+          "value": "邵藍"
+        },
+        {
+          "min": 54,
+          "max": 54,
+          "value": "蔣南"
+        },
+        {
+          "min": 55,
+          "max": 55,
+          "value": "洪霜"
+        },
+        {
+          "min": 56,
+          "max": 56,
+          "value": "金樹"
+        },
+        {
+          "min": 57,
+          "max": 57,
+          "value": "魏柏"
+        },
+        {
+          "min": 58,
+          "max": 58,
+          "value": "姚瑤"
+        },
+        {
+          "min": 59,
+          "max": 59,
+          "value": "薛明"
+        },
+        {
+          "min": 60,
+          "max": 60,
+          "value": "熊燁"
+        },
+        {
+          "min": 61,
+          "max": 61,
+          "value": "孟竹"
+        },
+        {
+          "min": 62,
+          "max": 62,
+          "value": "尹璇"
+        },
+        {
+          "min": 63,
+          "max": 63,
+          "value": "黎光"
+        },
+        {
+          "min": 64,
+          "max": 64,
+          "value": "賀茵"
+        },
+        {
+          "min": 65,
+          "max": 65,
+          "value": "邱澤"
+        },
+        {
+          "min": 66,
+          "max": 66,
+          "value": "毛庭"
+        },
+        {
+          "min": 67,
+          "max": 67,
+          "value": "康桐"
+        },
+        {
+          "min": 68,
+          "max": 68,
+          "value": "汪柳"
+        },
+        {
+          "min": 69,
+          "max": 69,
+          "value": "龍曉"
+        },
+        {
+          "min": 70,
+          "max": 70,
+          "value": "戴風"
+        },
+        {
+          "min": 71,
+          "max": 71,
+          "value": "田苗"
+        },
+        {
+          "min": 72,
+          "max": 72,
+          "value": "任航"
+        },
+        {
+          "min": 73,
+          "max": 73,
+          "value": "呂燦"
+        },
+        {
+          "min": 74,
+          "max": 74,
+          "value": "池雨"
+        },
+        {
+          "min": 75,
+          "max": 75,
+          "value": "柳岸"
+        },
+        {
+          "min": 76,
+          "max": 76,
+          "value": "溫靜"
+        },
+        {
+          "min": 77,
+          "max": 77,
+          "value": "喬辰"
+        },
+        {
+          "min": 78,
+          "max": 78,
+          "value": "莫凡"
+        },
+        {
+          "min": 79,
+          "max": 79,
+          "value": "易清"
+        },
+        {
+          "min": 80,
+          "max": 80,
+          "value": "連山"
+        },
+        {
+          "min": 81,
+          "max": 81,
+          "value": "紀夏"
+        },
+        {
+          "min": 82,
+          "max": 82,
+          "value": "安平"
+        },
+        {
+          "min": 83,
+          "max": 83,
+          "value": "侯望"
+        },
+        {
+          "min": 84,
+          "max": 84,
+          "value": "武辰"
+        },
+        {
+          "min": 85,
+          "max": 85,
+          "value": "齊悅"
+        },
+        {
+          "min": 86,
+          "max": 86,
+          "value": "孔寂"
+        },
+        {
+          "min": 87,
+          "max": 87,
+          "value": "柯源"
+        },
+        {
+          "min": 88,
+          "max": 88,
+          "value": "成蔭"
+        },
+        {
+          "min": 89,
+          "max": 89,
+          "value": "包岳"
+        },
+        {
+          "min": 90,
+          "max": 90,
+          "value": "梅影"
+        },
+        {
+          "min": 91,
+          "max": 91,
+          "value": "卓凡"
+        },
+        {
+          "min": 92,
+          "max": 92,
+          "value": "阮鈴"
+        },
+        {
+          "min": 93,
+          "max": 93,
+          "value": "歐陽洛"
+        },
+        {
+          "min": 94,
+          "max": 94,
+          "value": "司徒真"
+        },
+        {
+          "min": 95,
+          "max": 95,
+          "value": "上官蓉"
+        },
+        {
+          "min": 96,
+          "max": 96,
+          "value": "南宮澈"
+        },
+        {
+          "min": 97,
+          "max": 97,
+          "value": "夏侯寧"
+        },
+        {
+          "min": 98,
+          "max": 98,
+          "value": "慕容霽"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "value": "公孫羽"
+        },
+        {
+          "min": 100,
+          "max": 100,
+          "value": "諸葛川"
+        }
+      ]
+    },
+    {
+      "id": "npc_nickname",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "value": "鐵皮"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "value": "烏鴉"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "value": "火花"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "value": "灰狼"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "value": "扳手"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "value": "老鐘"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "value": "夜鷹"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "value": "砂礫"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "value": "燈芯"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "value": "獨眼"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "value": "紅線"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "value": "啞鈴"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "value": "破帆"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "value": "鉛筆"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "value": "短波"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "value": "藍煙"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "value": "長釘"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "value": "銅牙"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "value": "冷雨"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "value": "風鈴"
+        },
+        {
+          "min": 21,
+          "max": 21,
+          "value": "白狐"
+        },
+        {
+          "min": 22,
+          "max": 22,
+          "value": "黑貓"
+        },
+        {
+          "min": 23,
+          "max": 23,
+          "value": "鐵靴"
+        },
+        {
+          "min": 24,
+          "max": 24,
+          "value": "煙斗"
+        },
+        {
+          "min": 25,
+          "max": 25,
+          "value": "螺絲"
+        },
+        {
+          "min": 26,
+          "max": 26,
+          "value": "孤燈"
+        },
+        {
+          "min": 27,
+          "max": 27,
+          "value": "紙鶴"
+        },
+        {
+          "min": 28,
+          "max": 28,
+          "value": "火柴"
+        },
+        {
+          "min": 29,
+          "max": 29,
+          "value": "石頭"
+        },
+        {
+          "min": 30,
+          "max": 30,
+          "value": "野草"
+        },
+        {
+          "min": 31,
+          "max": 31,
+          "value": "灰雀"
+        },
+        {
+          "min": 32,
+          "max": 32,
+          "value": "機油"
+        },
+        {
+          "min": 33,
+          "max": 33,
+          "value": "長影"
+        },
+        {
+          "min": 34,
+          "max": 34,
+          "value": "斷弦"
+        },
+        {
+          "min": 35,
+          "max": 35,
+          "value": "老狗"
+        },
+        {
+          "min": 36,
+          "max": 36,
+          "value": "刀背"
+        },
+        {
+          "min": 37,
+          "max": 37,
+          "value": "銀針"
+        },
+        {
+          "min": 38,
+          "max": 38,
+          "value": "霧鴉"
+        },
+        {
+          "min": 39,
+          "max": 39,
+          "value": "木樁"
+        },
+        {
+          "min": 40,
+          "max": 40,
+          "value": "冬蟬"
+        },
+        {
+          "min": 41,
+          "max": 41,
+          "value": "紅帽"
+        },
+        {
+          "min": 42,
+          "max": 42,
+          "value": "空罐"
+        },
+        {
+          "min": 43,
+          "max": 43,
+          "value": "鋼索"
+        },
+        {
+          "min": 44,
+          "max": 44,
+          "value": "雨燕"
+        },
+        {
+          "min": 45,
+          "max": 45,
+          "value": "老鷹"
+        },
+        {
+          "min": 46,
+          "max": 46,
+          "value": "獵犬"
+        },
+        {
+          "min": 47,
+          "max": 47,
+          "value": "麻雀"
+        },
+        {
+          "min": 48,
+          "max": 48,
+          "value": "棉線"
+        },
+        {
+          "min": 49,
+          "max": 49,
+          "value": "鐵桶"
+        },
+        {
+          "min": 50,
+          "max": 50,
+          "value": "苔蘚"
+        },
+        {
+          "min": 51,
+          "max": 51,
+          "value": "沙狐"
+        },
+        {
+          "min": 52,
+          "max": 52,
+          "value": "指南針"
+        },
+        {
+          "min": 53,
+          "max": 53,
+          "value": "夜車"
+        },
+        {
+          "min": 54,
+          "max": 54,
+          "value": "黃銅"
+        },
+        {
+          "min": 55,
+          "max": 55,
+          "value": "斑鳩"
+        },
+        {
+          "min": 56,
+          "max": 56,
+          "value": "玻璃"
+        },
+        {
+          "min": 57,
+          "max": 57,
+          "value": "黑傘"
+        },
+        {
+          "min": 58,
+          "max": 58,
+          "value": "書蟲"
+        },
+        {
+          "min": 59,
+          "max": 59,
+          "value": "路標"
+        },
+        {
+          "min": 60,
+          "max": 60,
+          "value": "火鉗"
+        },
+        {
+          "min": 61,
+          "max": 61,
+          "value": "鐵膽"
+        },
+        {
+          "min": 62,
+          "max": 62,
+          "value": "月牙"
+        },
+        {
+          "min": 63,
+          "max": 63,
+          "value": "禿鷲"
+        },
+        {
+          "min": 64,
+          "max": 64,
+          "value": "線圈"
+        },
+        {
+          "min": 65,
+          "max": 65,
+          "value": "零號"
+        },
+        {
+          "min": 66,
+          "max": 66,
+          "value": "口哨"
+        },
+        {
+          "min": 67,
+          "max": 67,
+          "value": "銹刀"
+        },
+        {
+          "min": 68,
+          "max": 68,
+          "value": "橡果"
+        },
+        {
+          "min": 69,
+          "max": 69,
+          "value": "河狸"
+        },
+        {
+          "min": 70,
+          "max": 70,
+          "value": "老煙"
+        },
+        {
+          "min": 71,
+          "max": 71,
+          "value": "電池"
+        },
+        {
+          "min": 72,
+          "max": 72,
+          "value": "斷橋"
+        },
+        {
+          "min": 73,
+          "max": 73,
+          "value": "舊夢"
+        },
+        {
+          "min": 74,
+          "max": 74,
+          "value": "磁帶"
+        },
+        {
+          "min": 75,
+          "max": 75,
+          "value": "烙鐵"
+        },
+        {
+          "min": 76,
+          "max": 76,
+          "value": "釘鞋"
+        },
+        {
+          "min": 77,
+          "max": 77,
+          "value": "飛蛾"
+        },
+        {
+          "min": 78,
+          "max": 78,
+          "value": "風車"
+        },
+        {
+          "min": 79,
+          "max": 79,
+          "value": "駝峰"
+        },
+        {
+          "min": 80,
+          "max": 80,
+          "value": "北斗"
+        },
+        {
+          "min": 81,
+          "max": 81,
+          "value": "塵埃"
+        },
+        {
+          "min": 82,
+          "max": 82,
+          "value": "信鴿"
+        },
+        {
+          "min": 83,
+          "max": 83,
+          "value": "鐵胃"
+        },
+        {
+          "min": 84,
+          "max": 84,
+          "value": "銀狐"
+        },
+        {
+          "min": 85,
+          "max": 85,
+          "value": "齒輪"
+        },
+        {
+          "min": 86,
+          "max": 86,
+          "value": "紅磚"
+        },
+        {
+          "min": 87,
+          "max": 87,
+          "value": "壁虎"
+        },
+        {
+          "min": 88,
+          "max": 88,
+          "value": "錨鏈"
+        },
+        {
+          "min": 89,
+          "max": 89,
+          "value": "炭火"
+        },
+        {
+          "min": 90,
+          "max": 90,
+          "value": "黑桃"
+        },
+        {
+          "min": 91,
+          "max": 91,
+          "value": "流星"
+        },
+        {
+          "min": 92,
+          "max": 92,
+          "value": "鐵絲"
+        },
+        {
+          "min": 93,
+          "max": 93,
+          "value": "鹿角"
+        },
+        {
+          "min": 94,
+          "max": 94,
+          "value": "空瓶"
+        },
+        {
+          "min": 95,
+          "max": 95,
+          "value": "渡鴉"
+        },
+        {
+          "min": 96,
+          "max": 96,
+          "value": "細雨"
+        },
+        {
+          "min": 97,
+          "max": 97,
+          "value": "破曉"
+        },
+        {
+          "min": 98,
+          "max": 98,
+          "value": "車轍"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "value": "鹽巴"
+        },
+        {
+          "min": 100,
+          "max": 100,
+          "value": "回聲"
+        }
+      ]
+    },
+    {
+      "id": "npc_race",
+      "die": "D100",
+      "status": "暫定分配：前四種各 9%，其餘各 8%；種族不能平均分割 100 個整數點",
+      "rows": [
+        {
+          "min": 1,
+          "max": 9,
+          "value": "human"
+        },
+        {
+          "min": 10,
+          "max": 18,
+          "value": "alien"
+        },
+        {
+          "min": 19,
+          "max": 27,
+          "value": "mutant"
+        },
+        {
+          "min": 28,
+          "max": 36,
+          "value": "synth"
+        },
+        {
+          "min": 37,
+          "max": 44,
+          "value": "uplift"
+        },
+        {
+          "min": 45,
+          "max": 52,
+          "value": "chitin"
+        },
+        {
+          "min": 53,
+          "max": 60,
+          "value": "mycelial"
+        },
+        {
+          "min": 61,
+          "max": 68,
+          "value": "crystal"
+        },
+        {
+          "min": 69,
+          "max": 76,
+          "value": "amphibian"
+        },
+        {
+          "min": 77,
+          "max": 84,
+          "value": "mimic"
+        },
+        {
+          "min": 85,
+          "max": 92,
+          "value": "symbiote"
+        },
+        {
+          "min": 93,
+          "max": 100,
+          "value": "lumen"
+        }
+      ]
+    },
+    {
+      "id": "npc_profession",
+      "die": "D100",
+      "status": "首版等機率，各 5%",
+      "rows": [
+        {
+          "min": 1,
+          "max": 5,
+          "value": "driver"
+        },
+        {
+          "min": 6,
+          "max": 10,
+          "value": "mechanic"
+        },
+        {
+          "min": 11,
+          "max": 15,
+          "value": "medic"
+        },
+        {
+          "min": 16,
+          "max": 20,
+          "value": "soldier"
+        },
+        {
+          "min": 21,
+          "max": 25,
+          "value": "scout"
+        },
+        {
+          "min": 26,
+          "max": 30,
+          "value": "merchant"
+        },
+        {
+          "min": 31,
+          "max": 35,
+          "value": "scavenger"
+        },
+        {
+          "min": 36,
+          "max": 40,
+          "value": "engineer"
+        },
+        {
+          "min": 41,
+          "max": 45,
+          "value": "researcher"
+        },
+        {
+          "min": 46,
+          "max": 50,
+          "value": "hacker"
+        },
+        {
+          "min": 51,
+          "max": 55,
+          "value": "hunter"
+        },
+        {
+          "min": 56,
+          "max": 60,
+          "value": "guard"
+        },
+        {
+          "min": 61,
+          "max": 65,
+          "value": "courier"
+        },
+        {
+          "min": 66,
+          "max": 70,
+          "value": "diplomat"
+        },
+        {
+          "min": 71,
+          "max": 75,
+          "value": "historian"
+        },
+        {
+          "min": 76,
+          "max": 80,
+          "value": "locksmith"
+        },
+        {
+          "min": 81,
+          "max": 85,
+          "value": "demolition"
+        },
+        {
+          "min": 86,
+          "max": 90,
+          "value": "chemist"
+        },
+        {
+          "min": 91,
+          "max": 95,
+          "value": "electrician"
+        },
+        {
+          "min": 96,
+          "max": 100,
+          "value": "performer"
+        }
+      ]
+    },
+    {
+      "id": "invasion_history",
+      "die": "D100",
+      "status": "外星入侵篇首批歷史種子，完整因果鏈待擴充",
+      "rows": [
+        {
+          "min": 1,
+          "max": 25,
+          "value": {
+            "cause": "外星入侵",
+            "process": "通訊被干擾後，軌道攻擊摧毀城市指揮中心",
+            "trace": "民防日誌記錄了所有頻道同時失聲的時刻。"
+          }
+        },
+        {
+          "min": 26,
+          "max": 50,
+          "value": {
+            "cause": "外星入侵",
+            "process": "接觸使團建立據點後，援軍將交通與能源設施置於佔領之下",
+            "trace": "第一份友好協議背面寫滿了臨時撤離指示。"
+          }
+        },
+        {
+          "min": 51,
+          "max": 75,
+          "value": {
+            "cause": "外星入侵",
+            "process": "入侵者釋出改造物質，地表變化迫使居民逃離城市",
+            "trace": "研究員在地圖上標出最早出現變種人的街區。"
+          }
+        },
+        {
+          "min": 76,
+          "max": 100,
+          "value": {
+            "cause": "外星入侵",
+            "process": "漫長抵抗摧毀全球運輸網，殘存勢力割據公路",
+            "trace": "一封未寄出的軍報記下了最後一次跨區補給。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "npc_flaw",
+      "die": "D100",
+      "status": "20 個缺點，首版各 5%",
+      "rows": [
+        {
+          "min": 1,
+          "max": 5,
+          "value": "frail"
+        },
+        {
+          "min": 6,
+          "max": 10,
+          "value": "low_endurance"
+        },
+        {
+          "min": 11,
+          "max": 15,
+          "value": "restless"
+        },
+        {
+          "min": 16,
+          "max": 20,
+          "value": "slow_healing"
+        },
+        {
+          "min": 21,
+          "max": 25,
+          "value": "night_strain"
+        },
+        {
+          "min": 26,
+          "max": 30,
+          "value": "poor_driver"
+        },
+        {
+          "min": 31,
+          "max": 35,
+          "value": "wasteful_driver"
+        },
+        {
+          "min": 36,
+          "max": 40,
+          "value": "claustrophobic"
+        },
+        {
+          "min": 41,
+          "max": 45,
+          "value": "dark_fear"
+        },
+        {
+          "min": 46,
+          "max": 50,
+          "value": "unsteady"
+        },
+        {
+          "min": 51,
+          "max": 55,
+          "value": "weak_grip"
+        },
+        {
+          "min": 56,
+          "max": 60,
+          "value": "timid"
+        },
+        {
+          "min": 61,
+          "max": 65,
+          "value": "slow_reflex"
+        },
+        {
+          "min": 66,
+          "max": 70,
+          "value": "noisy"
+        },
+        {
+          "min": 71,
+          "max": 75,
+          "value": "bad_bargain"
+        },
+        {
+          "min": 76,
+          "max": 80,
+          "value": "abrasive"
+        },
+        {
+          "min": 81,
+          "max": 85,
+          "value": "distracted"
+        },
+        {
+          "min": 86,
+          "max": 90,
+          "value": "mechanical_clumsy"
+        },
+        {
+          "min": 91,
+          "max": 95,
+          "value": "chemical_sensitive"
+        },
+        {
+          "min": 96,
+          "max": 100,
+          "value": "startled_awake"
+        }
+      ]
+    },
+    {
+      "id": "building_event",
+      "die": "D100",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "event": "building_001"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "event": "building_002"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "event": "building_003"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "event": "building_004"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "event": "building_005"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "event": "building_006"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "event": "building_007"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "event": "building_008"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "event": "building_009"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "event": "building_010"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "event": "building_011"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "event": "building_012"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "event": "building_013"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "event": "building_014"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "event": "building_015"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "event": "building_016"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "event": "building_017"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "event": "building_018"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "event": "building_019"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "event": "building_020"
+        },
+        {
+          "min": 21,
+          "max": 21,
+          "event": "building_021"
+        },
+        {
+          "min": 22,
+          "max": 22,
+          "event": "building_022"
+        },
+        {
+          "min": 23,
+          "max": 23,
+          "event": "building_023"
+        },
+        {
+          "min": 24,
+          "max": 24,
+          "event": "building_024"
+        },
+        {
+          "min": 25,
+          "max": 25,
+          "event": "building_025"
+        },
+        {
+          "min": 26,
+          "max": 26,
+          "event": "building_026"
+        },
+        {
+          "min": 27,
+          "max": 27,
+          "event": "building_027"
+        },
+        {
+          "min": 28,
+          "max": 28,
+          "event": "building_028"
+        },
+        {
+          "min": 29,
+          "max": 29,
+          "event": "building_029"
+        },
+        {
+          "min": 30,
+          "max": 30,
+          "event": "building_030"
+        },
+        {
+          "min": 31,
+          "max": 31,
+          "event": "building_031"
+        },
+        {
+          "min": 32,
+          "max": 32,
+          "event": "building_032"
+        },
+        {
+          "min": 33,
+          "max": 33,
+          "event": "building_033"
+        },
+        {
+          "min": 34,
+          "max": 34,
+          "event": "building_034"
+        },
+        {
+          "min": 35,
+          "max": 35,
+          "event": "building_035"
+        },
+        {
+          "min": 36,
+          "max": 36,
+          "event": "building_036"
+        },
+        {
+          "min": 37,
+          "max": 37,
+          "event": "building_037"
+        },
+        {
+          "min": 38,
+          "max": 38,
+          "event": "building_038"
+        },
+        {
+          "min": 39,
+          "max": 39,
+          "event": "building_039"
+        },
+        {
+          "min": 40,
+          "max": 40,
+          "event": "building_040"
+        },
+        {
+          "min": 41,
+          "max": 41,
+          "event": "building_041"
+        },
+        {
+          "min": 42,
+          "max": 42,
+          "event": "building_042"
+        },
+        {
+          "min": 43,
+          "max": 43,
+          "event": "building_043"
+        },
+        {
+          "min": 44,
+          "max": 44,
+          "event": "building_044"
+        },
+        {
+          "min": 45,
+          "max": 45,
+          "event": "building_045"
+        },
+        {
+          "min": 46,
+          "max": 46,
+          "event": "building_046"
+        },
+        {
+          "min": 47,
+          "max": 47,
+          "event": "building_047"
+        },
+        {
+          "min": 48,
+          "max": 48,
+          "event": "building_048"
+        },
+        {
+          "min": 49,
+          "max": 49,
+          "event": "building_049"
+        },
+        {
+          "min": 50,
+          "max": 50,
+          "event": "building_050"
+        },
+        {
+          "min": 51,
+          "max": 51,
+          "event": "building_051"
+        },
+        {
+          "min": 52,
+          "max": 52,
+          "event": "building_052"
+        },
+        {
+          "min": 53,
+          "max": 53,
+          "event": "building_053"
+        },
+        {
+          "min": 54,
+          "max": 54,
+          "event": "building_054"
+        },
+        {
+          "min": 55,
+          "max": 55,
+          "event": "building_055"
+        },
+        {
+          "min": 56,
+          "max": 56,
+          "event": "building_056"
+        },
+        {
+          "min": 57,
+          "max": 57,
+          "event": "building_057"
+        },
+        {
+          "min": 58,
+          "max": 58,
+          "event": "building_058"
+        },
+        {
+          "min": 59,
+          "max": 59,
+          "event": "building_059"
+        },
+        {
+          "min": 60,
+          "max": 60,
+          "event": "building_060"
+        },
+        {
+          "min": 61,
+          "max": 61,
+          "event": "building_061"
+        },
+        {
+          "min": 62,
+          "max": 62,
+          "event": "building_062"
+        },
+        {
+          "min": 63,
+          "max": 63,
+          "event": "building_063"
+        },
+        {
+          "min": 64,
+          "max": 64,
+          "event": "building_064"
+        },
+        {
+          "min": 65,
+          "max": 65,
+          "event": "building_065"
+        },
+        {
+          "min": 66,
+          "max": 66,
+          "event": "building_066"
+        },
+        {
+          "min": 67,
+          "max": 67,
+          "event": "building_067"
+        },
+        {
+          "min": 68,
+          "max": 68,
+          "event": "building_068"
+        },
+        {
+          "min": 69,
+          "max": 69,
+          "event": "building_069"
+        },
+        {
+          "min": 70,
+          "max": 70,
+          "event": "building_070"
+        },
+        {
+          "min": 71,
+          "max": 71,
+          "event": "building_071"
+        },
+        {
+          "min": 72,
+          "max": 72,
+          "event": "building_072"
+        },
+        {
+          "min": 73,
+          "max": 73,
+          "event": "building_073"
+        },
+        {
+          "min": 74,
+          "max": 74,
+          "event": "building_074"
+        },
+        {
+          "min": 75,
+          "max": 75,
+          "event": "building_075"
+        },
+        {
+          "min": 76,
+          "max": 76,
+          "event": "building_076"
+        },
+        {
+          "min": 77,
+          "max": 77,
+          "event": "building_077"
+        },
+        {
+          "min": 78,
+          "max": 78,
+          "event": "building_078"
+        },
+        {
+          "min": 79,
+          "max": 79,
+          "event": "building_079"
+        },
+        {
+          "min": 80,
+          "max": 80,
+          "event": "building_080"
+        },
+        {
+          "min": 81,
+          "max": 81,
+          "event": "building_081"
+        },
+        {
+          "min": 82,
+          "max": 82,
+          "event": "building_082"
+        },
+        {
+          "min": 83,
+          "max": 83,
+          "event": "building_083"
+        },
+        {
+          "min": 84,
+          "max": 84,
+          "event": "building_084"
+        },
+        {
+          "min": 85,
+          "max": 85,
+          "event": "building_085"
+        },
+        {
+          "min": 86,
+          "max": 86,
+          "event": "building_086"
+        },
+        {
+          "min": 87,
+          "max": 87,
+          "event": "building_087"
+        },
+        {
+          "min": 88,
+          "max": 88,
+          "event": "building_088"
+        },
+        {
+          "min": 89,
+          "max": 89,
+          "event": "building_089"
+        },
+        {
+          "min": 90,
+          "max": 90,
+          "event": "building_090"
+        },
+        {
+          "min": 91,
+          "max": 91,
+          "event": "building_091"
+        },
+        {
+          "min": 92,
+          "max": 92,
+          "event": "building_092"
+        },
+        {
+          "min": 93,
+          "max": 93,
+          "event": "building_093"
+        },
+        {
+          "min": 94,
+          "max": 94,
+          "event": "building_094"
+        },
+        {
+          "min": 95,
+          "max": 95,
+          "event": "building_095"
+        },
+        {
+          "min": 96,
+          "max": 96,
+          "event": "building_096"
+        },
+        {
+          "min": 97,
+          "max": 97,
+          "event": "building_097"
+        },
+        {
+          "min": 98,
+          "max": 98,
+          "event": "building_098"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "event": "building_099"
+        },
+        {
+          "min": 100,
+          "max": 100,
+          "event": "building_100"
+        }
+      ]
+    }
+  ]
+}

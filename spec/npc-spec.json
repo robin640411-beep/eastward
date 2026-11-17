@@ -1,0 +1,81 @@
+{
+  "version": "0.1.0",
+  "status": "組合生成與三種態度行為已確認；數值與其他態度屬草案",
+  "generation": {
+    "dimensions": [
+      "種族",
+      "職業",
+      "態度"
+    ],
+    "identity_tables": {
+      "name": "npc_name",
+      "nickname": "npc_nickname"
+    },
+    "display_format": "「{nickname}」{name}",
+    "race_profession_tables_status": "已建立 12 種族、20 職業及對應 D100 表",
+    "persist_fields": [
+      "actor_id",
+      "name",
+      "nickname",
+      "race",
+      "profession",
+      "attitude",
+      "interaction_history",
+      "advantage_ids",
+      "flaw_id"
+    ],
+    "catalog": "data/npc-catalog.json",
+    "race_table": "npc_race",
+    "profession_table": "npc_profession",
+    "flaw_table": "npc_flaw",
+    "advantages": "由種族與職業各取得一項，見 npc-catalog.json 的 advantage_id"
+  },
+  "shared_interactions": [
+    "交談",
+    "交易",
+    "攻擊"
+  ],
+  "attitude_rules": {
+    "敵對": {
+      "status": "confirmed",
+      "on_encounter": "start_character_combat",
+      "talk_enabled": false,
+      "trade_enabled": false
+    },
+    "掠奪": {
+      "status": "confirmed",
+      "on_encounter": "start_character_combat",
+      "talk_enabled": false,
+      "trade_enabled": false
+    },
+    "同情": {
+      "status": "confirmed",
+      "on_encounter": "shared_interactions",
+      "gift_possible": true,
+      "gift_chance": null
+    },
+    "友善": {
+      "status": "draft",
+      "response": "願意交談，是否交易取決於可交換物品"
+    },
+    "戒備": {
+      "status": "draft",
+      "response": "謹慎回應，交易條件仍待定"
+    },
+    "冷淡": {
+      "status": "draft",
+      "response": "簡短回答，未必願意交易"
+    }
+  },
+  "precedence": "先檢查敵對或掠奪並轉入戰鬥，其餘才顯示共用互動；不能因招募或商店模板而繞過態度",
+  "implementation_proposals": [
+    "職業影響服務、裝備與對話，種族影響背景相容性與特徵",
+    "同情贈送結果於該次互動保存，不因反覆按交談無限領物"
+  ],
+  "not_implemented": [
+    "NPC 共用互動介面",
+    "態度分支執行器",
+    "交易與贈物數值"
+  ],
+  "event_polarity_rule": "有利事件也能抽到敵對 NPC；不依好壞分類篩掉態度"
+}

@@ -1,0 +1,68 @@
+{
+  "goal": "完成《一路向東》手機網頁遊戲與全部必要圖像；目前仍進行中",
+  "project": "eastward",
+  "site_project_id": "appgprj_6afcd475a5a481918126e986e4962f6a",
+  "site_registered": true,
+  "deployed": false,
+  "assets": {
+    "files": 344,
+    "characters": 240,
+    "portraits": 12,
+    "vehicles": 8,
+    "enemies": 16,
+    "scenes": 28,
+    "icons": 16,
+    "mods": 4,
+    "generator": "tools/make_art.py",
+    "gallery": "dist/art.html",
+    "vehicle_seat_variants": 20
+  },
+  "implemented": [
+    "原創像素 SVG 素材",
+    "基本手機直向畫面",
+    "角色種族職業與優缺點生成",
+    "本機存檔與匯出",
+    "行車與事件狀態機",
+    "建築子事件",
+    "基本人物與車輛戰鬥",
+    "交易服務與改裝",
+    "招募遣散與延遲重逢",
+    "睡眠守夜與被攻擊者醒來",
+    "每位清醒角色獨立指令與目標，敵我速度排序結算",
+    "戰鬥指令可中途存檔，藥品預留避免超支",
+    "建築原始服務保留，額外探索結束後回到原事件",
+    "戰鬥與行車期間禁止免費用藥、裝備、遣散與換車",
+    "20 個加座車身圖像，所有乘員有獨立透明車窗",
+    "事件執行者切換、情報特性、職業設施處理與每停靠故事",
+    "直接選項成本前置檢查與成本顯示",
+    "一般 NPC 有限存貨交易與持久記憶",
+    "原身分同伴延後在公路或建築重逢，可再次加入",
+    "不同時段敵人池與 NPC 自身戰鬥數值",
+    "32 優點及 20 缺點接入事件與戰鬥執行器"
+  ],
+  "verification": [
+    "324 個 SVG XML 與引用檢查",
+    "Chrome 390x844 人物生成、行車、事件選項已操作",
+    "人物車輛敵人素材瀏覽器視覺檢查",
+    "22 項 engine 測試通過，含多人指令、速度先手、存檔指令、睡眠、建築服務回程",
+    "33 項 engine 測試通過，新增情報、職業、付款與座位檢查",
+    "344 個 SVG 引用與 XML 檢查通過",
+    "390x844 Chrome 實際載入舊存檔、進入建築、住宿付費、隨機探索、ESP 戰鬥兩回合勝利",
+    "50 項 engine 測試，涵蓋全部種族 36 個超能力執行、角色特性、NPC 庫存、離隊重逢",
+    "54 項引擎測試通過，100 組種子完整旅程皆到達終局，無負資源或事件卡關",
+    "390×844 Chrome 驗證 11 人車窗、兩人指令車戰、進度 100 綠洲、神諭缺油與全滅結局",
+    "344 個 SVG 引用與透明窗座標檢查通過，發布版已移除 QA 測試頁"
+  ],
+  "must_finish_before_completion": [
+    "完成現有私人 Site 的源碼打包與部署，確認成功網址"
+  ],
+  "tools": {
+    "node": "/Users/robin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+    "local_preview": "http://127.0.0.1:8765/",
+    "preview_exec_session": 18938,
+    "browser": "Chrome id 1",
+    "browser_tab": "2093001319"
+  },
+  "next_step": "執行 Sites source helper 與私人部署。"
+}

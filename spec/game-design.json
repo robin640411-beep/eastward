@@ -1,0 +1,632 @@
+{
+  "schema_version": "1.0.0",
+  "language": "zh-Hant",
+  "document_type": "已確認的遊戲設計與待定事項",
+  "project": {
+    "name": "一路向東",
+    "platform": "手機網頁遊戲",
+    "orientation": "直向",
+    "genre": [
+      "肉鴿",
+      "RPG",
+      "末日生存",
+      "公路冒險"
+    ],
+    "priorities": [
+      "持續探索與發現",
+      "抵達末日綠洲完成旅程",
+      "戰鬥不占據大部分遊玩時間",
+      "維持手機網頁遊戲的低運算負擔"
+    ],
+    "references": {
+      "Caves of Qud": [
+        "簡約像素表現"
+      ],
+      "EarthBound": [
+        "JRPG 指令式回合戰鬥的參考"
+      ]
+    }
+  },
+  "world": {
+    "setting": "外星入侵後的末日世界",
+    "inhabitants": [
+      "人類",
+      "外星人",
+      "變種人",
+      "合成人",
+      "啟智獸族",
+      "甲殼族",
+      "菌絲族",
+      "晶核族",
+      "潮生族",
+      "擬形族",
+      "共生族",
+      "光膜族"
+    ],
+    "apocalypse": {
+      "fixed_cause": true,
+      "nuclear_disaster_is_one_possible_cause": false,
+      "cause_catalog_target": "本篇固定外星入侵，其他末日起因不混入本篇開局抽取",
+      "history_varies_between_runs": true,
+      "origin_and_progression_vary_between_runs": true,
+      "current_cause": "外星入侵"
+    },
+    "history_generator": {
+      "required": true,
+      "uses_ai": false,
+      "generation_method": "TRPG 神諭系統，以隨機表與規則組合產生背景故事線",
+      "purpose": "在外星入侵前提內產生每局不同的侵略經過與災後歷史",
+      "revelation_medium": [
+        "公路事件中取得的書籍"
+      ]
+    },
+    "story_background_proposal": {
+      "status": "目前先製作外星入侵篇；病毒與核戰篇保留為未製作方向",
+      "backgrounds": [
+        {
+          "id": "viral_outbreak",
+          "name": "病毒外洩",
+          "user_defined_premise": "病毒使人變成變種人或殭屍"
+        },
+        {
+          "id": "alien_invasion",
+          "name": "外星人入侵",
+          "user_defined_premise": "外星人入侵造成末日；變種人與殭屍是否存在及其來源待定"
+        },
+        {
+          "id": "nuclear_aftermath",
+          "name": "核戰過後",
+          "user_defined_premise": "核戰造成末日；變種人與殭屍是否存在及其來源待定"
+        }
+      ],
+      "shared_mechanics": [
+        "D10 公路前進與消耗",
+        "D100 公路與建築事件",
+        "75%、50%、25% 追加事件",
+        "人物與車輛回合戰鬥",
+        "角色裝備、公共背包與車輛改裝",
+        "睡眠與守夜",
+        "抵達進度 100 的末日綠洲"
+      ],
+      "proposed_content_separation": [
+        "世界歷史",
+        "NPC 與勢力",
+        "敵人",
+        "書籍與對話",
+        "背景專屬事件"
+      ],
+      "oracle_role_proposal": "先確立篇章前提，再用相容的神諭產生該篇每局不同的歷史細節；不任意混合三種末日起因",
+      "selection_method": "目前固定外星入侵篇"
+    },
+    "active_background": "alien_invasion"
+  },
+  "journey": {
+    "structure": "具有終點的 D100 公路旅程",
+    "direction": "向東，畫面向右",
+    "motivation": "尋找遙遠東方傳說中的末日綠洲或樂園",
+    "goal_meaning": "抵達末日綠洲，結束本局遊戲",
+    "reachable_final_destination": true,
+    "progression": {
+      "system": "D100 旅程進度；每次前進擲 D10",
+      "start": 1,
+      "destination": 100,
+      "advance_die": "D10",
+      "advance_roll_range": [
+        1,
+        10
+      ],
+      "distance_advanced": "受 D10 點數、汽油、依目前時段體力成本可行駛的距離及剩餘旅程限制；夜間換算待定",
+      "same_roll_for_distance_and_costs": true,
+      "resource_costs": {
+        "fuel": "依實際前進量扣除汽油；一般情況等於本次 D10 點數",
+        "driver_stamina": "一般駕駛每實際前進 1 點消耗 1 體力；夜間額外消耗，正式公式待定",
+        "fuel_per_progress_point": 1,
+        "driver_stamina_per_progress_point": 1
+      },
+      "events_per_advance": "一個或多個，不固定為一個",
+      "event_die": "D100",
+      "normal_sequence": [
+        "擲 D10 決定前進量",
+        "結算實際前進、汽油與駕駛體力消耗",
+        "擲 D100 決定本次公路遭遇，停靠時可能包含多重事件",
+        "處理本次遭遇的事件；多重事件的數量、擲骰與觸發方式待定"
+      ],
+      "arrival_ends_run": true,
+      "overshoot_resolution": "最多前進至 100，只扣除實際前進量的資源",
+      "arrival_event_and_resource_resolution_order": "結算實際前進與消耗後，若抵達 100，本次事件為抵達末日綠洲並結束遊戲；不再抽普通事件",
+      "forced_stop_event": "未抵達終點且汽油或駕駛體力耗盡時強制停車；停車狀態如何與本次 D100 事件結合待定，不另行假定增加事件"
+    },
+    "branching_overworld_map": false,
+    "driving_mode": "自動行車，遇事決策",
+    "manual_stop_required": false,
+    "ordinary_events_require_player_choice": true,
+    "road_encounters": [
+      "人物或 NPC",
+      "其他車輛",
+      "怪物",
+      "其他事件"
+    ],
+    "playtime": {
+      "fixed_total_run_duration": null,
+      "variable_run_length_accepted": true,
+      "note": "不同局的事件與建築遭遇數可不同，不以統一時長限制旅程"
+    }
+  },
+  "events": {
+    "selection": "前進 D10 結算後，擲 D100 決定事件",
+    "multiple_events_per_stop": {
+      "enabled": true,
+      "description": "每次停靠可能遭遇一個或多個事件",
+      "event_count_rule": "第一個事件必定發生；完成後依序以 75%、50%、25% 決定是否再發生下一個獨立事件；首次失敗即停止，最多四個",
+      "event_roll_and_trigger_rule": "每個獨立事件各擲 D100；追加判定使用 D100 小於等於 75、50、25",
+      "events_are_independent": true,
+      "primary_and_additional_event_structure": false,
+      "resolution_order": null,
+      "additional_event_probabilities": [
+        0.75,
+        0.5,
+        0.25
+      ],
+      "maximum_events": 4
+    },
+    "follow_up_events": {
+      "enabled": true,
+      "can_occur_during_originating_stop": false,
+      "timing": "只能在之後的停靠中出現，不在起始事件的同一次停靠接續觸發",
+      "appearance_is_guaranteed": false,
+      "exact_trigger_and_probability": null,
+      "terminology": "同次追加的獨立事件可連續出現；劇情後續仍只能在往後停靠出現"
+    },
+    "categories": {
+      "公路事件": {
+        "confirmed_examples": [
+          "車輛戰鬥",
+          "路上遇到商店",
+          "維修車輛",
+          "修車廠改造車輛",
+          "建築物"
+        ]
+      },
+      "建築事件": {
+        "description": "角色下車進入建築後擲 D100 決定遭遇，人物戰鬥可由此觸發",
+        "target_unique_events": 100,
+        "content_status": "已建立 data/building-events.json，共 100 項"
+      }
+    },
+    "d100_table_ranges": {
+      "01-50": "有利事件",
+      "51-100": "不利事件",
+      "unique_primary_events": 100,
+      "note": "主事件分類各 50%；有利事件仍可遇到敵對或掠奪 NPC 並開戰，分類不保證最終結果有利"
+    },
+    "all_encounters_are_road_events": false,
+    "interaction_model": "公路遭遇與建築探索皆以事件和選擇呈現；公路可遇到建築物，進入後使用建築事件表",
+    "day_phase_affects_encounter_availability": true,
+    "npc_attitude_independent_of_event_polarity": true
+  },
+  "presentation": {
+    "art": {
+      "style": "接近 Caves of Qud 的簡約像素風格",
+      "detail_level": "簡單，不需要精細"
+    },
+    "main_view": "大部分時間看見自己的車輛行駛",
+    "vehicle_view": {
+      "perspective": "側面",
+      "facing": "右",
+      "show_exterior": true,
+      "show_all_occupants_heads_through_windows": true
+    },
+    "top_hud": {
+      "contents": [
+        "時速",
+        "所有角色資訊",
+        "各角色生命值",
+        "各角色體力"
+      ],
+      "upcoming_event_preview": false
+    },
+    "travel_ambience": {
+      "automatic": true,
+      "with_companions": [
+        "與同伴交談"
+      ],
+      "alone": [
+        "自言自語",
+        "收聽無線電或廣播",
+        "無所事事"
+      ],
+      "continuous_dialogue_required": false
+    }
+  },
+  "characters": {
+    "starting_character_count": 1,
+    "recruit_companions_during_journey": true,
+    "equipment_system": true,
+    "equipment": {
+      "slots": [
+        "武器",
+        "防具",
+        "配件"
+      ],
+      "items_per_slot": 1,
+      "durability_enabled": false,
+      "routine_equipment_maintenance_required": false,
+      "vehicle_equipment_is_separate": true
+    },
+    "health": {
+      "meaning": "角色可以承受的傷害"
+    },
+    "stamina": {
+      "meaning": "角色的疲勞、清醒與活動能力",
+      "driver_loses_stamina": true,
+      "non_drivers_recover_stamina": true,
+      "zero_stamina_state": "需要休息；睡著或昏迷等具體狀態待定",
+      "not_hunger_or_satiety": true,
+      "night_driving_costs_more": true,
+      "night_multiplier": null,
+      "separate_from_esp": true
+    },
+    "can_change_driver": true,
+    "dismissed_companions": {
+      "destination_determined_by_oracle_roll": true,
+      "can_reappear": true,
+      "reappearance_is_guaranteed": false,
+      "reappearance_locations": [
+        "後續公路事件"
+      ],
+      "possible_future_roles": [
+        "再次成為同伴",
+        "成為敵人"
+      ],
+      "preserve_identity_and_prior_companionship": true,
+      "can_take_equipped_items_on_departure": true,
+      "shared_inventory_stays_with_party": true
+    },
+    "medicine": {
+      "restores_health": true,
+      "healing_amount": null,
+      "stored_in_shared_inventory": true
+    },
+    "npc_identity": {
+      "name_table": "npc_name",
+      "nickname_table": "npc_nickname",
+      "entries_per_table": 100,
+      "display_format": "「{nickname}」{name}",
+      "rolls": "新 NPC 分別擲 D100 決定名字與外號",
+      "persist_identity": true,
+      "reencounter_rule": "重逢、入隊與離隊沿用同一人物的名字與外號，不重新抽取",
+      "race_table": "npc_race",
+      "profession_table": "npc_profession"
+    },
+    "npc_behavior": {
+      "shared_interactions": [
+        "交談",
+        "交易",
+        "攻擊"
+      ],
+      "interaction_list_extensible": true,
+      "attitude_determines_response": true,
+      "confirmed_attitudes": {
+        "敵對": "直接開戰，不提供交談或交易解法",
+        "掠奪": "直接開戰，不提供交談或交易解法",
+        "同情": "可能給予玩家物品，不保證贈送"
+      },
+      "shared_menu_does_not_override_forced_combat": true,
+      "other_attitudes_and_probabilities": "待定"
+    },
+    "traits": {
+      "advantages_per_character": 2,
+      "race_advantage_count": 1,
+      "profession_advantage_count": 1,
+      "flaws_per_character": 1,
+      "advantage_catalog_count": 32,
+      "flaw_catalog_count": 20,
+      "catalog": "data/traits.json",
+      "flaw_table": "npc_flaw",
+      "flaw_assignment": "新角色擲 D100 決定並保存；再次出現不重擲",
+      "numeric_status": "具體效果數值為首版試玩設定"
+    },
+    "attributes": {
+      "core_attribute_count": 4,
+      "excluded_resources": [
+        "生命值",
+        "ESP",
+        "體力"
+      ],
+      "names_status": "四種屬性的名稱與功能為首版提案，尚未由使用者定案",
+      "proposed_attributes": [
+        {
+          "id": "offense",
+          "name": "攻擊",
+          "purpose": "人物武器攻擊的威力"
+        },
+        {
+          "id": "defense",
+          "name": "防禦",
+          "purpose": "降低人物受到的直接攻擊傷害"
+        },
+        {
+          "id": "speed",
+          "name": "速度",
+          "purpose": "人物行動順序與逃跑判定"
+        },
+        {
+          "id": "psyche",
+          "name": "精神",
+          "purpose": "超能力效果強度與精神干擾抵抗"
+        }
+      ],
+      "reference_note": "參考 EarthBound 的回合戰鬥與超能力概念；四屬性為本遊戲簡化方案，不宣稱原作只有四屬性"
+    },
+    "psychic_powers": {
+      "can_be_learned": true,
+      "resource_name": "ESP",
+      "resource_separate_from_core_attributes": true,
+      "resource_separate_from_stamina": true,
+      "power_catalog_status": "待製作",
+      "learning_method": "由種族與角色等級決定",
+      "esp_costs_and_recovery": null,
+      "implementation_proposal": "學會超能力後可在適用的戰鬥或事件使用，消耗 ESP；不因學習增加或取代原有兩優點一缺點",
+      "learning_factors": [
+        "種族",
+        "等級"
+      ],
+      "profession_affects_learning": false
+    }
+  },
+  "inventory": {
+    "model": "全隊共用一個無限容量的公共背包",
+    "capacity_unlimited": true,
+    "weight_limit": false,
+    "slot_limit": false,
+    "separate_personal_storage": false,
+    "separate_vehicle_storage": false,
+    "storage_rule": "所有未裝備物品統一放入公共背包；角色身上的裝備另行記錄",
+    "dismissal_equipment_rule": "同伴可以帶走離隊時身上裝備；公共背包物品仍屬隊伍",
+    "vehicle_replacement_requires_inventory_transfer": false,
+    "design_goal": "簡化物品管理，不處理載重、車內儲物或人物間搬運物品",
+    "food_system_enabled": false
+  },
+  "vehicles": {
+    "starting_seats_including_driver": 1,
+    "seat_capacity_varies_by_vehicle": true,
+    "seat_capacity_includes_driver": true,
+    "replacement_seat_rule": {
+      "condition": "換用車輛的座位不足以容納目前全隊",
+      "required_action": "玩家選擇開除同伴，直到留下的人數不超過座位數",
+      "dismissal_selection": "由玩家決定，不隨機選擇被開除者",
+      "dismissed_companion_fate": "擲骰查詢神諭決定去向，並可能在後續旅途中再次登場"
+    },
+    "can_replace_vehicle_model": true,
+    "can_modify_vehicle": true,
+    "service_access": {
+      "repair_is_road_event": true,
+      "modification_is_road_event": true,
+      "modification_requires_entering_garage": true,
+      "unrestricted_anywhere_modification": false,
+      "repair_details": "透過公路事件維修；費用、效果及具體服務條件待定"
+    },
+    "confirmed_modifications": [
+      "增加座位",
+      "安裝車載武器",
+      "裝甲",
+      "特殊設備"
+    ],
+    "model_determines": [
+      "基本座位數",
+      "基本生命值",
+      "改裝格數"
+    ],
+    "modification_slots": {
+      "shared_between_types": true,
+      "count_varies_by_vehicle_model": true,
+      "types": {
+        "車載武器": "增加車戰指令",
+        "裝甲": "降低車戰受到的傷害",
+        "額外座位": "每件占一格改裝，增加一個座位",
+        "特殊設備": "提供公路事件中的額外選項"
+      }
+    },
+    "health": {
+      "single_vehicle_health_pool": true,
+      "can_take_damage_in_vehicle_combat": true,
+      "individual_component_durability": false,
+      "repair_model": "只處理車輛整體生命值，不分別維修輪胎、引擎與武器"
+    },
+    "fuel_required_for_driving": true,
+    "forced_stop_conditions": [
+      "汽油耗盡",
+      "目前駕駛體力耗盡"
+    ],
+    "driver_replacement_can_enable_continued_travel": true
+  },
+  "exploration": {
+    "enabled": true,
+    "mode": "事件式建築探索",
+    "entry": "公路 D100 遭遇建築物後，角色下車進入",
+    "event_die": "D100",
+    "target_unique_events": 100,
+    "reuse_road_event_rules": true,
+    "continuation_d100_thresholds": [
+      75,
+      50,
+      25
+    ],
+    "maximum_events_per_visit": 4,
+    "event_independence": "同次探索事件彼此獨立；劇情後續仍不得在同一停靠出現",
+    "free_roaming_map": false,
+    "pathfinding_required": false,
+    "companion_map_following_required": false,
+    "implementation_note": "沿用事件式呈現，不恢復先前取消的格子走路地圖；建築種類、內容及進出介面待製作",
+    "building_event_table_status": "已建立 building_event D100 與 100 種事件資料",
+    "building_event_catalog": "data/building-events.json",
+    "includes_shops_and_empty_events": true
+  },
+  "combat": {
+    "character_combat": {
+      "mode": "JRPG 指令式回合戰鬥",
+      "goal": "短促，並提供攻擊以外的不同選擇",
+      "contexts": [
+        "建築探索遇敵",
+        "其他事件引發的人物衝突"
+      ],
+      "style_confirmed": "一般 JRPG 指令式回合制，以 EarthBound 為參考，無額外特殊戰鬥操作",
+      "implementation_defaults": {
+        "status": "基本實作預設，非逐項確認數值",
+        "commands": [
+          "攻擊",
+          "超能力",
+          "物品",
+          "防禦",
+          "逃跑"
+        ],
+        "round_flow": "清醒可行動角色選擇指令後，敵我依行動順序結算，重複至戰鬥結束",
+        "sleep_exception": "無人守夜時敵方先攻一輪；遭攻擊者醒來，未遭攻擊者繼續睡"
+      }
+    },
+    "vehicle_combat": {
+      "enabled": true,
+      "mode": "回合指令制",
+      "context": "公路上遭遇其他車輛時可能觸發"
+    },
+    "exact_commands": null
+  },
+  "stranding_and_endings": {
+    "no_fuel_means_stop": true,
+    "search_after_stopping": true,
+    "finding_fuel_is_guaranteed": false,
+    "replacement_vehicle_may_be_needed": true,
+    "finding_usable_replacement_vehicle_is_guaranteed": false,
+    "resume_condition": "取得足以繼續行駛的汽油，或找到可繼續行駛的替代車輛，且有能駕駛的角色",
+    "stranded_run_end_condition": "無法找到汽油或可用的替代車輛，旅程無法繼續時結束本局",
+    "stranded_ending_generation": "依擲骰結果查詢神諭，向玩家敘述結局",
+    "ending_uses_ai": false,
+    "exact_search_exhaustion_rule": null,
+    "search_presentation": "透過停車後的公路事件處理，不進入步行地圖"
+  },
+  "time": {
+    "model": "行車與特定活動推進世界時間",
+    "day_phases": [
+      "清晨",
+      "上午",
+      "下午",
+      "夜晚"
+    ],
+    "day_phase_hour_boundaries": null,
+    "driving_step_world_minutes": 60,
+    "driving_encounter_rule": "每次擲 D10 前進後以 D100 決定遭遇；一次停靠可能包含多重事件",
+    "specific_activities_can_advance_world_time": true,
+    "reading_or_deciding_does_not_automatically_advance_world_time": true,
+    "activity_cost_examples_not_final": [
+      {
+        "activity": "與 NPC 交談",
+        "example_world_minutes": 5,
+        "status": "示例，未定案"
+      },
+      {
+        "activity": "戰鬥",
+        "example_rounds": 3,
+        "example_world_minutes": 5,
+        "status": "示例，未定案"
+      }
+    ]
+  },
+  "content": {
+    "scale_target": "成千上萬種事件，以及人物、車輛與怪物遭遇",
+    "scale_is_target_not_completed_inventory": true,
+    "approach": "獨特故事與規則組合並重",
+    "name_changes_alone_do_not_count_as_distinct_content": true,
+    "npc_archetypes": {
+      "generation_model": "種族＋職業＋態度，另抽姓名與外號",
+      "fixed_catalog_of_100_npcs_required": false,
+      "race_and_profession_catalog_status": "已建立 12 種族與 20 職業，見 data/npc-catalog.json",
+      "distinct_from_names_and_nicknames": true
+    }
+  },
+  "oracle_system": {
+    "status": "採用神諭系統的方向已確認；表格內容與精確實作待設計",
+    "role": "遊戲各類情況與內容的共用生成方式",
+    "uses_ai_at_runtime": false,
+    "method": "以 TRPG 神諭的隨機表抽取與組合方式產生結果",
+    "confirmed_domains": [
+      "世界歷史",
+      "NPC 名字",
+      "NPC 態度",
+      "對話內容",
+      "敵人",
+      "裝備",
+      "旅程無法繼續時的結局",
+      "被開除同伴的去向",
+      "NPC 外號"
+    ],
+    "domains_are_extensible": true,
+    "implementation_proposals_not_final": [
+      "按世界歷史、地點、時段與既有狀態篩選可用表項，再依權重抽取",
+      "以預寫語句模板與條件分支，將神諭結果轉成可閱讀對話與可執行選擇",
+      "保存已生成的人物與歷史事實，避免重複互動時任意重擲",
+      "按需生成並保存結果，不持續重算整個世界，以降低運算負擔"
+    ]
+  },
+  "open_questions": [
+    "一個遊戲內行車小時對應的現實播放時間，以及暫停方式",
+    "D100 事件表的分類區間與機率，以及強制停車狀態如何與 D100 事件結合",
+    "後續事件在之後停靠中的出現條件與機率，以及如何納入當次事件抽取",
+    "每次行車時乘客的體力恢復量",
+    "D10 前進與原有每次行車一小時規則的對應方式；原有 60 分鐘設定暫時保留",
+    "如何判定停車後已無法找到汽油或可用車輛，以及搜索範圍、次數或耗時限制",
+    "結局神諭的表項、擲骰方式與情境條件",
+    "汽油、體力、傷勢及車況的數值與相互影響",
+    "各車型的基本座位、生命值、改裝格數與各改裝的具體效果",
+    "車輛生命值歸零的結果、公路維修事件的費用與效果，以及換車時既有改裝的處理；改造限修車廠內進行",
+    "交談與戰鬥等活動的正式耗時規則",
+    "清晨、上午、下午與夜晚的具體時間分界",
+    "睡眠、昏迷、休息與體力恢復的細節",
+    "被開除同伴的去向神諭、再次登場條件與機率，以及重新加入或成為敵人的條件",
+    "人物戰鬥與車輛戰鬥的指令及規則",
+    "死亡、角色接替、全隊覆滅與跨局保留內容",
+    "神諭系統的表格資料格式、抽取規則、權重、因果限制與文本組合方法",
+    "存檔、離線與跨裝置需求",
+    "完整介面配置與素材、動畫清單",
+    "缺油或疲勞停車後的公路事件流程",
+    "除車輛座位限制外是否另設隊伍上限",
+    "夜間駕駛的體力倍率與不足一格時的前進結算",
+    "藥品回血量與使用時機",
+    "建築物種類與對應公路 D100 的建築入口",
+    "建築探索的好壞比例、耗時與體力消耗；不直接套用行車 D10 的燃油及距離成本",
+    "下車成員、留車成員、提前離開與建築探索結束後的流程",
+    "NPC 態度機率、其他態度反應、交易與贈送規則",
+    "睡眠時長、恢復量、守夜者的體力消耗與睡眠遭遇機率",
+    "種族與職業能力的具體數值，以及睡眠遭攻擊的命中與範圍判定",
+    "特性加成後的行車成本、實際距離與夜間成本結算；戰鬥機率及先攻基礎值",
+    "四種核心屬性名稱、功能、初始值與成長方式",
+    "各種族的超能力清單、學習等級、ESP 上限、消耗與恢復規則"
+  ],
+  "implementation_drafts": {
+    "status": "首版資料草案，不覆寫已確認規則或把暫定數值當成定案",
+    "event_spec": "data/event-spec.json",
+    "oracle_tables": "data/oracles.json",
+    "event_catalog": "data/events.json",
+    "npc_spec": "data/npc-spec.json",
+    "npc_catalog": "data/npc-catalog.json",
+    "traits": "data/traits.json",
+    "building_events": "data/building-events.json"
+  },
+  "sleep": {
+    "required_when_all_stamina_depleted": true,
+    "advances_world_time": true,
+    "watch_assignment_required_for_protection": true,
+    "watcher_is_awake_not_sleeping": true,
+    "unwatched_combat": {
+      "all_characters_asleep_at_start": true,
+      "enemy_free_opening_rounds": 1,
+      "wake_on_being_attacked": true,
+      "unattacked_characters_remain_asleep": true,
+      "woken_character_acts_during_enemy_opening_round": false
+    },
+    "sleep_duration": null,
+    "stamina_recovery": null,
+    "exhausted_watcher_rule": "全員體力歸零時無人守夜，全員睡眠；遭遇戰鬥時敵方先攻一輪",
+    "note": "無人守夜仍可能入睡，但遭戰鬥時承受睡眠與敵方先攻懲罰；不保證每次睡眠發生戰鬥",
+    "wake_trigger_note": "受到攻擊即醒來；不是全隊同時醒來。命中、傷害與範圍攻擊細節仍待戰鬥規則定義"
+  }
+}

@@ -1,0 +1,464 @@
+{
+  "version": "0.1.0",
+  "status": "依需求製作的 32 優點與 20 缺點；具體數值為首版試玩值",
+  "assignment": {
+    "race_advantages": 1,
+    "profession_advantages": 1,
+    "flaws": 1,
+    "flaw_table": "npc_flaw",
+    "applies_to": "主角、同伴與具備完整種族職業的 NPC",
+    "persist_on_reencounter": true
+  },
+  "advantages": [
+    {
+      "id": "race_human",
+      "name": "舊世常識",
+      "source_type": "race",
+      "source_id": "human",
+      "trigger": "舊世界民用設施事件",
+      "effect": "可選擇「依操作標示處理」，取得該設施的一條可靠操作提示。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_alien",
+      "name": "先遣密語",
+      "source_type": "race",
+      "source_id": "alien",
+      "trigger": "取得外星軍用訊息",
+      "effect": "可解讀訊息中的命令或識別碼，揭露一條隱藏情報，不自動改變對方態度。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_mutant",
+      "name": "異變耐受",
+      "source_type": "race",
+      "source_id": "mutant",
+      "trigger": "受到污染標籤的生命傷害",
+      "effect": "本角色每次污染傷害減少 2，最低為 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_synth",
+      "name": "記憶備份",
+      "source_type": "race",
+      "source_id": "synth",
+      "trigger": "第一次讀取事件終端",
+      "effect": "可額外恢復一段已刪除的文字紀錄；不等同解除門禁。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_uplift",
+      "name": "敏銳嗅覺",
+      "source_type": "race",
+      "source_id": "uplift",
+      "trigger": "事件包含隱藏生物",
+      "effect": "互動前揭露藏匿生物是否存在，不預告尚未發生的公路事件。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_chitin",
+      "name": "天然甲殼",
+      "source_type": "race",
+      "source_id": "chitin",
+      "trigger": "受到直接物理攻擊",
+      "effect": "本角色每次物理傷害減少 1，最低為 0；不保護車輛。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_mycelial",
+      "name": "孢子辨識",
+      "source_type": "race",
+      "source_id": "mycelial",
+      "trigger": "事件出現孢子或菌落",
+      "effect": "在接觸前顯示菌落是否有害，不自動提供治療。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_crystal",
+      "name": "能量共振",
+      "source_type": "race",
+      "source_id": "crystal",
+      "trigger": "事件內存在隱藏供能裝置",
+      "effect": "揭露一個仍有能量的裝置位置，不直接啟動或修理它。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_amphibian",
+      "name": "水域適應",
+      "source_type": "race",
+      "source_id": "amphibian",
+      "trigger": "本人執行標記為涉水的探索選項",
+      "effect": "免除該選項的涉水額外體力成本，仍支付基礎成本。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_mimic",
+      "name": "輪廓偽裝",
+      "source_type": "race",
+      "source_id": "mimic",
+      "trigger": "人物戰中由本人執行逃跑",
+      "effect": "逃跑成功率增加 15 個百分點，不影響車輛逃跑。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_symbiote",
+      "name": "共生修復",
+      "source_type": "race",
+      "source_id": "symbiote",
+      "trigger": "本人完成一次有效睡眠",
+      "effect": "額外恢復 2 生命，不超過上限；未睡眠的守夜者不能觸發。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "race_lumen",
+      "name": "微光照明",
+      "source_type": "race",
+      "source_id": "lumen",
+      "trigger": "本人參與黑暗建築事件",
+      "effect": "移除該事件因缺少照明而鎖定的選項，不揭露隱藏敵人。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_driver",
+      "name": "平穩駕駛",
+      "source_type": "profession",
+      "source_id": "driver",
+      "trigger": "本人擔任當次駕駛",
+      "effect": "總駕駛體力成本減少 1；有實際前進時最低仍消耗 1，含夜間。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_mechanic",
+      "name": "精準整備",
+      "source_type": "profession",
+      "source_id": "mechanic",
+      "trigger": "本人參與修車廠維修",
+      "effect": "同次維修的車輛生命恢復量增加 3，不超過上限；不能路邊維修。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_medic",
+      "name": "急救手法",
+      "source_type": "profession",
+      "source_id": "medic",
+      "trigger": "本人使用藥品治療任一角色",
+      "effect": "本次藥品生命恢復量增加 2，不影響體力。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_soldier",
+      "name": "武器訓練",
+      "source_type": "profession",
+      "source_id": "soldier",
+      "trigger": "本人以人物武器造成命中",
+      "effect": "本次武器傷害增加 1，不套用車載武器。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_scout",
+      "name": "掩體觀察",
+      "source_type": "profession",
+      "source_id": "scout",
+      "trigger": "本人清醒參與伏擊事件",
+      "effect": "第一輪所受直接攻擊傷害減少 2，最低 0；睡眠中不生效。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_merchant",
+      "name": "熟悉行情",
+      "source_type": "profession",
+      "source_id": "merchant",
+      "trigger": "本人與願意交易的 NPC 議價",
+      "effect": "購買報價降低 10%，取整規則由交易系統統一處理，不可變成免費。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_scavenger",
+      "name": "廢料回收",
+      "source_type": "profession",
+      "source_id": "scavenger",
+      "trigger": "本人完成有廢料獎勵的搜索",
+      "effect": "額外獲得 1 廢料；搜索無收穫時不憑空產生獎勵。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_engineer",
+      "name": "機械復原",
+      "source_type": "profession",
+      "source_id": "engineer",
+      "trigger": "事件含損壞的非車輛機械",
+      "effect": "解鎖修復機械的事件選項；材料與時間依選項支付。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_researcher",
+      "name": "樣本分析",
+      "source_type": "profession",
+      "source_id": "researcher",
+      "trigger": "取得未知外星樣本",
+      "effect": "揭露樣本用途或危害的一項資訊，不重擲本局歷史。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_hacker",
+      "name": "門禁破解",
+      "source_type": "profession",
+      "source_id": "hacker",
+      "trigger": "遇到運作中的電子鎖",
+      "effect": "解鎖繞過電子門禁的選項，不適用純機械鎖。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_hunter",
+      "name": "弱點辨認",
+      "source_type": "profession",
+      "source_id": "hunter",
+      "trigger": "本人第一次攻擊本場生物敵人並命中",
+      "effect": "這次攻擊額外造成 2 傷害；每場戰鬥只觸發一次，不適用車輛與機械。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_guard",
+      "name": "堅定守望",
+      "source_type": "profession",
+      "source_id": "guard",
+      "trigger": "本人清醒守夜且遭戰鬥",
+      "effect": "守衛本人首次受到的攻擊傷害減少 3，最低 0；不喚醒其他人。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_courier",
+      "name": "道路記號",
+      "source_type": "profession",
+      "source_id": "courier",
+      "trigger": "事件出現信使路標",
+      "effect": "解讀一條道路消息或通行線索，不改變 D10 前進結果。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_diplomat",
+      "name": "留有餘地",
+      "source_type": "profession",
+      "source_id": "diplomat",
+      "trigger": "與非敵對且非掠奪 NPC 交談",
+      "effect": "解鎖「交換情報」選項，不強制交易成功，也不取消戰鬥態度。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_historian",
+      "name": "史料交叉比對",
+      "source_type": "profession",
+      "source_id": "historian",
+      "trigger": "閱讀與既有紀錄相關的書籍",
+      "effect": "揭露兩份紀錄的一條關聯，不另抽末日起因。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_locksmith",
+      "name": "巧手開鎖",
+      "source_type": "profession",
+      "source_id": "locksmith",
+      "trigger": "遇到機械鎖容器或門",
+      "effect": "解鎖不用消耗破壞工具的開鎖選項，仍支付事件設定的時間。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_demolition",
+      "name": "引信判讀",
+      "source_type": "profession",
+      "source_id": "demolition",
+      "trigger": "事件出現已識別爆炸裝置",
+      "effect": "提供拆除選項，並在確認前顯示失敗後果；不保證成功。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_chemist",
+      "name": "成分鑑定",
+      "source_type": "profession",
+      "source_id": "chemist",
+      "trigger": "取得未標示化學品",
+      "effect": "揭露藥劑或毒物分類，避免未辨識就使用；不增加藥品數量。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_electrician",
+      "name": "斷電隔離",
+      "source_type": "profession",
+      "source_id": "electrician",
+      "trigger": "遇到帶電設施障礙",
+      "effect": "解鎖切斷供電的選項，避免該選項的觸電傷害，不適用戰鬥電擊。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "profession_performer",
+      "name": "旅途故事",
+      "source_type": "profession",
+      "source_id": "performer",
+      "trigger": "本人在當次停靠開始時清醒，且至少有一名同伴",
+      "effect": "一次停靠可選擇講故事，使另一名清醒同伴恢復 1 體力；不能對自己使用或重複刷取。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    }
+  ],
+  "flaws": [
+    {
+      "id": "frail",
+      "name": "體弱",
+      "trigger": "生成角色",
+      "effect": "生命上限減少 2，最低為 1。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "low_endurance",
+      "name": "易疲倦",
+      "trigger": "生成角色",
+      "effect": "體力上限減少 2，最低為 1。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "restless",
+      "name": "淺眠",
+      "trigger": "本人完成睡眠",
+      "effect": "該次睡眠體力恢復量減少 1，最低 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "slow_healing",
+      "name": "癒合遲緩",
+      "trigger": "本人接受藥品治療",
+      "effect": "藥品生命恢復量減少 1，最低 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "night_strain",
+      "name": "夜駕吃力",
+      "trigger": "本人夜間駕駛",
+      "effect": "在夜間基本加成之外，每次行車再多消耗 1 體力。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "poor_driver",
+      "name": "生疏駕駛",
+      "trigger": "本人駕駛",
+      "effect": "每次行車額外消耗 1 體力。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "wasteful_driver",
+      "name": "猛踩油門",
+      "trigger": "本人駕駛",
+      "effect": "有實際前進時，該次汽油成本額外增加 1。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "claustrophobic",
+      "name": "幽閉恐懼",
+      "trigger": "本人參與狹窄建築事件",
+      "effect": "需要本人出力的選項額外消耗 1 體力。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "dark_fear",
+      "name": "畏暗",
+      "trigger": "本人參與未照明建築事件",
+      "effect": "需要本人出力的選項額外消耗 1 體力；取得照明後不適用。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "unsteady",
+      "name": "手抖",
+      "trigger": "本人使用遠程人物武器",
+      "effect": "命中率減少 10 個百分點。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "weak_grip",
+      "name": "握力不足",
+      "trigger": "本人近戰命中",
+      "effect": "傷害減少 1，最低 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "timid",
+      "name": "臨戰畏縮",
+      "trigger": "本人進入人物戰",
+      "effect": "第一輪造成的攻擊傷害減少 1，最低 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "slow_reflex",
+      "name": "反應遲緩",
+      "trigger": "判定本人戰鬥行動順序",
+      "effect": "先攻值減少 1；不影響被攻擊即醒來規則。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "noisy",
+      "name": "動靜太大",
+      "trigger": "本人執行人物逃跑",
+      "effect": "逃跑成功率減少 10 個百分點。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "bad_bargain",
+      "name": "不擅議價",
+      "trigger": "本人代表隊伍購買",
+      "effect": "報價增加 10%；不影響免費贈物。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "abrasive",
+      "name": "言語生硬",
+      "trigger": "本人與同情態度 NPC 互動",
+      "effect": "該次贈物判定機率減少 10 個百分點，不強制轉成敵對。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "distracted",
+      "name": "搜索粗心",
+      "trigger": "本人領取搜索廢料獎勵",
+      "effect": "獲得的廢料減少 1，最低 0。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "mechanical_clumsy",
+      "name": "機械笨拙",
+      "trigger": "本人執行設施修復選項",
+      "effect": "額外花費 10 分鐘，不影響其他角色操作。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "chemical_sensitive",
+      "name": "化學敏感",
+      "trigger": "本人受到污染傷害",
+      "effect": "傷害增加 1。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    },
+    {
+      "id": "startled_awake",
+      "name": "驚醒慌亂",
+      "trigger": "本人因受到攻擊而醒來",
+      "effect": "醒來後自己的首次攻擊傷害減少 1，最低 0；仍立即醒來，敵方先攻輪不被中斷。",
+      "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
+    }
+  ],
+  "resolution_rules": {
+    "active_actor": "行動特性只採本次執行者；不得累加所有隊員同類特性。睡眠者不提供主動事件選項。",
+    "numeric_order": "先計基礎效果與時段，再套用優缺點加減，最後套上下限；比率同基礎相加後一次取整",
+    "chance_bounds": [
+      0,
+      100
+    ],
+    "integer_rounding": "正值非整數向上取整；購買價格最低 1；生命、體力上限最低 1；傷害與恢復最低 0",
+    "opposed_traits": "允許優缺點抵銷，不為了強度重新抽取缺點",
+    "payment": "成本於選項顯示；直接選項成本確認前檢查，無足額資源不執行；行車依燃料與駕駛體力限制實際距離。",
+    "persistence": "一次性獎勵與每戰每停靠觸發次數存入狀態，重新開啟介面不得重置",
+    "invariants": [
+      "不建立食物或負重系統",
+      "所有種族仍需休息",
+      "改裝仍限修車廠",
+      "敵對與掠奪仍直接開戰",
+      "受攻擊即醒來，不因缺點改成繼續睡",
+      "未被攻擊者不因隊友醒來而自動甦醒"
+    ]
+  }
+}
