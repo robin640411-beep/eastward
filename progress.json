@@ -43,7 +43,11 @@
     "即時 Canvas 公路場景、多層移動、車輪與揚塵動畫",
     "202 個公路與建築事件圖像，依事件顯示環境動態",
     "場景直接處理事件與敵人目標鎖定",
-    "12 秒行車段落，可略過動畫"
+    "12 秒行車段落，可略過動畫",
+    "共享行車與停靠鏡頭，提前呈現實際擲骰事件、拉遠與減速",
+    "12 種沿途地貌與連續日夜光線、星月、車燈",
+    "中央敵人與下方隊伍 JRPG 戰鬥介面，直接點擊敵人或治療對象",
+    "超能力子選單、上一人指令修改、受傷與治療回饋"
   ],
   "verification": [
     "324 個 SVG XML 與引用檢查",
@@ -60,7 +64,13 @@
     "正式網址瀏覽器確認：繁中標題、種族職業選單、角色圖像與開始遊戲按鈕成功載入",
     "390×844 實測行車 0% 與 45% 畫面，遠景與路面移動",
     "加油站、燃燒油槽、巢穴場景視覺驗證，場景迎戰及鎖定超能力操作通過",
-    "57 項測試及 202 個新增 SVG 檢查通過"
+    "57 項測試及 202 個新增 SVG 檢查通過",
+    "公路動畫更新正式部署成功，正式網址載入確認",
+    "390×844 與 360×780 檢查中央敵人、隊伍與拇指按鈕，窄版無水平溢出",
+    "兩位隊員攻擊、藥品、超能力與防禦實際回合結算，返回上一人成功",
+    "自動行車抵達加油站與進入建築成功；鹽原、峽谷、夜間森林、清晨海岸目視檢查",
+    "82% 接近鏡頭可見前方加油站；99.99% 與正式停靠車身位置和尺寸一致",
+    "100 組種子預覽事件與實際事件一致且不消耗正式資源或隨機數"
   ],
   "must_finish_before_completion": [],
   "tools": {
@@ -75,8 +85,13 @@
   "deployment": {
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "commit_sha": "60ae0750e701d2771d61960c8eeb570c88c6baa7",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_10d5516d5fe08191a2448b44a188f1b7",
+    "commit_sha": "91527d7dcc8fac0a9ae64936d40f49e79938e6cd",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_70333dfcfff48191b3e578dc130299cd",
     "audience": "owner-private"
+  },
+  "current_update": {
+    "name": "continuous-camera-and-jrpg-ui",
+    "status": "locally-verified-awaiting-deployment",
+    "physical_phone_tested": false
   }
 }
