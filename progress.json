@@ -1,11 +1,11 @@
 {
-  "goal": "完成《一路向東》手機網頁遊戲與全部必要圖像；目前仍進行中",
+  "goal": "《一路向東》首版手機網頁遊戲與完整必要圖像已實作、驗證並部署",
   "project": "eastward",
   "site_project_id": "appgprj_6afcd475a5a481918126e986e4962f6a",
   "site_registered": true,
-  "deployed": false,
+  "deployed": true,
   "assets": {
-    "files": 344,
+    "files": 546,
     "characters": 240,
     "portraits": 12,
     "vehicles": 8,
@@ -15,7 +15,8 @@
     "mods": 4,
     "generator": "tools/make_art.py",
     "gallery": "dist/art.html",
-    "vehicle_seat_variants": 20
+    "vehicle_seat_variants": 20,
+    "encounter_images": 202
   },
   "implemented": [
     "原創像素 SVG 素材",
@@ -38,7 +39,11 @@
     "一般 NPC 有限存貨交易與持久記憶",
     "原身分同伴延後在公路或建築重逢，可再次加入",
     "不同時段敵人池與 NPC 自身戰鬥數值",
-    "32 優點及 20 缺點接入事件與戰鬥執行器"
+    "32 優點及 20 缺點接入事件與戰鬥執行器",
+    "即時 Canvas 公路場景、多層移動、車輪與揚塵動畫",
+    "202 個公路與建築事件圖像，依事件顯示環境動態",
+    "場景直接處理事件與敵人目標鎖定",
+    "12 秒行車段落，可略過動畫"
   ],
   "verification": [
     "324 個 SVG XML 與引用檢查",
@@ -51,11 +56,13 @@
     "50 項 engine 測試，涵蓋全部種族 36 個超能力執行、角色特性、NPC 庫存、離隊重逢",
     "54 項引擎測試通過，100 組種子完整旅程皆到達終局，無負資源或事件卡關",
     "390×844 Chrome 驗證 11 人車窗、兩人指令車戰、進度 100 綠洲、神諭缺油與全滅結局",
-    "344 個 SVG 引用與透明窗座標檢查通過，發布版已移除 QA 測試頁"
+    "344 個 SVG 引用與透明窗座標檢查通過，發布版已移除 QA 測試頁",
+    "正式網址瀏覽器確認：繁中標題、種族職業選單、角色圖像與開始遊戲按鈕成功載入",
+    "390×844 實測行車 0% 與 45% 畫面，遠景與路面移動",
+    "加油站、燃燒油槽、巢穴場景視覺驗證，場景迎戰及鎖定超能力操作通過",
+    "57 項測試及 202 個新增 SVG 檢查通過"
   ],
-  "must_finish_before_completion": [
-    "完成現有私人 Site 的源碼打包與部署，確認成功網址"
-  ],
+  "must_finish_before_completion": [],
   "tools": {
     "node": "/Users/robin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
     "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
@@ -64,5 +71,12 @@
     "browser": "Chrome id 1",
     "browser_tab": "2093001319"
   },
-  "next_step": "執行 Sites source helper 與私人部署。"
+  "next_step": "可開始使用者試玩；後續依回饋調整數值與內容。",
+  "deployment": {
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "commit_sha": "60ae0750e701d2771d61960c8eeb570c88c6baa7",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_10d5516d5fe08191a2448b44a188f1b7",
+    "audience": "owner-private"
+  }
 }
