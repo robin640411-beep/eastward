@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-18",
+  "status": "local-verified-awaiting-publication",
+  "automated_tests": {
+    "passed": 145,
+    "failed": 0
+  },
+  "browser_checks": [
+    "Chrome 360x780 actual storm event: full-stage rain and sky bolt visible; 48-frame sample includes clear main bolt and three branches, no translated rectangular flash.",
+    "Storm wait choice advanced world time by 60 minutes and resolved event.",
+    "Ordinary forest, green hills and snow terrain driving showed leaves, petals and falling snow without an encounter.",
+    "Soft animation setting toggled successfully; models verify no sky flash and longer visible bolt in soft mode.",
+    "Document and viewport both 360x780; no page overflow or console warnings/errors."
+  ],
+  "screenshots": [
+    "lightning-360.jpg",
+    "storm-360.jpg",
+    "leaves-driving-360.jpg",
+    "petals-driving-360.jpg",
+    "snow-driving-360.jpg"
+  ],
+  "limitations": [
+    "Desktop Chrome phone viewport; physical phone performance not measured.",
+    "All twelve weather profiles tested by model; representative storm/leaves/petals/snow visually verified."
+  ]
+}

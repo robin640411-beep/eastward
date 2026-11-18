@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "date": "2026-11-18",
+  "scope": "Cosmetic road weather only; game events, RNG, resources and world clock unchanged.",
+  "profiles": {
+    "salt": {
+      "dust": 0.5
+    },
+    "canyon": {
+      "dust": 0.6,
+      "leaf": 0.12
+    },
+    "forest": {
+      "leaf": 1,
+      "rain": 0.16
+    },
+    "city": {
+      "rain": 0.5,
+      "leaf": 0.22
+    },
+    "coast": {
+      "rain": 0.65
+    },
+    "industrial": {
+      "ash": 0.7,
+      "rain": 0.18
+    },
+    "marsh": {
+      "rain": 0.65,
+      "leaf": 0.45
+    },
+    "desert": {
+      "dust": 1
+    },
+    "farmland": {
+      "leaf": 0.5,
+      "petal": 0.6
+    },
+    "snow": {
+      "snow": 1
+    },
+    "alien": {
+      "spore": 0.8,
+      "ash": 0.2
+    },
+    "oasis": {
+      "petal": 1,
+      "leaf": 0.35
+    }
+  },
+  "particle_limits": {
+    "rain": 72,
+    "snow": 64,
+    "leaf": 24,
+    "petal": 28,
+    "dust": 22,
+    "ash": 18,
+    "spore": 18
+  },
+  "particles": "Screen-space layers with wind, tumbling leaves/petals, depth-scaled snow, rain and ground splashes; terrain profiles blend with the scenery.",
+  "lightning": {
+    "trigger": "road_100 storm; ramps in during approach",
+    "geometry": "Random sky start, segmented main bolt and three branches; independent visual hash",
+    "cadence": "one bolt in each 8-second block with 0.35 to 3.35 second randomized onset",
+    "full_duration_seconds": 0.82,
+    "soft_duration_seconds": 1.1,
+    "soft": "Fewer slower particles and no sky flash; lightning remains visible.",
+    "camera": "Drawn once in sky screen space, never in the scaled encounter object."
+  },
+  "performance": "Existing 30fps canvas loop; cached 72-particle pool and eight bolt shapes; no new DOM particles, image downloads or AI runtime.",
+  "interiors": "No outdoor weather inside buildings or character battles."
+}

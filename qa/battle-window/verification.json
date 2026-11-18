@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local-verified-awaiting-publication",
+  "status": "published_and_readonly_verified",
   "automated_tests": {
     "passed": 140,
     "failed": 0
@@ -35,6 +35,21 @@
     "npc-choices-360.jpg",
     "three-enemies-before-360.jpg",
     "three-enemies-gap-360.jpg",
-    "travel-four-360.jpg"
+    "travel-four-360.jpg",
+    "production-entry.jpg"
+  ],
+  "deployment": {
+    "commit_sha": "205dd8a5c6aa9882ddd66fcde5fbe183689b2413",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cf0399b98e188191b84426aed41fb0a1",
+    "deployment_id": "appgdep_6afdba9cdac8819195a1db79655a9b9f",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Original private Site deployment succeeded.",
+    "Chrome loaded app.js?v=14-battle-window; Start/Continue entry rendered.",
+    "No browser warning/error; production save not loaded or modified.",
+    "Release archive has all three new modules and excludes QA fixture page."
   ]
 }

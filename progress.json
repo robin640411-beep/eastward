@@ -115,17 +115,17 @@
     "browser": "Chrome id 3",
     "browser_tab": "2093001361"
   },
-  "next_step": "Publish tested v14 to existing private Site and verify entry assets read-only.",
+  "next_step": "Publish v15-weather to original owner-private Site.",
   "deployment": {
-    "commit_sha": "840ba6d067346187830c6f1325dfd7f04895dc13",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_da37c881ac5c8191a22626226e1cf563",
-    "deployment_id": "appgdep_6afdb11a95248191a3d905ca5fa5dfe6",
+    "commit_sha": "205dd8a5c6aa9882ddd66fcde5fbe183689b2413",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cf0399b98e188191b84426aed41fb0a1",
+    "deployment_id": "appgdep_6afdba9cdac8819195a1db79655a9b9f",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "fixed-event-window-four-party-slots-and-attack-effects",
+    "name": "random-branching-lightning-and-ambient-weather",
     "status": "local-verified-awaiting-publication",
     "physical_phone_tested": false
   },
@@ -282,7 +282,7 @@
     "audience": "owner-private"
   },
   "battle_presentation": {
-    "status": "local-verified-awaiting-publication",
+    "status": "published_and_readonly_verified",
     "spec": "spec/battle-presentation.json",
     "evidence": "qa/battle-window/verification.json",
     "tests_passed": 140,
@@ -292,6 +292,24 @@
       "角色從自己框格探出半身後收回",
       "敵人倒下保留空位",
       "敵人攻擊方式、武器與種族超能力各自特效"
+    ],
+    "commit_sha": "205dd8a5c6aa9882ddd66fcde5fbe183689b2413",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cf0399b98e188191b84426aed41fb0a1",
+    "deployment_id": "appgdep_6afdba9cdac8819195a1db79655a9b9f",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "road_weather": {
+    "status": "local-verified-awaiting-publication",
+    "spec": "spec/weather.json",
+    "evidence": "qa/weather/verification.json",
+    "tests_passed": 145,
+    "features": [
+      "移除事件物件內的方形雷光",
+      "天空隨機落點與三分岔閃電",
+      "12 種場景配置飄葉、花瓣、雪、雨、沙塵、灰燼與孢子",
+      "地景交界天氣漸變，平常行車即出現",
+      "柔和模式降低粒子、移除天空閃光"
     ]
   }
 }
