@@ -1,12 +1,13 @@
 import {battleFrame,frameEffects} from './motion-model.js';
+import {actionVisual} from './battle-presentation.js';
 // Each awake traveller commits one command. Only then does initiative resolve.
 export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  const begin=Game.prototype.beginCombat;
  Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id)}};
  Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=this.alive().filter(p=>!p.asleep).map(p=>p.id);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
  Game.prototype.enemyAction=function(e){const b=this.s.battle;if(!b||e.hp<=0)return;if(e.stun>0){e.stun--;return;}
-  if(b.mode==='vehicle'){const armor=this.s.vehicle.mods.filter(x=>x==='armor').length;const damage=Math.max(1,e.attack-armor*2-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
-  else {const target=this.pick(this.alive());if(!target)return;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
+  if(b.mode==='vehicle'){this.actionTarget='vehicle';const armor=this.s.vehicle.mods.filter(x=>x==='armor').length;const damage=Math.max(1,e.attack-armor*2-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
+  else {const target=this.pick(this.alive());if(!target)return;this.actionTarget=target.id;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
  };
  Game.prototype.enemyTurn=function(){const b=this.s.battle;if(!b)return;b.guardIds??=[];for(const e of b.enemies){this.enemyAction(e);if(this.s.mode==='ending')break;}if(this.s.battle){b.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id);b.orders={};}};
  Game.prototype.combatRound=function(command){const b=this.s.battle;if(!b||this.s.mode!=='combat')return false;const p=this.commandActor();if(p){
@@ -27,7 +28,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=this.alive().filter(q=>!q.asleep).map(q=>q.id);return true;
  };
  Game.prototype.partyAction=function(p,c){const b=this.s.battle;let e=b.enemies.find(e=>e.id===c.target&&e.hp>0)||b.enemies.find(e=>e.hp>0);if(!e)return;
- const target=this.alive().find(q=>q.id===c.target)||this.alive().slice().sort((a,z)=>a.hp/a.maxHp-z.hp/z.maxHp)[0];
+ const target=this.alive().find(q=>q.id===c.target)||this.alive().slice().sort((a,z)=>a.hp/a.maxHp-z.hp/z.maxHp)[0];this.actionTarget=(c.type==='medicine'||c.type==='psi'&&learned(p).find(x=>x.id===Number(c.power))?.type==='heal')?target?.id:e.id;
  if(c.type==='defend'){b.guardIds.push(p.id);this.log(display(p),'採取防禦姿態。');return;}
  if(c.type==='escape'){const chance=clamp(45+this.stat(p,'speed')*2+(b.mode==='character'&&p.race==='mimic'?15:0)-(b.mode==='character'&&p.flaw==='noisy'?10:0),5,95);if(this.roll()<=chance){this.tell('成功脫離戰鬥。');this.finishCombat(false);}else this.log(display(p),'逃跑失敗。');return;}
  if(c.type==='medicine'){if(this.s.resources.medicine<1)return;this.add('medicine',-1);target.hp=clamp(target.hp+8+(p.profession==='medic'?2:0)-(target.flaw==='slow_healing'?1:0),0,target.maxHp);this.log(display(p),`為${display(target)}使用藥品。`);return;}
@@ -51,9 +52,9 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
   const power=command?.type==='psi'?learned(unit).find(p=>p.id===Number(command.power)):null;
   const kind=stunned?'stun':command?.type||'attack';
   const intended=command?.target||(side==='party'?b.enemies.find(e=>e.hp>0)?.id:null);
-  const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
+  this.actionTarget=null;const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
   const label=this.s.logs[0]!==lastLog?this.s.logs[0].text:stunned?'暫時無法行動。':'採取行動。';
-  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:intended,effects,after,label});
+  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(unit,command,{...b,vehicleGun:this.s.vehicle.mods.includes('gun')},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
   return result;
  };}
  // Inventory changes cannot bypass the turn or move characters out of a moving car.

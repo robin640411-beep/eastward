@@ -1,5 +1,6 @@
 import {GROWTH} from './progression-catalog.js';
 import {regionIndex} from './route-runtime.js';
+import {enemyAttackStyle} from './battle-presentation.js';
 export const MAX_LEVEL=18;
 export const bossDefinition=s=>GROWTH.bosses.find(b=>b.id===s.finalBoss?.id);
 const clampLevel=n=>Math.max(1,Math.min(MAX_LEVEL,n));
@@ -27,7 +28,7 @@ export function installProgression(Game,{display,learned}){
  Game.prototype.companionBossExchange=function(lead,p){const boss=bossDefinition(this.s);let index=this.roll(boss.companion.length)-1;if(p.lastBossRumor===index)index=(index+1)%boss.companion.length;p.lastBossRumor=index;const [question,reply]=boss.companion[index];this.recordBossRumor(p,question+'\n'+reply,'companion');return {focus:'boss',bossId:boss.id,subject:p.id,lines:[{speaker:display(lead),personId:lead.id,text:question},{speaker:display(p),personId:p.id,text:reply}]};};
  Game.prototype.beginFinale=function(){const boss=bossDefinition(this.s);this.s.finalBoss.encountered=true;this.s.current={instance:++this.s.serial,finalGate:true,event:{id:'final_gate',title:'樂園之前 · '+boss.name,text:boss.description,options:[]},resolved:false};this.s.frames=[];this.s.mode='event';this.beginCombat('character','finalBoss');};
  const begin=Game.prototype.beginCombat;Game.prototype.beginCombat=function(mode='character',category=null,npc=null){begin.call(this,mode,category,npc);const b=this.s.battle;if(!b)return;
-  if(category==='finalBoss'){const boss=bossDefinition(this.s);b.finalBoss=true;b.resume='event';b.enemies=[{...boss,id:'e0',bossId:boss.id,hp:this.s.finalBoss.hp??boss.hp,maxHp:boss.hp,stun:0,scale:1.4}];this.s.notice=boss.description;}
+  if(category==='finalBoss'){const boss=bossDefinition(this.s);b.finalBoss=true;b.resume='event';b.enemies=[{...boss,id:'e0',bossId:boss.id,hp:this.s.finalBoss.hp??boss.hp,maxHp:boss.hp,stun:0,scale:1.4}];b.enemies[0].attackStyle=enemyAttackStyle(b.enemies[0]);this.s.notice=boss.description;}
  };
  const choose=Game.prototype.choose;Game.prototype.choose=function(id){if(this.s.mode==='event'&&this.s.current?.finalGate&&id==='challenge'){this.beginFinale();return true;}return choose.call(this,id);};
  const endCombat=Game.prototype.finishCombat;Game.prototype.finishCombat=function(win){const b=this.s.battle;if(!b)return;const final=b.finalBoss,gate=this.s.current?.finalGate;
@@ -40,5 +41,5 @@ export function makeRegionalEnemies(game,mode,npc,helpers,category=null){const {
  const candidates=category==='machine'?region.enemies.filter(k=>game.d.assets.enemies[k].machine):region.enemies;const hour=Math.floor(game.s.minutes/60)%24,night=hour<5||hour>=18,preferred=night?['crawler','lurker','parasite','swarm','drone']:['soldier','worker','sentinel','hound','turret'];const pool=[...candidates,...candidates.filter(k=>preferred.includes(k))];
  return Array.from({length:count},(_,i)=>{const key=npc?'raider':game.pick(pool),art=game.d.assets.enemies[key],heavy=['brute','nest','sentinel'].includes(key),hp=region.health+(heavy?5:0);const e={id:'e'+i,key,name:npc?display(npc):art.name,hp,maxHp:hp,attack:region.attack+(heavy?1:0),defense:region.defense,speed:region.speed,scale:region.body_scale,region:region.region,machine:art.machine,stun:0,npc:npc?clone(npc):null};
   if(mode==='vehicle'){e.vehicle=game.pick(Object.keys(game.d.assets.vehicles));e.name='敵方'+game.d.assets.vehicles[e.vehicle].name+' · '+art.name;e.hp=e.maxHp=hp+8;}
-  if(npc&&mode==='character')Object.assign(e,{hp:npc.hp,maxHp:npc.maxHp,attack:game.stat(npc,'attack'),defense:game.stat(npc,'defense'),speed:game.stat(npc,'speed'),scale:1});return e;});
+  if(npc&&mode==='character')Object.assign(e,{hp:npc.hp,maxHp:npc.maxHp,attack:game.stat(npc,'attack'),defense:game.stat(npc,'defense'),speed:game.stat(npc,'speed'),scale:1});e.attackStyle=enemyAttackStyle(e,mode);return e;});
 }

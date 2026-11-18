@@ -345,5 +345,6 @@
       "敵對": "還想往東走？先聽清楚：",
       "掠奪": "東邊那東西可不會像我一樣只拿物資。"
     }
-  }
+  },
+  "attack_presentation": "spec/battle-presentation.json"
 }

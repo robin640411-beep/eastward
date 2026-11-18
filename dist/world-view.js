@@ -1,3 +1,4 @@
+import {drawBattleEffects} from './battle-effects.js';
 // Lightweight 384px stage: layered pixel art, no physics engine or continuous DOM writes.
 import {reducedMotion} from './cinematics.js';
 import {phaseName} from './engine.js';
@@ -72,52 +73,20 @@ function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  if(kind==='signal'&&i<3){ctx.strokeStyle='#8ec6ae';ctx.globalAlpha=(1-v)*.7;ctx.strokeRect(265-v*25,97-v*19,v*50,v*38)}ctx.globalAlpha=1;
  }if(kind==='storm'&&Math.sin(t*.9)>.996){rect(0,0,W,H,'#c6d6ce88')}
 }
-function battle(){const b=state.battle;if(!b)return;const enemies=playback?b.enemies:b.enemies.filter(e=>e.hp>0),layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
+function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
  if(!vehicleFight){if(state.current?.inside||state.frames?.at(-1)?.kind==='building')room();else panorama(biomeAt(state.progress,state.seed,state.route),0,0,W,H);rect(0,0,W,H,'#0e192bc7');
   const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
  }
- enemies.forEach((e,i)=>{const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0),attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack',impact=age>=.22&&age<.56;
-  const recoil=struck&&impact&&!reduced?Math.sin((age-.22)*42)*6*(1-(age-.22)/.34):0,lunge=attacking&&age<.4&&!reduced?Math.sin(age/.4*Math.PI)*12:0;
+ enemies.forEach((e,i)=>{const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0),attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack',impact=age>=.36&&age<.82;
+  const recoil=struck&&impact&&!reduced?Math.sin((age-.36)*42)*5*(1-(age-.36)/.46):0,lunge=attacking&&age<.4&&!reduced?Math.sin(age/.4*Math.PI)*12:0;
   const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
-  ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.62?Math.max(0,1-(age-.22)/.4):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
+  ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.9?Math.max(0,1-(age-.36)/.54):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
   if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paint(assets.characters[e.npc.race+'_'+e.npc.profession],l.cx-l.h/3,y,l.h*2/3,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
   ctx.restore();
  });
  if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
- drawBattleBeat(enemies,layout,vehicleFight,age);
-}
-function drawBattleBeat(enemies,layout,vehicleFight,age){if(!beat||age<0||age>.72)return;const b=beat,impact=age>=.22,t=clamp01(age/.22),hitT=clamp01((age-.22)/.4);
- const targetIds=b.effects.filter(f=>f.side==='enemies').map(f=>f.id),index=enemies.findIndex(e=>e.id===(targetIds[0]||b.target)),l=layout[index]||layout[0]||{cx:192,cy:122};
- const actor=state.party.find(p=>p.id===b.actor),enemyIndex=enemies.findIndex(e=>e.id===b.actor),origin=layout[enemyIndex]||l;
- const healing=b.kind==='medicine'||b.power==='heal',support=healing||b.kind==='defend'||b.power==='shield',color=healing?'#a1d6ac':b.kind==='psi'?'#bcb6ef':'#f4d39d';
- if(actor&&!vehicleFight&&b.kind!=='stun'){
-  ctx.globalAlpha=age>.5?Math.max(0,(.68-age)/.18):1;
-  const advance=support?0:Math.sin(clamp01(age/.48)*Math.PI)*17;
-  paint(assets.characters[actor.race+'_'+actor.profession],45+advance,153-advance*.35,38,57);ctx.globalAlpha=1;
- }
- if(b.kind==='attack'||(b.kind==='psi'&&!support)){
-  const enemy=b.side==='enemies',sx=enemy?origin.cx:vehicleFight?40:77,sy=enemy?origin.cy+25:186,ex=enemy?192:l.cx,ey=enemy?234:l.cy;
-  if(!impact){
-   const x=sx+(ex-sx)*t,y=sy+(ey-sy)*t;ctx.strokeStyle=color;ctx.lineWidth=b.kind==='psi'?4:2;ctx.beginPath();ctx.moveTo(sx+(ex-sx)*Math.max(0,t-.25),sy+(ey-sy)*Math.max(0,t-.25));ctx.lineTo(x,y);ctx.stroke();
-   if(b.kind==='psi'){ctx.strokeStyle='#ddd8f4';ctx.strokeRect(x-5,y-5,10,10);}else if(b.ranged){rect(sx-4,sy-4,8,8,'#f7dfa1');rect(x-3,y-1,6,2,'#fff0c1');}
-  }else if(hitT<.8&&b.effects.some(f=>f.amount<0)){const points=enemy?[{cx:192,cy:218}]:b.power==='burst'?layout:[l];
-   for(const p of points){ctx.save();ctx.translate(p.cx,p.cy);ctx.globalAlpha=1-hitT;ctx.strokeStyle=color;ctx.lineWidth=3;
-    if(b.kind==='psi'){const r=9+hitT*42;ctx.beginPath();for(let i=0;i<8;i++){const angle=i*Math.PI/4+hitT;const x=Math.cos(angle)*r,y=Math.sin(angle)*r;i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();ctx.stroke();}
-    else{ctx.beginPath();ctx.moveTo(-21+hitT*7,24);ctx.lineTo(24,-26+hitT*5);ctx.stroke();ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-27,9);ctx.lineTo(17,-27);ctx.stroke();}
-    for(let i=0;i<6;i++){const angle=i*Math.PI/3;rect(Math.cos(angle)*(10+hitT*28),Math.sin(angle)*(10+hitT*28),3,3,color);}ctx.restore();
-   }
-  }
- }else if(support){ctx.globalAlpha=1-hitT*.7;const x=actor?64:192,y=180;
-  if(healing){for(let i=0;i<5;i++){const px=x-22+i*11,py=y-((age*65+i*9)%48);rect(px-3,py,7,2,color);rect(px,py-3,2,8,color);}}
-  else{ctx.strokeStyle='#aac9d9';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-19,y-27);ctx.lineTo(x+19,y-27);ctx.lineTo(x+16,y+2);ctx.lineTo(x,y+13);ctx.lineTo(x-16,y+2);ctx.closePath();ctx.stroke();}ctx.globalAlpha=1;
- }
- if(impact){
-  for(const f of b.effects){let p={cx:192,cy:211};if(f.side==='enemies')p=layout[enemies.findIndex(e=>e.id===f.id)]||l;else if(f.side==='party'){const n=state.party.findIndex(p=>p.id===f.id);p={cx:55+(n%3)*122,cy:213};}
-   const amount=f.amount>0?'+'+f.amount:String(f.amount);text(amount,p.cx-amount.length*5,p.cy-10-hitT*25,f.amount>0?'#b9e8bc':'#fff0c3',18);
-  }
-  if(!b.effects.length&&['attack','psi'].includes(b.kind)&&!support)text(b.label.includes('落空')?'MISS':'格擋',l.cx-18,l.cy-10-hitT*18,'#c1c9cc',12);
- }
+ drawBattleEffects(ctx,{beat,age,enemies,layout,party:state.party,soft:reduced});
 }
 function encounterArt(current){let a=encounters[current?.event?.id];if(current?.inside&&a&&!a.interior){const inner={gas:'019',garage:'020',clinic:'021',motel:'022',pharmacy:'017',market:'016',stall:'016',cars:'025',warehouse:'001'}[a.kind];if(inner)a=encounters['building_'+inner];}return a;}
 function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const height=203*facade.rect[3]/facade.rect[2];ctx.drawImage(sheet,...facade.rect,x,196-height,203,height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
@@ -154,7 +123,7 @@ export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performan
  // Warm actual approaching art so it is already on screen before stopping.
  const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image|| (e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
  for(const e of s.battle?.enemies||[])if(e.image)img(e.image);
- canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，隊伍狀態與指令在下方':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
+ canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，我方隊員在下方，指令在上方訊息窗':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
 export function captureVisual(s){return {party:Object.fromEntries(s.party.map(p=>[p.id,p.hp])),hp:s.party.reduce((n,p)=>n+p.hp,0),vehicle:s.vehicle.hp,enemies:s.battle?.enemies.reduce((n,e)=>n+e.hp,0)||0,fuel:s.resources.fuel,scrap:s.resources.scrap,medicine:s.resources.medicine,round:s.battle?.round,mode:s.mode}}
 export function animateResult(before,s,type){const after=captureVisual(s);for(const p of s.party){const el=document.querySelector(`[data-person="${p.id}"]`),diff=p.hp-(before.party?.[p.id]??p.hp);if(el&&diff){el.classList.add(diff<0?'was-hit':'was-healed');}}feedback=[];for(const [key,label,x,col] of [['hp','HP',45,'#e58d79'],['vehicle','車況',48,'#e58d79'],['enemies','',174,'#f0d38e'],['fuel','汽油',176,'#a8d0b8'],['scrap','廢料',176,'#d9bc79'],['medicine','藥品',176,'#a8d0b8']]){const diff=after[key]-before[key];if(diff)feedback.push({text:`${label} ${diff>0?'+':''}${diff}`,x,color:col})}if(feedback.length||before.round!==after.round||type==='psi'){actionAt=clock;actionKind=after.enemies<before.enemies?(type==='psi'?'psi':'attack'):'none'}}
 

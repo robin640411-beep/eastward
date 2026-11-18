@@ -1,0 +1,381 @@
+{
+  "version": 1,
+  "date": "2026-11-18",
+  "layout": {
+    "event_description_and_choices": "fixed message window, 4 choices per page",
+    "party_slots": 4,
+    "empty_slots": "blank frames, same width",
+    "actor_animation": "own frame top clips full sprite to upper half; rises and returns per action",
+    "enemy_slots": "original enemy array and positions retained for entire battle; defeated slots hidden and unselectable"
+  },
+  "timing_ms": {
+    "action": 980,
+    "impact": 360
+  },
+  "attacks": {
+    "punch": {
+      "name": "拳擊",
+      "shape": "impact",
+      "color": "#edc79a"
+    },
+    "club": {
+      "name": "揮棒",
+      "shape": "club",
+      "color": "#deb782"
+    },
+    "blade": {
+      "name": "刃擊",
+      "shape": "slash",
+      "color": "#dbe5db"
+    },
+    "claw": {
+      "name": "爪擊",
+      "shape": "claw",
+      "color": "#e9baa3"
+    },
+    "bite": {
+      "name": "撕咬",
+      "shape": "bite",
+      "color": "#e4c1a1"
+    },
+    "slam": {
+      "name": "重壓",
+      "shape": "slam",
+      "color": "#c8ad8a"
+    },
+    "tentacle": {
+      "name": "觸手鞭擊",
+      "shape": "tentacle",
+      "color": "#b7a1bd"
+    },
+    "bullet": {
+      "name": "手槍射擊",
+      "shape": "bullet",
+      "color": "#e6c38c"
+    },
+    "burst_fire": {
+      "name": "連發射擊",
+      "shape": "burst_fire",
+      "color": "#e3ca98"
+    },
+    "cannon": {
+      "name": "砲擊",
+      "shape": "cannon",
+      "color": "#e3a978"
+    },
+    "ram": {
+      "name": "車體衝撞",
+      "shape": "slam",
+      "color": "#c1ced0"
+    },
+    "acid": {
+      "name": "酸液噴吐",
+      "shape": "acid",
+      "color": "#b3c476"
+    },
+    "spores": {
+      "name": "孢子噴散",
+      "shape": "spores",
+      "color": "#a2bd9a"
+    },
+    "shock": {
+      "name": "電弧放電",
+      "shape": "shock",
+      "color": "#9bcfdf"
+    },
+    "saw": {
+      "name": "旋刃切割",
+      "shape": "saw",
+      "color": "#c4d1d2"
+    },
+    "dive": {
+      "name": "俯衝撲擊",
+      "shape": "dive",
+      "color": "#d2beb0"
+    },
+    "cross_slash": {
+      "name": "四臂斬擊",
+      "shape": "cross_slash",
+      "color": "#d9cfac"
+    },
+    "swarm": {
+      "name": "蟲群湧出",
+      "shape": "swarm",
+      "color": "#b6b88a"
+    },
+    "psychic": {
+      "name": "精神侵入",
+      "shape": "psychic",
+      "color": "#c5addf"
+    }
+  },
+  "enemies": {
+    "raider": "bullet",
+    "soldier": "burst_fire",
+    "mutant": "slam",
+    "infected": "claw",
+    "crawler": "acid",
+    "hound": "bite",
+    "nest": "acid",
+    "swarm": "spores",
+    "drone": "shock",
+    "turret": "cannon",
+    "worker": "saw",
+    "sentinel": "blade",
+    "lurker": "claw",
+    "brute": "slam",
+    "wing": "dive",
+    "parasite": "tentacle"
+  },
+  "bosses": {
+    "overseer": "cross_slash",
+    "broodmother": "swarm",
+    "zero_core": "cannon",
+    "graft_colossus": "slam",
+    "fallen_angel": "psychic"
+  },
+  "powers": {
+    "human": [
+      {
+        "name": "念力推擊",
+        "shape": "force",
+        "color": "#b9c5ec",
+        "variant": 0
+      },
+      {
+        "name": "心靈復原",
+        "shape": "heal",
+        "color": "#abd7b7",
+        "variant": 0
+      },
+      {
+        "name": "意志屏障",
+        "shape": "shield",
+        "color": "#b9c5ec",
+        "variant": 0
+      }
+    ],
+    "alien": [
+      {
+        "name": "星芒",
+        "shape": "stars",
+        "color": "#ded1a6",
+        "variant": 0
+      },
+      {
+        "name": "靜默波",
+        "shape": "silence",
+        "color": "#b7b5dd",
+        "variant": 0
+      },
+      {
+        "name": "腦域風暴",
+        "shape": "storm",
+        "color": "#beb4ec",
+        "variant": 0
+      }
+    ],
+    "mutant": [
+      {
+        "name": "異變衝擊",
+        "shape": "rupture",
+        "color": "#c8a2ad",
+        "variant": 0
+      },
+      {
+        "name": "再生",
+        "shape": "heal",
+        "color": "#b3cf92",
+        "variant": 1
+      },
+      {
+        "name": "畸變爆發",
+        "shape": "eruption",
+        "color": "#c6a182",
+        "variant": 0
+      }
+    ],
+    "synth": [
+      {
+        "name": "脈衝",
+        "shape": "pulse",
+        "color": "#a1d2d6",
+        "variant": 0
+      },
+      {
+        "name": "反應護盾",
+        "shape": "shield",
+        "color": "#a1d2d6",
+        "variant": 1
+      },
+      {
+        "name": "系統震盪",
+        "shape": "overload",
+        "color": "#bfd8ee",
+        "variant": 0
+      }
+    ],
+    "uplift": [
+      {
+        "name": "野性共鳴",
+        "shape": "sonic",
+        "color": "#d6ba8c",
+        "variant": 0
+      },
+      {
+        "name": "生命回聲",
+        "shape": "heal",
+        "color": "#b6cf97",
+        "variant": 2
+      },
+      {
+        "name": "心靈嚎叫",
+        "shape": "howl",
+        "color": "#dec49d",
+        "variant": 0
+      }
+    ],
+    "chitin": [
+      {
+        "name": "碎甲念波",
+        "shape": "shards",
+        "color": "#d4c1a1",
+        "variant": 0
+      },
+      {
+        "name": "甲殼屏障",
+        "shape": "shield",
+        "color": "#b7bf98",
+        "variant": 2
+      },
+      {
+        "name": "鎮壓",
+        "shape": "crush",
+        "color": "#c8c4a9",
+        "variant": 0
+      }
+    ],
+    "mycelial": [
+      {
+        "name": "孢子念波",
+        "shape": "spores",
+        "color": "#afd0a1",
+        "variant": 0
+      },
+      {
+        "name": "菌網修復",
+        "shape": "heal",
+        "color": "#a4c79a",
+        "variant": 3
+      },
+      {
+        "name": "眠霧",
+        "shape": "sleep_mist",
+        "color": "#bcc7ba",
+        "variant": 0
+      }
+    ],
+    "crystal": [
+      {
+        "name": "晶芒",
+        "shape": "crystal",
+        "color": "#c4c0e9",
+        "variant": 0
+      },
+      {
+        "name": "折射屏障",
+        "shape": "shield",
+        "color": "#cad2e9",
+        "variant": 3
+      },
+      {
+        "name": "共振崩解",
+        "shape": "shatter",
+        "color": "#c3cfea",
+        "variant": 0
+      }
+    ],
+    "amphibian": [
+      {
+        "name": "潮汐衝擊",
+        "shape": "water",
+        "color": "#91c4d0",
+        "variant": 0
+      },
+      {
+        "name": "潮生修復",
+        "shape": "heal",
+        "color": "#9bcfcd",
+        "variant": 4
+      },
+      {
+        "name": "深水屏障",
+        "shape": "shield",
+        "color": "#a3d1d8",
+        "variant": 4
+      }
+    ],
+    "mimic": [
+      {
+        "name": "幻影刺擊",
+        "shape": "phantom",
+        "color": "#c1afd8",
+        "variant": 0
+      },
+      {
+        "name": "感官錯置",
+        "shape": "confuse",
+        "color": "#c8b5cd",
+        "variant": 0
+      },
+      {
+        "name": "幻象屏障",
+        "shape": "shield",
+        "color": "#c7b6d9",
+        "variant": 5
+      }
+    ],
+    "symbiote": [
+      {
+        "name": "共生鞭擊",
+        "shape": "tentacle",
+        "color": "#bba2b8",
+        "variant": 0
+      },
+      {
+        "name": "生命縫合",
+        "shape": "heal",
+        "color": "#d3afb4",
+        "variant": 5
+      },
+      {
+        "name": "雙重意識",
+        "shape": "shield",
+        "color": "#c5aabd",
+        "variant": 6
+      }
+    ],
+    "lumen": [
+      {
+        "name": "光束",
+        "shape": "beam",
+        "color": "#f1dba5",
+        "variant": 0
+      },
+      {
+        "name": "溫光",
+        "shape": "heal",
+        "color": "#efdbab",
+        "variant": 6
+      },
+      {
+        "name": "極光爆發",
+        "shape": "aurora",
+        "color": "#d5d6b3",
+        "variant": 0
+      }
+    ]
+  },
+  "rules": "Presentation follows resolved actions and actual recipients; no additional randomness, costs or combat-stat changes. Existing saves derive missing enemy attackStyle.",
+  "performance": "Single existing canvas loop; bounded geometric effects; no additional image download or AI runtime; respects soft animation preference."
+}

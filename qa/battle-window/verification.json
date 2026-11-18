@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-18",
+  "status": "local-verified-awaiting-publication",
+  "automated_tests": {
+    "passed": 140,
+    "failed": 0
+  },
+  "browser_checks": [
+    "Chrome 360x780: gas station description and enter/skip choices in fixed 204px window; entered building, service options remained in window.",
+    "Guarded NPC: talked, paged to second command page, goodbye available; description and reply stay within message scroll.",
+    "Solo: four combat frames, three visibly blank.",
+    "Three enemies: killed center soldier; after enemy attacks left coordinates remained 31.0625, 129.5, 227.9375; middle slot hidden and disabled.",
+    "Party attack rises half body from slot 0; four-character round observed matching slot 1, 2 and 3 actor-window, then hides after action.",
+    "Full and soft motion modes exercised; actual crystal PSI reduced ESP by 3 and hit enemy; no damage/rng changes introduced.",
+    "Combat 390x844: document 390x844; four-person travel 360x780: document 360x780.",
+    "No browser console warnings or errors."
+  ],
+  "limitations": [
+    "Desktop Chrome with phone viewports; physical phone performance not measured.",
+    "All 42 effect shapes checked for finite canvas geometry; representative attacks observed live, not every possible race/enemy animation."
+  ],
+  "screenshots": [
+    "club-rise-360.jpg",
+    "companion-slot-2-360.jpg",
+    "companion-slot-4-360.jpg",
+    "crystal-effect-0.jpg",
+    "crystal-effect-1.jpg",
+    "crystal-effect-2.jpg",
+    "event-360.jpg",
+    "four-action-0.jpg",
+    "four-action-1.jpg",
+    "four-action-2.jpg",
+    "four-action-3.jpg",
+    "four-party-360.jpg",
+    "npc-choices-360.jpg",
+    "three-enemies-before-360.jpg",
+    "three-enemies-gap-360.jpg",
+    "travel-four-360.jpg"
+  ]
+}

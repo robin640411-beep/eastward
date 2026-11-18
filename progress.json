@@ -115,18 +115,18 @@
     "browser": "Chrome id 3",
     "browser_tab": "2093001361"
   },
-  "next_step": "Publish validated roadside update to existing owner-private Site.",
+  "next_step": "Publish tested v14 to existing private Site and verify entry assets read-only.",
   "deployment": {
-    "commit_sha": "f7d9fd701e2df5dac81cdbef865b9ce73e6ca0df",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_f489ade3341c8191b4030dfe77d13113",
-    "deployment_id": "appgdep_6afda6e76f0c8191a4fff4a3930366fa",
+    "commit_sha": "840ba6d067346187830c6f1325dfd7f04895dc13",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_da37c881ac5c8191a22626226e1cf563",
+    "deployment_id": "appgdep_6afdb11a95248191a3d905ca5fa5dfe6",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "ten-roadside-types-across-twelve-terrains",
-    "status": "local_verified_ready_to_publish",
+    "name": "fixed-event-window-four-party-slots-and-attack-effects",
+    "status": "local-verified-awaiting-publication",
     "physical_phone_tested": false
   },
   "natural_journey_ui": {
@@ -263,7 +263,7 @@
     "audience": "owner-private"
   },
   "roadside_scenery": {
-    "status": "local_verified_ready_to_publish",
+    "status": "published_and_readonly_verified",
     "spec": "spec/roadside-scenery.json",
     "evidence": "qa/roadside/verification.json",
     "types": 10,
@@ -274,6 +274,24 @@
       "依地景調整分布密度、素材與積雪、植被、鏽蝕及異星痕跡",
       "物件隨車速向後移動，另有偶爾經過的車流",
       "分層繪製、最多 96 張小型物件快取、不消耗遊戲亂數"
+    ],
+    "commit_sha": "840ba6d067346187830c6f1325dfd7f04895dc13",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_da37c881ac5c8191a22626226e1cf563",
+    "deployment_id": "appgdep_6afdb11a95248191a3d905ca5fa5dfe6",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "battle_presentation": {
+    "status": "local-verified-awaiting-publication",
+    "spec": "spec/battle-presentation.json",
+    "evidence": "qa/battle-window/verification.json",
+    "tests_passed": 140,
+    "features": [
+      "事件與選項同一固定訊息窗",
+      "戰鬥固定四個框格，無人留白",
+      "角色從自己框格探出半身後收回",
+      "敵人倒下保留空位",
+      "敵人攻擊方式、武器與種族超能力各自特效"
     ]
   }
 }

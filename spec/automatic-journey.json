@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "date": "2026-11-18",
   "character_creation": {
     "automatic": true,
@@ -37,7 +37,7 @@
   "layout": {
     "top": "Current location and saved named Paradise distance, before title and party status.",
     "message_window": {
-      "height_px": 140,
+      "height_px": 204,
       "fixed_height": true,
       "position": "Above driving/battle scene",
       "contents": [
@@ -48,13 +48,19 @@
         "NPC dialogue",
         "resources and level rewards",
         "battle actions",
-        "fatigue and watch prompts"
+        "fatigue and watch prompts",
+        "event choices",
+        "battle commands"
       ],
       "auto_scroll": true,
       "manual_reread": true,
       "manual_pause_seconds": 7,
       "retained_messages": 60,
-      "page_auto_scroll": false
+      "page_auto_scroll": false,
+      "compact_height_px": 178,
+      "compact_at_viewport_height_px": 700,
+      "choices_per_page": 4,
+      "overflow_choices": "Previous / More pagination within the fixed window"
     },
     "below_driving_scene": "No dialogue, progress notices or continue panel; navigation remains available."
   },
