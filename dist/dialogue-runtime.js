@@ -1,3 +1,4 @@
+import {companionExchange} from './companion-dialogue.js';
 export const MAX_PARTY=4;
 export function normalizeJourney(s){
  if(!s)return;
@@ -33,13 +34,13 @@ export function installDialogue(Game,{display}){
   this.log('戰前喊話',this.s.notice);
  };
  Game.prototype.ambient=function(){
-  const channel=this.oracle('driving_channel').value,driver=this.driver(),others=this.alive().filter(p=>p.id!==driver.id&&!p.asleep),s=this.s;
-  let kind=channel,speaker='',lines=[];
+  const channel=this.oracle('driving_channel').value,s=this.s,awake=this.alive().filter(p=>!p.asleep),driver=awake.find(p=>p.id===s.driver)||awake[0],lead=awake.find(p=>p.id===s.protagonistId)||driver,others=awake.filter(p=>p.id!==lead?.id);
+  let kind=channel,speaker='',lines=[],conversation={};
   if(channel==='radio'){const r=this.oracle('driving_radio').value;speaker=r.station;lines=[{speaker:r.station,text:fillWorld(r.text,s.world)}];}
-  else if(channel==='quiet'){speaker='車內';lines=[{speaker,text:this.oracle('driving_quiet').value}];}
-  else if(others.length){kind='companions';speaker='車內閒聊';const partner=this.pick(others),pair=this.oracle('driving_companions').value;lines=[{speaker:display(driver),personId:driver.id,text:pair[0]},{speaker:display(partner),personId:partner.id,text:pair[1]}];}
-  else{kind='solo';speaker='自言自語';lines=this.oracle('driving_solo').value.map(text=>({speaker:display(driver),personId:driver.id,text}));}
-  if(s.travel)s.travel.voices={kind,speaker,lines};return lines.map(l=>kind==='quiet'?l.text:`${l.speaker}：「${l.text}」`).join('\n');
+  else if(channel==='quiet'||!lead){kind='quiet';speaker='車內';lines=[{speaker,text:this.oracle('driving_quiet').value}];}
+  else if(others.length){kind='companions';speaker='車內閒聊';const partner=this.pick(others);conversation=companionExchange(this,lead,partner,display);lines=conversation.lines;}
+  else{kind='solo';speaker='自言自語';lines=this.oracle('driving_solo').value.map(text=>({speaker:display(lead),personId:lead.id,text}));}
+  if(s.travel)s.travel.voices={...conversation,kind,speaker,lines};return lines.map(l=>kind==='quiet'?l.text:`${l.speaker}：「${l.text}」`).join('\n');
  };
  Game.prototype.reviewParty=function(id){
   if(!this.s.rosterReview||this.s.party.length<=MAX_PARTY||id===this.s.protagonistId)return false;

@@ -100,7 +100,16 @@
       "20 則電台報導",
       "4 種安靜片刻"
     ],
-    "generation": "離線靜態內容搭配 D100；不呼叫 AI"
+    "generation": "離線靜態內容搭配 D100；不呼叫 AI",
+    "companion_profiles": {
+      "races": 12,
+      "professions": 20,
+      "identity_exchanges": 64,
+      "wish_options": 96,
+      "selection_table": "companion_focus",
+      "catalog": "companion-dialogue.json",
+      "hopes_saved_on_character": true
+    }
   },
   "party_limit": {
     "total": 4,

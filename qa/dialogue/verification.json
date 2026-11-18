@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local_verified",
+  "status": "published_and_readonly_verified",
   "content": {
     "history_topics": 100,
     "attitude_variants": 600,
@@ -26,5 +26,12 @@
   "limitations": [
     "Chrome phone viewports; physical device performance not measured",
     "Production save will not be loaded or advanced during verification"
+  ],
+  "production_checks": [
+    "Native deployment succeeded",
+    "Production entry loaded v=7-voices assets",
+    "十年統治 opening text visible",
+    "No browser console errors",
+    "Production save not loaded or advanced"
   ]
 }

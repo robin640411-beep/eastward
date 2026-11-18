@@ -146,7 +146,11 @@
     "tests_passed": 79
   },
   "occupation_dialogue": {
-    "status": "verified_pending_publication",
+    "status": "published_and_readonly_verified",
+    "commit_sha": "35df73cd59ed5c8547144dcf0584eda515eb0fbb",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_7a4497f7c1608191bd8bd2118b9195e9",
+    "deployment_id": "appgdep_6afd8792b684819195557e304bd166fb",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "spec": "spec/occupation-dialogue.json",
     "evidence": "qa/dialogue/verification.json",
     "topics": 100,
@@ -155,5 +159,21 @@
     "max_party": 4,
     "max_companions": 3,
     "tests_passed": 89
+  },
+  "companion_identity_dialogue": {
+    "status": "tested_pending_publication",
+    "spec": "spec/companion-dialogue.json",
+    "evidence": "qa/companions/verification.json",
+    "races": 12,
+    "professions": 20,
+    "identity_exchanges": 64,
+    "wish_options": 96,
+    "tests_passed": 95,
+    "features": [
+      "種族與職業專屬閒聊",
+      "樂園願望按角色保存並延續到重逢",
+      "已聽過的願望可在角色面板重讀",
+      "只有清醒且存活的角色參與對話"
+    ]
   }
 }

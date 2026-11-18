@@ -240,6 +240,14 @@
         "無所事事"
       ],
       "continuous_dialogue_required": false
+    },
+    "companion_conversation": {
+      "catalog": "companion-dialogue.json",
+      "race_and_profession_affect_dialogue": true,
+      "shared_destination": "樂園（末日綠洲）",
+      "personal_hopes_persist": true,
+      "awake_speakers_only": true,
+      "unknown_destination_conditions_are_not_guaranteed": true
     }
   },
   "characters": {
