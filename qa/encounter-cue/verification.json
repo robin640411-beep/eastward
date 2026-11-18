@@ -1,0 +1,21 @@
+{
+  "viewport": [
+    390,
+    844
+  ],
+  "browser": "Chrome",
+  "unit_tests_passed": 217,
+  "scenarios": {
+    "hostile_npc": "告別第一位 NPC 後見到駕駛驚嘆號，遇襲說明停留至點擊迎戰，經條紋轉場後可點敵人完成攻擊。",
+    "save_and_resume": "閱讀突襲說明時重開並繼續旅程，仍在閱讀。",
+    "vehicle": "出現追獵車說明與迎戰、逃離選項，點一次迎戰經過轉場進入車戰。",
+    "reward": "接連發現行李箱直接顯示獲得厚外套 ×1。"
+  },
+  "screenshots": [
+    "01-driver-alert.jpg",
+    "02-reading.jpg",
+    "03-transition.jpg",
+    "04-battle.jpg",
+    "sequence.jpg"
+  ]
+}

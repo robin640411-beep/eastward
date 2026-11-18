@@ -214,3 +214,12 @@
   .portrait-layout .choice-pagination button:first-child::before {content:'‹'}
   .portrait-layout .message-window:has(.choice-pagination) .message-heading {min-height:21px}
 }
+
+.portrait-layout .encounter-notice { border-left-color: #da9464 }
+.encounter-copy { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 4px 6px; }
+.encounter-copy strong { color: #efd6a6; font-size: 14px }
+.encounter-copy p { color: #e4e8d9; margin: 4px 0; line-height: 1.55; font-size: 14px }
+.encounter-copy .previous-receipt { color: #aebdaf; font-size: 12px }
+.encounter-notice .message-actions button { width: 100%; min-height: 40px }
+
+.portrait-layout.has-encounter-cue .travel-party .member:disabled { opacity: 1 }

@@ -108,4 +108,16 @@ for(const [title,minute] of [['日間',885],['夜間',1260]]){
  g.s.party.push(g.person('alien','medic'));
  states['武裝車停靠 · '+title]=g.s;
 }
+// Use actual finishEvent rolls so the normal stop -> chain -> combat path is exercised.
+const leadIn=states['十年口述 · 友善'];
+const chainCases=new Set();
+for(let seed=1;seed<15000&&chainCases.size<3;seed++){
+ const prior=structuredClone(leadIn);prior.rng=seed;
+ const probe=new Game(d,structuredClone(prior));probe.finishEvent();
+ if(probe.s.frames.at(-1)?.count!==2)continue;
+ const label=probe.s.battle?'同一停靠 · 陌生人來襲':probe.s.current?.rewardReceipt?'同一停靠 · 自動拾取':
+  probe.s.current?.event.id==='road_069'?'同一停靠 · 追獵車':null;
+ if(label&&!chainCases.has(label)){states[label]=prior;chainCases.add(label);}
+}
+if(chainCases.size!==3)throw Error('Unable to find real chained event fixtures');
 writeFileSync(new URL('../dist/qa.html',import.meta.url),`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一路向東測試情境</title><style>body{background:#14232d;color:#eee;font:18px sans-serif;padding:24px}button{display:block;margin:18px 0;padding:18px;width:100%}</style><h1>本機測試情境</h1><p>載入固定測試存檔，再按「繼續旅程」。</p><div id="cases"></div><script>const states=${JSON.stringify(states).replaceAll('<','\\u003c')};for(const [name,state] of Object.entries(states)){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{localStorage.setItem('eastward.save.v1',JSON.stringify(state));location.href='./'};document.querySelector('#cases').append(b)}</script></html>`);

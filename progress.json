@@ -431,7 +431,7 @@
   "active_presentation": {
     "mode": "classic_pixel",
     "art_source": "8f732e1",
-    "release": "26-pixel-horizons",
+    "release": "27-encounter-cue",
     "layout": "vehicle, four party slots, scene, messages, navigation",
     "screenshots": [
       "qa/pixel-horizons/alien-drive.jpg",
@@ -445,7 +445,8 @@
       "facilities": 8,
       "interiors": 8,
       "style": "原生低解析度像素圖，以色塊和明暗表現距離。"
-    }
+    },
+    "encounter_sequence": "qa/encounter-cue/verification.json"
   },
   "road_and_rewards": {
     "evidence": "qa/road-loot/verification.json",
