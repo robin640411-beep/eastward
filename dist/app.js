@@ -2,7 +2,7 @@ import {concealAttitudeLabels} from './npc-presentation.js';
 import {originPages} from './origin-runtime.js';
 import {vehicleStats,vehicleArt} from './vehicle-runtime.js';
 import {vehiclePanel,garagePanel} from './vehicle-ui.js';
-import {battleSlots,enemyTargetRegions,commandPage,BEAT_MS,IMPACT_MS} from './battle-presentation.js';
+import {battleSlots,bustRole,enemyTargetRegions,commandPage,BEAT_MS,IMPACT_MS} from './battle-presentation.js';
 import {encounterCommands} from './encounter-commands.js';
 import {automaticDecision,automaticStep,canContinueDriving,declineRest,alternateDriver,syncMessageContext,appendMessage} from './automatic-journey.js';
 import {mountMessageScroll,stopMessageScroll,resetMessageScroll} from './message-scroll.js';
@@ -15,13 +15,13 @@ import {applyBattleFrame,transitionFor} from './motion-model.js';
 import {sceneTransition,waitForBeat,reducedMotion,toggleMotion} from './cinematics.js';
 import {enemyLayout,biomeAt,BIOMES} from './journey-view-model.js';
 import {Game,ITEMS,MODS,learned,display,phase,phaseName} from './engine.js';
-const root=document.getElementById('app'),KEY='eastward.save.v1';let data,g,panel=null,timer=null,automaticTimer=null,sound=false,travelStarted=0,travelLength=12000,selectedEnemy=null,pendingCommand=null,combatMenu='root',presentation=null,busy=false,playbackController=null,playbackLabel='',playbackStep=null,playbackStarted=0;
+const root=document.getElementById('app'),KEY='eastward.save.v1';let data,g,panel=null,timer=null,automaticTimer=null,sound=false,travelStarted=0,travelLength=12000,selectedEnemy=null,pendingCommand=null,combatMenu='root',presentation=null,busy=false,playbackController=null,playbackLabel='',playbackStep=null,playbackPhase=null;
 const ui={personId:null,slot:'全部',itemId:null,shopItemId:null,watchId:null,picker:null,feedback:'',scrollCompare:false,commandPage:0,commandKey:''};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const img=(path,alt='',cls='')=>`<img src="assets/${esc(path)}" alt="${esc(alt)}" class="${cls}">`;
 const btn=(label,action,args='',cls='',disabled=false)=>`<button class="${cls}" data-action="${action}" ${action==='choicePage'?`aria-label="${esc(label)}"`:''} data-args="${esc(args)}" ${disabled?'disabled':''}>${esc(label)}</button>`;
 const nameOf=(kind,id)=>data.catalog[kind].find(x=>x.id===id)?.name||id;
-const portrait=p=>data.assets.portraits[p.race];const sprite=p=>data.assets.characters[p.race+'_'+p.profession];
+const portrait=p=>data.assets.portraits[p.race];
 const bar=(v,max,type='')=>`<div class="bar ${type}"><i style="width:${Math.max(0,Math.min(100,v/max*100))}%"></i></div>`;
 function save(){if(g?.s){try{localStorage.setItem(KEY,JSON.stringify(g.s))}catch{g.s.notice='瀏覽器儲存空間不足，請匯出存檔。'}}}
 function audio(){if(!sound)return;try{const ctx=new AudioContext(),o=ctx.createOscillator(),a=ctx.createGain();o.type='triangle';o.frequency.value=190;a.gain.setValueAtTime(.03,ctx.currentTime);a.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.1);o.connect(a);a.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.12);o.onended=()=>ctx.close()}catch{}}
@@ -31,16 +31,11 @@ function worldPicture(id,cls=''){const a=data.assets.worlds[id];return `<svg cla
 function intro(){let saved=null;try{saved=JSON.parse(localStorage.getItem(KEY))}catch{}return `<div class="intro"><div class="eyebrow">A ROAD THROUGH THE AFTERMATH</div><h1>一路向東</h1><p>外星統治地球，已經十年。<br>你還有一輛車，和一個向東的理由。</p><div class="intro-scene">${worldPicture('city')}${img(data.assets.vehicles.sedan.image,'往東行駛的車','intro-car')}</div><p class="random-traveller">每段旅程，都由一位不同的旅人開始。<br>帶著他的身分、天賦與缺點，一路向東。</p><div class="actions">${btn('開始新的旅程','start','','primary')}${saved?btn(`繼續旅程 · 第 ${Math.floor(saved.minutes/1440)+1} 天`,'load'):''}</div><div class="footer-note">單人遊戲 · 自動保存在此瀏覽器<br><a href="art.html" target="_blank">像素圖鑑</a></div></div>`;}
 function partyStrip(battle=false){const s=presentation||g.s,actor=battle&&!presentation?g.commandActor():null,allyTarget=pendingCommand?.allies,clickable=allyTarget||!battle,people=battleSlots(s.party);
  return `<div class="party-strip ${battle?'battle-party':'travel-party'}" aria-label="${battle?'我方隊員':'同行者狀態'}">${people.map((p,index)=>{if(!p)return `<div class="battle-slot empty-slot" data-slot="${index}" aria-label="空隊伍欄位 ${index+1}"><div class="member empty-member"></div></div>`;
- const order=s.battle?.orders?.[p.id],orderName={attack:'攻擊',defend:'防禦',medicine:'藥品',escape:'逃跑',psi:'超能力'}[order?.type],rising=battle&&presentation&&playbackStep?.side==='party'&&playbackStep.actor===p.id&&['attack','psi'].includes(playbackStep.kind);
- const card=`<${clickable?'button':'div'} data-person="${p.id}" aria-label="${esc(display(p))}，生命 ${p.hp}/${p.maxHp}，體力 ${p.st}/${p.maxSt}，ESP ${p.esp}/${p.maxEsp}" title="${esc(display(p))}" class="member ${p.id===actor?.id?'active':''} ${p.hp<=0?'fallen':''} ${allyTarget?'ally-target':''}" ${clickable?`data-action="${allyTarget?'targetAlly':'openPerson'}" data-args="${p.id}" ${allyTarget&&p.hp<=0?'disabled':''}`:''}><div class="member-identity">${img(portrait(p),'')}<span><strong>${esc(p.name)}</strong><small>${p.hp<=0?'倒下':p.asleep?'睡眠中':p.id===s.driver&&!battle?(s.mode==='driving'?'駕駛中':'駕駛')+' · Lv. '+p.level:'Lv. '+p.level+' · '+nameOf('professions',p.profession)}</small></span></div><div class="member-vitals">${[['生命',p.hp,p.maxHp,'hp'],['體力',p.st,p.maxSt,'st'],['ESP',p.esp,p.maxEsp,'esp']].map(([name,v,max,k])=>`<div><span>${name}<b>${v}<small>/${max}</small></b></span>${bar(v,max,k)}</div>`).join('')}</div>${battle?`<span class="order-state">${p.hp<=0?'倒下':p.asleep?'睡眠':rising?'出手中':orderName?'✓ '+orderName:p.id===actor?.id?'▸ 指令':'等待'}</span>`:''}</${clickable?'button':'div'}>`;
- return `<div class="battle-slot ${rising?'acting':''}" data-slot="${index}">${card}</div>`;
+ const order=s.battle?.orders?.[p.id],orderName={attack:'攻擊',defend:'防禦',medicine:'藥品',escape:'逃跑',psi:'超能力'}[order?.type],pose=battle&&presentation?bustRole(playbackStep,p.id):null;
+ const poseText=pose==='attack'?'出手中':pose?(playbackPhase==='windup'?'迎擊':{hit:'受擊',evade:'閃避',guard:'擋下'}[pose]):'';
+ const card=`<${clickable?'button':'div'} data-person="${p.id}" aria-label="${esc(display(p))}，生命 ${p.hp}/${p.maxHp}，體力 ${p.st}/${p.maxSt}，ESP ${p.esp}/${p.maxEsp}" title="${esc(display(p))}" class="member ${p.id===actor?.id?'active':''} ${p.hp<=0?'fallen':''} ${allyTarget?'ally-target':''}" ${clickable?`data-action="${allyTarget?'targetAlly':'openPerson'}" data-args="${p.id}" ${allyTarget&&p.hp<=0?'disabled':''}`:''}><div class="member-identity">${img(portrait(p),'')}<span><strong>${esc(p.name)}</strong><small>${p.hp<=0?'倒下':p.asleep?'睡眠中':p.id===s.driver&&!battle?(s.mode==='driving'?'駕駛中':'駕駛')+' · Lv. '+p.level:'Lv. '+p.level+' · '+nameOf('professions',p.profession)}</small></span></div><div class="member-vitals">${[['生命',p.hp,p.maxHp,'hp'],['體力',p.st,p.maxSt,'st'],['ESP',p.esp,p.maxEsp,'esp']].map(([name,v,max,k])=>`<div><span>${name}<b>${v}<small>/${max}</small></b></span>${bar(v,max,k)}</div>`).join('')}</div>${battle?`<span class="order-state">${poseText||(p.hp<=0?'倒下':p.asleep?'睡眠':orderName?'✓ '+orderName:p.id===actor?.id?'▸ 指令':'等待')}</span>`:''}</${clickable?'button':'div'}>`;
+ return `<div class="battle-slot ${pose==='attack'?'acting':pose?'targeted':''}" data-slot="${index}" ${pose?`data-pose="${pose}" data-phase="${playbackPhase}"`:''}>${card}</div>`;
  }).join('')}</div>`;
-}
-function battleActor(s){
- const index=s.party.findIndex(p=>p.id===playbackStep?.actor);
- if(!s.battle||!presentation||playbackStep?.side!=='party'||!['attack','psi'].includes(playbackStep.kind)||index<0)return '';
- const actor=s.party[index];
- return `<div class="stage-actor" style="--slot:${index}" aria-label="${esc(display(actor))}正在出手"><img src="assets/${sprite(actor)}" alt="" class="actor-rise" style="--beat-ms:${BEAT_MS}ms;animation-delay:-${Math.max(0,performance.now()-playbackStarted)}ms"></div>`;
 }
 function hud(){
  const s=presentation||g.s,v=vehicleStats(data.assets,s.vehicle),fuel=s.resources.fuel,reserve=s.resources.fuelReserve||0;
@@ -49,7 +44,7 @@ function hud(){
 }
 function routeHeader(){const s=presentation||g.s,km=remainingKm(s.progress),destination=destinationAt(s);return `<div class="route-header" aria-label="旅程位置"><strong id="journey-place">${esc(biomeAt(s.progress,s.seed,s.route).name)}</strong><div class="destination-readout"><span>距離 ${esc(destination.name)}</span><span>還剩 <b id="journey-distance">${km.toLocaleString('en-US')}</b> 公里</span></div><div class="route-track" role="img" aria-label="距離樂園還剩 ${km} 公里"><i id="journey-progress" style="width:${100-km/10}%"></i></div></div>`;}
 function enemyTargets(){const s=presentation||g.s;if(!s.battle)return '';const enemies=s.battle.enemies,regions=enemyTargetRegions(enemies,enemyLayout(enemies.length,enemies));return enemies.map((e,i)=>{const r=regions[i];return `<button class="world-target ${e.hp<=0?'defeated':''} ${selectedEnemy===e.id?'selected':''} ${pendingCommand&&!pendingCommand.allies?'await-target':''}" style="left:${r.left/384*100}%;width:${r.width/384*100}%;--caption-x:${r.caption/ r.width*100}%" data-enemy-id="${e.id}" ${e.hp<=0?'disabled aria-hidden="true"':''} data-action="targetEnemy" data-args="${e.id}" aria-label="${pendingCommand&&!pendingCommand.allies?'對':'鎖定'}${esc(e.name)}" aria-pressed="${selectedEnemy===e.id}"><span class="enemy-caption"><span>${esc(e.name)}</span><small>HP ${e.hp}/${e.maxHp}</small>${bar(e.hp,e.maxHp,'hp')}</span></button>`;}).join('');}
-function scene(){const s=presentation||g.s,title=s.battle?(s.battle.finalBoss?'樂園前的決戰':s.battle.mode==='vehicle'?'公路追逐':'遭遇戰')+' · '+s.battle.round+' 回合':s.mode==='driving'?'向東行駛':s.current?.inside||s.frames?.at(-1)?.kind==='building'?(s.current?.place?.name||'建築內部'):(s.current?.place?.name||'公路旁');return `<section class="scene world-stage ${s.mode==='driving'?'driving':''} ${s.battle?'battle-stage':''}"><canvas id="world-canvas" width="384" height="240" role="img" aria-label="公路遊戲場景"></canvas><div class="scene-badge">${esc(title)}</div><span class="compass">${s.battle?'VS':'E →'}</span><div class="world-targets">${enemyTargets()}</div>${battleActor(s)}</section>`}
+function scene(){const s=presentation||g.s,title=s.battle?(s.battle.finalBoss?'樂園前的決戰':s.battle.mode==='vehicle'?'公路追逐':'遭遇戰')+' · '+s.battle.round+' 回合':s.mode==='driving'?'向東行駛':s.current?.inside||s.frames?.at(-1)?.kind==='building'?(s.current?.place?.name||'建築內部'):(s.current?.place?.name||'公路旁');return `<section class="scene world-stage ${s.mode==='driving'?'driving':''} ${s.battle?'battle-stage':''}"><canvas id="world-canvas" width="384" height="240" role="img" aria-label="公路遊戲場景"></canvas><div class="scene-badge">${esc(title)}</div><span class="compass">${s.battle?'VS':'E →'}</span><div class="world-targets">${enemyTargets()}</div></section>`}
 
 function messageWindow(){const s=presentation||g.s,decision=presentation?'wait':automaticDecision(g);let prompt='',actions='';
  if(decision==='rest'){const p=g.driver(),other=alternateDriver(g);prompt=`${display(p)}的體力只剩 ${p.st}。${canContinueDriving(g)?'要停車休息嗎？':'已經無法安全開車，需要休息或換人接手。'}`;actions=btn('停車休息','restBegin','','primary')+btn('再開一段','keepDriving','','',!canContinueDriving(g))+(other?btn(other.name+'接手','restSwap'): '');}
@@ -109,6 +104,24 @@ function restoreDialog(previous,scroll){const modal=root.querySelector('.panel-b
 }
 root.addEventListener('keydown',e=>{const modal=root.querySelector('[role="dialog"]');if(!modal)return;if(e.key==='Escape'){e.preventDefault();panel=null;ui.picker=null;render();return;}if(e.key==='Tab'){const focus=[...modal.querySelectorAll('button:not(:disabled),[tabindex="0"],summary')];if(!focus.length)return;const first=focus[0],last=focus.at(-1);if(e.shiftKey&&(document.activeElement===first||!focus.includes(document.activeElement))){e.preventDefault();last.focus();}else if(!e.shiftKey&&(document.activeElement===last||!focus.includes(document.activeElement))){e.preventDefault();first.focus();}}});
 function resetVisuals(){g.visualSteps=[];g.visualStart=null;}
+// During a beat the canvas and the skip button stay mounted through contact.
+function refreshBattleBeat(phase){
+ playbackPhase=phase;
+ root.querySelector('.battle-party').outerHTML=partyStrip(true);
+ const line=root.querySelector('.message-line');
+ line.querySelector('strong').textContent=playbackStep.visual?.name||'戰況';
+ line.querySelector('p').textContent=playbackLabel;
+ const canvas=root.querySelector('#world-canvas');
+ if(phase==='windup'){
+  const targets=presentation.party.filter(p=>bustRole(playbackStep,p.id));
+  const subjects=targets.map(p=>display(p)).join('、');
+  canvas.setAttribute('aria-label',subjects?(playbackStep.side==='party'?subjects+'正在出手':playbackStep.name+'攻向'+subjects):playbackLabel);
+ }else{
+  root.querySelector('.world-targets').innerHTML=enemyTargets();
+  root.querySelectorAll('.world-target').forEach(button=>button.disabled=true);
+  if(playbackStep.effects.some(f=>f.side==='vehicle'))root.querySelector('.vehicle-hud').outerHTML=hud();
+ }
+}
 async function presentChange(before,effectType){
  const steps=g.visualSteps||[],start=g.visualStart,transition=transitionFor(before,g.s),visualBefore=before?captureVisual(before):null;
  resetVisuals();save();
@@ -120,15 +133,18 @@ async function presentChange(before,effectType){
    await sceneTransition(transition,transition==='battle'?'遭遇戰':'走進建築',()=>render());
    for(const step of steps){
     if(playbackController.signal.aborted)break;
-    playbackStep=step;playbackStarted=performance.now();playbackLabel=step.name+' · '+(step.kind==='stun'?'無法行動':step.visual?.name||'行動');
-    render();playBattleBeat(step);
-    await waitForBeat(IMPACT_MS,playbackController.signal);if(playbackController.signal.aborted)break;
-    applyBattleFrame(presentation,step.after);playbackLabel=step.name+'：'+step.label;render();
-    for(const hit of step.effects.filter(e=>e.side==='party')){const el=root.querySelector(`[data-person="${hit.id}"]`);el?.classList.add(hit.amount<0?'was-hit':'was-healed');if(el){const amount=document.createElement('span');amount.className='damage-number'+(hit.amount>0?' heal':'');amount.textContent=(hit.amount>0?'+':'')+hit.amount;el.append(amount);}}
-    await waitForBeat(BEAT_MS-IMPACT_MS,playbackController.signal);
+    playbackStep=step;playbackLabel=step.name+' · '+(step.kind==='stun'?'無法行動':step.visual?.name||'行動');
+    const started=playBattleBeat(step);
+    refreshBattleBeat('windup');
+    await waitForBeat(Math.max(0,started+IMPACT_MS-performance.now()),playbackController.signal);
+    if(playbackController.signal.aborted)break;
+    applyBattleFrame(presentation,step.after);
+    playbackLabel=step.name+'：'+step.label;
+    refreshBattleBeat('contact');
+    await waitForBeat(Math.max(0,started+BEAT_MS-performance.now()),playbackController.signal);
    }
   }else await sceneTransition(transition,transition==='battle'?'遭遇戰':transition==='leave'?'回到公路':g.s.current?.event.title||'走進建築',()=>render());
- }finally{presentation=null;playbackStep=null;playbackController=null;clearBattleBeat();busy=false;render();}
+ }finally{presentation=null;playbackStep=null;playbackPhase=null;playbackController=null;clearBattleBeat();busy=false;render();}
 }
 function updateBattleControls(){
  stopMessageScroll();root.querySelector('.message-window').outerHTML=messageWindow();root.querySelector('.world-targets').innerHTML=enemyTargets();root.querySelector('.battle-party').outerHTML=partyStrip(true);mountMessageScroll(root.querySelector('.message-scroll'));

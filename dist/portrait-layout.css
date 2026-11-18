@@ -168,17 +168,22 @@
 }
 .portrait-layout .nav > button { min-height: 44px; padding: 3px; gap: 3px }
 .portrait-layout .world-targets { inset: var(--viewport-top,0%) 0 auto; height: var(--viewport-height,100%) }
-.portrait-layout .stage-actor {
-  position: absolute;
-  left: calc(var(--slot) * 25%);
-  bottom: 0;
-  width: 25%;
-  height: 72px;
-  overflow: hidden;
-  z-index: 2;
-  pointer-events: none;
+.portrait-layout .battle-slot.targeted .member {
+  border-color: #daad76;
+  box-shadow: inset 0 0 0 1px #80654d;
 }
-.portrait-layout .actor-rise { width: 76px; height: 118px; object-fit: contain }
+.portrait-layout .battle-slot[data-pose="hit"][data-phase="contact"] .member {
+  border-color: #f0aa90;
+  box-shadow: inset 0 0 0 1px #a65e51;
+}
+.portrait-layout .battle-slot.targeted .order-state,
+.portrait-layout .battle-slot.acting .order-state {
+  top: 2px;
+  right: 3px;
+  font-size: 9px;
+  line-height: 1.15;
+  color: #ffe0b0;
+}
 @media (max-height:690px) {
   .portrait-layout .message-heading > small { display: none }
   .portrait-layout .message-line { margin-bottom: 4px }

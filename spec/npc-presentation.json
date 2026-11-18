@@ -1,19 +1,19 @@
 {
-  "version": 1,
+  "version": 2,
   "date": "2026-11-19",
   "request": "NPC 與怪物戰鬥畫風一致，以表情動作描述態度，不顯示態度分類",
   "combat_art": {
-    "style_reference": "dist/assets/painted/enemies-atlas.png",
+    "style_reference": "dist/assets/characters",
     "race_count": 12,
+    "profession_count": 20,
     "weapon_poses": [
+      "none",
       "club",
       "pistol"
     ],
-    "sprite_count": 24,
-    "manifest": "npcBattleAtlas",
-    "selection": "種族與實際裝備武器",
-    "rendering": "與怪物共用腳底線，保留完整身體並等比例縮放",
-    "profession": "職業保留原有數值與文字，不另繪每個職業"
+    "resolver": "dist/combat-art.js",
+    "selection": "敵對 NPC 與我方依種族、職業和手持武器使用同一張戰鬥圖。",
+    "rendering": "NPC 在敵方隊形中全身呈現，我方從同一張圖裁到腰間。敵群和魔王使用相同的深色輪廓與有限色階。"
   },
   "demeanor": {
     "lines": {

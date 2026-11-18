@@ -57,12 +57,8 @@ body{background:#0b121c}button{transition:background .15s,border-color .15s}butt
 .in-combat .battle-party .order-state{font-size:8px;line-height:1.2;padding-top:4px;margin:0;white-space:nowrap}
 .in-combat .empty-slot .empty-member{background:#16232e;box-shadow:inset 0 0 0 2px #1c2b37;border-color:#394b58;opacity:.7}
 .in-combat .battle-slot.acting .member{border-color:#e9cb8b;box-shadow:inset 0 0 0 1px #ab9059;background:#344744}
-.actor-window{position:absolute;bottom:calc(100% - 1px);left:0;right:0;height:57px;overflow:hidden;z-index:4;pointer-events:none}
-.actor-rise{position:absolute;top:0;left:50%;width:76px;height:114px;max-width:none;image-rendering:pixelated;animation:slotRise var(--beat-ms,980ms) both;filter:drop-shadow(0 2px 1px #101d2b)}
-@keyframes slotRise{0%{transform:translate(-50%,60px)}24%,68%{transform:translate(-50%,0)}100%{transform:translate(-50%,60px)}}
-[data-motion="soft"] .actor-rise{animation-name:slotRiseSoft}@keyframes slotRiseSoft{0%,100%{opacity:0;transform:translate(-50%,7px)}20%,75%{opacity:1;transform:translate(-50%,0)}}
 .world-target.defeated{visibility:hidden;pointer-events:none}.is-playing .world-target.defeated{visibility:hidden}
-@media(max-width:370px){.in-combat .battle-party .member{padding:6px 4px;height:130px}.in-combat .battle-party .member-identity strong{font-size:9px}.message-commands button{font-size:10px;padding:4px}.actor-rise{width:70px;height:105px}.actor-window{height:53px}}
+@media(max-width:370px){.in-combat .battle-party .member{padding:6px 4px;height:130px}.in-combat .battle-party .member-identity strong{font-size:9px}.message-commands button{font-size:10px;padding:4px}}
 @media(max-height:700px){.message-window{height:178px;min-height:178px;max-height:178px}.game-shell>.brand{min-height:26px;padding-top:3px;padding-bottom:2px}.game-shell>.route-header{min-height:37px}.game-shell .nav>button{min-height:42px}.in-combat .battle-party .member{height:112px;gap:2px}.in-combat .battle-party .member-identity{min-height:29px}.in-combat .battle-party .member-vitals{gap:2px}}
 .in-combat .battle-party .member .member-identity,.in-combat .battle-party .member .member-vitals{flex:0 0 auto}.in-combat .battle-party .member .order-state{flex-basis:auto}.in-combat .battle-party .member-vitals>div>span{flex-direction:row}
 

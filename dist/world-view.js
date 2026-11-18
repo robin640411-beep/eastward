@@ -1,5 +1,6 @@
 import {distantPanorama,drawJourneySky,drawDistanceMist} from './atmosphere.js';
-import {npcBattleArt} from './npc-presentation.js';
+import {npcCombatArt,enemyCombatArt} from './combat-art.js';
+import {BEAT_MS,IMPACT_MS,bustRole,bustPose,partyAnchor} from './battle-presentation.js';
 import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
 import {weatherLayers} from './weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from './weather-art.js';
@@ -29,8 +30,16 @@ const stageResize=globalThis.ResizeObserver?new ResizeObserver(fitPixelStage):nu
 if(!stageResize)globalThis.addEventListener?.('resize',fitPixelStage);
 function img(path){if(!path)return null;if(!images.has(path)){const i=new Image();i.onload=()=>imageRevision++;i.src='assets/'+path;images.set(path,i)}const i=images.get(path);return i.complete&&i.naturalWidth?i:null}
 function paint(path,x,y,w,h){const i=img(path);if(i)ctx.drawImage(i,Math.round(x),Math.round(y),w,h)}
-function paintEnemy(key,x,y,w,h){const a=assets.enemyAtlas?.[key],p=a&&img(a.image);if(p){const [, ,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(p,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else paint(assets.enemies[key]?.image,x,y,w,h);}
-function paintNpcBattle(p,x,y,w,h){const a=npcBattleArt(assets,p),picture=a&&img(a.image);if(picture){const [,,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(picture,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else if(!a)paintEnemy('raider',x,y,w,h);}
+// These sprites are baked on their native pixel grid and loaded only when encountered.
+function combatPicture(art){return art?img(art.image.replace(/^assets\//,'')):null;}
+function paintCombatant(art,x,y,w,h){
+ const picture=combatPicture(art);
+ if(!picture)return;
+ const scale=Math.min(w/art.width,h/art.height);
+ const width=Math.round(art.width*scale),height=Math.round(art.height*scale);
+ ctx.drawImage(picture,Math.round(x+(w-width)/2),Math.round(y+h-height),width,height);
+}
+function paintEnemy(key,x,y,w,h){paintCombatant(enemyCombatArt({key}),x,y,w,h);}
 function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
 function poly(points,c){ctx.fillStyle=c;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()}
 function text(s,x,y,col='#e9d6a3',size=8){ctx.font=`bold ${size}px monospace`;ctx.textAlign='left';ctx.fillStyle='#13242c';ctx.fillText(s,x+1,y+1);ctx.fillStyle=col;ctx.fillText(s,x,y)}
@@ -119,18 +128,95 @@ function battleBackground(){const indoors=state.current?.inside||state.frames?.a
  }finally{ctx=main;}}
  ctx.drawImage(arenaCanvas,0,-stageTop);
 }
-function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
- if(!vehicleFight)battleBackground();
- enemies.forEach((e,i)=>{const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0),attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack',impact=age>=.36&&age<.82;
-  const recoil=struck&&impact&&!reduced?Math.sin((age-.36)*42)*5*(1-(age-.36)/.46):0,lunge=attacking&&age<.4&&!reduced?Math.sin(age/.4*Math.PI)*12:0;
-  const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
-  ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.9?Math.max(0,1-(age-.36)/.54):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
-  rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paintNpcBattle(e.npc,l.cx-l.w/2-7,y,l.w+14,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
-  ctx.restore();
+const carAnchor={cx:70,cy:192};
+let formation;
+function battleFormation(b){
+ if(formation?.enemies===b.enemies&&formation.mode===b.mode)return formation;
+ const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies);
+ const art=enemies.map(enemyCombatArt);
+ // Match the centre of mass inside the fitted sprite, including short quadrupeds
+ // and the low profile of a vehicle. Formation lanes remain stable for aiming.
+ const points=layout.map((lane,i)=>{
+  if(b.mode==='vehicle')return {...lane,cy:112+(enemies.length>1?106:175)*.23};
+  const sprite=art[i],scale=Math.min((lane.w+14)/sprite.width,lane.h/sprite.height);
+  const lowBody=['hound','crawler','brute','turret'].includes(sprite.key);
+  return {...lane,cy:Math.round(lane.cy+lane.h/2-sprite.height*scale*(lowBody ? .40 : .51))};
  });
+ formation={enemies,mode:b.mode,layout,art,points};
+ return formation;
+}
+function paintBattleBusts(age,layout,bottom){
+ const foeId=beat.side==='party'?beat.target:beat.actor;
+ const foe=layout[state.battle.enemies.findIndex(e=>e.id===foeId)];
+ for(const p of state.party){
+  const role=bustRole(beat,p.id);
+  if(!role)continue;
+  const anchor=partyAnchor(state.party,p.id,bottom-29);
+  if(!anchor)continue;
+  const direction=(foe?.cx??192)>=anchor.cx?1:-1;
+  const pose=bustPose(role,age*1000,direction,reduced);
+  if(!pose||pose.height<1)continue;
+  const picture=combatPicture(npcCombatArt(p));
+  if(!picture)continue;
+  const width=88,scale=width/picture.width;
+  const top=bottom-pose.height+pose.y,left=anchor.cx-width/2+pose.x;
+  // Draw down to the waist only. Integer scan bands keep the recoil on the pixel grid.
+  const waist=Math.round(picture.height*.61);
+  ctx.save();ctx.globalAlpha=pose.alpha;
+  // The drawn weapon points left. Face the opponent without changing lanes.
+  if(direction>0){ctx.translate(left*2+width,0);ctx.scale(-1,1);}
+  if(!pose.lean){
+   ctx.drawImage(picture,0,0,picture.width,waist,left,top,width,Math.round(waist*scale));
+  }else{
+   for(let row=0;row<waist;row+=4){
+    const h=Math.min(4,waist-row),dy=Math.round(row*scale),end=Math.round((row+h)*scale);
+    const shift=Math.round(pose.lean*(1-row/waist))*(direction>0?-1:1);
+    ctx.drawImage(picture,0,row,picture.width,h,left+shift,top+dy,width,end-dy);
+   }
+  }
+  ctx.restore();
+ }
+}
+function battle(){
+ const b=state.battle;if(!b)return;
+ const {enemies,layout,art}=battleFormation(b),vehicleFight=b.mode==='vehicle';
+ const age=(performance.now()-beatAt)/1000,since=age*1000-IMPACT_MS;
+ if(!vehicleFight)battleBackground();
+ for(const [i,e] of enemies.entries()){
+  const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
+  const knockout=e.hp<=0;
+  if(knockout&&(!struck||since>=420))continue;
+  const attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack';
+  const victim=vehicleFight?carAnchor:partyAnchor(state.party,beat?.target);
+  const direction=(victim?.cx??l.cx)>=l.cx?1:-1;
+  const push=attacking&&!reduced?clamp01((age-.22)/.12)*(1-clamp01((age-.40)/.18)):0;
+  const recoil=struck&&since>=0&&!reduced?1-clamp01((since-60)/160):0;
+  const actor=partyAnchor(state.party,beat?.actor);
+  const away=l.cx>=(actor?.cx??l.cx)?1:-1;
+  const dx=Math.round(push*6*direction+away*recoil*5);
+  const y=l.cy-l.h/2+Math.round(push*9-recoil*3+(reduced?0:Math.sin(clock*1.8+i)));
+  ctx.save();
+  ctx.globalAlpha=knockout?1-clamp01((since-110)/310):1;
+  rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
+  if(vehicleFight){
+   const width=enemies.length>1?106:175;
+   vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2+dx,112+Math.round(push*6),width,true);
+  }else{
+   paintCombatant(art[i],l.cx-l.w/2-7+dx,y,l.w+14,l.h);
+  }
+  ctx.restore();
+ }
  if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
- drawBattleEffects(ctx,{beat,age,enemies,layout,party:state.party,soft:reduced});
+}
+function battleForeground(){
+ if(!beat)return;
+ const age=(performance.now()-beatAt)/1000;
+ if(age<0||age>BEAT_MS/1000)return;
+ const b=state.battle,{enemies,layout,points}=battleFormation(b);
+ const bottom=stageHeight-stageTop;
+ paintBattleBusts(age,layout,bottom);
+ const fromCar=b.mode==='vehicle'&&(beat.side==='enemies'||beat.actor===state.driver&&beat.kind==='attack');
+ drawBattleEffects(ctx,{beat,age,enemies,layout:points,party:state.party,partyY:bottom-29,vehicleTarget:fromCar?carAnchor:null,soft:reduced});
 }
 function encounterArt(current){let a=encounters[current?.event?.id];if(current?.inside&&a&&!a.interior){const inner={gas:'019',garage:'020',clinic:'021',motel:'022',pharmacy:'017',market:'016',stall:'016',cars:'025',warehouse:'001'}[a.kind];if(inner)a=encounters['building_'+inner];}return a;}
 function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const height=203*facade.rect[3]/facade.rect[2];ctx.drawImage(sheet,...facade.rect,x,196-height,203,height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
@@ -158,13 +244,14 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(outdoors)drawWeatherSky(ctx,{seed:stormKey,seconds:clock-stormStarted,storm:stormStrength,soft:reduced});
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
-  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.image)paint(e.image,pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
+  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.bossId)paintCombatant(enemyCombatArt(e),pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
  }
  if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}}
  if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,-stageTop,W,stageHeight,'#07152c');ctx.globalAlpha=1;
  if(light.light<.68&&!interior){const x=(viewCarX+184)*viewZoom,y=185*viewZoom+220*(1-viewZoom);ctx.globalAlpha=(.68-light.light)*.55;poly([[x,y],[W,y-29],[W,y+18]],'#ffdf99');ctx.globalAlpha=1;rect(x-3,y-2,4,3,'#f3d894');}}
  if(outdoors)drawWeatherParticles(ctx,weather);
+ if(s.battle)battleForeground();
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));
  ctx.globalAlpha=.018;for(let y=-stageTop;y<stageHeight-stageTop;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,view,driving);
 }
@@ -174,12 +261,16 @@ export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performan
  fitPixelStage();
  const next=s.current?.instance+':'+s.mode+':'+!!s.current?.inside;if(next!==key){eventAt=clock;key=next}
  // Warm actual approaching art so it is already on screen before stopping.
- const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image|| (e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
- if(current?.npc)img(npcBattleArt(assets,current.npc)?.image);
- for(const e of s.battle?.enemies||[])if(e.npc)img(npcBattleArt(assets,e.npc)?.image);else if(e.image)img(e.image);
+ const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));
+ if(current?.npc)combatPicture(npcCombatArt(current.npc));
+ const upcoming=s.battle||s.travel?.preview?.battle;
+ if(upcoming){
+  if(upcoming.mode!=='vehicle')for(const e of upcoming.enemies)combatPicture(enemyCombatArt(e));
+  for(const p of s.party)combatPicture(npcCombatArt(p));
+ }
  canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，隊伍在上方，戰鬥指令在下方訊息窗':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
 export function captureVisual(s){return {party:Object.fromEntries(s.party.map(p=>[p.id,p.hp])),hp:s.party.reduce((n,p)=>n+p.hp,0),vehicle:s.vehicle.hp,enemies:s.battle?.enemies.reduce((n,e)=>n+e.hp,0)||0,fuel:s.resources.fuel,scrap:s.resources.scrap,medicine:s.resources.medicine,round:s.battle?.round,mode:s.mode}}
 export function animateResult(before,s,type){const after=captureVisual(s);for(const p of s.party){const el=document.querySelector(`[data-person="${p.id}"]`),diff=p.hp-(before.party?.[p.id]??p.hp);if(el&&diff){el.classList.add(diff<0?'was-hit':'was-healed');}}feedback=[];for(const [key,label,x,col] of [['hp','HP',45,'#e58d79'],['vehicle','車況',48,'#e58d79'],['enemies','',174,'#f0d38e'],['fuel','汽油',176,'#a8d0b8'],['scrap','廢料',176,'#d9bc79'],['medicine','藥品',176,'#a8d0b8']]){const diff=after[key]-before[key];if(diff)feedback.push({text:`${label} ${diff>0?'+':''}${diff}`,x,color:col})}if(feedback.length||before.round!==after.round||type==='psi'){actionAt=clock;actionKind=after.enemies<before.enemies?(type==='psi'?'psi':'attack'):'none'}}
 
-export function playBattleBeat(step){beat=step;beatAt=performance.now();feedback=[];actionAt=-10;}
+export function playBattleBeat(step){beat=step;beatAt=performance.now();feedback=[];actionAt=-10;return beatAt;}
 export function clearBattleBeat(){beat=null;}

@@ -1,0 +1,8157 @@
+{
+  "version": 1,
+  "source": "Native authored integer pixel clusters; no HD atlas",
+  "assets": {
+    "npcs/human_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1502
+    },
+    "npcs/human_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1688
+    },
+    "npcs/human_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1621
+    },
+    "npcs/human_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1486
+    },
+    "npcs/human_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1683
+    },
+    "npcs/human_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1581
+    },
+    "npcs/human_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1586
+    },
+    "npcs/human_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1785
+    },
+    "npcs/human_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1683
+    },
+    "npcs/human_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1336
+    },
+    "npcs/human_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1543
+    },
+    "npcs/human_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1461
+    },
+    "npcs/human_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1506
+    },
+    "npcs/human_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1695
+    },
+    "npcs/human_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1612
+    },
+    "npcs/human_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1494
+    },
+    "npcs/human_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1687
+    },
+    "npcs/human_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1582
+    },
+    "npcs/human_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1694
+    },
+    "npcs/human_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1834
+    },
+    "npcs/human_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1767
+    },
+    "npcs/human_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1437
+    },
+    "npcs/human_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1624
+    },
+    "npcs/human_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1565
+    },
+    "npcs/human_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1617
+    },
+    "npcs/human_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1812
+    },
+    "npcs/human_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1735
+    },
+    "npcs/human_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1489
+    },
+    "npcs/human_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1700
+    },
+    "npcs/human_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1606
+    },
+    "npcs/human_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1451
+    },
+    "npcs/human_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1643
+    },
+    "npcs/human_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/human_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1544
+    },
+    "npcs/human_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1763
+    },
+    "npcs/human_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1658
+    },
+    "npcs/human_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1703
+    },
+    "npcs/human_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1884
+    },
+    "npcs/human_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1815
+    },
+    "npcs/human_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1591
+    },
+    "npcs/human_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1790
+    },
+    "npcs/human_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1695
+    },
+    "npcs/human_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1593
+    },
+    "npcs/human_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1764
+    },
+    "npcs/human_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1668
+    },
+    "npcs/human_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1536
+    },
+    "npcs/human_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1741
+    },
+    "npcs/human_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1644
+    },
+    "npcs/human_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1310
+    },
+    "npcs/human_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1510
+    },
+    "npcs/human_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1456
+    },
+    "npcs/human_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1581
+    },
+    "npcs/human_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1788
+    },
+    "npcs/human_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1689
+    },
+    "npcs/human_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1581
+    },
+    "npcs/human_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1785
+    },
+    "npcs/human_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1678
+    },
+    "npcs/human_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1613
+    },
+    "npcs/human_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1811
+    },
+    "npcs/human_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1746
+    },
+    "npcs/alien_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1442
+    },
+    "npcs/alien_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1633
+    },
+    "npcs/alien_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1569
+    },
+    "npcs/alien_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1427
+    },
+    "npcs/alien_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1625
+    },
+    "npcs/alien_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1522
+    },
+    "npcs/alien_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1541
+    },
+    "npcs/alien_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1733
+    },
+    "npcs/alien_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1637
+    },
+    "npcs/alien_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1292
+    },
+    "npcs/alien_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1508
+    },
+    "npcs/alien_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1402
+    },
+    "npcs/alien_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1445
+    },
+    "npcs/alien_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1627
+    },
+    "npcs/alien_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1555
+    },
+    "npcs/alien_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1467
+    },
+    "npcs/alien_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1660
+    },
+    "npcs/alien_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1569
+    },
+    "npcs/alien_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1624
+    },
+    "npcs/alien_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1771
+    },
+    "npcs/alien_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1698
+    },
+    "npcs/alien_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1375
+    },
+    "npcs/alien_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1582
+    },
+    "npcs/alien_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1513
+    },
+    "npcs/alien_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1566
+    },
+    "npcs/alien_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1756
+    },
+    "npcs/alien_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1685
+    },
+    "npcs/alien_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1442
+    },
+    "npcs/alien_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1650
+    },
+    "npcs/alien_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1566
+    },
+    "npcs/alien_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1369
+    },
+    "npcs/alien_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1582
+    },
+    "npcs/alien_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1494
+    },
+    "npcs/alien_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1496
+    },
+    "npcs/alien_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1717
+    },
+    "npcs/alien_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1623
+    },
+    "npcs/alien_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1655
+    },
+    "npcs/alien_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1842
+    },
+    "npcs/alien_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1768
+    },
+    "npcs/alien_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1515
+    },
+    "npcs/alien_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1721
+    },
+    "npcs/alien_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1627
+    },
+    "npcs/alien_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1523
+    },
+    "npcs/alien_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1696
+    },
+    "npcs/alien_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1599
+    },
+    "npcs/alien_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1460
+    },
+    "npcs/alien_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1677
+    },
+    "npcs/alien_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1578
+    },
+    "npcs/alien_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1261
+    },
+    "npcs/alien_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1451
+    },
+    "npcs/alien_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1401
+    },
+    "npcs/alien_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1503
+    },
+    "npcs/alien_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1706
+    },
+    "npcs/alien_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1610
+    },
+    "npcs/alien_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1511
+    },
+    "npcs/alien_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1708
+    },
+    "npcs/alien_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1609
+    },
+    "npcs/alien_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1558
+    },
+    "npcs/alien_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1766
+    },
+    "npcs/alien_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1687
+    },
+    "npcs/mutant_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1469
+    },
+    "npcs/mutant_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1648
+    },
+    "npcs/mutant_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1589
+    },
+    "npcs/mutant_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1445
+    },
+    "npcs/mutant_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1623
+    },
+    "npcs/mutant_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1544
+    },
+    "npcs/mutant_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1571
+    },
+    "npcs/mutant_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1744
+    },
+    "npcs/mutant_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1657
+    },
+    "npcs/mutant_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1318
+    },
+    "npcs/mutant_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1494
+    },
+    "npcs/mutant_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1430
+    },
+    "npcs/mutant_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1477
+    },
+    "npcs/mutant_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1634
+    },
+    "npcs/mutant_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1584
+    },
+    "npcs/mutant_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1488
+    },
+    "npcs/mutant_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1685
+    },
+    "npcs/mutant_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1575
+    },
+    "npcs/mutant_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1663
+    },
+    "npcs/mutant_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1797
+    },
+    "npcs/mutant_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1726
+    },
+    "npcs/mutant_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1404
+    },
+    "npcs/mutant_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1587
+    },
+    "npcs/mutant_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1534
+    },
+    "npcs/mutant_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1580
+    },
+    "npcs/mutant_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1752
+    },
+    "npcs/mutant_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1688
+    },
+    "npcs/mutant_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1452
+    },
+    "npcs/mutant_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1651
+    },
+    "npcs/mutant_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1572
+    },
+    "npcs/mutant_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1415
+    },
+    "npcs/mutant_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1600
+    },
+    "npcs/mutant_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1523
+    },
+    "npcs/mutant_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1518
+    },
+    "npcs/mutant_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1722
+    },
+    "npcs/mutant_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1633
+    },
+    "npcs/mutant_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1670
+    },
+    "npcs/mutant_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1849
+    },
+    "npcs/mutant_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1778
+    },
+    "npcs/mutant_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1546
+    },
+    "npcs/mutant_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1738
+    },
+    "npcs/mutant_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1653
+    },
+    "npcs/mutant_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/mutant_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1720
+    },
+    "npcs/mutant_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1630
+    },
+    "npcs/mutant_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1496
+    },
+    "npcs/mutant_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1693
+    },
+    "npcs/mutant_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1604
+    },
+    "npcs/mutant_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1303
+    },
+    "npcs/mutant_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1496
+    },
+    "npcs/mutant_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1455
+    },
+    "npcs/mutant_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1543
+    },
+    "npcs/mutant_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1736
+    },
+    "npcs/mutant_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1639
+    },
+    "npcs/mutant_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1539
+    },
+    "npcs/mutant_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1727
+    },
+    "npcs/mutant_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1638
+    },
+    "npcs/mutant_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1586
+    },
+    "npcs/mutant_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1771
+    },
+    "npcs/mutant_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1716
+    },
+    "npcs/synth_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1427
+    },
+    "npcs/synth_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1603
+    },
+    "npcs/synth_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1547
+    },
+    "npcs/synth_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1417
+    },
+    "npcs/synth_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1591
+    },
+    "npcs/synth_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1506
+    },
+    "npcs/synth_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1519
+    },
+    "npcs/synth_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1699
+    },
+    "npcs/synth_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1615
+    },
+    "npcs/synth_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1295
+    },
+    "npcs/synth_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1500
+    },
+    "npcs/synth_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1413
+    },
+    "npcs/synth_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1445
+    },
+    "npcs/synth_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1613
+    },
+    "npcs/synth_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1553
+    },
+    "npcs/synth_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1445
+    },
+    "npcs/synth_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1629
+    },
+    "npcs/synth_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1546
+    },
+    "npcs/synth_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1618
+    },
+    "npcs/synth_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1758
+    },
+    "npcs/synth_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1697
+    },
+    "npcs/synth_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1392
+    },
+    "npcs/synth_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1565
+    },
+    "npcs/synth_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1518
+    },
+    "npcs/synth_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1532
+    },
+    "npcs/synth_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1702
+    },
+    "npcs/synth_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/synth_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1438
+    },
+    "npcs/synth_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1653
+    },
+    "npcs/synth_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1559
+    },
+    "npcs/synth_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1385
+    },
+    "npcs/synth_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/synth_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1491
+    },
+    "npcs/synth_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1510
+    },
+    "npcs/synth_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1712
+    },
+    "npcs/synth_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1621
+    },
+    "npcs/synth_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1636
+    },
+    "npcs/synth_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1805
+    },
+    "npcs/synth_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1755
+    },
+    "npcs/synth_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1513
+    },
+    "npcs/synth_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1703
+    },
+    "npcs/synth_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1618
+    },
+    "npcs/synth_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1520
+    },
+    "npcs/synth_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1683
+    },
+    "npcs/synth_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1595
+    },
+    "npcs/synth_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1460
+    },
+    "npcs/synth_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1657
+    },
+    "npcs/synth_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1577
+    },
+    "npcs/synth_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1278
+    },
+    "npcs/synth_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1452
+    },
+    "npcs/synth_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1423
+    },
+    "npcs/synth_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1506
+    },
+    "npcs/synth_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1696
+    },
+    "npcs/synth_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1612
+    },
+    "npcs/synth_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1518
+    },
+    "npcs/synth_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1702
+    },
+    "npcs/synth_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1608
+    },
+    "npcs/synth_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1577
+    },
+    "npcs/synth_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1754
+    },
+    "npcs/synth_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1699
+    },
+    "npcs/uplift_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1483
+    },
+    "npcs/uplift_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1694
+    },
+    "npcs/uplift_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/uplift_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1439
+    },
+    "npcs/uplift_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1648
+    },
+    "npcs/uplift_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1539
+    },
+    "npcs/uplift_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1567
+    },
+    "npcs/uplift_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1782
+    },
+    "npcs/uplift_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1660
+    },
+    "npcs/uplift_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1311
+    },
+    "npcs/uplift_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1536
+    },
+    "npcs/uplift_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1428
+    },
+    "npcs/uplift_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1469
+    },
+    "npcs/uplift_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1654
+    },
+    "npcs/uplift_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1579
+    },
+    "npcs/uplift_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1503
+    },
+    "npcs/uplift_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1722
+    },
+    "npcs/uplift_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1594
+    },
+    "npcs/uplift_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1682
+    },
+    "npcs/uplift_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1826
+    },
+    "npcs/uplift_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1741
+    },
+    "npcs/uplift_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1423
+    },
+    "npcs/uplift_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1612
+    },
+    "npcs/uplift_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1546
+    },
+    "npcs/uplift_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1588
+    },
+    "npcs/uplift_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1789
+    },
+    "npcs/uplift_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1705
+    },
+    "npcs/uplift_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1508
+    },
+    "npcs/uplift_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1729
+    },
+    "npcs/uplift_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1615
+    },
+    "npcs/uplift_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1432
+    },
+    "npcs/uplift_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1639
+    },
+    "npcs/uplift_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1542
+    },
+    "npcs/uplift_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1560
+    },
+    "npcs/uplift_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1780
+    },
+    "npcs/uplift_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1675
+    },
+    "npcs/uplift_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1704
+    },
+    "npcs/uplift_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1885
+    },
+    "npcs/uplift_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1807
+    },
+    "npcs/uplift_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/uplift_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1782
+    },
+    "npcs/uplift_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1661
+    },
+    "npcs/uplift_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1570
+    },
+    "npcs/uplift_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1752
+    },
+    "npcs/uplift_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1635
+    },
+    "npcs/uplift_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1508
+    },
+    "npcs/uplift_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1735
+    },
+    "npcs/uplift_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1615
+    },
+    "npcs/uplift_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1334
+    },
+    "npcs/uplift_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1541
+    },
+    "npcs/uplift_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1476
+    },
+    "npcs/uplift_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1548
+    },
+    "npcs/uplift_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1771
+    },
+    "npcs/uplift_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1653
+    },
+    "npcs/uplift_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1551
+    },
+    "npcs/uplift_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1749
+    },
+    "npcs/uplift_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1641
+    },
+    "npcs/uplift_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1605
+    },
+    "npcs/uplift_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1801
+    },
+    "npcs/uplift_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1724
+    },
+    "npcs/chitin_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1410
+    },
+    "npcs/chitin_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/chitin_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1533
+    },
+    "npcs/chitin_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1396
+    },
+    "npcs/chitin_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1599
+    },
+    "npcs/chitin_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1491
+    },
+    "npcs/chitin_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1489
+    },
+    "npcs/chitin_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1683
+    },
+    "npcs/chitin_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1585
+    },
+    "npcs/chitin_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1280
+    },
+    "npcs/chitin_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1486
+    },
+    "npcs/chitin_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1408
+    },
+    "npcs/chitin_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1424
+    },
+    "npcs/chitin_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1584
+    },
+    "npcs/chitin_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1521
+    },
+    "npcs/chitin_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1440
+    },
+    "npcs/chitin_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1644
+    },
+    "npcs/chitin_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1526
+    },
+    "npcs/chitin_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1617
+    },
+    "npcs/chitin_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1754
+    },
+    "npcs/chitin_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1688
+    },
+    "npcs/chitin_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1366
+    },
+    "npcs/chitin_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1559
+    },
+    "npcs/chitin_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1495
+    },
+    "npcs/chitin_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1547
+    },
+    "npcs/chitin_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1733
+    },
+    "npcs/chitin_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1661
+    },
+    "npcs/chitin_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1421
+    },
+    "npcs/chitin_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/chitin_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1548
+    },
+    "npcs/chitin_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1357
+    },
+    "npcs/chitin_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1561
+    },
+    "npcs/chitin_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1475
+    },
+    "npcs/chitin_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1480
+    },
+    "npcs/chitin_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1694
+    },
+    "npcs/chitin_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1594
+    },
+    "npcs/chitin_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1639
+    },
+    "npcs/chitin_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1803
+    },
+    "npcs/chitin_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1747
+    },
+    "npcs/chitin_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1509
+    },
+    "npcs/chitin_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1711
+    },
+    "npcs/chitin_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1611
+    },
+    "npcs/chitin_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1521
+    },
+    "npcs/chitin_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1688
+    },
+    "npcs/chitin_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1587
+    },
+    "npcs/chitin_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1451
+    },
+    "npcs/chitin_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1660
+    },
+    "npcs/chitin_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1564
+    },
+    "npcs/chitin_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1258
+    },
+    "npcs/chitin_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1452
+    },
+    "npcs/chitin_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1383
+    },
+    "npcs/chitin_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1502
+    },
+    "npcs/chitin_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1700
+    },
+    "npcs/chitin_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1606
+    },
+    "npcs/chitin_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1504
+    },
+    "npcs/chitin_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1680
+    },
+    "npcs/chitin_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/chitin_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1531
+    },
+    "npcs/chitin_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1722
+    },
+    "npcs/chitin_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1653
+    },
+    "npcs/mycelial_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1403
+    },
+    "npcs/mycelial_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1607
+    },
+    "npcs/mycelial_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1512
+    },
+    "npcs/mycelial_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1375
+    },
+    "npcs/mycelial_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1591
+    },
+    "npcs/mycelial_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1487
+    },
+    "npcs/mycelial_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1484
+    },
+    "npcs/mycelial_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1703
+    },
+    "npcs/mycelial_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        58,
+        93
+      ],
+      "bytes": 1580
+    },
+    "npcs/mycelial_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1239
+    },
+    "npcs/mycelial_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1450
+    },
+    "npcs/mycelial_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1353
+    },
+    "npcs/mycelial_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1371
+    },
+    "npcs/mycelial_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1565
+    },
+    "npcs/mycelial_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1488
+    },
+    "npcs/mycelial_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1444
+    },
+    "npcs/mycelial_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1649
+    },
+    "npcs/mycelial_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        60,
+        93
+      ],
+      "bytes": 1532
+    },
+    "npcs/mycelial_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1610
+    },
+    "npcs/mycelial_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1777
+    },
+    "npcs/mycelial_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1685
+    },
+    "npcs/mycelial_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1334
+    },
+    "npcs/mycelial_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1533
+    },
+    "npcs/mycelial_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1461
+    },
+    "npcs/mycelial_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1525
+    },
+    "npcs/mycelial_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1752
+    },
+    "npcs/mycelial_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1643
+    },
+    "npcs/mycelial_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1439
+    },
+    "npcs/mycelial_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1656
+    },
+    "npcs/mycelial_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1556
+    },
+    "npcs/mycelial_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1351
+    },
+    "npcs/mycelial_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1583
+    },
+    "npcs/mycelial_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1474
+    },
+    "npcs/mycelial_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1444
+    },
+    "npcs/mycelial_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1678
+    },
+    "npcs/mycelial_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1565
+    },
+    "npcs/mycelial_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1592
+    },
+    "npcs/mycelial_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1807
+    },
+    "npcs/mycelial_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1707
+    },
+    "npcs/mycelial_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1493
+    },
+    "npcs/mycelial_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1724
+    },
+    "npcs/mycelial_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        52,
+        93
+      ],
+      "bytes": 1600
+    },
+    "npcs/mycelial_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1511
+    },
+    "npcs/mycelial_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1700
+    },
+    "npcs/mycelial_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        59,
+        93
+      ],
+      "bytes": 1584
+    },
+    "npcs/mycelial_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1438
+    },
+    "npcs/mycelial_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1672
+    },
+    "npcs/mycelial_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        56,
+        93
+      ],
+      "bytes": 1553
+    },
+    "npcs/mycelial_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1224
+    },
+    "npcs/mycelial_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1432
+    },
+    "npcs/mycelial_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1358
+    },
+    "npcs/mycelial_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1486
+    },
+    "npcs/mycelial_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1713
+    },
+    "npcs/mycelial_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        5,
+        55,
+        93
+      ],
+      "bytes": 1594
+    },
+    "npcs/mycelial_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1462
+    },
+    "npcs/mycelial_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1685
+    },
+    "npcs/mycelial_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/mycelial_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1495
+    },
+    "npcs/mycelial_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1695
+    },
+    "npcs/mycelial_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1625
+    },
+    "npcs/crystal_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1403
+    },
+    "npcs/crystal_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1588
+    },
+    "npcs/crystal_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1524
+    },
+    "npcs/crystal_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1416
+    },
+    "npcs/crystal_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1597
+    },
+    "npcs/crystal_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1508
+    },
+    "npcs/crystal_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1500
+    },
+    "npcs/crystal_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1703
+    },
+    "npcs/crystal_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        58,
+        93
+      ],
+      "bytes": 1600
+    },
+    "npcs/crystal_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1270
+    },
+    "npcs/crystal_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1478
+    },
+    "npcs/crystal_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1396
+    },
+    "npcs/crystal_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1420
+    },
+    "npcs/crystal_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1588
+    },
+    "npcs/crystal_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1523
+    },
+    "npcs/crystal_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1433
+    },
+    "npcs/crystal_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1666
+    },
+    "npcs/crystal_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        60,
+        93
+      ],
+      "bytes": 1542
+    },
+    "npcs/crystal_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1619
+    },
+    "npcs/crystal_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1763
+    },
+    "npcs/crystal_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1694
+    },
+    "npcs/crystal_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1372
+    },
+    "npcs/crystal_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1546
+    },
+    "npcs/crystal_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1501
+    },
+    "npcs/crystal_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1541
+    },
+    "npcs/crystal_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1735
+    },
+    "npcs/crystal_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1649
+    },
+    "npcs/crystal_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1434
+    },
+    "npcs/crystal_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1657
+    },
+    "npcs/crystal_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1555
+    },
+    "npcs/crystal_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1389
+    },
+    "npcs/crystal_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1577
+    },
+    "npcs/crystal_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1498
+    },
+    "npcs/crystal_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1508
+    },
+    "npcs/crystal_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1701
+    },
+    "npcs/crystal_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1624
+    },
+    "npcs/crystal_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1637
+    },
+    "npcs/crystal_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1811
+    },
+    "npcs/crystal_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        54,
+        93
+      ],
+      "bytes": 1752
+    },
+    "npcs/crystal_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1514
+    },
+    "npcs/crystal_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1713
+    },
+    "npcs/crystal_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1620
+    },
+    "npcs/crystal_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1518
+    },
+    "npcs/crystal_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1678
+    },
+    "npcs/crystal_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1587
+    },
+    "npcs/crystal_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1462
+    },
+    "npcs/crystal_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1663
+    },
+    "npcs/crystal_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        56,
+        93
+      ],
+      "bytes": 1575
+    },
+    "npcs/crystal_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1285
+    },
+    "npcs/crystal_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1467
+    },
+    "npcs/crystal_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1436
+    },
+    "npcs/crystal_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1500
+    },
+    "npcs/crystal_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1696
+    },
+    "npcs/crystal_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        55,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/crystal_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1495
+    },
+    "npcs/crystal_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1676
+    },
+    "npcs/crystal_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        57,
+        93
+      ],
+      "bytes": 1591
+    },
+    "npcs/crystal_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1534
+    },
+    "npcs/crystal_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1704
+    },
+    "npcs/crystal_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1660
+    },
+    "npcs/amphibian_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1490
+    },
+    "npcs/amphibian_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1669
+    },
+    "npcs/amphibian_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1615
+    },
+    "npcs/amphibian_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1476
+    },
+    "npcs/amphibian_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1660
+    },
+    "npcs/amphibian_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1567
+    },
+    "npcs/amphibian_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1566
+    },
+    "npcs/amphibian_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1746
+    },
+    "npcs/amphibian_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1656
+    },
+    "npcs/amphibian_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1365
+    },
+    "npcs/amphibian_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/amphibian_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1497
+    },
+    "npcs/amphibian_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1489
+    },
+    "npcs/amphibian_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1661
+    },
+    "npcs/amphibian_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/amphibian_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1504
+    },
+    "npcs/amphibian_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1696
+    },
+    "npcs/amphibian_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1601
+    },
+    "npcs/amphibian_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1671
+    },
+    "npcs/amphibian_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1810
+    },
+    "npcs/amphibian_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1750
+    },
+    "npcs/amphibian_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1492
+    },
+    "npcs/amphibian_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1646
+    },
+    "npcs/amphibian_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1600
+    },
+    "npcs/amphibian_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1602
+    },
+    "npcs/amphibian_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1792
+    },
+    "npcs/amphibian_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1713
+    },
+    "npcs/amphibian_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1473
+    },
+    "npcs/amphibian_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1706
+    },
+    "npcs/amphibian_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1595
+    },
+    "npcs/amphibian_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1426
+    },
+    "npcs/amphibian_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1621
+    },
+    "npcs/amphibian_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1544
+    },
+    "npcs/amphibian_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1585
+    },
+    "npcs/amphibian_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1782
+    },
+    "npcs/amphibian_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1702
+    },
+    "npcs/amphibian_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1678
+    },
+    "npcs/amphibian_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1856
+    },
+    "npcs/amphibian_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1794
+    },
+    "npcs/amphibian_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1577
+    },
+    "npcs/amphibian_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1767
+    },
+    "npcs/amphibian_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1676
+    },
+    "npcs/amphibian_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1572
+    },
+    "npcs/amphibian_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1734
+    },
+    "npcs/amphibian_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1644
+    },
+    "npcs/amphibian_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1514
+    },
+    "npcs/amphibian_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1713
+    },
+    "npcs/amphibian_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1627
+    },
+    "npcs/amphibian_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1348
+    },
+    "npcs/amphibian_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1542
+    },
+    "npcs/amphibian_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1495
+    },
+    "npcs/amphibian_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1566
+    },
+    "npcs/amphibian_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1755
+    },
+    "npcs/amphibian_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1668
+    },
+    "npcs/amphibian_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1551
+    },
+    "npcs/amphibian_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1742
+    },
+    "npcs/amphibian_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1641
+    },
+    "npcs/amphibian_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1647
+    },
+    "npcs/amphibian_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1827
+    },
+    "npcs/amphibian_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1771
+    },
+    "npcs/mimic_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1468
+    },
+    "npcs/mimic_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1654
+    },
+    "npcs/mimic_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1592
+    },
+    "npcs/mimic_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1404
+    },
+    "npcs/mimic_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1632
+    },
+    "npcs/mimic_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1514
+    },
+    "npcs/mimic_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1565
+    },
+    "npcs/mimic_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1747
+    },
+    "npcs/mimic_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1648
+    },
+    "npcs/mimic_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1290
+    },
+    "npcs/mimic_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1506
+    },
+    "npcs/mimic_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1410
+    },
+    "npcs/mimic_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1466
+    },
+    "npcs/mimic_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1647
+    },
+    "npcs/mimic_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1578
+    },
+    "npcs/mimic_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1454
+    },
+    "npcs/mimic_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/mimic_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1551
+    },
+    "npcs/mimic_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1634
+    },
+    "npcs/mimic_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1795
+    },
+    "npcs/mimic_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1720
+    },
+    "npcs/mimic_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1373
+    },
+    "npcs/mimic_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1559
+    },
+    "npcs/mimic_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1505
+    },
+    "npcs/mimic_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1551
+    },
+    "npcs/mimic_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1738
+    },
+    "npcs/mimic_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1666
+    },
+    "npcs/mimic_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1452
+    },
+    "npcs/mimic_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1656
+    },
+    "npcs/mimic_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1568
+    },
+    "npcs/mimic_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1400
+    },
+    "npcs/mimic_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1596
+    },
+    "npcs/mimic_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1506
+    },
+    "npcs/mimic_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1520
+    },
+    "npcs/mimic_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1730
+    },
+    "npcs/mimic_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1630
+    },
+    "npcs/mimic_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1678
+    },
+    "npcs/mimic_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1875
+    },
+    "npcs/mimic_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1792
+    },
+    "npcs/mimic_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1548
+    },
+    "npcs/mimic_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1752
+    },
+    "npcs/mimic_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1650
+    },
+    "npcs/mimic_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1550
+    },
+    "npcs/mimic_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1723
+    },
+    "npcs/mimic_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1620
+    },
+    "npcs/mimic_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1489
+    },
+    "npcs/mimic_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1707
+    },
+    "npcs/mimic_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1603
+    },
+    "npcs/mimic_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1288
+    },
+    "npcs/mimic_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1472
+    },
+    "npcs/mimic_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1430
+    },
+    "npcs/mimic_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1532
+    },
+    "npcs/mimic_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1743
+    },
+    "npcs/mimic_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1641
+    },
+    "npcs/mimic_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1527
+    },
+    "npcs/mimic_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1723
+    },
+    "npcs/mimic_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1621
+    },
+    "npcs/mimic_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1563
+    },
+    "npcs/mimic_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1748
+    },
+    "npcs/mimic_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1689
+    },
+    "npcs/symbiote_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1474
+    },
+    "npcs/symbiote_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1655
+    },
+    "npcs/symbiote_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1599
+    },
+    "npcs/symbiote_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1471
+    },
+    "npcs/symbiote_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1655
+    },
+    "npcs/symbiote_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1560
+    },
+    "npcs/symbiote_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1587
+    },
+    "npcs/symbiote_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1774
+    },
+    "npcs/symbiote_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        58,
+        93
+      ],
+      "bytes": 1674
+    },
+    "npcs/symbiote_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1334
+    },
+    "npcs/symbiote_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1542
+    },
+    "npcs/symbiote_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1450
+    },
+    "npcs/symbiote_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1472
+    },
+    "npcs/symbiote_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/symbiote_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1577
+    },
+    "npcs/symbiote_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1513
+    },
+    "npcs/symbiote_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1717
+    },
+    "npcs/symbiote_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        60,
+        93
+      ],
+      "bytes": 1604
+    },
+    "npcs/symbiote_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1688
+    },
+    "npcs/symbiote_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1828
+    },
+    "npcs/symbiote_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1756
+    },
+    "npcs/symbiote_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1429
+    },
+    "npcs/symbiote_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1605
+    },
+    "npcs/symbiote_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1551
+    },
+    "npcs/symbiote_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1621
+    },
+    "npcs/symbiote_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1798
+    },
+    "npcs/symbiote_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1732
+    },
+    "npcs/symbiote_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1498
+    },
+    "npcs/symbiote_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1700
+    },
+    "npcs/symbiote_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1622
+    },
+    "npcs/symbiote_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1440
+    },
+    "npcs/symbiote_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1636
+    },
+    "npcs/symbiote_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1554
+    },
+    "npcs/symbiote_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1549
+    },
+    "npcs/symbiote_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1778
+    },
+    "npcs/symbiote_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1668
+    },
+    "npcs/symbiote_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1687
+    },
+    "npcs/symbiote_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1862
+    },
+    "npcs/symbiote_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1792
+    },
+    "npcs/symbiote_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1573
+    },
+    "npcs/symbiote_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1781
+    },
+    "npcs/symbiote_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        52,
+        93
+      ],
+      "bytes": 1677
+    },
+    "npcs/symbiote_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1587
+    },
+    "npcs/symbiote_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1761
+    },
+    "npcs/symbiote_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        59,
+        93
+      ],
+      "bytes": 1654
+    },
+    "npcs/symbiote_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1530
+    },
+    "npcs/symbiote_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1741
+    },
+    "npcs/symbiote_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        56,
+        93
+      ],
+      "bytes": 1640
+    },
+    "npcs/symbiote_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1312
+    },
+    "npcs/symbiote_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1498
+    },
+    "npcs/symbiote_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1460
+    },
+    "npcs/symbiote_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1569
+    },
+    "npcs/symbiote_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1777
+    },
+    "npcs/symbiote_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        55,
+        93
+      ],
+      "bytes": 1672
+    },
+    "npcs/symbiote_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1513
+    },
+    "npcs/symbiote_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1727
+    },
+    "npcs/symbiote_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1614
+    },
+    "npcs/symbiote_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1599
+    },
+    "npcs/symbiote_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1802
+    },
+    "npcs/symbiote_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1728
+    },
+    "npcs/lumen_driver_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1513
+    },
+    "npcs/lumen_driver_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1702
+    },
+    "npcs/lumen_driver_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1628
+    },
+    "npcs/lumen_mechanic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1555
+    },
+    "npcs/lumen_mechanic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1747
+    },
+    "npcs/lumen_mechanic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1643
+    },
+    "npcs/lumen_medic_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1590
+    },
+    "npcs/lumen_medic_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1801
+    },
+    "npcs/lumen_medic_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        58,
+        93
+      ],
+      "bytes": 1685
+    },
+    "npcs/lumen_soldier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1392
+    },
+    "npcs/lumen_soldier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1589
+    },
+    "npcs/lumen_soldier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        52,
+        93
+      ],
+      "bytes": 1512
+    },
+    "npcs/lumen_scout_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1550
+    },
+    "npcs/lumen_scout_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1721
+    },
+    "npcs/lumen_scout_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1648
+    },
+    "npcs/lumen_merchant_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1550
+    },
+    "npcs/lumen_merchant_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1745
+    },
+    "npcs/lumen_merchant_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        60,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/lumen_scavenger_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1737
+    },
+    "npcs/lumen_scavenger_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1886
+    },
+    "npcs/lumen_scavenger_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1809
+    },
+    "npcs/lumen_engineer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1500
+    },
+    "npcs/lumen_engineer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1673
+    },
+    "npcs/lumen_engineer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        59,
+        93
+      ],
+      "bytes": 1612
+    },
+    "npcs/lumen_researcher_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1643
+    },
+    "npcs/lumen_researcher_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1845
+    },
+    "npcs/lumen_researcher_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1761
+    },
+    "npcs/lumen_hacker_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1514
+    },
+    "npcs/lumen_hacker_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1710
+    },
+    "npcs/lumen_hacker_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        2,
+        59,
+        93
+      ],
+      "bytes": 1629
+    },
+    "npcs/lumen_hunter_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1511
+    },
+    "npcs/lumen_hunter_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1701
+    },
+    "npcs/lumen_hunter_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1612
+    },
+    "npcs/lumen_guard_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1613
+    },
+    "npcs/lumen_guard_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1793
+    },
+    "npcs/lumen_guard_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        62,
+        93
+      ],
+      "bytes": 1720
+    },
+    "npcs/lumen_courier_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        6,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1723
+    },
+    "npcs/lumen_courier_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1901
+    },
+    "npcs/lumen_courier_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        54,
+        93
+      ],
+      "bytes": 1830
+    },
+    "npcs/lumen_diplomat_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1633
+    },
+    "npcs/lumen_diplomat_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1843
+    },
+    "npcs/lumen_diplomat_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1738
+    },
+    "npcs/lumen_historian_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1645
+    },
+    "npcs/lumen_historian_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1814
+    },
+    "npcs/lumen_historian_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        59,
+        93
+      ],
+      "bytes": 1709
+    },
+    "npcs/lumen_locksmith_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1580
+    },
+    "npcs/lumen_locksmith_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1792
+    },
+    "npcs/lumen_locksmith_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        56,
+        93
+      ],
+      "bytes": 1689
+    },
+    "npcs/lumen_demolition_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1372
+    },
+    "npcs/lumen_demolition_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1560
+    },
+    "npcs/lumen_demolition_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        52,
+        93
+      ],
+      "bytes": 1503
+    },
+    "npcs/lumen_chemist_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1628
+    },
+    "npcs/lumen_chemist_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1828
+    },
+    "npcs/lumen_chemist_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        55,
+        93
+      ],
+      "bytes": 1721
+    },
+    "npcs/lumen_electrician_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1579
+    },
+    "npcs/lumen_electrician_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1771
+    },
+    "npcs/lumen_electrician_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        4,
+        57,
+        93
+      ],
+      "bytes": 1676
+    },
+    "npcs/lumen_performer_none": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        9,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1634
+    },
+    "npcs/lumen_performer_club": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1838
+    },
+    "npcs/lumen_performer_pistol": {
+      "width": 64,
+      "height": 96,
+      "bounds": [
+        1,
+        1,
+        57,
+        93
+      ],
+      "bytes": 1761
+    },
+    "enemies/raider": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        13,
+        8,
+        85,
+        92
+      ],
+      "bytes": 1218
+    },
+    "enemies/soldier": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        14,
+        3,
+        94,
+        93
+      ],
+      "bytes": 1657
+    },
+    "enemies/mutant": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        83,
+        93
+      ],
+      "bytes": 1533
+    },
+    "enemies/infected": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        6,
+        3,
+        83,
+        93
+      ],
+      "bytes": 1663
+    },
+    "enemies/crawler": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        3,
+        11,
+        95,
+        93
+      ],
+      "bytes": 1699
+    },
+    "enemies/hound": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        2,
+        25,
+        93,
+        88
+      ],
+      "bytes": 1543
+    },
+    "enemies/nest": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        4,
+        15,
+        95,
+        96
+      ],
+      "bytes": 1693
+    },
+    "enemies/swarm": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        10,
+        11,
+        94,
+        88
+      ],
+      "bytes": 1129
+    },
+    "enemies/drone": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        6,
+        22,
+        93,
+        80
+      ],
+      "bytes": 1134
+    },
+    "enemies/turret": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        7,
+        22,
+        93,
+        91
+      ],
+      "bytes": 1062
+    },
+    "enemies/worker": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        3,
+        24,
+        96,
+        91
+      ],
+      "bytes": 1626
+    },
+    "enemies/sentinel": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        1,
+        3,
+        90,
+        93
+      ],
+      "bytes": 1920
+    },
+    "enemies/lurker": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        5,
+        4,
+        86,
+        93
+      ],
+      "bytes": 1233
+    },
+    "enemies/brute": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        12,
+        18,
+        93,
+        88
+      ],
+      "bytes": 1441
+    },
+    "enemies/wing": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        1,
+        6,
+        95,
+        91
+      ],
+      "bytes": 1646
+    },
+    "enemies/parasite": {
+      "width": 96,
+      "height": 96,
+      "bounds": [
+        4,
+        4,
+        94,
+        92
+      ],
+      "bytes": 1718
+    },
+    "bosses/overseer": {
+      "width": 128,
+      "height": 128,
+      "bounds": [
+        1,
+        4,
+        127,
+        124
+      ],
+      "bytes": 2550
+    },
+    "bosses/broodmother": {
+      "width": 128,
+      "height": 128,
+      "bounds": [
+        2,
+        6,
+        128,
+        125
+      ],
+      "bytes": 2602
+    },
+    "bosses/zero_core": {
+      "width": 128,
+      "height": 128,
+      "bounds": [
+        4,
+        3,
+        126,
+        126
+      ],
+      "bytes": 2071
+    },
+    "bosses/graft_colossus": {
+      "width": 128,
+      "height": 128,
+      "bounds": [
+        2,
+        3,
+        127,
+        126
+      ],
+      "bytes": 2352
+    },
+    "bosses/fallen_angel": {
+      "width": 128,
+      "height": 128,
+      "bounds": [
+        2,
+        2,
+        128,
+        123
+      ],
+      "bytes": 3425
+    }
+  }
+}

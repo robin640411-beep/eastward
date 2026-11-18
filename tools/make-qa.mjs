@@ -68,6 +68,16 @@ for(const [label,race,weapon,enemy] of [['單人四格 · 球棒','human','club'
 g=fresh();setLevel(g.actor(),5);g.actor().hp=g.actor().maxHp=100;g.beginCombat();const first=g.s.battle.enemies[0];g.s.battle.enemies=['hound','soldier','crawler'].map((key,i)=>({...structuredClone(first),id:'e'+i,key,name:d.assets.enemies[key].name,hp:i===1?1:100,maxHp:100,speed:0,attack:1,attackStyle:undefined}));g.s.rng=14;states['三敵固定站位 · 擊倒中央']=g.s;
 g=fresh();g.s.vehicle.model='van';for(const [race,job] of [['alien','medic'],['crystal','mechanic'],['amphibian','historian']])g.s.party.push(g.person(race,job));g.s.party.forEach(p=>{setLevel(p,5);p.hp=p.maxHp=100;p.esp=p.maxEsp=100;});g.beginCombat();g.s.battle.enemies.forEach(e=>{e.hp=e.maxHp=500;e.speed=0;e.attack=1;});states['四人四格 · 輪流出手']=g.s;
 
+// Three preselected orders let one tap play a full round with four distinct lanes.
+g=fresh();g.s=structuredClone(states['四人四格 · 輪流出手']);
+g.s.party[0].gear.武器='club';
+const sampleEnemy=g.s.battle.enemies[0];
+g.s.battle.enemies=['hound','soldier','crawler'].map((key,i)=>({...sampleEnemy,id:'e'+i,key,
+ name:d.assets.enemies[key].name,hp:170,maxHp:170,speed:80-i,attack:13,attackStyle:undefined}));
+for(const p of g.s.party.slice(1))g.s.battle.orders[p.id]={type:'defend'};
+g.s.rng=38; // The three enemies target lanes 3, 2 and 4, in that order.
+states['命中演出 · 四人三敵']=g.s;
+
 // NPC visual parity and implicit attitude cues, without production save mutations.
 for(const race of d.catalog.races)for(const weapon of ['club','pistol']){g=fresh();g.s.progress=51;setLevel(g.actor(),8);g.actor().hp=g.actor().maxHp=200;const p=g.person(race.id,'scavenger');p.attitude='敵對';p.gear.武器=weapon;g.s.mode='event';g.s.current={instance:88,event:{id:'road_014',title:'公路旁的旅人',text:'一位旅人站在車旁，攔住了去路。',options:[]},npc:p,dialogue:false};g.beginCombat('character',null,p);g.s.battle.enemies[0].hp=g.s.battle.enemies[0].maxHp=150;g.s.battle.enemies[0].attack=1;states['NPC 立繪 · '+race.name+' · '+weapon]=g.s;}
 for(const attitude of ['友善','同情','戒備','冷淡','敵對','掠奪']){g=fresh();g.s.vehicle.model='van';const p=g.person('synth','merchant');p.attitude=attitude;g.s.mode='event';g.s.current={instance:97,event:{id:'road_014',title:'橋下的旅人',text:'路旁有人抬起頭，注意到了你們的車。',options:[]},npc:p,dialogue:true,service:'npc_trade'};g.s.notice='';if(['敵對','掠奪'].includes(attitude))g.beginCombat('character',null,p);states['神情 · '+attitude]=g.s;}

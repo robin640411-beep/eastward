@@ -1,17 +1,18 @@
 {
-  "version": 2,
+  "version": 3,
   "date": "2026-11-19",
   "layout": {
     "event_description_and_choices": "fixed message window, 4 choices per page",
     "party_slots": 4,
     "empty_slots": "blank frames, same width",
-    "actor_animation": "own frame top clips full sprite to upper half; rises and returns per action",
+    "actor_animation": "出手者從畫面下緣與自己隊伍欄同列的位置探身，顯示到腰間，行動結束後退回畫面下方。",
     "enemy_slots": "original enemy array and positions retained for entire battle; defeated slots hidden and unselectable",
     "enemy_targeting": {
       "stage": "Adjacent full-height lanes with no overlap; captions anchored under original enemy; defeated lane disabled without moving survivors.",
       "message_window": "Attack and targeted psychic powers offer living-enemy buttons in the fixed message window as well as stage taps.",
       "commands": "One command per awake member; retained canvas and partial command-window update during target browsing."
-    }
+    },
+    "victim_animation": "敵方指定的隊員於接觸前探身。實際失血者在命中時後仰，落空則閃避，抵銷傷害則格擋。擊倒一擊仍演到收身，車輛受損定位在我方車身。"
   },
   "timing_ms": {
     "action": 980,
@@ -382,5 +383,5 @@
     ]
   },
   "rules": "Presentation follows resolved actions and actual recipients; no additional randomness, costs or combat-stat changes. Existing saves derive missing enemy attackStyle.",
-  "performance": "Single 30 FPS canvas loop. Character battles skip hidden road/weather work and reuse one 384x240 cached arena, invalidated on scene or image load. UI-only command browsing neither clones nor saves game state; main renders retain the existing canvas."
+  "performance": "戰場背景快取依手機畫布尺寸、場景與素材載入更新。角色、特效與傷害數字共用 384 像素寬的舞台，每秒最多 30 幀。攻擊準備與命中沿用同一畫布及播放時鐘。"
 }

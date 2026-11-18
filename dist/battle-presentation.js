@@ -39,10 +39,41 @@ export function actionVisual(unit,command,battle,side,driver){
  return {...ATTACK_STYLES[id],id};
 }
 export const battleSlots=party=>Array.from({length:4},(_,i)=>party[i]||null);
-export const partyAnchor=(party,id)=>({cx:48+Math.max(0,party.findIndex(p=>p.id===id))*96,cy:225});
+export function partyAnchor(party,id,cy=225){
+ const slot=party.findIndex(p=>p?.id===id);
+ return slot>=0&&slot<4 ? {cx:48+slot*96,cy} : null;
+}
 export function commandPage(items,page=0,size=4){const pages=Math.max(1,Math.ceil(items.length/size)),index=Math.max(0,Math.min(pages-1,page));return {items:items.slice(index*size,(index+1)*size),page:index,pages};}
 export const BEAT_MS=980;
 export const IMPACT_MS=360;
+
+// Read the resolved action. A traveller can still be shown after a lethal hit.
+export function bustRole(beat,id){
+ if(!beat)return null;
+ if(beat.side==='party')return beat.actor===id&&['attack','psi'].includes(beat.kind)?'attack':null;
+ if(beat.kind!=='attack')return null;
+ if(beat.effects.some(f=>f.side==='party'&&f.id===id&&f.amount<0))return 'hit';
+ if(beat.target===id)return beat.label?.includes('落空')?'evade':'guard';
+ return null;
+}
+
+const unit=x=>Math.max(0,Math.min(1,x));
+export function bustPose(role,ms,direction,soft=false){
+ if(!role||ms<=0||ms>=BEAT_MS)return null;
+ const rise=unit(ms/230),sink=unit((ms-700)/(BEAT_MS-700));
+ const visible=(1-(1-rise)**3)*(1-sink*sink);
+ if(soft)return {height:Math.round(69+7*visible),x:0,y:0,lean:0,alpha:visible};
+ const since=ms-IMPACT_MS;
+ // Briefly hold contact, then let the body settle before sliding below the frame.
+ const recoil=since<0?0:1-unit((since-62)/190);
+ const windup=unit((ms-155)/125)*(1-unit((ms-295)/65));
+ let x=0,y=0,lean=0;
+ if(role==='attack'){x=direction*(-3*windup+5*recoil);y=3*windup-3*recoil;lean=direction*(-2*windup+4*recoil);}
+ if(role==='hit'){x=-direction*6*recoil;y=5*recoil;lean=-direction*8*recoil;}
+ if(role==='guard'){y=4*Math.max(windup,recoil);lean=-direction*2*recoil;}
+ if(role==='evade'){x=-direction*10*Math.max(windup,recoil);lean=-direction*6*Math.max(windup,recoil);}
+ return {height:Math.round(76*visible),x:Math.round(x)||0,y:Math.round(y)||0,lean:Math.round(lean)||0,alpha:1};
+}
 
 // Each enemy owns a disjoint stage lane; dead slots stay reserved.
 // Large bodies, heads and vehicle ends must remain tappable on narrow phones.

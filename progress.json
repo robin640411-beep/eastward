@@ -431,12 +431,14 @@
   "active_presentation": {
     "mode": "classic_pixel",
     "art_source": "8f732e1",
-    "release": "23-pixel",
+    "release": "24-battle",
     "layout": "vehicle, four party slots, scene, messages, navigation",
     "screenshots": [
       "qa/pixel-return/drive-390.jpg",
       "qa/pixel-return/interior-390.jpg",
       "qa/pixel-return/battle-360.jpg"
-    ]
+    ],
+    "combat_art": "固定像素角色、怪物與魔王，玩家及 NPC 共用種族、職業、武器圖",
+    "combat_evidence": "qa/combat-pixel/verification.json"
   }
 }

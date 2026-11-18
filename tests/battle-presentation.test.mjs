@@ -2,9 +2,38 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
 import {Game,learned,display,POWERS} from '../dist/engine.js';
 import {battleSlots,commandPage,ATTACK_STYLES,ENEMY_ATTACKS,BOSS_ATTACKS,POWER_STYLES,enemyAttackStyle,actionVisual} from '../dist/battle-presentation.js';
 import {drawBattleEffects,effectTargets,EFFECT_SHAPES} from '../dist/battle-effects.js';
+import {bustRole,bustPose,partyAnchor,IMPACT_MS,BEAT_MS} from '../dist/battle-presentation.js';
 import {enemyLayout} from '../dist/journey-view-model.js';import {encounterCommands} from '../dist/encounter-commands.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 const fresh=()=>{const g=new Game(d);g.start({seed:445});return g;};
+test('only actual attacked slots react, even on a lethal hit or a missed NPC shot',()=>{
+ const party=['a','b','c','d'].map(id=>({id,hp:id==='c'?0:12}));
+ const shot={side:'enemies',actor:'e2',kind:'attack',target:'c',effects:[{side:'party',id:'c',amount:-12}]};
+ assert.deepEqual(party.map(p=>bustRole(shot,p.id)),[null,null,'hit',null]);
+ assert.deepEqual(partyAnchor(party,'c',287),{cx:240,cy:287});
+ assert.equal(partyAnchor(party,'vehicle',287),null);
+ for(const [step,expected] of [
+  [{...shot,effects:[],label:'攻擊落空。'},'evade'],
+  [{...shot,effects:[]},'guard'],
+  [{...shot,kind:'stun',target:null,effects:[]},null],
+  [{...shot,target:'vehicle',effects:[{side:'vehicle',id:'vehicle',amount:-3}]},null],
+  [{...shot,side:'party',actor:'b',kind:'psi',effects:[{side:'party',id:'c',amount:2}]},null]
+ ])assert.equal(bustRole(step,'c'),expected);
+ assert.equal(bustRole({...shot,side:'party',actor:'d'},'d'),'attack');
+});
+test('the torso reaches its mark before contact, recoils away and withdraws in one beat',()=>{
+ const right=1;
+ assert.equal(bustPose('hit',0,right),null);
+ assert(bustPose('hit',70,right).height<bustPose('hit',280,right).height);
+ assert.equal(bustPose('hit',IMPACT_MS-1,right).lean,0);
+ const contact=bustPose('hit',IMPACT_MS,right);
+ assert(contact.height>=70&&contact.lean<0&&contact.x<0);
+ assert.deepEqual(contact,bustPose('hit',IMPACT_MS+45,right));
+ assert(bustPose('hit',BEAT_MS-45,right).height<contact.height);
+ assert.equal(bustPose('hit',BEAT_MS,right),null);
+ assert.equal(bustPose('hit',IMPACT_MS,-right).lean,-contact.lean);
+ assert.equal(bustPose('hit',IMPACT_MS,right,true).lean,0);
+});
 test('party cards always reserve four slots and preserve the same member positions',()=>{for(let n=1;n<=4;n++){const p=Array.from({length:n},(_,i)=>({id:'p'+i}));const slots=battleSlots(p);assert.equal(slots.length,4);assert.deepEqual(slots.slice(0,n),p);assert(slots.slice(n).every(x=>x===null));}});
 test('all NPC choices, trait commands and exits remain reachable by in-window pagination',()=>{const g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.mode='event';g.s.current={event:{id:'road_014',title:'旅人',options:[]},npc:g.person(),dialogue:true,service:'npc_trade'};g.s.current.npc.attitude='友善';const commands=encounterCommands(g,display),pages=commandPage(commands).pages,flattened=[];for(let page=0;page<pages;page++){const p=commandPage(commands,page);assert(p.items.length<=4);flattened.push(...p.items);}assert.deepEqual(flattened,commands);for(const a of ['talk','panel','recruit','attackNpc','finish','cycleActor'])assert(commands.some(c=>c.action===a));assert.equal(commandPage(commands,99).page,pages-1);});
 test('unaffordable event costs remain disabled and original choice IDs are preserved',()=>{const g=fresh();g.s.mode='event';g.s.resources.scrap=0;g.s.current={event:{id:'road_001',title:'加油站',options:[{id:'purchase',label:'購買',effects:[{op:'resource',key:'scrap',amount:-3}],requires:[]}]}};const commands=encounterCommands(g,display);assert.equal(commands[0].args,'purchase');assert.equal(commands[0].action,'choose');assert(commands[0].disabled);});
