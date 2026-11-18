@@ -1,6 +1,6 @@
 {
   "date": "2026-11-19",
-  "status": "local_verified_ready_to_publish",
+  "status": "published_and_readonly_verified",
   "automated_tests": {
     "passed": 164,
     "failed": 0
@@ -32,5 +32,17 @@
   "limitations": [
     "Physical phone and Safari not tested.",
     "Production gameplay save is not loaded or modified for verification."
+  ],
+  "deployment": {
+    "commit_sha": "f80d598c693cb72a3c53a43e6977b439e3a74b33",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cda06015fbb88191b64b7437f8231c0e",
+    "deployment_id": "appgdep_6afdd5d9240c81919e82898bd5ef9327",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Original private Site entry loaded app.js?v=18-npc-presence with no console errors.",
+    "Existing production save was not loaded or modified."
   ]
 }

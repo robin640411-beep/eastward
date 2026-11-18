@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "date": "2026-11-19",
+  "scope": "公路遠景與天空，保留近景清晰度及現有遊戲規則",
+  "depth": {
+    "distant_sampling": [
+      160,
+      70
+    ],
+    "cached_backdrop": [
+      512,
+      224
+    ],
+    "blur_px": 0.7,
+    "saturation": 0.48,
+    "contrast": 0.72,
+    "horizon": "遠方霧色依時段變化，12 種地貌各有雲量與霧濃度",
+    "sky_space": "遠景往下收至畫布 y=28，頂端漸透，保留地平線與近路物件",
+    "foreground": "車輛、角色、公路與路旁物件維持原像素清晰度"
+  },
+  "sky": {
+    "sunrise_hour": 5,
+    "sunset_hour": 19,
+    "orientation": "太陽由東方右側升起，向左方落下",
+    "night": "月亮、星點與暗色雲層",
+    "cloud_count": 7,
+    "cloud_motion": "持續低速飄移，比景物視差更慢",
+    "storm": "雲層加厚、遮弱日月光、既有隨機閃電保留",
+    "soft_motion": "雲漂移減慢"
+  },
+  "performance": {
+    "filters": "只在背景首次載入時預處理，不對全畫面逐幀模糊",
+    "sprites": "雲以小尺寸圖塊快取，最多 18 張",
+    "transition": "兩個 384×180 畫布使用互補透明遮罩合成，避免換景的天空重疊加濃",
+    "gameplay_rng_consumed": false,
+    "save_migration_required": false
+  }
+}

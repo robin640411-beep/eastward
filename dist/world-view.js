@@ -1,3 +1,4 @@
+import {distantPanorama,drawJourneySky,drawDistanceMist} from './atmosphere.js';
 import {npcBattleArt} from './npc-presentation.js';
 import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
 import {weatherLayers} from './weather-model.js';
@@ -20,13 +21,13 @@ function poly(points,c){ctx.fillStyle=c;ctx.beginPath();points.forEach(([x,y],i)
 function text(s,x,y,col='#e9d6a3',size=8){ctx.font=`bold ${size}px monospace`;ctx.textAlign='left';ctx.fillStyle='#13242c';ctx.fillText(s,x+1,y+1);ctx.fillStyle=col;ctx.fillText(s,x,y)}
 function rnd(i){return ((Math.sin(i*127.1+41.7)*43758.5453)%1+1)%1}
 const quietLandscapes=new Map();
-function panorama(b,x=0,y=0,w=W,h=174,alpha=1){const id=b.id||b,region=assets.worlds?.[id],picture=region&&img(region.image);ctx.save();ctx.globalAlpha=alpha;
- if(picture){let quiet=quietLandscapes.get(id);if(!quiet){quiet=document.createElement('canvas');quiet.width=768;quiet.height=340;const q=quiet.getContext('2d');q.imageSmoothingEnabled=false;q.filter='saturate(0.4) contrast(0.85) brightness(0.85)';q.drawImage(picture,...region.rect,0,0,768,340);q.filter='none';q.fillStyle='#29374233';q.fillRect(0,0,768,340);quietLandscapes.set(id,quiet);}ctx.drawImage(quiet,x,y,w,h);}
+function panorama(b,x=0,y=0,w=W,h=174,alpha=1,fadeSky=false){const id=b.id||b,region=assets.worlds?.[id],picture=region&&img(region.image);ctx.save();ctx.globalAlpha=alpha;
+ if(picture){const key=id+':'+fadeSky;let quiet=quietLandscapes.get(key);if(!quiet){quiet=distantPanorama(picture,region,{fadeSky});quietLandscapes.set(key,quiet);}ctx.drawImage(quiet,x,y,w,h);}
  else{rect(x,y,w,h,'#344452');paint(assets.scenes[(id==='city'?'city':id==='forest'?'forest':'alien')+'_morning'],x,y,w,h);}ctx.restore();}
 function landscape(b,alpha=1){
  // Mirrored adjacent panels meet at the same edge; the horizon never stops scrolling.
  const span=512,offset=roadTravel*.14,first=Math.floor(offset/span);
- for(let i=first;i<=first+1;i++){const x=i*span-offset;ctx.save();if(i%2){ctx.translate(x+span,0);ctx.scale(-1,1);panorama(b,0,-20,span,200,alpha);}else panorama(b,x,-20,span,200,alpha);ctx.restore();}
+ for(let i=first;i<=first+1;i++){const x=i*span-offset;ctx.save();if(i%2){ctx.translate(x+span,0);ctx.scale(-1,1);panorama(b,0,28,span,152,alpha,true);}else panorama(b,x,28,span,152,alpha,true);ctx.restore();}
 }
 function roadside(b){const spacing=128,offset=roadTravel*3.6,first=Math.floor(offset/spacing),ground=237;
  for(let j=first-1;j<=first+4;j++){const x=j*spacing-offset,c=b.id==='snow'?'#a7afa8':b.id==='salt'?'#868c7b':'#5c685b';
@@ -34,17 +35,26 @@ function roadside(b){const spacing=128,offset=roadTravel*3.6,first=Math.floor(of
   rect(x+57,ground-2,13,4,'#4b5551');rect(x+61,ground-3,7,2,'#88907e');
  }
 }
-let transitionLayer=null;
+let transitionLayer=null,incomingLandscape=null;
 function blendedLandscape(from,to,blend){
- landscape(from);if(from.id===to.id||blend<=0)return;
+ if(from.id===to.id||blend<=0){landscape(from);return;}
  if(blend>=1){landscape(to);return;}
- // New terrain enters from the right through a broad, soft edge. One small
- // offscreen buffer avoids duplicating the panorama work for every feather strip.
- if(!transitionLayer){transitionLayer=document.createElement('canvas');transitionLayer.width=W;transitionLayer.height=180;}
- const main=ctx,q=transitionLayer.getContext('2d');ctx=q;q.clearRect(0,0,W,180);q.imageSmoothingEnabled=false;landscape(to);
- const edge=W+96-blend*(W+192),mask=q.createLinearGradient(edge-96,0,edge+96,0);mask.addColorStop(0,'#0000');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,W,180);q.globalCompositeOperation='source-over';ctx=main;ctx.drawImage(transitionLayer,0,0);
+ // Composite complementary masks before painting over the sky. This prevents
+ // translucent upper horizons doubling in opacity halfway through a transition.
+ const layer=()=>{const c=document.createElement('canvas');c.width=W;c.height=180;return c;};
+ if(!transitionLayer){transitionLayer=layer();incomingLandscape=layer();}
+ const main=ctx,edge=W+96-blend*(W+192);
+ try{
+  for(const [target,biome,incoming] of [[transitionLayer,from,false],[incomingLandscape,to,true]]){
+   const q=target.getContext('2d');ctx=q;q.clearRect(0,0,W,180);q.imageSmoothingEnabled=false;landscape(biome);
+   const mask=q.createLinearGradient(edge-96,0,edge+96,0);mask.addColorStop(0,incoming?'#0000':'#000');mask.addColorStop(1,incoming?'#000':'#0000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,W,180);q.globalCompositeOperation='source-over';
+  }
+  const q=transitionLayer.getContext('2d');q.globalCompositeOperation='lighter';q.drawImage(incomingLandscape,0,0);q.globalCompositeOperation='source-over';
+ }finally{ctx=main;}ctx.drawImage(transitionLayer,0,0);
 }
-function road(from,to,blend,light){blendedLandscape(from,to,blend);
+function road(from,to,blend,light){
+ const sky=drawJourneySky(ctx,{seed:state.seed,seconds:clock,travel:roadTravel,minutes:lightMinute,from,to,blend,light,storm:stormStrength,soft:reduced});
+ blendedLandscape(from,to,blend);drawDistanceMist(ctx,{light,mist:sky.mist});
  // Atmospheric separation calms the artwork and puts the vehicle on a readable road.
  const haze=ctx.createLinearGradient(0,95,0,175);haze.addColorStop(0,'#38494c00');haze.addColorStop(1,'#485454bb');ctx.fillStyle=haze;ctx.fillRect(0,95,W,80);
  rect(0,165,W,75,'#303c43');rect(0,165,W,5,'#6c7569');rect(0,170,W,2,'#222f38');rect(0,174,W,1,'#8c907b');
@@ -55,7 +65,6 @@ function road(from,to,blend,light){blendedLandscape(from,to,blend);
  for(let i=0;i<62;i++){const x=(i*71-roadTravel*(2.4+rnd(i)*1.2)%440+440)%440;rect(x,178+rnd(i+46)*57,2+i%4,1,i%3?'#465157':'#626d6a');}
  rect(0,234,W,2,'#949680');rect(0,236,W,4,'#525f57');
  const marker=490-roadTravel*.85%930;paint(assets.occupation.pylon,marker,87,27,72);
- if(light.night){ctx.globalAlpha=.35;for(let i=0;i<16;i++)rect(rnd(i)*W,rnd(i+91)*45,1,1,'#c0c9cf');ctx.globalAlpha=1;}
 }
 function room(){const eventKind=encounters[state.current?.event.id]?.kind,raw=({gas:'garage',clinic:'clinic',pharmacy:'clinic',motel:'hotel',stall:'shop',market:'shop',nest:'nest',eggs:'nest',spores:'nest'}[eventKind]||state.frames?.at(-1)?.scene||'warehouse'),kind=({gas:'garage',pharmacy:'clinic',motel:'hotel',market:'shop',stall:'shop',nest:'nest'}[raw]||raw),valid=['warehouse','clinic','garage','shop','hotel','laboratory','ruin','nest'],scene=valid.includes(kind)?kind:'warehouse';paint(assets.scenes[scene],0,0,W,H);
  if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const cw=sh*W/H;sx+=(sw-cw)/2;sw=cw;ctx.drawImage(p,sx,sy,sw,sh,0,0,W,H);}}
