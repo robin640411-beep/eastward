@@ -1,0 +1,20 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "checked": [
+    "driving acceleration reaches 60 km/h, nearby posts pass while far panorama shifts",
+    "automatic drive reaches gas station, costs applied once",
+    "building shutters close and reveal interior; overlay removed",
+    "battle strips enter combat after double tap only once",
+    "two-person attacks resolve in order, actor changes and per-target damage",
+    "PSI costs 3 ESP once; skip proceeds to next round once",
+    "enemy acts first when faster; hit party card flashes and damage appears",
+    "lethal attack finishes before victory event controls return",
+    "no horizontal overflow, navigation hit targets at least 69 by 46 px",
+    "no console errors"
+  ],
+  "test_count": 69,
+  "real_phone_tested": false
+}

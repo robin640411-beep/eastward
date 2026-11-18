@@ -54,7 +54,12 @@
     "全部 546 張原有美術重新繪製，角色、車輛、敵人、圖示、場景和事件物件一致更新",
     "12 個高細節佔領區全景、8 建築外觀、8 室內、16 戰鬥敵人原創圖集",
     "母艦、資源抽取、黑紫生體設施、巡邏機和人類設施監控器",
-    "新版大型敵人等比顯示並共用腳底線，車窗位置與座位保留"
+    "新版大型敵人等比顯示並共用腳底線，車窗位置與座位保留",
+    "進出建築門扇轉場、開戰橫向分段轉場",
+    "按實際速度順序播放普通攻擊、超能力、藥品、防禦與受傷；倒下動畫後返回事件",
+    "動畫可略過且存檔立即保存已結算結果，連點不重複行動",
+    "低彩度遠景、無上限遠景捲動、路標護欄與三層公路視差、起步加速與停靠減速",
+    "完整／柔和動畫切換並保存偏好，柔和模式仍保留必要動作提示"
   ],
   "verification": [
     "324 個 SVG XML 與引用檢查",
@@ -81,7 +86,11 @@
     "62 項測試全數通過；正式站載入原有存檔、顯示新地貌與精簡狀態列，無瀏覽器錯誤",
     "比對基準 commit，全部 546 張既有 SVG 均已更新，沒有遺漏",
     "全部 28 車型／座位圖的 147 個窗孔保留原座標，11 人車窗實際可見",
-    "390×844／360×780 實際檢查新行車、加油站、室內、夜間森林、佔領城市與戰鬥，點選敵人及回合結算正常"
+    "390×844／360×780 實際檢查新行車、加油站、室內、夜間森林、佔領城市與戰鬥，點選敵人及回合結算正常",
+    "64 項測試通過，圖集裁切界線及真透明格式已檢查",
+    "正式網站成功載入新版地景、角色與車輛，原有存檔可繼續，未見瀏覽器錯誤",
+    "69 項測試通過，新增動畫紀錄不改骰值、花費或先後順序，最後一擊及睡眠被擊中者重播一致",
+    "390×844 Chrome 實際檢查自動行車、進屋轉場、開戰、普通攻擊與超能力、略過、快速連點及戰鬥勝利；無水平溢出或瀏覽器錯誤"
   ],
   "must_finish_before_completion": [],
   "tools": {
@@ -94,15 +103,15 @@
   },
   "next_step": "可開始使用者試玩；後續依回饋調整數值與內容。",
   "deployment": {
-    "status": "succeeded",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_5db1a8c65edc8191bb60a0d66ec8f75b",
-    "commit_sha": "b2327f094b7ed173682578b44c4f6fac3f07aa43",
+    "status": "succeeded",
+    "commit_sha": "a182e0553b3cfcf782a5568daf902295c1c2c399",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_37bbf16e5a9c81919114f82b6c96ef93",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "occupied-earth-art-remake",
-    "status": "locally-verified-awaiting-deployment",
+    "name": "road-motion-and-combat-cinematics",
+    "status": "local-verified-awaiting-publication",
     "physical_phone_tested": false
   }
 }

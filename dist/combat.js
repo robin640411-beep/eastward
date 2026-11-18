@@ -1,3 +1,4 @@
+import {battleFrame,frameEffects} from './motion-model.js';
 // Each awake traveller commits one command. Only then does initiative resolve.
 export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  const begin=Game.prototype.beginCombat;
@@ -41,6 +42,20 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.s.vehicle.mods.filter(x=>x==='gun').length*4;
  if(e.npc?.race==='chitin'&&b.mode==='character')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
  };
+ // Record the actual initiative sequence for the view, including a final lethal hit.
+ // Recording is opt-in, does not roll dice, and is separate from the persisted state.
+ for(const [method,side] of [['partyAction','party'],['enemyAction','enemies']]){const action=Game.prototype[method];Game.prototype[method]=function(unit,command){
+  if(!this.recordVisuals||!this.s.battle||unit.hp<=0)return action.call(this,unit,command);
+  this.visualSteps??=[];if(!this.visualSteps.length)this.visualStart=structuredClone(this.s);
+  const b=this.s.battle,before=battleFrame(this.s,b),lastLog=this.s.logs[0],stunned=side==='enemies'&&unit.stun>0;
+  const power=command?.type==='psi'?learned(unit).find(p=>p.id===Number(command.power)):null;
+  const kind=stunned?'stun':command?.type||'attack';
+  const intended=command?.target||(side==='party'?b.enemies.find(e=>e.hp>0)?.id:null);
+  const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
+  const label=this.s.logs[0]!==lastLog?this.s.logs[0].text:stunned?'暫時無法行動。':'採取行動。';
+  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:intended,effects,after,label});
+  return result;
+ };}
  // Inventory changes cannot bypass the turn or move characters out of a moving car.
  for(const method of ['dismiss','equip','useMedicine','replaceVehicle','recruit']){const original=Game.prototype[method];Game.prototype[method]=function(...args){if(!['ready','event'].includes(this.s.mode))return false;return original.apply(this,args)}}
 }
