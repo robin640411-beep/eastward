@@ -232,7 +232,7 @@
       "source_type": "profession",
       "source_id": "courier",
       "trigger": "事件出現信使路標",
-      "effect": "解讀一條道路消息或通行線索，不改變 D10 前進結果。",
+      "effect": "解讀一條道路消息或通行線索，了解當地的傳聞。",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {

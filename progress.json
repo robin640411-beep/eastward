@@ -102,7 +102,8 @@
     "正式私人網站載入 v4-motion、原有存檔、完整動畫切換正常，手機尺寸無溢出或瀏覽器錯誤",
     "76 項測試通過，裝備預覽對照實際換裝結果，含等級、缺點、升級降級、配件取捨與不同同伴",
     "390×844 與 360×780 瀏覽器檢查角色面板、裝備比較、重複點擊、舊物回袋、商店購買、守夜及選角卡片",
-    "所有下拉選單移除，12 種族與 20 職業選擇正常；圖鑑切換正常；無水平溢出、遺失圖像或瀏覽器錯誤"
+    "所有下拉選單移除，12 種族與 20 職業選擇正常；圖鑑切換正常；無水平溢出、遺失圖像或瀏覽器錯誤",
+    "正式網站載入 v5-loadout、舊存檔與實際裝備比較；確認按鈕距手機底部超過 100px，避免浮動工具列遮擋"
   ],
   "must_finish_before_completion": [],
   "tools": {
@@ -111,19 +112,33 @@
     "local_preview": "http://127.0.0.1:8765/",
     "preview_exec_session": null,
     "browser": "Chrome id 3",
-    "browser_tab": "2093001341"
+    "browser_tab": "2093001361"
   },
   "next_step": "可開始使用者試玩；後續依回饋調整數值與內容。",
   "deployment": {
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "commit_sha": "e60d4572417b83815597d66c7214bcb25d42f5c4",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_35779b7b7d948191be760db17eb6697d",
+    "commit_sha": "0eb9250628cc4b61d804d0329dc450b02d9be285",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_0b08d3a594f881918ea00da6a62b07a2",
     "audience": "owner-private"
   },
   "current_update": {
     "name": "character-equipment-and-card-ui",
-    "status": "local-verified-awaiting-publication",
+    "status": "deployed-and-browser-verified",
     "physical_phone_tested": false
+  },
+  "natural_journey_ui": {
+    "status": "verified_pending_publication",
+    "evidence": "qa/journey-ui/verification.json",
+    "features": [
+      "自動亂數與隱藏骰表",
+      "無倒數與事件預告的自然行車",
+      "停靠後的情境指令視窗",
+      "JRPG 隊伍狀態與底部圖示選單",
+      "停靠後直接上路",
+      "舊存檔紀錄相容",
+      "車輛面板整理"
+    ],
+    "tests_passed": 79
   }
 }

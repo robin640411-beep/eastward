@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-18",
+  "status": "local_verified",
+  "viewport_checks": [
+    "390x844 driving and automatic arrival",
+    "360x800 two-person combat and equipment comparison"
+  ],
+  "automated_tests": {
+    "passed": 79,
+    "failed": 0
+  },
+  "checked": [
+    "No dice, oracle, countdown, distance or cost preview in driving UI",
+    "Natural approach to illustrated gas station, automatically stopped with choices",
+    "Building entry transition and commands",
+    "Continue from completed stop goes directly into driving",
+    "Opening bag during driving does not restart trip; encounter closes menu",
+    "Two-person command selection, attack animation and round resolution",
+    "Equipment 7 to 9 preview matches equip result and returns club",
+    "360px viewport has no horizontal document overflow or select elements",
+    "Vehicle status and modification panel",
+    "Legacy journal rendering removes old dice mechanics without changing save records"
+  ],
+  "screenshots": [
+    "driving-mobile.jpg",
+    "stopped-mobile.jpg",
+    "battle-360.jpg",
+    "equipment-360.jpg"
+  ],
+  "limitations": [
+    "Viewport testing in desktop Chrome; no physical phone performance measurement"
+  ]
+}
