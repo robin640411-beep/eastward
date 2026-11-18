@@ -18,7 +18,7 @@ export function installDialogue(Game,{display}){
  };
  Game.prototype.talk=function(){
   const c=this.s.current,p=c?.npc;if(this.s.mode!=='event'||!c?.dialogue||!p||['敵對','掠奪'].includes(p.attitude))return false;
-  const topic=this.dialogueTopic(p),text=fillWorld(topic.responses[p.attitude]||topic.responses['冷淡'],this.s.world);
+  const topic=this.dialogueTopic(p),text=fillWorld(topic.responses[p.attitude]||topic.responses['冷淡'],this.s.world)+this.bossRumor(p);
   this.s.minutes+=5;
   let reunion='';if(c.event.kind==='followup'&&!c.recalled){c.recalled=true;reunion=`「又見面了。${p.memories?.at(-1)||'我還記得我們一起走過的路。'}」\n`;}
   let gift='';if(p.attitude==='同情'&&!c.giftGiven){c.giftGiven=true;if(this.roll()<=60-(this.actor()?.flaw==='abrasive'?10:0)){this.add('medicine',1);gift='\n他從行囊中取出一份藥品交給你：「這個留著，路上用得上。」';}}
@@ -30,7 +30,7 @@ export function installDialogue(Game,{display}){
  const begin=Game.prototype.beginCombat;Game.prototype.beginCombat=function(mode='character',category=null,npc=null){
   begin.call(this,mode,category,npc);if(!npc||!this.s.battle)return;
   const topic=this.dialogueTopic(npc),attitude=npc.attitude==='掠奪'?'掠奪':'敵對';
-  this.s.notice=`${display(npc)}：\n「${fillWorld(topic.responses[attitude],this.s.world)}」`;
+  this.s.notice=`${display(npc)}：\n「${fillWorld(topic.responses[attitude],this.s.world)+this.bossRumor(npc)}」`;
   this.log('戰前喊話',this.s.notice);
  };
  Game.prototype.ambient=function(){

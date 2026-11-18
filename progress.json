@@ -20,7 +20,8 @@
     "redrawn_existing": 546,
     "painted_atlases": 5,
     "occupation_props": 3,
-    "equipment_icons": 6
+    "equipment_icons": 6,
+    "final_bosses": 5
   },
   "implemented": [
     "原創像素 SVG 素材",
@@ -181,7 +182,7 @@
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
   },
   "route_regions": {
-    "status": "tested_pending_publication",
+    "status": "published_and_readonly_verified",
     "spec": "spec/route-regions.json",
     "evidence": "qa/regions/verification.json",
     "region_count": 10,
@@ -194,6 +195,31 @@
       "大型入口路牌與建築店名招牌",
       "地名與店名共用 D100，存檔保持一致",
       "舊存檔相容；不消耗額外戰鬥或事件亂數"
+    ],
+    "commit_sha": "53a49bfb80fc0f2c3fa69327fd2404bf1f3af3b1",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_05b0c05cf1bc8191a54ac39df701a52e",
+    "deployment_id": "appgdep_6afd902fb7d08191a0d3a631e8520e1e",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
+  },
+  "growth_and_finale": {
+    "status": "local_verified_pending_publication",
+    "spec": "spec/progression-combat.json",
+    "evidence": "qa/growth/verification.json",
+    "max_level": 18,
+    "enemies_per_region": 5,
+    "region_count": 10,
+    "enemy_group_size": [
+      1,
+      3
+    ],
+    "final_bosses": 5,
+    "tests_passed": 116,
+    "features": [
+      "整次停靠及巢狀建築只結算一次全隊升級",
+      "新同伴為主角等級前後一級、隨機裝備",
+      "各路段五種敵人、強度與體型隨旅程增加",
+      "開局固定五種魔王之一，擊敗後才能進入樂園",
+      "NPC 與同伴可隨機談論對應魔王，無保證提示"
     ]
   }
 }

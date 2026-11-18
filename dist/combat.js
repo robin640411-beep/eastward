@@ -21,7 +21,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  const turns=[...this.alive().filter(q=>b.orders[q.id]).map(q=>({unit:q,ally:true,speed:this.stat(q,'speed')})),...b.enemies.filter(e=>e.hp>0).map(e=>({unit:e,ally:false,speed:e.speed}))].map((t,i)=>({...t,tie:this.roll(100),index:i})).sort((a,z)=>z.speed-a.speed||z.tie-a.tie||a.index-z.index);
  for(const t of turns){if(t.unit.hp<=0)continue;if(t.ally){if(t.unit.asleep)continue;this.partyAction(t.unit,b.orders[t.unit.id]);}else this.enemyAction(t.unit);
   if(this.s.battle!==b||this.s.mode==='ending')return true;
-  if(b.enemies.every(e=>e.hp<=0)){this.add('scrap',2);this.gainXp(6);this.tell('戰鬥勝利，取得 2 份廢料。');this.finishCombat(true);return true;}
+  if(b.enemies.every(e=>e.hp<=0)){this.add('scrap',2);this.tell('戰鬥勝利，取得 2 份廢料。');this.finishCombat(true);return true;}
   if(b.mode==='vehicle'&&this.s.vehicle.hp<=0){this.tell('車輛失去行駛能力，敵人離去。');this.finishCombat(false);return true;}
  }
  this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=this.alive().filter(q=>!q.asleep).map(q=>q.id);return true;
@@ -38,7 +38,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  }
  const vehicleWeapon=b.mode==='vehicle'&&p.id===this.driver()?.id;const ranged=vehicleWeapon||ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&!vehicleWeapon&&p.flaw==='unsteady'?10:0)){this.log(display(p),'攻擊落空。');return;}
  let damage=Math.max(1,this.stat(p,'attack')-e.defense)+(p.profession==='soldier'&&(b.mode==='character'||p.id!==this.driver()?.id)?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(b.mode==='character'&&p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0);p.startled=false;
- if(b.mode==='character'&&p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!this.d.assets.enemies[e.key].machine){damage+=2;b.usedHunter.push(p.id)}
+ if(b.mode==='character'&&p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!(e.machine??this.d.assets.enemies[e.key]?.machine)){damage+=2;b.usedHunter.push(p.id)}
  if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.s.vehicle.mods.filter(x=>x==='gun').length*4;
  if(e.npc?.race==='chitin'&&b.mode==='character')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
  };

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "tested_pending_publication",
+  "status": "published_and_readonly_verified",
   "rules": {
     "route_positions": 100,
     "region_count": 10,
@@ -34,5 +34,12 @@
     "repeated-forest-start.jpg",
     "repeated-forest-sign.jpg",
     "named-gas-station-360.jpg"
+  ],
+  "production_checks": [
+    "Native publication succeeded",
+    "Opening page and updated biome label loaded",
+    "Entry and import map use v=9-regions-2",
+    "No browser console errors",
+    "Production gameplay save not loaded or changed"
   ]
 }

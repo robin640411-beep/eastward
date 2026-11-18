@@ -1,6 +1,8 @@
 // Local preview fixtures. Generated qa.html must not be packaged for release.
 import {readFileSync,writeFileSync} from 'node:fs';
 import {Game} from '../dist/engine.js';
+import {setLevel} from '../dist/progression-runtime.js';
+import {GROWTH} from '../dist/progression-catalog.js';
 import {createRoute,nameEncounter,BIOMES} from '../dist/route-runtime.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
@@ -30,5 +32,14 @@ for(const [label,from,to] of [['森林 → 都市 · 區段過渡','forest','cit
  for(let rng=1;rng<1000;rng++){g=new Game(d);g.start({seed:worldSeed});g.s.progress=6;g.s.rng=rng;g.depart();if(g.s.travel?.n===10){states[label]=g.s;break;}}
 }
 g=fresh();g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:19,event:structuredClone(d.events.events.find(e=>e.id==='road_001')),building:true,npc:null,resolved:false};g.s.notice=g.s.current.event.text;nameEncounter(g.s);states['D100 店名 · 加油站']=g.s;
+
+
+for(const boss of GROWTH.bosses){g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.party.forEach(p=>{setLevel(p,17);p.gear={武器:'pistol',防具:'vest',配件:'charm'};});g.s.progress=100;g.s.finalBoss.id=boss.id;g.beginFinale();states['最終魔王 · '+boss.name]=g.s;}
+g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.party.forEach(p=>setLevel(p,2));g.s.stop=1;g.s.mode='event';g.s.frames=[{kind:'road',count:4}];g.s.current={instance:19,event:{id:'road_011',title:'搜尋完成',text:'這次停靠的最後一個事件已經結束。',options:[]},resolved:false};states['完成事件 · 全隊升級']=g.s;
+for(const progress of [1,91]){for(let seed=1;seed<100;seed++){g=fresh();g.s.progress=progress;g.s.rng=seed;g.beginCombat();if(g.s.battle.enemies.length===3){states['三隻敵人 · 路段 '+progress]=g.s;break;}}}
+g=fresh();setLevel(g.actor(),3);g.s.vehicle.model='van';g.s.mode='event';g.s.current={instance:27,event:{id:'road_014',title:'等待同行的旅人',text:'旅人已經準備好自己的裝備。',options:[]},npc:g.person('mutant','mechanic'),dialogue:true,resolved:false};g.s.current.npc.attitude='友善';states['三級主角 · 邀請同伴']=g.s;
+for(let seed=1;seed<1000;seed++){g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.rng=seed;g.depart();if(g.s.travel?.voices.focus==='boss'){states['同伴 · 魔王傳聞']=g.s;break;}}
+g=fresh();g.s.progress=100;setLevel(g.actor(),17);g.beginFinale();g.s.battle.enemies[0].hp=1;g.s.battle.enemies[0].speed=0;states['魔王最後一擊 · 抵達樂園']=g.s;
+g=fresh();g.s.mode='event';g.s.current={instance:38,event:{id:'road_014',title:'東行旅人',text:'一位旅人提起東方入口的事情。',options:[]},npc:g.person('human','historian'),dialogue:true,resolved:false};g.s.current.npc.attitude='戒備';for(let seed=1;seed<1000;seed++){const candidate=new Game(d,structuredClone(g.s));candidate.s.rng=seed;candidate.talk();if(candidate.s.bossRumors.length){states['NPC · 魔王傳聞']=candidate.s;break;}}
 
 writeFileSync(new URL('../dist/qa.html',import.meta.url),`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一路向東測試情境</title><style>body{background:#14232d;color:#eee;font:18px sans-serif;padding:24px}button{display:block;margin:18px 0;padding:18px;width:100%}</style><h1>本機測試情境</h1><p>載入固定測試存檔，再按「繼續旅程」。</p><div id="cases"></div><script>const states=${JSON.stringify(states).replaceAll('<','\\u003c')};for(const [name,state] of Object.entries(states)){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{localStorage.setItem('eastward.save.v1',JSON.stringify(state));location.href='./'};document.querySelector('#cases').append(b)}</script></html>`);

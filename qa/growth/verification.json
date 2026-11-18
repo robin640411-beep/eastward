@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-18",
+  "status": "local_verified_pending_publication",
+  "spec": "spec/progression-combat.json",
+  "automated_tests": {
+    "passed": 116,
+    "failed": 0
+  },
+  "browser_checks": [
+    "390x844: all five final boss images rendered with party below and commands accessible",
+    "Actual two-person boss combat: attack target, companion defense, HP changes and next turn",
+    "Whole stop completed: both members advance from level 2 to 3, new powers displayed while driving",
+    "Early and late regions show three enemies with different HP and larger late-game bodies",
+    "360x800: all three enemy targets in bounds, no horizontal overflow",
+    "Recruit with level 3 protagonist joins at level 3 with random pistol and vest; equipment visible in character panel",
+    "Guarded NPC mentions selected boss; same rumor preserved in journal",
+    "Companion driving exchange mentions selected boss and Paradise",
+    "Final hit plays before Paradise ending; event award reaches level 18",
+    "No browser console errors"
+  ],
+  "limitations": [
+    "Desktop Chrome phone-size viewports; physical phone performance not measured",
+    "Production gameplay save is not loaded during release verification"
+  ],
+  "evidence": [
+    "broodmother-mobile.jpg",
+    "companion-rumor.jpg",
+    "fallen_angel-mobile.jpg",
+    "graft_colossus-mobile.jpg",
+    "level-up-mobile.jpg",
+    "overseer-mobile.jpg",
+    "recruit-equipment-360.jpg",
+    "region-1-enemies.jpg",
+    "region-91-enemies.jpg",
+    "rumor-journal.jpg",
+    "victory-mobile.jpg",
+    "zero_core-mobile.jpg"
+  ]
+}

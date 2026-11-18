@@ -91,7 +91,7 @@ function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  if(kind==='signal'&&i<3){ctx.strokeStyle='#8ec6ae';ctx.globalAlpha=(1-v)*.7;ctx.strokeRect(265-v*25,97-v*19,v*50,v*38)}ctx.globalAlpha=1;
  }if(kind==='storm'&&Math.sin(t*.9)>.996){rect(0,0,W,H,'#c6d6ce88')}
 }
-function battle(){const b=state.battle;if(!b)return;const enemies=playback?b.enemies:b.enemies.filter(e=>e.hp>0),layout=enemyLayout(enemies.length),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
+function battle(){const b=state.battle;if(!b)return;const enemies=playback?b.enemies:b.enemies.filter(e=>e.hp>0),layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
  if(!vehicleFight){if(state.current?.inside||state.frames?.at(-1)?.kind==='building')room();else panorama(biomeAt(state.progress,state.seed,state.route),0,0,W,H);rect(0,0,W,H,'#0e192bc7');
   const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
  }
@@ -100,7 +100,7 @@ function battle(){const b=state.battle;if(!b)return;const enemies=playback?b.ene
   const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
   ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.62?Math.max(0,1-(age-.22)/.4):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.npc?paint(assets.characters[e.npc.race+'_'+e.npc.profession],l.cx-l.h/3,y,l.h*2/3,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
+  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paint(assets.characters[e.npc.race+'_'+e.npc.profession],l.cx-l.h/3,y,l.h*2/3,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
   ctx.restore();
  });
  if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
@@ -158,7 +158,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(interior&&!driving&&!s.battle)room();else{road(from,to,blend,light);if(!s.battle&&(driving||!s.current))regionSign(view);}
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
-  if(driving&&s.travel.preview?.battle&&!current){const e=s.travel.preview.battle.enemies[0];if(e){if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
+  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.image)paint(e.image,pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
  }
  if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from,true);else{ctx.globalAlpha=1-blend;roadside(from,true);ctx.globalAlpha=blend;roadside(to,true);ctx.globalAlpha=1;}}
@@ -171,7 +171,8 @@ requestAnimationFrame(frame);
 export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false}={}){canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;
  const next=s.current?.instance+':'+s.mode+':'+!!s.current?.inside;if(next!==key){eventAt=clock;key=next}
  // Warm actual approaching art so it is already on screen before stopping.
- const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image);
+ const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image|| (e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
+ for(const e of s.battle?.enemies||[])if(e.image)img(e.image);
  canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，隊伍狀態與指令在下方':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
 export function captureVisual(s){return {party:Object.fromEntries(s.party.map(p=>[p.id,p.hp])),hp:s.party.reduce((n,p)=>n+p.hp,0),vehicle:s.vehicle.hp,enemies:s.battle?.enemies.reduce((n,e)=>n+e.hp,0)||0,fuel:s.resources.fuel,scrap:s.resources.scrap,medicine:s.resources.medicine,round:s.battle?.round,mode:s.mode}}
 export function animateResult(before,s,type){const after=captureVisual(s);for(const p of s.party){const el=document.querySelector(`[data-person="${p.id}"]`),diff=p.hp-(before.party?.[p.id]??p.hp);if(el&&diff){el.classList.add(diff<0?'was-hit':'was-healed');}}feedback=[];for(const [key,label,x,col] of [['hp','HP',45,'#e58d79'],['vehicle','車況',48,'#e58d79'],['enemies','',174,'#f0d38e'],['fuel','汽油',176,'#a8d0b8'],['scrap','廢料',176,'#d9bc79'],['medicine','藥品',176,'#a8d0b8']]){const diff=after[key]-before[key];if(diff)feedback.push({text:`${label} ${diff>0?'+':''}${diff}`,x,color:col})}if(feedback.length||before.round!==after.round||type==='psi'){actionAt=clock;actionKind=after.enemies<before.enemies?(type==='psi'?'psi':'attack'):'none'}}

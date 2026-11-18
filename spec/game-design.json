@@ -664,5 +664,15 @@
     "names_persist": true,
     "boundary_behavior": "按實際行駛距離切換，不因停靠次數變更；新景色從右方漸入，大型路牌立在區段入口。",
     "arrival": "樂園只在距離 100 時抵達；綠丘是可能出現的地貌，不代表樂園。"
+  },
+  "progression_and_finale": {
+    "source": "spec/progression-combat.json",
+    "level_cap": 18,
+    "leveling": "完成整次停靠後，全隊提升一級；連續事件與建築探索合併計算。",
+    "recruit_level": "主角等級加 D3−2，限制在 1 至 18 級。",
+    "recruit_equipment": "首次生成角色時隨機配備武器、防具與配件；重逢保留原裝備。",
+    "regional_enemies": "10 個區段各有 5 種敵人，數值與體型隨區段提升，每次 1–3 隻；敵對 NPC 獨立由事件觸發。",
+    "final_boss": "開局決定五選一魔王並保存；抵達 100 時進入入口決戰，擊敗後才抵達樂園。",
+    "foreshadowing": "NPC 交談有 20% 機會補充魔王傳聞；同伴閒聊有 20% 機會選中魔王話題，不保證出現。"
   }
 }

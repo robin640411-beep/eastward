@@ -115,5 +115,16 @@
     "total": 4,
     "companions": 3,
     "also_limited_by_vehicle_seats": true
+  },
+  "progression": {
+    "maximum_level": 18,
+    "join_offset": [
+      -1,
+      0,
+      1
+    ],
+    "random_equipment": true,
+    "reunion_preserves_equipment": true,
+    "source": "spec/progression-combat.json"
   }
 }

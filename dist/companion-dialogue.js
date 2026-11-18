@@ -5,6 +5,7 @@ export function companionExchange(game,initiator,partner,display){
  const race=catalog?.races[partner.race],profession=catalog?.professions[partner.profession];
  if(!race||!profession){const pair=game.oracle('driving_companions').value;return {lines:[line(initiator,pair[0],display),line(partner,pair[1],display)],focus:'shared'};}
  const focus=game.oracle('companion_focus').value;
+ if(focus==='boss')return game.companionBossExchange(initiator,partner);
  partner.chatterLast??={};
  function select(entries,key){let index=game.roll(entries.length)-1;if(entries.length>1&&partner.chatterLast[key]===index)index=(index+1)%entries.length;partner.chatterLast[key]=index;return entries[index];}
  let prompt,response;

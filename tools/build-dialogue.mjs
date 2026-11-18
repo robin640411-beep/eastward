@@ -3,7 +3,7 @@ const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url)));
 const content=read('spec/occupation-dialogue.json'),oracles=read('spec/oracles.json'),companions=read('spec/companion-dialogue.json');
 const table=(id,values)=>({id,die:'D100',status:'implemented',rows:values.map((value,i)=>({min:i*100/values.length+1,max:(i+1)*100/values.length,value}))});
 if(content.topics.length!==100)throw Error('Expected 100 occupation topics');
-const added=[{id:'companion_focus',die:'D100',rows:[{min:1,max:25,value:'race'},{min:26,max:50,value:'profession'},{min:51,max:100,value:'paradise'}]},table('occupation_dialogue',content.topics),table('driving_solo',content.driving.solo),table('driving_companions',content.driving.companions),table('driving_radio',content.driving.radio),table('driving_quiet',content.driving.quiet),{id:'driving_channel',die:'D100',rows:[{min:1,max:50,value:'talk'},{min:51,max:85,value:'radio'},{min:86,max:100,value:'quiet'}]}];
+const added=[{id:'companion_focus',die:'D100',rows:[{min:1,max:25,value:'race'},{min:26,max:50,value:'profession'},{min:51,max:80,value:'paradise'},{min:81,max:100,value:'boss'}]},table('occupation_dialogue',content.topics),table('driving_solo',content.driving.solo),table('driving_companions',content.driving.companions),table('driving_radio',content.driving.radio),table('driving_quiet',content.driving.quiet),{id:'driving_channel',die:'D100',rows:[{min:1,max:50,value:'talk'},{min:51,max:85,value:'radio'},{min:86,max:100,value:'quiet'}]}];
 oracles.companion_dialogue=companions;
 oracles.tables=oracles.tables.filter(t=>!added.some(n=>n.id===t.id)).concat(added);
 for(const p of ['spec/oracles.json','dist/data/oracles.json'])writeFileSync(new URL('../'+p,import.meta.url),JSON.stringify(oracles,null,2)+'\n');
