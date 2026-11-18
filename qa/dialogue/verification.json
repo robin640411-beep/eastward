@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-18",
+  "status": "local_verified",
+  "content": {
+    "history_topics": 100,
+    "attitude_variants": 600,
+    "companion_exchanges": 20,
+    "solo_exchanges": 20,
+    "radio_reports": 20,
+    "quiet_moments": 4
+  },
+  "automated_tests": {
+    "passed": 89,
+    "failed": 0
+  },
+  "browser_checks": [
+    "390px: friendly and guarded responses to the same topic differ",
+    "Repeated talk advances five minutes and selects another topic",
+    "Oral-history archive contains the actual spoken words, speaker and occupation year",
+    "360px: four-member status grid, no horizontal overflow, fifth recruit disabled despite bus seats",
+    "Oversized legacy save retains all five characters until explicit companion departure",
+    "Named companion portraits and two-line conversation while driving",
+    "Radio report labelled with its station during driving",
+    "No browser console errors"
+  ],
+  "limitations": [
+    "Chrome phone viewports; physical device performance not measured",
+    "Production save will not be loaded or advanced during verification"
+  ]
+}

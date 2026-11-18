@@ -128,7 +128,11 @@
     "physical_phone_tested": false
   },
   "natural_journey_ui": {
-    "status": "verified_pending_publication",
+    "status": "published_and_readonly_verified",
+    "commit_sha": "1531d062a4f36e187d57dddd19d4d05a7a8f4b2c",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_4cb1a75318e081919a8baaa22bfbf98e",
+    "deployment_id": "appgdep_6afd433bf1448191aa0d54e00b192401",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "evidence": "qa/journey-ui/verification.json",
     "features": [
       "自動亂數與隱藏骰表",
@@ -140,5 +144,16 @@
       "車輛面板整理"
     ],
     "tests_passed": 79
+  },
+  "occupation_dialogue": {
+    "status": "verified_pending_publication",
+    "spec": "spec/occupation-dialogue.json",
+    "evidence": "qa/dialogue/verification.json",
+    "topics": 100,
+    "attitude_variants": 600,
+    "driving_entries": 64,
+    "max_party": 4,
+    "max_companions": 3,
+    "tests_passed": 89
   }
 }

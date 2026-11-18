@@ -77,5 +77,34 @@
     "態度分支執行器",
     "交易與贈物數值"
   ],
-  "event_polarity_rule": "有利事件也能抽到敵對 NPC；不依好壞分類篩掉態度"
+  "event_polarity_rule": "有利事件也能抽到敵對 NPC；不依好壞分類篩掉態度",
+  "dialogue": {
+    "table": "occupation_dialogue",
+    "topics": 100,
+    "attitudes": [
+      "友善",
+      "同情",
+      "戒備",
+      "冷淡",
+      "敵對",
+      "掠奪"
+    ],
+    "history_scope": "外星統治地球十年",
+    "normal_talk_minutes": 5,
+    "hostile_or_raider": "只使用戰前喊話；保留直接開戰，不開放和平互動",
+    "recent_topic_memory": 6,
+    "oral_archive": "記錄玩家實際聽到的話，不把保留未說的細節寫入紀錄",
+    "driving": [
+      "20 組同伴閒聊",
+      "20 組自言自語",
+      "20 則電台報導",
+      "4 種安靜片刻"
+    ],
+    "generation": "離線靜態內容搭配 D100；不呼叫 AI"
+  },
+  "party_limit": {
+    "total": 4,
+    "companions": 3,
+    "also_limited_by_vehicle_seats": true
+  }
 }

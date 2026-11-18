@@ -57,7 +57,9 @@
       "generation_method": "TRPG 神諭系統，以隨機表與規則組合產生背景故事線",
       "purpose": "在外星入侵前提內產生每局不同的侵略經過與災後歷史",
       "revelation_medium": [
-        "公路事件中取得的書籍"
+        "公路事件中取得的書籍",
+        "依態度調整的 NPC 口述",
+        "行車電台報導"
       ]
     },
     "story_background_proposal": {
@@ -98,7 +100,9 @@
       "oracle_role_proposal": "先確立篇章前提，再用相容的神諭產生該篇每局不同的歷史細節；不任意混合三種末日起因",
       "selection_method": "目前固定外星入侵篇"
     },
-    "active_background": "alien_invasion"
+    "active_background": "alien_invasion",
+    "occupation_years": 10,
+    "current_year_rule": "開局入侵年份 + 10"
   },
   "journey": {
     "structure": "具有終點的 D100 公路旅程",
@@ -372,7 +376,10 @@
         "等級"
       ],
       "profession_affects_learning": false
-    }
+    },
+    "max_party_size_including_player": 4,
+    "max_companions": 3,
+    "capacity_rule": "可同行總人數為 min(車輛含駕駛座位, 4)，不因更大型車輛或額外座位突破 4 人"
   },
   "inventory": {
     "model": "全隊共用一個無限容量的公共背包",
@@ -541,7 +548,8 @@
       "fixed_catalog_of_100_npcs_required": false,
       "race_and_profession_catalog_status": "已建立 12 種族與 20 職業，見 data/npc-catalog.json",
       "distinct_from_names_and_nicknames": true
-    }
+    },
+    "dialogue_catalog": "occupation-dialogue.json"
   },
   "oracle_system": {
     "status": "採用神諭系統的方向已確認；表格內容與精確實作待設計",
@@ -588,7 +596,6 @@
     "存檔、離線與跨裝置需求",
     "完整介面配置與素材、動畫清單",
     "缺油或疲勞停車後的公路事件流程",
-    "除車輛座位限制外是否另設隊伍上限",
     "夜間駕駛的體力倍率與不足一格時的前進結算",
     "藥品回血量與使用時機",
     "建築物種類與對應公路 D100 的建築入口",

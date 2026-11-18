@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local_verified",
+  "status": "published_and_readonly_verified",
   "viewport_checks": [
     "390x844 driving and automatic arrival",
     "360x800 two-person combat and equipment comparison"
@@ -29,5 +29,11 @@
   ],
   "limitations": [
     "Viewport testing in desktop Chrome; no physical phone performance measurement"
-  ]
+  ],
+  "production_checks": [
+    "Native deployment succeeded",
+    "Production entry loads app.js, ui.css and journey-ui.css version 6-journey",
+    "Updated intro visible; no browser console errors"
+  ],
+  "production_gameplay": "Local QA only. Automatic approval review rejected clicking Continue on the production save, so production verification remained read-only."
 }
