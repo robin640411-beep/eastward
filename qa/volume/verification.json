@@ -1,0 +1,41 @@
+{
+  "rendering": "Canvas 2.5D, textured roof and front extrusion, two projected facade faces, time-dependent silhouette shadows",
+  "road_scenery": {
+    "biomes": 12,
+    "categories": 10,
+    "prop_silhouettes": 16
+  },
+  "vehicle_models": 18,
+  "weapon_models": 7,
+  "facility_exteriors": 17,
+  "interior_sets": 14,
+  "encounter_prop_sprites": 51,
+  "mapped_encounters": 202,
+  "tests_passed": 177,
+  "browser": {
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        360,
+        780
+      ]
+    ],
+    "samples": [
+      "armed-stop-390.jpg",
+      "armed-stop-night-360.jpg",
+      "service-interior-390.jpg"
+    ],
+    "checks": [
+      "road travel and passing scenery",
+      "vehicle panel weapon identity",
+      "exterior to interior and return to vehicle",
+      "day and night set lighting",
+      "active gallery counts and event coverage"
+    ],
+    "desktop_browser_mobile_viewport": true,
+    "physical_device": false
+  }
+}

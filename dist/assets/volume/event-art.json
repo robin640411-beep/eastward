@@ -1,0 +1,747 @@
+{
+  "interiors": {
+    "bath": {
+      "image": "volume/bath.webp",
+      "size": [
+        766,
+        339
+      ],
+      "rect": [
+        0,
+        0,
+        766,
+        339
+      ]
+    },
+    "office": {
+      "image": "volume/office.webp",
+      "size": [
+        768,
+        338
+      ],
+      "rect": [
+        0,
+        0,
+        768,
+        338
+      ]
+    },
+    "corridor": {
+      "image": "volume/corridor.webp",
+      "size": [
+        766,
+        339
+      ],
+      "rect": [
+        0,
+        0,
+        766,
+        339
+      ]
+    },
+    "stove": {
+      "image": "volume/stove.webp",
+      "size": [
+        768,
+        338
+      ],
+      "rect": [
+        0,
+        0,
+        768,
+        338
+      ]
+    },
+    "stairs": {
+      "image": "volume/stairs.webp",
+      "size": [
+        766,
+        339
+      ],
+      "rect": [
+        0,
+        0,
+        766,
+        339
+      ]
+    },
+    "partition": {
+      "image": "volume/partition.webp",
+      "size": [
+        768,
+        338
+      ],
+      "rect": [
+        0,
+        0,
+        768,
+        338
+      ]
+    }
+  },
+  "props": {
+    "tanker": {
+      "image": "volume/tanker.webp",
+      "size": [
+        320,
+        111
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        111
+      ]
+    },
+    "motorcycle": {
+      "image": "volume/motorcycle.webp",
+      "size": [
+        320,
+        174
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        174
+      ]
+    },
+    "bookvan": {
+      "image": "volume/bookvan.webp",
+      "size": [
+        320,
+        178
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        178
+      ]
+    },
+    "truck": {
+      "image": "volume/truck.webp",
+      "size": [
+        320,
+        140
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        140
+      ]
+    },
+    "chase": {
+      "image": "volume/chase.webp",
+      "size": [
+        320,
+        204
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        204
+      ]
+    },
+    "wreck": {
+      "image": "volume/wreck.webp",
+      "size": [
+        320,
+        122
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        122
+      ]
+    },
+    "pylon": {
+      "image": "volume/pylon.webp",
+      "size": [
+        175,
+        300
+      ],
+      "rect": [
+        0,
+        0,
+        175,
+        300
+      ]
+    },
+    "tree": {
+      "image": "volume/tree.webp",
+      "size": [
+        320,
+        159
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        159
+      ]
+    },
+    "tires": {
+      "image": "volume/tires.webp",
+      "size": [
+        320,
+        203
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        203
+      ]
+    },
+    "crate": {
+      "image": "volume/crate.webp",
+      "size": [
+        320,
+        279
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        279
+      ]
+    },
+    "luggage": {
+      "image": "volume/luggage.webp",
+      "size": [
+        320,
+        249
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        249
+      ]
+    },
+    "medicalbox": {
+      "image": "volume/medicalbox.webp",
+      "size": [
+        320,
+        264
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        264
+      ]
+    },
+    "toolbox": {
+      "image": "volume/toolbox.webp",
+      "size": [
+        320,
+        276
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        276
+      ]
+    },
+    "locker": {
+      "image": "volume/locker.webp",
+      "size": [
+        201,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        201,
+        320
+      ]
+    },
+    "safe": {
+      "image": "volume/safe.webp",
+      "size": [
+        296,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        296,
+        320
+      ]
+    },
+    "barrel": {
+      "image": "volume/barrel.webp",
+      "size": [
+        295,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        295,
+        320
+      ]
+    },
+    "generator": {
+      "image": "volume/generator.webp",
+      "size": [
+        320,
+        296
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        296
+      ]
+    },
+    "radio": {
+      "image": "volume/radio.webp",
+      "size": [
+        320,
+        317
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        317
+      ]
+    },
+    "rocks": {
+      "image": "volume/rocks.webp",
+      "size": [
+        320,
+        227
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        227
+      ]
+    },
+    "pit": {
+      "image": "volume/pit.webp",
+      "size": [
+        320,
+        223
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        223
+      ]
+    },
+    "ice": {
+      "image": "volume/ice.webp",
+      "size": [
+        320,
+        211
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        211
+      ]
+    },
+    "mud": {
+      "image": "volume/mud.webp",
+      "size": [
+        320,
+        213
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        213
+      ]
+    },
+    "flood": {
+      "image": "volume/flood.webp",
+      "size": [
+        320,
+        209
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        209
+      ]
+    },
+    "spikes": {
+      "image": "volume/spikes.webp",
+      "size": [
+        320,
+        214
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        214
+      ]
+    },
+    "glass": {
+      "image": "volume/glass.webp",
+      "size": [
+        320,
+        210
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        210
+      ]
+    },
+    "electric": {
+      "image": "volume/electric.webp",
+      "size": [
+        320,
+        245
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        245
+      ]
+    },
+    "vines": {
+      "image": "volume/vines.webp",
+      "size": [
+        320,
+        215
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        215
+      ]
+    },
+    "eggs": {
+      "image": "volume/eggs.webp",
+      "size": [
+        320,
+        202
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        202
+      ]
+    },
+    "fire": {
+      "image": "volume/fire.webp",
+      "size": [
+        320,
+        206
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        206
+      ]
+    },
+    "turret": {
+      "image": "volume/turret.webp",
+      "size": [
+        320,
+        190
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        190
+      ]
+    },
+    "shelf": {
+      "image": "volume/shelf.webp",
+      "size": [
+        237,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        237,
+        320
+      ]
+    },
+    "bed": {
+      "image": "volume/bed.webp",
+      "size": [
+        309,
+        258
+      ],
+      "rect": [
+        0,
+        0,
+        309,
+        258
+      ]
+    },
+    "terminal": {
+      "image": "volume/terminal.webp",
+      "size": [
+        229,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        229,
+        320
+      ]
+    },
+    "map": {
+      "image": "volume/map.webp",
+      "size": [
+        306,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        306,
+        320
+      ]
+    },
+    "book": {
+      "image": "volume/book.webp",
+      "size": [
+        320,
+        220
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        220
+      ]
+    },
+    "paper": {
+      "image": "volume/paper.webp",
+      "size": [
+        307,
+        245
+      ],
+      "rect": [
+        0,
+        0,
+        307,
+        245
+      ]
+    },
+    "poster": {
+      "image": "volume/poster.webp",
+      "size": [
+        320,
+        272
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        272
+      ]
+    },
+    "coat": {
+      "image": "volume/coat.webp",
+      "size": [
+        166,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        166,
+        320
+      ]
+    },
+    "door": {
+      "image": "volume/door.webp",
+      "size": [
+        200,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        200,
+        320
+      ]
+    },
+    "counter": {
+      "image": "volume/counter.webp",
+      "size": [
+        320,
+        242
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        242
+      ]
+    },
+    "furniture": {
+      "image": "volume/furniture.webp",
+      "size": [
+        320,
+        236
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        236
+      ]
+    },
+    "lamp": {
+      "image": "volume/lamp.webp",
+      "size": [
+        151,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        151,
+        320
+      ]
+    },
+    "bareShelf": {
+      "image": "volume/bareShelf.webp",
+      "size": [
+        274,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        274,
+        320
+      ]
+    },
+    "emptyCabinet": {
+      "image": "volume/emptyCabinet.webp",
+      "size": [
+        320,
+        311
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        311
+      ]
+    },
+    "openSafe": {
+      "image": "volume/openSafe.webp",
+      "size": [
+        320,
+        300
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        300
+      ]
+    },
+    "openCase": {
+      "image": "volume/openCase.webp",
+      "size": [
+        320,
+        303
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        303
+      ]
+    },
+    "drainedTank": {
+      "image": "volume/drainedTank.webp",
+      "size": [
+        320,
+        287
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        287
+      ]
+    },
+    "deadGenerator": {
+      "image": "volume/deadGenerator.webp",
+      "size": [
+        320,
+        282
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        282
+      ]
+    },
+    "deadTerminal": {
+      "image": "volume/deadTerminal.webp",
+      "size": [
+        278,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        278,
+        320
+      ]
+    },
+    "brokenDisplay": {
+      "image": "volume/brokenDisplay.webp",
+      "size": [
+        320,
+        266
+      ],
+      "rect": [
+        0,
+        0,
+        320,
+        266
+      ]
+    },
+    "blockedDoor": {
+      "image": "volume/blockedDoor.webp",
+      "size": [
+        307,
+        320
+      ],
+      "rect": [
+        0,
+        0,
+        307,
+        320
+      ]
+    }
+  }
+}

@@ -75,4 +75,11 @@ g=fresh();g.s.mode='event';g.s.current={instance:97,event:{id:'road_014',title:'
 
 for(const [label,biome,minutes] of [['鹽原正午','salt',720],['海岸日出','coast',390],['峽谷日落','canyon',1050],['森林深夜','forest',1380],['雪山午后','snow',840],['城市暴雨','city',720]]){g=fresh();g.s.route=createRoute(445,sides=>sides===12?BIOMES.findIndex(b=>b.id===biome)+1:1);g.s.minutes=minutes;g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:140,event:{id:biome==='city'?'road_100':'road_014',title:'路邊歇腳',text:'遠方的景物隔著薄霧，天空的雲緩緩飄過。',options:[]},npc:g.person('human','mechanic'),dialogue:true};g.s.current.npc.attitude='友善';states['景深與天空 · '+label]=g.s;}
 
+// One fixed stop with a roof-mounted weapon for mobile art and lighting checks.
+for(const [title,minute] of [['日間',885],['夜間',1260]]){
+ g=fresh();g.s=structuredClone(states['D100 店名 · 加油站']);
+ g.s.vehicle=starterVehicle(5);g.s.resources.fuel=20;g.s.minutes=minute;
+ g.s.party.push(g.person('alien','medic'));
+ states['武裝車停靠 · '+title]=g.s;
+}
 writeFileSync(new URL('../dist/qa.html',import.meta.url),`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一路向東測試情境</title><style>body{background:#14232d;color:#eee;font:18px sans-serif;padding:24px}button{display:block;margin:18px 0;padding:18px;width:100%}</style><h1>本機測試情境</h1><p>載入固定測試存檔，再按「繼續旅程」。</p><div id="cases"></div><script>const states=${JSON.stringify(states).replaceAll('<','\\u003c')};for(const [name,state] of Object.entries(states)){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{localStorage.setItem('eastward.save.v1',JSON.stringify(state));location.href='./'};document.querySelector('#cases').append(b)}</script></html>`);

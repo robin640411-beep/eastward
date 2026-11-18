@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "asset": "painted/roadside-atlas.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "columns": 4,
+  "rows": 4,
+  "source_unchanged": true,
+  "view": "slightly elevated roadside side view, roofs and right faces visible",
+  "light": "warm upper left, cool right faces; dynamic cast shadow at runtime",
+  "alpha": {
+    "min": 0,
+    "max": 255,
+    "fullyTransparentPixels": 635050
+  },
+  "sprites": {
+    "pole_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        92,
+        13,
+        149,
+        285
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9929824561403509,
+      "width": 145,
+      "height": 281,
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        94,
+        15,
+        145,
+        281
+      ],
+      "cellPadding": [
+        94,
+        15,
+        75,
+        18
+      ]
+    },
+    "pole_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        378,
+        13,
+        187,
+        285
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9929824561403509,
+      "width": 183,
+      "height": 281,
+      "cell": [
+        314,
+        0,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        380,
+        15,
+        183,
+        281
+      ],
+      "cellPadding": [
+        66,
+        15,
+        64,
+        18
+      ]
+    },
+    "sign_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        658,
+        82,
+        247,
+        216
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9907407407407407,
+      "width": 243,
+      "height": 212,
+      "cell": [
+        627,
+        0,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        660,
+        84,
+        243,
+        212
+      ],
+      "cellPadding": [
+        33,
+        84,
+        37,
+        18
+      ]
+    },
+    "sign_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        1011,
+        23,
+        166,
+        275
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9927272727272727,
+      "width": 162,
+      "height": 271,
+      "cell": [
+        940,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        1013,
+        25,
+        162,
+        271
+      ],
+      "cellPadding": [
+        73,
+        25,
+        79,
+        18
+      ]
+    },
+    "lamp_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        89,
+        325,
+        158,
+        288
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9930555555555556,
+      "width": 154,
+      "height": 284,
+      "cell": [
+        0,
+        314,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        91,
+        327,
+        154,
+        284
+      ],
+      "cellPadding": [
+        91,
+        13,
+        69,
+        16
+      ]
+    },
+    "lamp_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        358,
+        328,
+        216,
+        285
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9929824561403509,
+      "width": 212,
+      "height": 281,
+      "cell": [
+        314,
+        314,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        360,
+        330,
+        212,
+        281
+      ],
+      "cellPadding": [
+        46,
+        16,
+        55,
+        16
+      ]
+    },
+    "shelter_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        628,
+        390,
+        293,
+        222
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.990990990990991,
+      "width": 289,
+      "height": 218,
+      "cell": [
+        627,
+        314,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        630,
+        392,
+        289,
+        218
+      ],
+      "cellPadding": [
+        3,
+        78,
+        21,
+        17
+      ]
+    },
+    "shelter_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        959,
+        374,
+        273,
+        238
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9915966386554622,
+      "width": 269,
+      "height": 234,
+      "cell": [
+        940,
+        314,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        961,
+        376,
+        269,
+        234
+      ],
+      "cellPadding": [
+        21,
+        62,
+        24,
+        17
+      ]
+    },
+    "rail_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        18,
+        764,
+        279,
+        97
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.979381443298969,
+      "width": 275,
+      "height": 93,
+      "cell": [
+        0,
+        627,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        20,
+        766,
+        275,
+        93
+      ],
+      "cellPadding": [
+        20,
+        139,
+        19,
+        81
+      ]
+    },
+    "rail_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        338,
+        741,
+        255,
+        123
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.983739837398374,
+      "width": 251,
+      "height": 119,
+      "cell": [
+        314,
+        627,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        340,
+        743,
+        251,
+        119
+      ],
+      "cellPadding": [
+        26,
+        116,
+        36,
+        78
+      ]
+    },
+    "barrier_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        637,
+        753,
+        284,
+        112
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9821428571428571,
+      "width": 280,
+      "height": 108,
+      "cell": [
+        627,
+        627,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        639,
+        755,
+        280,
+        108
+      ],
+      "cellPadding": [
+        12,
+        128,
+        21,
+        77
+      ]
+    },
+    "barrier_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        957,
+        721,
+        277,
+        145
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9862068965517241,
+      "width": 273,
+      "height": 141,
+      "cell": [
+        940,
+        627,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        959,
+        723,
+        273,
+        141
+      ],
+      "cellPadding": [
+        19,
+        96,
+        22,
+        76
+      ]
+    },
+    "container_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        15,
+        1029,
+        284,
+        172
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9883720930232558,
+      "width": 280,
+      "height": 168,
+      "cell": [
+        0,
+        940,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        17,
+        1031,
+        280,
+        168
+      ],
+      "cellPadding": [
+        17,
+        91,
+        17,
+        55
+      ]
+    },
+    "container_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        344,
+        1010,
+        254,
+        190
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9894736842105263,
+      "width": 250,
+      "height": 186,
+      "cell": [
+        314,
+        940,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        346,
+        1012,
+        250,
+        186
+      ],
+      "cellPadding": [
+        32,
+        72,
+        31,
+        56
+      ]
+    },
+    "tower_0": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        694,
+        948,
+        169,
+        281
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9928825622775801,
+      "width": 165,
+      "height": 277,
+      "cell": [
+        627,
+        940,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        696,
+        950,
+        165,
+        277
+      ],
+      "cellPadding": [
+        69,
+        10,
+        79,
+        27
+      ]
+    },
+    "tower_1": {
+      "image": "painted/roadside-atlas.png",
+      "rect": [
+        984,
+        964,
+        223,
+        265
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "ground": 0.9924528301886792,
+      "width": 219,
+      "height": 261,
+      "cell": [
+        940,
+        940,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        986,
+        966,
+        219,
+        261
+      ],
+      "cellPadding": [
+        46,
+        26,
+        49,
+        27
+      ]
+    }
+  }
+}

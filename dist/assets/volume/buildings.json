@@ -1,0 +1,331 @@
+{
+  "facilities": {
+    "gas": {
+      "image": "volume/architecture/facility-gas.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        252
+      ],
+      "size": [
+        440,
+        252
+      ]
+    },
+    "garage": {
+      "image": "volume/architecture/facility-garage.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        257
+      ],
+      "size": [
+        440,
+        257
+      ]
+    },
+    "motel": {
+      "image": "volume/architecture/facility-motel.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        274
+      ],
+      "size": [
+        440,
+        274
+      ]
+    },
+    "clinic": {
+      "image": "volume/architecture/facility-clinic.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        254
+      ],
+      "size": [
+        440,
+        254
+      ]
+    },
+    "pharmacy": {
+      "image": "volume/architecture/facility-pharmacy.webp",
+      "rect": [
+        0,
+        0,
+        416,
+        324
+      ],
+      "size": [
+        416,
+        324
+      ]
+    },
+    "warehouse": {
+      "image": "volume/architecture/facility-warehouse.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        235
+      ],
+      "size": [
+        440,
+        235
+      ]
+    },
+    "shop": {
+      "image": "volume/architecture/facility-shop.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        289
+      ],
+      "size": [
+        440,
+        289
+      ]
+    },
+    "checkpoint": {
+      "image": "volume/architecture/facility-checkpoint.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        258
+      ],
+      "size": [
+        440,
+        258
+      ]
+    },
+    "stall": {
+      "image": "volume/architecture/facility-stall.webp",
+      "rect": [
+        0,
+        0,
+        332,
+        245
+      ],
+      "size": [
+        332,
+        245
+      ]
+    },
+    "market": {
+      "image": "volume/architecture/facility-market.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        270
+      ],
+      "size": [
+        440,
+        270
+      ]
+    },
+    "toll": {
+      "image": "volume/architecture/facility-toll.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        276
+      ],
+      "size": [
+        440,
+        276
+      ]
+    },
+    "bridge": {
+      "image": "volume/architecture/facility-bridge.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        237
+      ],
+      "size": [
+        440,
+        237
+      ]
+    },
+    "tunnel": {
+      "image": "volume/architecture/facility-tunnel.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        275
+      ],
+      "size": [
+        440,
+        275
+      ]
+    },
+    "camp": {
+      "image": "volume/architecture/facility-camp.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        193
+      ],
+      "size": [
+        440,
+        193
+      ]
+    },
+    "scrapyard": {
+      "image": "volume/architecture/facility-scrapyard.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        231
+      ],
+      "size": [
+        440,
+        231
+      ]
+    },
+    "memorial": {
+      "image": "volume/architecture/facility-memorial.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        282
+      ],
+      "size": [
+        440,
+        282
+      ]
+    },
+    "solar": {
+      "image": "volume/architecture/facility-solar.webp",
+      "rect": [
+        0,
+        0,
+        440,
+        274
+      ],
+      "size": [
+        440,
+        274
+      ]
+    }
+  },
+  "interiors": {
+    "warehouse": {
+      "image": "volume/architecture/interior-warehouse.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "clinic": {
+      "image": "volume/architecture/interior-clinic.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "garage": {
+      "image": "volume/architecture/interior-garage.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "shop": {
+      "image": "volume/architecture/interior-shop.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "hotel": {
+      "image": "volume/architecture/interior-hotel.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "laboratory": {
+      "image": "volume/architecture/interior-laboratory.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "ruin": {
+      "image": "volume/architecture/interior-ruin.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    },
+    "nest": {
+      "image": "volume/architecture/interior-nest.webp",
+      "rect": [
+        0,
+        0,
+        623,
+        309
+      ],
+      "size": [
+        623,
+        309
+      ]
+    }
+  }
+}

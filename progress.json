@@ -119,16 +119,16 @@
   },
   "next_step": "等待使用者試玩回饋；後續完成更新可直接發布，維持原有私人網站。",
   "deployment": {
-    "commit_sha": "8f732e14d683d6c8a93da48bade4ca95a24d6c71",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_614843b326d0819188d318409db3c389",
-    "deployment_id": "appgdep_6afdea803988819185be4061b2d2bffc",
-    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "audience": "owner-private"
+    "audience": "owner-private",
+    "commit_sha": "be17b3b966131bbabaed053c532e7ca7a9364a6e",
+    "deployment_id": "appgdep_6afdeeb1be68819185ebba4fd1887c21",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_ccca7ef605f88191bebade572ac07508",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
   },
   "current_update": {
     "name": "hd2d-road-and-mobile-layout",
-    "status": "local-verified-ready-to-publish",
+    "status": "deployed-and-browser-verified",
     "physical_phone_tested": false
   },
   "natural_journey_ui": {
@@ -402,6 +402,21 @@
   "hd2d": {
     "spec": "spec/hd2d.json",
     "evidence": "qa/hd2d/verification.json",
-    "tests_passed": 169
+    "tests_passed": 169,
+    "status": "succeeded",
+    "audience": "owner-private",
+    "commit_sha": "be17b3b966131bbabaed053c532e7ca7a9364a6e",
+    "deployment_id": "appgdep_6afdeeb1be68819185ebba4fd1887c21",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_ccca7ef605f88191bebade572ac07508",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
+  },
+  "road_volume": {
+    "qa": "qa/volume/verification.json",
+    "rendering": "2.5D canvas",
+    "facilities": 17,
+    "interiors": 14,
+    "vehicle_weapons": 7,
+    "roadside_silhouettes": 16,
+    "release": "22-relief"
   }
 }
