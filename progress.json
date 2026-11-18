@@ -119,15 +119,15 @@
   },
   "next_step": "等待使用者試玩回饋；後續完成更新可直接發布，維持原有私人網站。",
   "deployment": {
-    "commit_sha": "3ffa36d846fc62cd98a98b0d270a29a08f5b6a83",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_7130259ea8e08191af8cc78934eda8dc",
-    "deployment_id": "appgdep_6afdc6fd835c8191bc4b439d68ff0d9a",
+    "commit_sha": "1fc90f36d9989da97755b944de7efbc41d687337",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_392b771d1188819186a00a3fc3ac708e",
+    "deployment_id": "appgdep_6afdcd2467bc8191b2d19bb490cdeea5",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "player-origins-random-starters-and-shared-vehicle-modifications",
+    "name": "battle-target-input-and-render-performance",
     "status": "local_verified_pending_publication",
     "physical_phone_tested": false
   },
@@ -320,7 +320,7 @@
     "audience": "owner-private"
   },
   "origins_and_vehicles": {
-    "status": "local_verified_pending_publication",
+    "status": "published_and_readonly_verified",
     "spec": [
       "spec/origins.json",
       "spec/starter-vehicles.json"
@@ -337,6 +337,23 @@
       "修車廠四類改裝共享各車上限，顯示前後差異與停用原因",
       "所有乘員有對應車窗，車戰套用實際裝甲與武器特效",
       "油箱與公共背包備用汽油，停靠自動補充；舊存檔保留"
+    ],
+    "commit_sha": "1fc90f36d9989da97755b944de7efbc41d687337",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_392b771d1188819186a00a3fc3ac708e",
+    "deployment_id": "appgdep_6afdcd2467bc8191b2d19bb490cdeea5",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "battle_input_fix": {
+    "status": "local_verified_pending_publication",
+    "spec": "spec/battle-presentation.json",
+    "evidence": "qa/battle-input/verification.json",
+    "tests_passed": 159,
+    "features": [
+      "敵人點選區域依固定站位分區，死亡位置保留",
+      "固定訊息窗可直接選擇攻擊目標",
+      "切換指令不重建畫布、不寫入存檔",
+      "人物戰鬥移除被覆蓋的公路繪製並快取背景"
     ]
   }
 }

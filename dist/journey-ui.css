@@ -69,3 +69,15 @@ body{background:#0b121c}button{transition:background .15s,border-color .15s}butt
 /* Opening and workshop: story stays in the same message window. */
 .mode-prologue .message-line p{font-size:14px;line-height:1.8;white-space:pre-line}.mode-prologue .message-line strong{font-size:13px;color:#e0ca94}.mode-prologue .message-scroll{scroll-behavior:auto}
 .vehicle-weapon{display:grid;grid-template-columns:1fr auto;gap:5px;padding:12px;background:#142732;border:1px solid #425c63;border-radius:6px}.vehicle-weapon small{grid-column:1/-1;color:#9fb4b6}.vehicle-weapon span{color:#dac690;font-size:12px}.garage-status{display:grid;gap:6px;padding:14px;background:#243f46;border:1px solid #71857e;border-radius:6px}.garage-status strong{color:#ead8a6}.garage-status small{color:#adbfbd}.garage-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.garage-option{padding:12px;background:#182d37;border:1px solid #4f6369;border-radius:6px;display:flex;flex-direction:column;gap:7px}.garage-option h3,.garage-option p{margin:0}.garage-option h3{font-size:15px;color:#e2cea1}.garage-option p{font-size:13px;line-height:1.6}.garage-option small{font-size:11px;line-height:1.6;color:#a6b9b6}.garage-option button{width:100%;min-height:44px;margin-top:auto}.garage-repair{display:flex;gap:12px;align-items:center;justify-content:space-between}.garage-repair p{font-size:12px}
+
+/* Stable, non-overlapping enemy lanes. Captions remain under their original slots. */
+.world-targets{position:absolute;inset:0;pointer-events:none}
+.battle-stage .world-target{top:0;height:100%;max-width:none;min-height:0;transform:none;pointer-events:auto;touch-action:manipulation}
+.battle-stage .world-target.defeated{pointer-events:none}
+.battle-stage .world-target .enemy-caption{left:var(--caption-x);right:auto;bottom:4%;width:min(101px,96%);transform:translateX(-50%)}
+.battle-stage .world-target.await-target::before{left:calc(var(--caption-x) - 6px);top:18%}
+.battle-stage .world-target:hover{background:transparent}
+.battle-stage .compass{pointer-events:none}
+.enemy-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:5px 0}
+.enemy-choices>button{min-height:44px;overflow-wrap:anywhere;border-color:#b6a16d}
+.enemy-choices>button:only-child{grid-column:1/-1}

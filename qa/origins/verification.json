@@ -1,6 +1,6 @@
 {
   "date": "2026-11-19",
-  "status": "local_verified_pending_publication",
+  "status": "published_and_readonly_verified",
   "automated_tests": {
     "passed": 156,
     "failed": 0
@@ -27,11 +27,24 @@
     "single-seat-360.jpg",
     "two-seat-recruit-360.jpg",
     "garage-before-360.jpg",
-    "garage-full-360.jpg"
+    "garage-full-360.jpg",
+    "production-entry.jpg"
   ],
   "limitations": [
     "Desktop Chrome mobile viewport; physical phone not tested.",
     "Representative starting vehicles inspected visually; all 10 models and 33 seat variants checked structurally.",
     "Production gameplay save will not be loaded or modified during release verification."
+  ],
+  "deployment": {
+    "commit_sha": "1fc90f36d9989da97755b944de7efbc41d687337",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_392b771d1188819186a00a3fc3ac708e",
+    "deployment_id": "appgdep_6afdcd2467bc8191b2d19bb490cdeea5",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Original private Site reloaded app.js?v=16-origins and completed entry rendering without console warnings/errors.",
+    "Production save not loaded or modified."
   ]
 }

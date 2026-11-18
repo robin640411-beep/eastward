@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-19",
+  "status": "local_verified_pending_publication",
+  "reported_issue": "Character combat targets hard to select, with stutter.",
+  "findings": [
+    "Old fixed 101px hitboxes missed wide vehicle ends and large-enemy areas; DOM hit-testing confirmed points landed on the canvas instead of target buttons.",
+    "Character frames rendered hidden road scenery beneath the battle arena. Pure command browsing replaced the full page and canvas and serialized saves.",
+    "The desktop test did not reproduce a permanent freeze; actual user phone performance remains unmeasured."
+  ],
+  "automated_tests": {
+    "passed": 159,
+    "failed": 0
+  },
+  "browser_checks": [
+    "Chrome 360x780: target buttons and stage targeting both commit attacks.",
+    "Rapid double-click killed the middle enemy once; round advanced from 1 to 2 only once, defeated slot remained empty.",
+    "Next attack targeted the surviving right enemy, HP 100 to 90. Psychic power targeted left enemy, HP 100 to 89 and ESP 18 to 15; next round accepted input.",
+    "Medicine selected a party member, consumed one medicine and returned to commands.",
+    "Four party members committed separate attacks, advanced automatically to each member, completed all actions and reached round 2.",
+    "Stage upper points previously missing targets now resolve to targetEnemy. Document dimensions 360x780 match viewport.",
+    "No console warnings or errors."
+  ],
+  "performance_sample": {
+    "case": "Three character enemies at route segment 91, same local Chrome mobile viewport; 120 steady painted frames after 30 warmup frames.",
+    "before": {
+      "draw_image_calls_per_frame": 22,
+      "median_frame_js_ms": 0.8,
+      "p95_frame_js_ms": 1.1
+    },
+    "after": {
+      "draw_image_calls_per_frame": 4,
+      "median_frame_js_ms": 0.3,
+      "p95_frame_js_ms": 0.4,
+      "canvas_replaced_on_command_browse": false
+    },
+    "scope": "Canvas JavaScript callback measurements on desktop Chrome, not GPU or physical phone FPS."
+  },
+  "screenshots": [
+    "four-person-targets-360.jpg"
+  ],
+  "limitations": [
+    "Physical phone and Safari not tested.",
+    "Production game save will not be loaded or modified during release verification."
+  ]
+}

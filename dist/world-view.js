@@ -8,9 +8,9 @@ import {phaseName} from './engine.js';
 import {routeView} from './route-runtime.js';
 import {drawRoadside} from './roadside-art.js';
 import {biomeAt,tripPose,enemyLayout,lightingAt,mixHex,ease,clamp01} from './journey-view-model.js';
-const W=384,H=240,images=new Map();let reduced=reducedMotion(),stormStrength=0,stormStarted=0,stormKey='';
+const W=384,H=240,images=new Map();let imageRevision=0;let reduced=reducedMotion(),stormStrength=0,stormStarted=0,stormKey='';
 let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel=0,eventAt=0,key='',actionAt=-10,feedback=[],actionKind='',travelAt=0,tripDuration=12000,speed=1,viewZoom=.84,viewCarX=24,displayMinute=-1,selectedTarget=null,lightMinute=null,beat=null,beatAt=0,playback=false;
-function img(path){if(!path)return null;if(!images.has(path)){const i=new Image();i.src='assets/'+path;images.set(path,i)}const i=images.get(path);return i.complete&&i.naturalWidth?i:null}
+function img(path){if(!path)return null;if(!images.has(path)){const i=new Image();i.onload=()=>imageRevision++;i.src='assets/'+path;images.set(path,i)}const i=images.get(path);return i.complete&&i.naturalWidth?i:null}
 function paint(path,x,y,w,h){const i=img(path);if(i)ctx.drawImage(i,Math.round(x),Math.round(y),w,h)}
 function paintEnemy(key,x,y,w,h){const a=assets.enemyAtlas?.[key],p=a&&img(a.image);if(p){const [, ,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(p,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else paint(assets.enemies[key]?.image,x,y,w,h);}
 function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
@@ -76,10 +76,16 @@ function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  if(kind==='signal'&&i<3){ctx.strokeStyle='#8ec6ae';ctx.globalAlpha=(1-v)*.7;ctx.strokeRect(265-v*25,97-v*19,v*50,v*38)}ctx.globalAlpha=1;
  }
 }
+let arenaCanvas=null,arenaKey='';
+function battleBackground(){const indoors=state.current?.inside||state.frames?.at(-1)?.kind==='building',biome=biomeAt(state.progress,state.seed,state.route),next=[indoors,biome.id,state.current?.event?.id,state.frames?.at(-1)?.scene,imageRevision].join(':');
+ if(!arenaCanvas){arenaCanvas=document.createElement('canvas');arenaCanvas.width=W;arenaCanvas.height=H;}
+ if(next!==arenaKey){const main=ctx;try{ctx=arenaCanvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,W,H);if(indoors)room();else panorama(biome,0,0,W,H);rect(0,0,W,H,'#0e192bc7');
+  const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);arenaKey=next;
+ }finally{ctx=main;}}
+ ctx.drawImage(arenaCanvas,0,0);
+}
 function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
- if(!vehicleFight){if(state.current?.inside||state.frames?.at(-1)?.kind==='building')room();else panorama(biomeAt(state.progress,state.seed,state.route),0,0,W,H);rect(0,0,W,H,'#0e192bc7');
-  const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
- }
+ if(!vehicleFight)battleBackground();
  enemies.forEach((e,i)=>{const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0),attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack',impact=age>=.36&&age<.82;
   const recoil=struck&&impact&&!reduced?Math.sin((age-.36)*42)*5*(1-(age-.36)/.46):0,lunge=attacking&&age<.4&&!reduced?Math.sin(age/.4*Math.PI)*12:0;
   const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
@@ -112,8 +118,8 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  const stormTarget=outdoors&&encounters[currentWeather?.event?.id]?.effect==='storm'?(driving?ease((u-.15)/.5):1):0;
  const weatherKey=s.seed+':'+(currentWeather?.instance??s.stop)+':storm';if(stormTarget>0&&weatherKey!==stormKey){stormKey=weatherKey;stormStarted=clock;}
  stormStrength+=(stormTarget-stormStrength)*(1-Math.exp(-dt*2));
- const weather={seed:s.seed,seconds:clock,travel:roadTravel,layers:weatherLayers({seed:s.seed,from,to,blend,seconds:clock,storm:stormStrength}),soft:reduced,light:light.light};
- if(interior&&!driving&&!s.battle)room();else road(from,to,blend,light);
+ const weather=outdoors?{seed:s.seed,seconds:clock,travel:roadTravel,layers:weatherLayers({seed:s.seed,from,to,blend,seconds:clock,storm:stormStrength}),soft:reduced,light:light.light}:null;
+ if(!s.battle||carFight){if(interior&&!driving&&!s.battle)room();else road(from,to,blend,light);}
  if(outdoors)drawWeatherSky(ctx,{seed:stormKey,seconds:clock-stormStarted,storm:stormStrength,soft:reduced});
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);

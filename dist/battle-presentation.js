@@ -43,3 +43,7 @@ export const partyAnchor=(party,id)=>({cx:48+Math.max(0,party.findIndex(p=>p.id=
 export function commandPage(items,page=0,size=4){const pages=Math.max(1,Math.ceil(items.length/size)),index=Math.max(0,Math.min(pages-1,page));return {items:items.slice(index*size,(index+1)*size),page:index,pages};}
 export const BEAT_MS=980;
 export const IMPACT_MS=360;
+
+// Each enemy owns a disjoint stage lane; dead slots stay reserved.
+// Large bodies, heads and vehicle ends must remain tappable on narrow phones.
+export function enemyTargetRegions(enemies,layout){return enemies.map((_,i)=>{const left=i?(layout[i-1].cx+layout[i].cx)/2:0,right=i<layout.length-1?(layout[i].cx+layout[i+1].cx)/2:384;return {left,width:right-left,caption:layout[i].cx-left};});}
