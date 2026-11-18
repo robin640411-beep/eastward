@@ -1,101 +1,93 @@
 {
-  "atlasA": {
-    "path": "painted/world-atlas-a.png",
-    "width": 1536,
-    "height": 1024,
+  "pixelHorizons": {
+    "path": "scenes/pixel-horizons.png",
+    "width": 1024,
+    "height": 228,
     "cells": [
       [
         "salt",
         0,
         0,
-        768,
-        339
+        256,
+        76
       ],
       [
         "canyon",
-        768,
+        256,
         0,
-        768,
-        339
+        256,
+        76
       ],
       [
         "forest",
+        512,
         0,
-        343,
-        768,
-        337
+        256,
+        76
       ],
       [
         "city",
         768,
-        343,
-        768,
-        337
+        0,
+        256,
+        76
       ],
       [
         "coast",
         0,
-        683,
-        768,
-        341
+        76,
+        256,
+        76
       ],
       [
         "industrial",
-        768,
-        683,
-        768,
-        341
-      ]
-    ]
-  },
-  "atlasB": {
-    "path": "painted/world-atlas-b.png",
-    "width": 1536,
-    "height": 1024,
-    "cells": [
+        256,
+        76,
+        256,
+        76
+      ],
       [
         "marsh",
-        0,
-        0,
-        768,
-        338
+        512,
+        76,
+        256,
+        76
       ],
       [
         "desert",
         768,
-        0,
-        768,
-        338
+        76,
+        256,
+        76
       ],
       [
         "farmland",
         0,
-        342,
-        768,
-        337
+        152,
+        256,
+        76
       ],
       [
         "snow",
-        768,
-        342,
-        768,
-        337
+        256,
+        152,
+        256,
+        76
       ],
       [
         "alien",
-        0,
-        682,
-        768,
-        342
+        512,
+        152,
+        256,
+        76
       ],
       [
         "oasis",
         768,
-        682,
-        768,
-        342
+        152,
+        256,
+        76
       ]
     ]
-  },
-  "note": "Cells are [biome,x,y,width,height]. Source rectangles exclude mixed rows at generated atlas seams; original PNG files unmodified."
+  }
 }

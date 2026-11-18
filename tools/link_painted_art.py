@@ -3,8 +3,7 @@ from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1];p=R/'dist/assets/manifest.json';m=json.loads(p.read_text());m['artVersion']='occupation-2';m['style']='精緻16位元像素；黑紫生體裝甲、琥珀能源、青綠人類設施與鏽蝕修補';m['worlds']={}
 l=json.loads((R/'art-direction/world-atlas-layout.json').read_text())
-for key in ['atlasA','atlasB']:
- a=l[key]
+for a in l.values():
  for name,x,y,w,h in a['cells']:m['worlds'][name]={'image':a['path'],'rect':[x,y,w,h],'size':[a['width'],a['height']]}
 l=json.loads((R/'art-direction/facilities-interiors-layout.json').read_text())
 for key in ['facilities','interiors']:

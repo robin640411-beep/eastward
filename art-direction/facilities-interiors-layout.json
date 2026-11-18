@@ -1,133 +1,129 @@
 {
   "facilities": {
-    "file": "painted/facilities-atlas.png",
-    "width": 2172,
-    "height": 724,
+    "file": "scenes/pixel-facilities.png",
+    "width": 768,
+    "height": 256,
     "alpha": true,
-    "transparentPixels": 675922,
     "cells": [
       [
         "gas",
         0,
         0,
-        543,
-        350
+        192,
+        128
       ],
       [
         "garage",
-        543,
+        192,
         0,
-        543,
-        350
+        192,
+        128
       ],
       [
         "motel",
-        1086,
+        384,
         0,
-        543,
-        350
+        192,
+        128
       ],
       [
         "clinic",
-        1629,
+        576,
         0,
-        543,
-        350
+        192,
+        128
       ],
       [
         "pharmacy",
         0,
-        350,
-        543,
-        350
+        128,
+        192,
+        128
       ],
       [
         "warehouse",
-        543,
-        350,
-        543,
-        350
+        192,
+        128,
+        192,
+        128
       ],
       [
         "shop",
-        1086,
-        350,
-        543,
-        350
+        384,
+        128,
+        192,
+        128
       ],
       [
         "checkpoint",
-        1629,
-        350,
-        543,
-        350
+        576,
+        128,
+        192,
+        128
       ]
-    ],
-    "note": "Each source rect retains transparent margins. Rows use y 0 and 350 so visible building baselines align at about source y 334/335, rather than uneven geometric cell margins. RGBA transparency verified."
+    ]
   },
   "interiors": {
-    "file": "painted/interiors-atlas.png",
-    "width": 1254,
-    "height": 1254,
-    "alpha": false,
+    "file": "scenes/pixel-interiors.png",
+    "width": 1024,
+    "height": 320,
     "cells": [
       [
         "warehouse",
         0,
         0,
-        626,
-        311
+        256,
+        160
       ],
       [
         "clinic",
-        628,
+        256,
         0,
-        626,
-        311
+        256,
+        160
       ],
       [
         "garage",
+        512,
         0,
-        315,
-        626,
-        309
+        256,
+        160
       ],
       [
         "shop",
-        628,
-        315,
-        626,
-        309
+        768,
+        0,
+        256,
+        160
       ],
       [
         "hotel",
         0,
-        630,
-        626,
-        308
+        160,
+        256,
+        160
       ],
       [
         "laboratory",
-        628,
-        630,
-        626,
-        308
+        256,
+        160,
+        256,
+        160
       ],
       [
         "ruin",
-        0,
-        944,
-        626,
-        310
+        512,
+        160,
+        256,
+        160
       ],
       [
         "nest",
-        628,
-        944,
-        626,
-        310
+        768,
+        160,
+        256,
+        160
       ]
-    ],
-    "note": "Safe rectangles avoid mixed pixels at x 627 and row transitions around 312/313,626/627,939-942. Each room roughly 2:1 with empty lower floor."
+    ]
   }
 }

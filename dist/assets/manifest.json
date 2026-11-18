@@ -1468,371 +1468,371 @@
   "artVersion": "occupation-2",
   "worlds": {
     "salt": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         0,
         0,
-        768,
-        339
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "canyon": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
-        768,
+        256,
         0,
-        768,
-        339
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "forest": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
+        512,
         0,
-        343,
-        768,
-        337
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "city": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         768,
-        343,
-        768,
-        337
+        0,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "coast": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         0,
-        683,
-        768,
-        341
+        76,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "industrial": {
-      "image": "painted/world-atlas-a.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
-        768,
-        683,
-        768,
-        341
+        256,
+        76,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "marsh": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
-        0,
-        0,
-        768,
-        338
+        512,
+        76,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "desert": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         768,
-        0,
-        768,
-        338
+        76,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "farmland": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         0,
-        342,
-        768,
-        337
+        152,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "snow": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
-        768,
-        342,
-        768,
-        337
+        256,
+        152,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "alien": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
-        0,
-        682,
-        768,
-        342
+        512,
+        152,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     },
     "oasis": {
-      "image": "painted/world-atlas-b.png",
+      "image": "scenes/pixel-horizons.png",
       "rect": [
         768,
-        682,
-        768,
-        342
+        152,
+        256,
+        76
       ],
       "size": [
-        1536,
-        1024
+        1024,
+        228
       ]
     }
   },
   "facilities": {
     "gas": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
         0,
         0,
-        543,
-        350
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "garage": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        543,
+        192,
         0,
-        543,
-        350
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "motel": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        1086,
+        384,
         0,
-        543,
-        350
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "clinic": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        1629,
+        576,
         0,
-        543,
-        350
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "pharmacy": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
         0,
-        350,
-        543,
-        350
+        128,
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "warehouse": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        543,
-        350,
-        543,
-        350
+        192,
+        128,
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "shop": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        1086,
-        350,
-        543,
-        350
+        384,
+        128,
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     },
     "checkpoint": {
-      "image": "painted/facilities-atlas.png",
+      "image": "scenes/pixel-facilities.png",
       "rect": [
-        1629,
-        350,
-        543,
-        350
+        576,
+        128,
+        192,
+        128
       ],
       "size": [
-        2172,
-        724
+        768,
+        256
       ]
     }
   },
   "interiors": {
     "warehouse": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
         0,
         0,
-        626,
-        311
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "clinic": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
-        628,
+        256,
         0,
-        626,
-        311
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "garage": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
+        512,
         0,
-        315,
-        626,
-        309
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "shop": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
-        628,
-        315,
-        626,
-        309
+        768,
+        0,
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "hotel": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
         0,
-        630,
-        626,
-        308
+        160,
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "laboratory": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
-        628,
-        630,
-        626,
-        308
+        256,
+        160,
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "ruin": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
-        0,
-        944,
-        626,
-        310
+        512,
+        160,
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     },
     "nest": {
-      "image": "painted/interiors-atlas.png",
+      "image": "scenes/pixel-interiors.png",
       "rect": [
-        628,
-        944,
-        626,
-        310
+        768,
+        160,
+        256,
+        160
       ],
       "size": [
-        1254,
-        1254
+        1024,
+        320
       ]
     }
   },

@@ -11,7 +11,7 @@ const assets=JSON.parse(readFileSync(new URL('../dist/assets/manifest.json',impo
 test('visible foundations and tires, rather than transparent image borders, meet the road',()=>{
  assert.equal(groundRatio(assets.occupation.pylon),120/128);
  assert.equal(groundRatio(assets.vehicles.compact),69/72);
- assert.equal(groundRatio(assets.facilities.gas),333/350);
+ for(const facade of Object.values(assets.facilities))assert.equal(groundRatio(facade),122/128);
  const pylon=groundedBox(assets.occupation.pylon,100,ROAD_GROUND.pylon,27,72);
  assert(Math.abs(pylon.contact-ROAD_GROUND.pylon)<=.5);
  assert(pylon.y>87,'the old position left the pylon floating above the road');
@@ -55,7 +55,7 @@ test('the actual roadside renderer grounds every kind across all twelve biomes',
    const region={...b,index:3},profile=ROADSIDE_PROFILES[b.id],seen=new Set();
    for(let travel=0;travel<18000;travel+=600){
     const records=[],stack=[];let tx=0,ty=0,sx=1,sy=1;
-    const ctx={globalAlpha:1,save(){stack.push({tx,ty,sx,sy,alpha:this.globalAlpha});},restore(){const p=stack.pop();({tx,ty,sx,sy}=p);this.globalAlpha=p.alpha;},translate(x,y){tx+=x*sx;ty+=y*sy;},scale(x,y){sx*=x;sy*=y;},fillRect(){},drawImage(image,x,y,w,h){records.push({image,x:tx+(sx<0?x+w:x)*sx,y:ty+y*sy,w:Math.abs(w*sx),h:h*sy});}};
+    const ctx={globalAlpha:1,save(){stack.push({tx,ty,sx,sy,alpha:this.globalAlpha});},restore(){const p=stack.pop();({tx,ty,sx,sy}=p);this.globalAlpha=p.alpha;},translate(x,y){tx+=x*sx;ty+=y*sy;},scale(x,y){sx*=x;sy*=y;},fillRect(){},drawImage(image,...args){const [x,y,w,h]=args.slice(-4);records.push({image,x:tx+(sx<0?x+w:x)*sx,y:ty+y*sy,w:Math.abs(w*sx),h:h*sy});}};
     drawRoadside(ctx,{seed:445,region,travel,seconds:75,assets,image:path=>({path})});
     const depth=i=>i.type==='building'?ROAD_GROUND.building:i.type==='vehicle'?ROAD_GROUND.parked:ROAD_GROUND.prop;
     const items=roadsideItems(445,region,travel).sort((a,b)=>depth(a)-depth(b));

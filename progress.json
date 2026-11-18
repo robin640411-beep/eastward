@@ -431,15 +431,21 @@
   "active_presentation": {
     "mode": "classic_pixel",
     "art_source": "8f732e1",
-    "release": "25-road-loot",
+    "release": "26-pixel-horizons",
     "layout": "vehicle, four party slots, scene, messages, navigation",
     "screenshots": [
-      "qa/pixel-return/drive-390.jpg",
-      "qa/pixel-return/interior-390.jpg",
-      "qa/pixel-return/battle-360.jpg"
+      "qa/pixel-horizons/alien-drive.jpg",
+      "qa/pixel-horizons/nest.jpg",
+      "qa/pixel-horizons/outdoor-battle.jpg"
     ],
     "combat_art": "固定像素角色、怪物與魔王，玩家及 NPC 共用種族、職業、武器圖",
-    "combat_evidence": "qa/combat-pixel/verification.json"
+    "combat_evidence": "qa/combat-pixel/verification.json",
+    "backgrounds": {
+      "worlds": 12,
+      "facilities": 8,
+      "interiors": 8,
+      "style": "原生低解析度像素圖，以色塊和明暗表現距離。"
+    }
   },
   "road_and_rewards": {
     "evidence": "qa/road-loot/verification.json",

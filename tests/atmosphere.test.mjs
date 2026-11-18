@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {SKY_PROFILES,skyState,cloudLayout} from '../dist/atmosphere.js';
+import {readFileSync} from 'node:fs';
+import {paintHorizon,horizonPostcard} from '../dist/horizon-art.js';
+import {lightingAt} from '../dist/journey-view-model.js';
+import {SKY_PROFILES,skyState,cloudLayout,skyBands} from '../dist/atmosphere.js';
 import {BIOMES} from '../dist/route-catalog.js';
 
 test('sun rises in the east, sets in the west and yields to the moon without popping',()=>{
@@ -22,4 +25,28 @@ test('cloud drift is continuous and deterministic, bounded at long travel distan
  const a=cloudLayout(445,10,20),b=cloudLayout(445,10.01,20),soft=cloudLayout(445,10.01,20,true),soft0=cloudLayout(445,10,20,true);
  assert.equal(a.length,7);for(let i=0;i<a.length;i++){assert(Math.abs(a[i].x-b[i].x)<.02);assert(Math.abs(soft[i].x-soft0[i].x)<Math.abs(a[i].x-b[i].x));}
  for(const c of cloudLayout(445,1e9,1e12)){assert(c.x>=-130&&c.x<520);assert(c.y>=0&&c.y+c.h<70);}
+});
+
+test('the road and postcards share native square pixels and isolate each atlas cell',()=>{
+ const assets=JSON.parse(readFileSync(new URL('../dist/assets/manifest.json',import.meta.url)));
+ for(const [i,{id,name}] of BIOMES.entries()){
+  const region=assets.worlds[id],sheet={},calls=[];
+  assert.deepEqual(region.rect,[(i%4)*256,Math.floor(i/4)*76,256,76]);
+  paintHorizon({drawImage:(...args)=>calls.push(args)},sheet,region,17.45,3.8,2);
+  assert.deepEqual(calls,[[sheet,...region.rect,17,4,512,152]]);
+  const picture=horizonPostcard(region,name);
+  assert(picture.includes('overflow="hidden" viewBox="'+region.rect.join(' ')+'"'));
+  assert(picture.includes('assets/'+region.image));
+ }
+});
+
+test('palette bands cover the full extended sky without seams at every hour',()=>{
+ for(const above of [0,1,55,99,218])for(const minutes of [0,379,720,1090,1439])for(const storm of [0,.55,1]){
+  let end=0-above;
+  for(const {y,h,color} of skyBands(lightingAt(minutes),storm,above)){
+   assert.equal(y,end);assert(h>0&&Number.isInteger(h));assert.match(color,/^#[0-9a-f]{6}$/);
+   end+=h;
+  }
+  assert.equal(end,180);
+ }
 });

@@ -1,10 +1,8 @@
 import {ROADSIDE_PROFILES,roadsideItems,roadsideTraffic,sceneryRandom} from './roadside-model.js';
 import {ROAD_GROUND,groundedBox,groundShadow,propGround} from './scenery-ground.js';
 const sprites=new Map();
-const facades=new Map();
 // Plaques attach to a real panel, rail or post. Low structures have low mounts.
 export const ROADSIDE_MOUNTS=Object.freeze({pole:[49,38,13,14],sign:[62,42,16,15],lamp:[58,47,7,9],shelter:[68,61,12,17],rail:[60,81,14,7],barrier:[48,81,14,16],container:[62,72,16,12],tower:[47,32,14,17]});
-function quietFacade(kind,asset,picture){const key=kind+':'+asset.image+':'+asset.rect.join(',');if(facades.has(key))return facades.get(key);const c=document.createElement('canvas');c.width=216;c.height=Math.round(216*asset.rect[3]/asset.rect[2]);const q=c.getContext('2d');q.imageSmoothingEnabled=false;q.filter='saturate(0.35) brightness(0.84)';q.drawImage(picture,...asset.rect,0,0,c.width,c.height);facades.set(key,c);return c;}
 // Small, cached pixel cutouts. Only positions are recomputed while driving.
 export function roadsideSprite(type,biome,variant){variant%=3;const key=type+':'+biome+':'+variant;if(sprites.has(key))return sprites.get(key);const p=ROADSIDE_PROFILES[biome]||ROADSIDE_PROFILES.salt,c=document.createElement('canvas');c.width=112;c.height=112;const q=c.getContext('2d');q.imageSmoothingEnabled=false;
  const r=(x,y,w,h,col)=>{q.fillStyle=col;q.fillRect(x,y,w,h);},line=(points,col,width=1)=>{q.strokeStyle=col;q.lineWidth=width;q.beginPath();points.forEach(([x,y],i)=>i?q.lineTo(x,y):q.moveTo(x,y));q.stroke();},wall=p.wall,trim=p.trim,dark='#25373d',shade='#39494b',accent=p.accent,ground=propGround(type)*112;
@@ -33,7 +31,7 @@ export function drawRoadside(ctx,{seed,region,travel,seconds,assets,image}){cons
  const depth=item=>item.type==='building'?ROAD_GROUND.building:item.type==='vehicle'?ROAD_GROUND.parked:ROAD_GROUND.prop;
  for(const item of roadsideItems(seed,region,travel).sort((a,b)=>depth(a)-depth(b))){const {type,x,variant,scale}=item;ctx.save();ctx.globalAlpha*=.94;
   if(type==='building'){const kind=p.facades[variant%p.facades.length],a=assets.facilities[kind],picture=a&&image(a.image),w=(kind==='warehouse'?110:96)*scale;
-   if(picture){const box=groundedBox(a,x,ROAD_GROUND.building,w);groundShadow(ctx,a,box);ctx.drawImage(quietFacade(kind,a,picture),box.x,box.y,box.width,box.height);}
+   if(picture){const box=groundedBox(a,x,ROAD_GROUND.building,w);groundShadow(ctx,a,box);ctx.drawImage(picture,...a.rect,box.x,box.y,box.width,box.height);}
   }else if(type==='vehicle'){const model=p.vehicles[variant%p.vehicles.length],a=assets.vehicles[model],picture=image(a.image),w=78*scale;if(picture){const box=groundedBox(a,x,ROAD_GROUND.parked,w,w*72/160);groundShadow(ctx,a,box,.4);ctx.drawImage(picture,box.x,box.y,box.width,box.height);}}
   else {const size=type==='pole'?106*scale:type==='tower'?99*scale:91*scale,box=groundedBox({ground:propGround(type)},x,ROAD_GROUND.prop,size,size);ctx.drawImage(roadsideSprite(type,region.id,variant),box.x,box.y,box.width,box.height);}
   ctx.restore();
