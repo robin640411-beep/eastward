@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
 import {Game} from '../dist/engine.js';
-import {createRoute,biomeAt,routeView,nameEncounter,BIOMES} from '../dist/route-runtime.js';
+import {createRoute,createDestination,remainingKm,destinationAt,biomeAt,routeView,nameEncounter,BIOMES} from '../dist/route-runtime.js';
 import {PLACE_NAMES} from '../dist/route-catalog.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
@@ -25,11 +25,21 @@ test('region advances at actual distance boundaries, never per stop or per rende
  assert.equal(routeView(g.s,0).current.index,0);assert.equal(routeView(g.s,.5).current.index,1);assert.equal(routeView(g.s,1).current.index,1);
  g.s.stop+=20;assert.equal(routeView(g.s,0).current.index,0);g.s.stop=before.stop;assert.deepEqual(g.s,before);
 });
-test('terrain transition and roadside sign remain continuous across arrival and reload',()=>{
- const g=fresh();g.s.progress=9;g.s.mode='driving';g.s.travel={n:2};const end=routeView(g.s,1);assert.equal(end.current.index,1);assert(Math.abs(end.blend-.5)<.00001);assert.equal(end.sign.name,g.s.route.regions[1].name);
- const near=routeView(g.s,.9999);assert(Math.abs(near.blend-end.blend)<.0001);assert(Math.abs(near.signX-end.signX)<.001);
+test('terrain transition and remaining kilometres stay continuous across arrival and reload',()=>{
+ const g=fresh();g.s.progress=9;g.s.mode='driving';g.s.travel={n:2};const end=routeView(g.s,1);assert.equal(end.current.index,1);assert(Math.abs(end.blend-.5)<.00001);assert.equal(end.remainingKm,remainingKm(11));
+ const near=routeView(g.s,.9999);assert(Math.abs(near.blend-end.blend)<.0001);assert.equal(near.remainingKm,end.remainingKm);
  g.s.progress=11;g.s.mode='event';g.s.travel=null;assert.deepEqual(routeView(g.s),end);
  assert.deepEqual(routeView(new Game(d,structuredClone(g.s)).s),end);
+});
+test('destination uses all D100 names, persists, and legacy migration leaves the journey unchanged',()=>{
+ for(let face=1;face<=100;face++){const destination=createDestination(1,sides=>{assert.equal(sides,100);return face;});assert.equal(destination.name,PLACE_NAMES[face-1]+'樂園');assert.equal(destination.nameRoll,face);}
+ const g=fresh(),saved=structuredClone(g.s);assert.deepEqual(destinationAt(new Game(d,saved).s),destinationAt(g.s));
+ const old=structuredClone(g.s);delete old.route.destination;old.route.version=1;const before=structuredClone(old),loaded=new Game(d,old);assert.deepEqual(destinationAt(loaded.s),destinationAt(g.s));delete loaded.s.route.destination;loaded.s.route.version=1;assert.deepEqual(loaded.s,before);
+});
+test('kilometres start at 1000, reach zero, and decline only with actual travel',()=>{
+ assert.equal(remainingKm(1),1000);assert.equal(remainingKm(100),0);assert.equal(remainingKm(105),0);assert.equal(remainingKm(-5),1000);
+ const g=fresh(),before=structuredClone(g.s);g.s.minutes+=120;g.s.stop+=2;assert.equal(routeView(g.s).remainingKm,1000);g.s=before;g.s.progress=94;g.s.mode='driving';g.s.travel={n:10};const snapshot=structuredClone(g.s);let km=1000;
+ for(let step=0;step<=100;step++){const next=routeView(g.s,step/100).remainingKm;assert(next<=km&&next>=0);km=next;}assert.equal(km,0);assert.deepEqual(g.s,snapshot);
 });
 test('legacy save receives a stable route without spending RNG, time or resources',()=>{
  const g=fresh();g.s.progress=64;delete g.s.route;const before=structuredClone(g.s),loaded=new Game(d,structuredClone(before));const route=loaded.s.route;assert.equal(route.regions.length,10);assert.equal(routeView(loaded.s).current.index,6);

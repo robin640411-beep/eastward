@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local_verified_pending_publication",
+  "status": "published_and_readonly_verified",
   "spec": "spec/progression-combat.json",
   "automated_tests": {
     "passed": 116,
@@ -34,6 +34,19 @@
     "region-91-enemies.jpg",
     "rumor-journal.jpg",
     "victory-mobile.jpg",
-    "zero_core-mobile.jpg"
-  ]
+    "zero_core-mobile.jpg",
+    "production-entry.jpg"
+  ],
+  "production_checks": [
+    "Native publication succeeded",
+    "Production entry and module import map use v=10-growth, including progression runtime and catalog",
+    "No missing intro images or browser console errors",
+    "Production gameplay save not loaded or changed"
+  ],
+  "deployment": {
+    "commit_sha": "95afba501ceadcfd314feba0ddfdeeb468f2e5f1",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_3eb2746764fc8191b9ca7210ae3ad507",
+    "deployment_id": "appgdep_6afd99958744819190f0f1754cb14eb6",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
+  }
 }

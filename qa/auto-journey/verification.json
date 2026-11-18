@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-18",
+  "status": "local_verified_ready_to_publish",
+  "automated_tests": {
+    "passed": 128,
+    "failed": 0
+  },
+  "browser_checks": [
+    "360x780: location is at the top, four party members and all bottom navigation fit with page height 780 and page scroll 0.",
+    "Message window stays 140px; observed scrollTop advancing from 0 to 140 without input, page scroll remains 0.",
+    "Random new run generated a Tideborn merchant and departed without selection or Continue.",
+    "Stamina 5 automatically drives; stamina 4 shows an in-window rest prompt; continue initiates driving.",
+    "Rested companion takes the wheel and automatically departs.",
+    "Four-hour safe sleep restores stamina from 4 to 19 and automatically resumes at 12:01.",
+    "All-zero party cannot continue driving; sleep setup correctly has no watchkeeper.",
+    "Resolved roadside loot automatically completes stop, grants one level and drives.",
+    "Building entry and service choices retained; description appears in the message window.",
+    "Two-person battle attack/target/defend round completes, messages appear in the fixed window.",
+    "No captured browser console warnings or errors."
+  ],
+  "scroll_measurement": {
+    "window_height": 140,
+    "inner_height": 108,
+    "scroll_height": 345,
+    "before_scroll_top": 0,
+    "after_scroll_top": 140,
+    "page_scroll": 0,
+    "page_height": 780
+  },
+  "limitations": [
+    "Desktop Chrome at phone viewport; physical phone not tested."
+  ],
+  "screenshots": [
+    "four-person-driving.jpg",
+    "chat-scrolling.jpg",
+    "rest-prompt.jpg",
+    "battle-messages.jpg",
+    "random-driving.jpg"
+  ]
+}

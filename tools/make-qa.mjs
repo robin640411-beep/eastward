@@ -42,4 +42,14 @@ for(let seed=1;seed<1000;seed++){g=fresh();g.s.vehicle.model='van';g.s.party.pus
 g=fresh();g.s.progress=100;setLevel(g.actor(),17);g.beginFinale();g.s.battle.enemies[0].hp=1;g.s.battle.enemies[0].speed=0;states['魔王最後一擊 · 抵達樂園']=g.s;
 g=fresh();g.s.mode='event';g.s.current={instance:38,event:{id:'road_014',title:'東行旅人',text:'一位旅人提起東方入口的事情。',options:[]},npc:g.person('human','historian'),dialogue:true,resolved:false};g.s.current.npc.attitude='戒備';for(let seed=1;seed<1000;seed++){const candidate=new Game(d,structuredClone(g.s));candidate.s.rng=seed;candidate.talk();if(candidate.s.bossRumors.length){states['NPC · 魔王傳聞']=candidate.s;break;}}
 
+g=fresh();states['出發前 · 一千公里']=g.s;
+for(let seed=1;seed<2000;seed++){g=fresh();g.s.vehicle.model='van';for(const [race,job] of [['alien','medic'],['mutant','mechanic'],['human','historian']])g.s.party.push(g.person(race,job));g.s.party.forEach(p=>setLevel(p,2));g.completeStop('qa:four');g.s.rng=seed;g.depart();if(g.s.travel?.voices.kind==='companions'){states['四人行車 · 對話與升級']=g.s;break;}}
+g=fresh();g.s.progress=100;g.beginFinale();states['樂園入口 · 零公里']=g.s;
+
+states['隨機人物 · 全新旅程']=null;
+for(const st of [0,4,5]){g=fresh();g.driver().st=st;states['自動行車 · 體力 '+st]=g.s;}
+g=fresh();g.s.vehicle.model='van';g.driver().st=3;g.s.party.push(g.person('alien','medic'));g.s.party[1].st=18;states['疲勞 · 換人駕駛']=g.s;
+g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.party.forEach(p=>p.st=0);states['全員耗盡 · 休息']=g.s;
+g=fresh();g.driver().st=4;for(let seed=1;seed<100;seed++){const candidate=new Game(d,structuredClone(g.s));candidate.s.rng=seed;if(candidate.roll()>30){g.s.rng=seed;break;}}states['疲勞 · 平安睡眠']=g.s;
+
 writeFileSync(new URL('../dist/qa.html',import.meta.url),`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一路向東測試情境</title><style>body{background:#14232d;color:#eee;font:18px sans-serif;padding:24px}button{display:block;margin:18px 0;padding:18px;width:100%}</style><h1>本機測試情境</h1><p>載入固定測試存檔，再按「繼續旅程」。</p><div id="cases"></div><script>const states=${JSON.stringify(states).replaceAll('<','\\u003c')};for(const [name,state] of Object.entries(states)){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{localStorage.setItem('eastward.save.v1',JSON.stringify(state));location.href='./'};document.querySelector('#cases').append(b)}</script></html>`);

@@ -115,17 +115,18 @@
     "browser": "Chrome id 3",
     "browser_tab": "2093001361"
   },
-  "next_step": "可開始使用者試玩；後續依回饋調整數值與內容。",
+  "next_step": "Publish the validated automatic-journey update to the existing private Site under the user standing authorization.",
   "deployment": {
+    "commit_sha": "95afba501ceadcfd314feba0ddfdeeb468f2e5f1",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_3eb2746764fc8191b9ca7210ae3ad507",
+    "deployment_id": "appgdep_6afd99958744819190f0f1754cb14eb6",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "commit_sha": "0eb9250628cc4b61d804d0329dc450b02d9be285",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_0b08d3a594f881918ea00da6a62b07a2",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "character-equipment-and-card-ui",
-    "status": "deployed-and-browser-verified",
+    "name": "automatic-journey-fixed-message-window",
+    "status": "local_verified_ready_to_publish",
     "physical_phone_tested": false
   },
   "natural_journey_ui": {
@@ -202,7 +203,7 @@
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
   },
   "growth_and_finale": {
-    "status": "local_verified_pending_publication",
+    "status": "published_and_readonly_verified",
     "spec": "spec/progression-combat.json",
     "evidence": "qa/growth/verification.json",
     "max_level": 18,
@@ -220,6 +221,35 @@
       "各路段五種敵人、強度與體型隨旅程增加",
       "開局固定五種魔王之一，擊敗後才能進入樂園",
       "NPC 與同伴可隨機談論對應魔王，無保證提示"
+    ],
+    "commit_sha": "95afba501ceadcfd314feba0ddfdeeb468f2e5f1",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_3eb2746764fc8191b9ca7210ae3ad507",
+    "deployment_id": "appgdep_6afd99958744819190f0f1754cb14eb6",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
+  },
+  "road_hud": {
+    "status": "included_in_automatic_journey_release",
+    "spec": "spec/route-regions.json",
+    "evidence": "qa/road-hud/verification.json",
+    "tests_passed": 118,
+    "features": [
+      "移除路邊地區牌與方向牌",
+      "場景上方的地名、每局 D100 樂園名稱、1000 至 0 公里顯示",
+      "自言自語、同伴、電台和安靜片刻移到車景上方",
+      "行駛下方不再放置重複對話、升級摘要或繼續前進按鈕"
+    ]
+  },
+  "automatic_journey": {
+    "status": "local_verified_ready_to_publish",
+    "spec": "spec/automatic-journey.json",
+    "evidence": "qa/auto-journey/verification.json",
+    "tests_passed": 128,
+    "features": [
+      "地點與樂園距離位於畫面最上方",
+      "固定 140px 訊息視窗與自動捲動",
+      "直接隨機產生新人物",
+      "開局與事件完成後自動前進",
+      "體力低於 5 才詢問休息，同窗換手與守夜設定"
     ]
   }
 }

@@ -1,0 +1,10 @@
+// Only animate the small message viewport; never scroll the game page.
+let ticker=null,lastId=0,oldTop=0,holdUntil=0,mounted=null;
+export function stopMessageScroll(){clearInterval(ticker);ticker=null;if(mounted)oldTop=mounted.scrollTop;mounted=null;}
+export function resetMessageScroll(){stopMessageScroll();lastId=0;oldTop=0;holdUntil=0;}
+export function mountMessageScroll(el,{prompt=false,transient=false}={}){if(!el)return;stopMessageScroll();mounted=el;if(transient){el.scrollTop=el.scrollHeight;return;}const rows=[...el.querySelectorAll('[data-message-id]')],latest=Number(rows.at(-1)?.dataset.messageId)||0;
+ const firstNew=rows.find(row=>Number(row.dataset.messageId)>lastId);if(firstNew){el.scrollTop=firstNew.offsetTop;holdUntil=performance.now()+1600;}else el.scrollTop=oldTop;
+ if(prompt)el.scrollTop=el.scrollHeight;lastId=latest;oldTop=el.scrollTop;
+ const pause=()=>{holdUntil=performance.now()+7000;};el.addEventListener('pointerdown',pause,{passive:true});el.addEventListener('wheel',pause,{passive:true});el.addEventListener('keydown',pause);
+ ticker=setInterval(()=>{if(!el.isConnected){stopMessageScroll();return;}oldTop=el.scrollTop;if(document.hidden||performance.now()<holdUntil||el.scrollTop>=el.scrollHeight-el.clientHeight-1)return;el.scrollTop=Math.min(el.scrollHeight-el.clientHeight,el.scrollTop+2.4);oldTop=el.scrollTop;},120);
+}

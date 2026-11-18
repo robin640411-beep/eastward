@@ -37,7 +37,6 @@ function roadside(b,near=false){const depth=near?3.6:1.45,spacing=near?128:164,o
     poly([[x+80,ground],[x+85,ground-74],[x+88,ground-92],[x+91,ground],[x+89,ground]],'#344548');
     poly([[x+86,ground-43],[x+61,ground-65],[x+66,ground-66],[x+88,ground-50],[x+108,ground-73],[x+111,ground-72],[x+89,ground-38]],'#344548');
    }else{poly([[x+58,ground],[x+68,ground-7-t*12],[x+77,ground-11],[x+91,ground]],b.id==='snow'?'#a2aba5':'#616c61');}
-   if(j%4===0){rect(x+118,ground-41,3,41,'#6c7772');rect(x+104,ground-44,31,17,'#243c3d');rect(x+106,ground-42,27,1,'#839383');text('E →',x+109,ground-32,'#bbbc98',8);}
   }
  }
 }
@@ -63,12 +62,6 @@ function road(from,to,blend,light){blendedLandscape(from,to,blend);
  rect(0,234,W,2,'#949680');rect(0,236,W,4,'#525f57');
  const marker=490-roadTravel*.85%930;paint(assets.occupation.pylon,marker,87,27,72);
  if(light.night){ctx.globalAlpha=.35;for(let i=0;i<16;i++)rect(rnd(i)*W,rnd(i+91)*45,1,1,'#c0c9cf');ctx.globalAlpha=1;}
-}
-function regionSign(view){if(!view.sign)return;const x=view.signX,y=63,w=178,h=65;
- rect(x+18,y+h,5,47,'#555f5d');rect(x+w-23,y+h,5,47,'#555f5d');rect(x+19,y+h,2,46,'#b2b8a3');rect(x+w-22,y+h,2,46,'#b2b8a3');
- rect(x+2,y+3,w,h,'#0c1a24');rect(x,y,w,h,'#93a898');rect(x+2,y+2,w-4,h-4,'#284e4e');rect(x+5,y+5,w-10,h-10,'#426963');rect(x+6,y+6,w-12,h-12,'#284e4e');
- text('東行公路  /  歡迎來到',x+13,y+17,'#b6c9b4',8);text(view.sign.name,x+13,y+43,'#f0ebce',Math.min(18,144/view.sign.name.length));
- text('EAST  →',x+114,y+57,'#c8cba7',8);rect(x+11,y+h-7,51,1,'#577c70');
 }
 function room(){const eventKind=encounters[state.current?.event.id]?.kind,raw=({gas:'garage',clinic:'clinic',pharmacy:'clinic',motel:'hotel',stall:'shop',market:'shop',nest:'nest',eggs:'nest',spores:'nest'}[eventKind]||state.frames?.at(-1)?.scene||'warehouse'),kind=({gas:'garage',pharmacy:'clinic',motel:'hotel',market:'shop',stall:'shop',nest:'nest'}[raw]||raw),valid=['warehouse','clinic','garage','shop','hotel','laboratory','ruin','nest'],scene=valid.includes(kind)?kind:'warehouse';paint(assets.scenes[scene],0,0,W,H);
  if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const cw=sh*W/H;sx+=(sw-cw)/2;sw=cw;ctx.drawImage(p,sx,sy,sw,sh,0,0,W,H);}}
@@ -147,7 +140,7 @@ function drawEncounter(current,x,interior=false,preview=false){const a=encounter
  if(current.npc)person(current.npc,x+(interior?104:114),interior?147:153,interior?54:43);
  if(!preview&&(interior||current.dialogue)){const actor=state.party.find(p=>p.id===state.actorId&&p.hp>0)||state.party.find(p=>p.hp>0);if(actor)person(actor,interior?48:134,interior?157:166,interior?49:38,clock-eventAt<1.5)}
 }
-function updateReadouts(minutes,pose,biome,driving){const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;}
+function updateReadouts(minutes,pose,view,driving){const biome=view.current;const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving+':'+view.remainingKm;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;const distance=document.getElementById('journey-distance'),progress=document.getElementById('journey-progress');if(distance)distance.textContent=view.remainingKm.toLocaleString('en-US');if(progress){progress.style.width=(100-view.remainingKm/10)+'%';progress.parentElement.setAttribute('aria-label','距離樂園還剩 '+view.remainingKm+' 公里');}}
 function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||document.hidden){lastTime=time;return}if(time-lastFrame<33)return;const dt=Math.min((time-lastTime)/1000,.08)||.033;lastTime=time;lastFrame=time;clock+=dt;reduced=reducedMotion();
  const s=state,driving=s.mode==='driving',carFight=s.battle?.mode==='vehicle',u=driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=s.current?.inside||s.frames?.at(-1)?.kind==='building';
  // Both travelling and stopped use this camera, including the very last frame.
@@ -155,7 +148,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(driving||carFight)roadTravel+=dt*(carFight?60:pose.speed)*speed;
  const minute=s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
  const view=routeView(s,u),{from,to,blend}=view;ctx.clearRect(0,0,W,H);
- if(interior&&!driving&&!s.battle)room();else{road(from,to,blend,light);if(!s.battle&&(driving||!s.current))regionSign(view);}
+ if(interior&&!driving&&!s.battle)room();else road(from,to,blend,light);
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
   if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.image)paint(e.image,pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
@@ -165,7 +158,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,0,W,H,'#07152c');ctx.globalAlpha=1;
  if(light.light<.68&&!interior){const x=(viewCarX+184)*viewZoom,y=185*viewZoom+220*(1-viewZoom);ctx.globalAlpha=(.68-light.light)*.55;poly([[x,y],[W,y-29],[W,y+18]],'#ffdf99');ctx.globalAlpha=1;rect(x-3,y-2,4,3,'#f3d894');}}
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));
- ctx.globalAlpha=.018;for(let y=0;y<H;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,view.current,driving);
+ ctx.globalAlpha=.018;for(let y=0;y<H;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,view,driving);
 }
 requestAnimationFrame(frame);
 export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false}={}){canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;

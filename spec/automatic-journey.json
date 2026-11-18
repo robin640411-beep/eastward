@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "date": "2026-11-18",
+  "character_creation": {
+    "automatic": true,
+    "selection_ui": false,
+    "randomized": [
+      "race",
+      "profession",
+      "name",
+      "nickname",
+      "flaw"
+    ],
+    "race_count": 12,
+    "profession_count": 20,
+    "method": "Existing seeded oracle draws; no AI and no visible dice."
+  },
+  "journey": {
+    "start": "Automatically drive after generating a character or resuming a ready save.",
+    "resolved_events": "After a short reading pause, resolve the current event and chained events, then depart automatically.",
+    "interactive_events": "Unresolved choices, NPC interaction, shops, buildings, replacement vehicles and battles wait for player action.",
+    "generic_continue_prompt": false,
+    "fatigue_prompt": {
+      "threshold": "current driver stamina < 5",
+      "location": "fixed message window",
+      "choices": [
+        "rest",
+        "continue if minimum travel cost is affordable",
+        "switch to a rested companion if available"
+      ],
+      "repeat": "Once per departure; choosing continue does not repeatedly ask at the same stop."
+    },
+    "rest": "Choose a watchkeeper in the same window; after safe sleep resume automatically when travel is possible. Existing sleep ambush rules remain.",
+    "blocked": "No fuel or broken vehicle waits for salvage; no automatic endless search.",
+    "modal_pause": true
+  },
+  "layout": {
+    "top": "Current location and saved named Paradise distance, before title and party status.",
+    "message_window": {
+      "height_px": 140,
+      "fixed_height": true,
+      "position": "Above driving/battle scene",
+      "contents": [
+        "companion chat",
+        "self talk",
+        "radio",
+        "event descriptions",
+        "NPC dialogue",
+        "resources and level rewards",
+        "battle actions",
+        "fatigue and watch prompts"
+      ],
+      "auto_scroll": true,
+      "manual_reread": true,
+      "manual_pause_seconds": 7,
+      "retained_messages": 60,
+      "page_auto_scroll": false
+    },
+    "below_driving_scene": "No dialogue, progress notices or continue panel; navigation remains available."
+  },
+  "compatibility": "Existing saves are normalized without rerolling people, destination, route or enemies.",
+  "publication": {
+    "standing_authorization": true,
+    "user_instruction": "每當更新完成後都允許自動上傳，不需要再確認",
+    "destination": "Original owner-private Site; preserve audience."
+  }
+}

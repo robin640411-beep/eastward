@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 3,
   "route": {
     "start": 1,
     "end": 100,
@@ -15,7 +15,7 @@
   "transition": {
     "blend_distance": 2.4,
     "style": "Directional feathered panorama transition; road, vehicle and motion remain continuous.",
-    "sign": "Large roadside place sign at each region entrance, including repeated terrain types."
+    "sign": "No roadside region sign. Current region name appears at the very top of the game, before the HUD."
   },
   "biomes": [
     {
@@ -585,5 +585,19 @@
         "value": "明河"
       }
     ]
+  },
+  "destination": {
+    "name_oracle": "location_name D100",
+    "name_format": "名稱＋樂園",
+    "chosen_at": "start; stable in save and legacy migrations",
+    "distance_km": 1000,
+    "display": "Right edge of the route header at the very top of the game",
+    "mapping": "Round(1000 * clamp((100 - route_position) / 99, 0, 1)); display only, game positions remain 1..100.",
+    "driving": "Smoothly follows actual travelled distance; no encounter countdown."
+  },
+  "driving_ui": {
+    "dialogue": "Fixed 140px message window above the scene; auto-scrolling conversation, radio, events, rewards and rest prompts.",
+    "below_scene": "No dialogue, level summary or continue controls during driving.",
+    "source": "spec/automatic-journey.json"
   }
 }

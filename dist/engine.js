@@ -1,3 +1,4 @@
+import {normalizeFlow,installAutomaticJourney} from './automatic-journey.js';
 import {normalizeProgression,installProgression,makeRegionalEnemies} from './progression-runtime.js';
 import {normalizeRoute,nameEncounter} from './route-runtime.js';
 import {MAX_PARTY,normalizeJourney,installDialogue} from './dialogue-runtime.js';
@@ -17,7 +18,7 @@ export const POWERS={
  human:[['念力推擊','strike'],['心靈復原','heal'],['意志屏障','shield']],alien:[['星芒','strike'],['靜默波','stun'],['腦域風暴','burst']],mutant:[['異變衝擊','strike'],['再生','heal'],['畸變爆發','burst']],synth:[['脈衝','strike'],['反應護盾','shield'],['系統震盪','stun']],uplift:[['野性共鳴','strike'],['生命回聲','heal'],['心靈嚎叫','burst']],chitin:[['碎甲念波','strike'],['甲殼屏障','shield'],['鎮壓','stun']],mycelial:[['孢子念波','strike'],['菌網修復','heal'],['眠霧','stun']],crystal:[['晶芒','strike'],['折射屏障','shield'],['共振崩解','burst']],amphibian:[['潮汐衝擊','strike'],['潮生修復','heal'],['深水屏障','shield']],mimic:[['幻影刺擊','strike'],['感官錯置','stun'],['幻象屏障','shield']],symbiote:[['共生鞭擊','strike'],['生命縫合','heal'],['雙重意識','shield']],lumen:[['光束','strike'],['溫光','heal'],['極光爆發','burst']]};
 export function learned(p){return POWERS[p.race].map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i]})).filter(x=>p.level>=x.level)}
 export class Game{
- constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);}
+ constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);}
  roll(sides=100){let x=this.s.rng>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;this.s.rng=x>>>0||1;return (this.s.rng%sides)+1;}
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
@@ -59,7 +60,7 @@ export class Game{
  const o=c.event.options?.find(x=>x.id===id);if(!o||!this.afford(o.requires))return false;if(o.requires?.some(x=>x.free_seats)&&this.s.party.length>=this.partyLimit())return false;
  // Resolve each option exactly once; service / battle owns the continuation.
  c.event.options=[];this.s.notice=/試玩|草案|依選項結算|依所選事件/.test(o.result_text||'')?'你們完成了這次行動。':o.result_text||'';for(const f of o.effects){this.effect(f);if(this.s.mode==='ending')break;}
- if(!o.effects.length)this.tell(o.label.includes('離開')||o.id==='skip'?'你們沒有停留。':'這裡沒有更多發現。');if(this.s.mode==='event'&&!c.service&&!c.dialogue)this.s.notice+='\n處理完畢，可以繼續。';return true;
+ if(!o.effects.length)this.tell(o.label.includes('離開')||o.id==='skip'?'你們沒有停留。':'這裡沒有更多發現。');if(this.s.mode==='event'&&!c.service&&!c.dialogue)this.s.notice+='\n你們收拾好行囊。';return true;
  }
  effect(f){const p=this.actor();if(!p){this.end(false,'車內再也沒有人能繼續旅程。');return;}
  switch(f.op){
@@ -124,3 +125,5 @@ installNpcs(Game,{clone,display,ITEMS});
 installDialogue(Game,{display});
 
 installProgression(Game,{display,learned});
+
+installAutomaticJourney(Game,{display});
