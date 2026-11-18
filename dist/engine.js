@@ -1,3 +1,4 @@
+import {npcDemeanor} from './npc-presentation.js';
 import {VEHICLE_MODS,normalizeVehicleState,installVehicles} from './vehicle-runtime.js';
 import {installOrigins} from './origin-runtime.js';
 import {normalizeFlow,installAutomaticJourney} from './automatic-journey.js';
@@ -84,7 +85,8 @@ export class Game{
  case 'event_check':{const special={mechanical_lock:'locksmith',electric:'electrician',explosive:'demolition',dark_search:'lumen',alarm:'scout'}[f.check];const skilled=this.alive().some(q=>!q.asleep&&(q.profession===special||q.race===special));const ok=this.roll()<= (skilled?90:55);this.tell(ok?'處理成功。':'處理失敗。');(ok?f.success_effects:f.failure_effects||[]).forEach(x=>this.effect(x));break;}
  default:throw Error('Unimplemented effect '+f.op);
  }this.checkAlive();}
- interact(service=null){const c=this.s.current;if(!c.npc)c.npc=this.person();if(['敵對','掠奪'].includes(c.npc.attitude)){this.beginCombat('character',null,c.npc);return;}c.dialogue=true;c.service=service||null;this.s.notice=`${display(c.npc)}看著你。態度：${c.npc.attitude}。`;}
+ interact(service=null){const c=this.s.current;if(!c.npc)c.npc=this.person();if(['敵對','掠奪'].includes(c.npc.attitude)){this.beginCombat('character',null,c.npc);return;}c.dialogue=true;c.service=service||null;this.s.notice=`${display(c.npc)}
+${npcDemeanor(c.npc,{seed:this.s.seed})}`;}
  openService(service){this.interact(service)}
  recruit(){const c=this.s.current,p=c?.npc;if(!p)return false;if(this.s.party.some(q=>q.id===p.id))return false;if(this.s.party.length>=this.partyLimit()){this.tell(this.s.party.length>=MAX_PARTY?'隊伍最多 4 人，無法再邀請同伴。':'沒有空座位，無法邀請同行。');return false;}if(['敵對','掠奪'].includes(p.attitude)){this.beginCombat('character',null,p);return false;}this.s.party.push(p);c.npc=null;c.dialogue=false;this.tell(display(p)+'加入了隊伍。');return true;}
  schedule(p,hostile=false){if(!p)return;this.s.pending.push({id:'f'+(++this.s.serial),event:'former_companion',actor:clone(p),hostile,after:this.s.stop+1})}

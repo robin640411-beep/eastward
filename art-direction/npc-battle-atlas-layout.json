@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "style_reference": "painted/enemies-atlas.png",
+  "source_unchanged": true,
+  "sprites": {
+    "human_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        55,
+        28,
+        274,
+        328
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        0,
+        362,
+        362
+      ],
+      "race": "human",
+      "weapon": "club"
+    },
+    "alien_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        429,
+        28,
+        250,
+        328
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        0,
+        362,
+        362
+      ],
+      "race": "alien",
+      "weapon": "club"
+    },
+    "mutant_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        749,
+        31,
+        304,
+        326
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        0,
+        362,
+        362
+      ],
+      "race": "mutant",
+      "weapon": "club"
+    },
+    "synth_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        1141,
+        30,
+        260,
+        326
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        0,
+        362,
+        362
+      ],
+      "race": "synth",
+      "weapon": "club"
+    },
+    "uplift_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        55,
+        373,
+        264,
+        347
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        362,
+        362,
+        362
+      ],
+      "race": "uplift",
+      "weapon": "club"
+    },
+    "chitin_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        420,
+        374,
+        261,
+        344
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        362,
+        362,
+        362
+      ],
+      "race": "chitin",
+      "weapon": "club"
+    },
+    "mycelial_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        781,
+        372,
+        253,
+        344
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        362,
+        362,
+        362
+      ],
+      "race": "mycelial",
+      "weapon": "club"
+    },
+    "crystal_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        1129,
+        372,
+        262,
+        347
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        362,
+        362,
+        362
+      ],
+      "race": "crystal",
+      "weapon": "club"
+    },
+    "amphibian_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        57,
+        754,
+        269,
+        326
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        724,
+        362,
+        362
+      ],
+      "race": "amphibian",
+      "weapon": "club"
+    },
+    "mimic_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        426,
+        737,
+        259,
+        343
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        724,
+        362,
+        362
+      ],
+      "race": "mimic",
+      "weapon": "club"
+    },
+    "symbiote_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        772,
+        735,
+        275,
+        345
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        724,
+        362,
+        362
+      ],
+      "race": "symbiote",
+      "weapon": "club"
+    },
+    "lumen_club": {
+      "image": "painted/npc-melee-atlas.png",
+      "rect": [
+        1137,
+        735,
+        255,
+        345
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        724,
+        362,
+        362
+      ],
+      "race": "lumen",
+      "weapon": "club"
+    },
+    "human_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        63,
+        27,
+        266,
+        331
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        0,
+        362,
+        362
+      ],
+      "race": "human",
+      "weapon": "pistol"
+    },
+    "alien_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        428,
+        29,
+        251,
+        329
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        0,
+        362,
+        362
+      ],
+      "race": "alien",
+      "weapon": "pistol"
+    },
+    "mutant_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        760,
+        29,
+        293,
+        329
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        0,
+        362,
+        362
+      ],
+      "race": "mutant",
+      "weapon": "pistol"
+    },
+    "synth_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        1144,
+        28,
+        256,
+        330
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        0,
+        362,
+        362
+      ],
+      "race": "synth",
+      "weapon": "pistol"
+    },
+    "uplift_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        55,
+        371,
+        265,
+        350
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        362,
+        362,
+        362
+      ],
+      "race": "uplift",
+      "weapon": "pistol"
+    },
+    "chitin_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        422,
+        374,
+        259,
+        344
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        362,
+        362,
+        362
+      ],
+      "race": "chitin",
+      "weapon": "pistol"
+    },
+    "mycelial_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        786,
+        371,
+        250,
+        346
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        362,
+        362,
+        362
+      ],
+      "race": "mycelial",
+      "weapon": "pistol"
+    },
+    "crystal_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        1147,
+        370,
+        246,
+        349
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        362,
+        362,
+        362
+      ],
+      "race": "crystal",
+      "weapon": "pistol"
+    },
+    "amphibian_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        61,
+        755,
+        264,
+        325
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        0,
+        724,
+        362,
+        362
+      ],
+      "race": "amphibian",
+      "weapon": "pistol"
+    },
+    "mimic_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        427,
+        735,
+        256,
+        345
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        362,
+        724,
+        362,
+        362
+      ],
+      "race": "mimic",
+      "weapon": "pistol"
+    },
+    "symbiote_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        777,
+        735,
+        270,
+        346
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        724,
+        724,
+        362,
+        362
+      ],
+      "race": "symbiote",
+      "weapon": "pistol"
+    },
+    "lumen_pistol": {
+      "image": "painted/npc-pistol-atlas.png",
+      "rect": [
+        1141,
+        734,
+        252,
+        346
+      ],
+      "size": [
+        1448,
+        1086
+      ],
+      "cell": [
+        1086,
+        724,
+        362,
+        362
+      ],
+      "race": "lumen",
+      "weapon": "pistol"
+    }
+  }
+}

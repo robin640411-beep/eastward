@@ -1,3 +1,4 @@
+import {npcDemeanor} from './npc-presentation.js';
 import {companionExchange} from './companion-dialogue.js';
 export const MAX_PARTY=4;
 export function normalizeJourney(s){
@@ -30,7 +31,7 @@ export function installDialogue(Game,{display}){
  const begin=Game.prototype.beginCombat;Game.prototype.beginCombat=function(mode='character',category=null,npc=null){
   begin.call(this,mode,category,npc);if(!npc||!this.s.battle)return;
   const topic=this.dialogueTopic(npc),attitude=npc.attitude==='掠奪'?'掠奪':'敵對';
-  this.s.notice=`${display(npc)}：\n「${fillWorld(topic.responses[attitude],this.s.world)+this.bossRumor(npc)}」`;
+  this.s.notice=`${npcDemeanor(npc,{seed:this.s.seed,confronted:true})}\n${display(npc)}：\n「${fillWorld(topic.responses[attitude],this.s.world)+this.bossRumor(npc)}」`;
   this.log('戰前喊話',this.s.notice);
  };
  Game.prototype.ambient=function(){

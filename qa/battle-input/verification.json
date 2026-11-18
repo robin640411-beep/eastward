@@ -1,6 +1,6 @@
 {
   "date": "2026-11-19",
-  "status": "local_verified_pending_publication",
+  "status": "published_and_readonly_verified",
   "reported_issue": "Character combat targets hard to select, with stutter.",
   "findings": [
     "Old fixed 101px hitboxes missed wide vehicle ends and large-enemy areas; DOM hit-testing confirmed points landed on the canvas instead of target buttons.",
@@ -41,5 +41,17 @@
   "limitations": [
     "Physical phone and Safari not tested.",
     "Production game save will not be loaded or modified during release verification."
+  ],
+  "deployment": {
+    "commit_sha": "aa7ecbb8115ec475b0f2955e32ed39bffef87994",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_a10c047573e8819183c2af91a4ccf23b",
+    "deployment_id": "appgdep_6afdd15b948481919c6b7393bad42ce5",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Original private Site loaded app.js?v=17-battle-input and rendered the entry without console warnings/errors.",
+    "Production save was not loaded or modified."
   ]
 }

@@ -1,3 +1,4 @@
+import {npcBattleArt} from './npc-presentation.js';
 import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
 import {weatherLayers} from './weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from './weather-art.js';
@@ -13,6 +14,7 @@ let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel
 function img(path){if(!path)return null;if(!images.has(path)){const i=new Image();i.onload=()=>imageRevision++;i.src='assets/'+path;images.set(path,i)}const i=images.get(path);return i.complete&&i.naturalWidth?i:null}
 function paint(path,x,y,w,h){const i=img(path);if(i)ctx.drawImage(i,Math.round(x),Math.round(y),w,h)}
 function paintEnemy(key,x,y,w,h){const a=assets.enemyAtlas?.[key],p=a&&img(a.image);if(p){const [, ,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(p,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else paint(assets.enemies[key]?.image,x,y,w,h);}
+function paintNpcBattle(p,x,y,w,h){const a=npcBattleArt(assets,p),picture=a&&img(a.image);if(picture){const [,,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(picture,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else if(!a)paintEnemy('raider',x,y,w,h);}
 function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
 function poly(points,c){ctx.fillStyle=c;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()}
 function text(s,x,y,col='#e9d6a3',size=8){ctx.font=`bold ${size}px monospace`;ctx.textAlign='left';ctx.fillStyle='#13242c';ctx.fillText(s,x+1,y+1);ctx.fillStyle=col;ctx.fillText(s,x,y)}
@@ -91,7 +93,7 @@ function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layo
   const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
   ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.9?Math.max(0,1-(age-.36)/.54):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paint(assets.characters[e.npc.race+'_'+e.npc.profession],l.cx-l.h/3,y,l.h*2/3,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
+  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paintNpcBattle(e.npc,l.cx-l.w/2-7,y,l.w+14,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
   ctx.restore();
  });
  if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
@@ -138,7 +140,8 @@ export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performan
  const next=s.current?.instance+':'+s.mode+':'+!!s.current?.inside;if(next!==key){eventAt=clock;key=next}
  // Warm actual approaching art so it is already on screen before stopping.
  const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image|| (e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
- for(const e of s.battle?.enemies||[])if(e.image)img(e.image);
+ if(current?.npc)img(npcBattleArt(assets,current.npc)?.image);
+ for(const e of s.battle?.enemies||[])if(e.npc)img(npcBattleArt(assets,e.npc)?.image);else if(e.image)img(e.image);
  canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，我方隊員在下方，指令在上方訊息窗':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
 export function captureVisual(s){return {party:Object.fromEntries(s.party.map(p=>[p.id,p.hp])),hp:s.party.reduce((n,p)=>n+p.hp,0),vehicle:s.vehicle.hp,enemies:s.battle?.enemies.reduce((n,e)=>n+e.hp,0)||0,fuel:s.resources.fuel,scrap:s.resources.scrap,medicine:s.resources.medicine,round:s.battle?.round,mode:s.mode}}
 export function animateResult(before,s,type){const after=captureVisual(s);for(const p of s.party){const el=document.querySelector(`[data-person="${p.id}"]`),diff=p.hp-(before.party?.[p.id]??p.hp);if(el&&diff){el.classList.add(diff<0?'was-hit':'was-healed');}}feedback=[];for(const [key,label,x,col] of [['hp','HP',45,'#e58d79'],['vehicle','車況',48,'#e58d79'],['enemies','',174,'#f0d38e'],['fuel','汽油',176,'#a8d0b8'],['scrap','廢料',176,'#d9bc79'],['medicine','藥品',176,'#a8d0b8']]){const diff=after[key]-before[key];if(diff)feedback.push({text:`${label} ${diff>0?'+':''}${diff}`,x,color:col})}if(feedback.length||before.round!==after.round||type==='psi'){actionAt=clock;actionKind=after.enemies<before.enemies?(type==='psi'?'psi':'attack'):'none'}}

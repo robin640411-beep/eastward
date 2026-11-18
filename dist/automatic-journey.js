@@ -1,3 +1,4 @@
+import {npcDemeanor} from './npc-presentation.js';
 import {journalEntry} from './journey-ui.js';
 export function normalizeFlow(s){if(!s)return;s.journeyFlow??={declined:null,restSetup:false};s.messages??=[];s.messageSerial??=0;}
 export function appendMessage(s,title,text,personId=null){normalizeFlow(s);if(!text)return;const last=s.messages.at(-1);if(last?.text===text&&last.title===title)return;const message={id:++s.messageSerial,title,text,personId};s.messages.push(message);s.messages=s.messages.slice(-60);return message;}
@@ -20,7 +21,7 @@ export function automaticDecision(g){const s=g.s;if(!s||s.rosterReview||s.battle
 export function declineRest(g){if(automaticDecision(g)!=='rest'||!canContinueDriving(g))return false;normalizeFlow(g.s);g.s.journeyFlow.declined=restKey(g);return true;}
 export function automaticStep(g){const decision=automaticDecision(g);if(decision==='drive')return g.depart();if(decision==='finish'){g.finishEvent();return true;}if(decision==='resolveSearch'){g.resolveSearch();return true;}return false;}
 export function syncMessageContext(g,display){const s=g.s;if(!s)return;normalizeFlow(s);const c=s.current;
- if(c?.event){const key=[s.stop,c.instance,c.event.id,c.inside].join(':');if(s.journeyFlow.sceneKey!==key){s.journeyFlow.sceneKey=key;const identity=c.npc?'\n'+display(c.npc)+' · '+(g.d.catalog.races.find(r=>r.id===c.npc.race)?.name||c.npc.race)+' · '+(g.d.catalog.professions.find(r=>r.id===c.npc.profession)?.name||c.npc.profession)+' · '+c.npc.attitude:'';appendMessage(s,c.place?.name||c.event.title,c.event.text.replace('{npc.display_name}',c.npc?display(c.npc):'旅人')+identity);}}
+ if(c?.event){const key=[s.stop,c.instance,c.event.id,c.inside].join(':');if(s.journeyFlow.sceneKey!==key){s.journeyFlow.sceneKey=key;const identity=c.npc?'\n'+display(c.npc)+' · '+(g.d.catalog.races.find(r=>r.id===c.npc.race)?.name||c.npc.race)+' · '+(g.d.catalog.professions.find(r=>r.id===c.npc.profession)?.name||c.npc.profession)+(s.battle?'':'\n'+npcDemeanor(c.npc,{seed:s.seed})):'';appendMessage(s,c.place?.name||c.event.title,c.event.text.replace('{npc.display_name}',c.npc?display(c.npc):'旅人')+identity);}}
  if(s.mode!=='driving'&&s.notice&&s.journeyFlow.notice!==s.notice){s.journeyFlow.notice=s.notice;const recent=s.messages.slice(-12),covered=s.notice.split('\n').filter(Boolean).every(line=>recent.some(m=>m.text===line||`${m.title}：${m.text}`===line));if(!covered)appendMessage(s,c?.conversation?.title||'旅途片刻',s.notice);}
 }
 export function installAutomaticJourney(Game,{display}){
