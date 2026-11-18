@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "tested_pending_publication",
+  "status": "published_and_readonly_verified",
   "content": {
     "races": 12,
     "professions": 20,
@@ -29,5 +29,11 @@
     "character-hope-360.jpg",
     "mutant-mechanic-360.jpg",
     "medic-profession-360.jpg"
+  ],
+  "production_checks": [
+    "Native deployment succeeded",
+    "Production loaded v=8-companions assets and opening screen",
+    "No browser console errors",
+    "Production save not loaded or advanced"
   ]
 }

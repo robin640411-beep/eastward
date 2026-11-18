@@ -1,7 +1,6 @@
 export const clamp01=n=>Math.max(0,Math.min(1,n));
 export const ease=n=>{n=clamp01(n);return n*n*(3-2*n)};
-export const BIOMES=[{id:'salt',name:'白鹽荒原'},{id:'canyon',name:'紅岩峽谷'},{id:'forest',name:'枯木森林'},{id:'city',name:'沉默市郊'},{id:'coast',name:'失落海岸'},{id:'industrial',name:'廢棄工業帶'},{id:'marsh',name:'淹水濕地'},{id:'desert',name:'風蝕沙丘'},{id:'farmland',name:'荒廢農田'},{id:'snow',name:'冰封山道'},{id:'alien',name:'異星侵蝕區'},{id:'oasis',name:'東方綠帶'}];
-export function biomeAt(progress,seed=0){if(progress>=94)return BIOMES[11];return BIOMES[(Math.floor((progress-1)/8)+(Math.abs(seed)%3))%11]}
+export {BIOMES,biomeAt} from './route-runtime.js';
 export function tripPose(progress){const u=clamp01(progress),approach=ease((u-.4)/.6);return {u,approach,zoom:1-.16*approach,carX:58-34*approach,carY:140,carW:190,eventX:600-390*approach,speed:u<.08?60*ease(u/.08):u<.72?60:60*(1-ease((u-.72)/.28))}}
 export function enemyLayout(count){return Array.from({length:count},(_,i)=>({cx:192+(i-(count-1)/2)*105,cy:122,w:count>2?80:106,h:count>2?103:132}))}
 export function mixHex(a,b,t){const x=a.replace('#',''),y=b.replace('#','');return '#'+[0,2,4].map(i=>Math.round(parseInt(x.slice(i,i+2),16)*(1-t)+parseInt(y.slice(i,i+2),16)*t).toString(16).padStart(2,'0')).join('')}

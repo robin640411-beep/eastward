@@ -1,6 +1,7 @@
 // Local preview fixtures. Generated qa.html must not be packaged for release.
 import {readFileSync,writeFileSync} from 'node:fs';
 import {Game} from '../dist/engine.js';
+import {createRoute,nameEncounter,BIOMES} from '../dist/route-runtime.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 const states={};function fresh(){const g=new Game(d);g.start({seed:445,race:'human',profession:'driver'});return g}
@@ -10,7 +11,7 @@ g=fresh();g.s.progress=99;states['抵達綠洲']=g.s;
 g=fresh();g.s.resources.fuel=0;g.s.mode='event';g.s.strandedSearch=true;g.s.current={event:{title:'尋找出路',text:'附近沒有剩餘汽油，也找不到能行駛的車。',options:[]},resolved:false};states['缺油結局']=g.s;
 g=fresh();g.actor().hp=1;g.beginCombat();g.s.battle.enemies.forEach(e=>{e.attack=100;e.speed=100});states['全滅結局']=g.s;
 for(const [label,id] of [['加油站停靠','road_001'],['斷橋','road_056'],['燃燒油槽','road_082'],['建築塌陷','building_046'],['怪物巢穴','building_066']]){g=fresh();const interior=id.startsWith('building');g.s.mode='event';g.s.frames=[{kind:interior?'building':'road',count:1,scene:interior?'warehouse':null}];g.s.current={instance:7,event:structuredClone((interior?d.buildings:d.events).events.find(e=>e.id===id)),resolved:false,building:id==='road_001',npc:null,inside:false};states[label]=g.s;}
-for(const [label,progress,minutes] of [['鹽原白天',1,720],['峽谷黃昏',9,1080],['森林夜晚',17,1320],['海岸清晨',33,360],['佔領城市',25,720],['異星侵蝕',81,960],['雪原',73,720]]){g=fresh();g.s.seed=0;g.s.progress=progress;g.s.minutes=minutes;states[label]=g.s;}
+for(const [label,id,minutes] of [['鹽原白天','salt',720],['峽谷黃昏','canyon',1080],['森林夜晚','forest',1320],['海岸清晨','coast',360],['佔領城市','city',720],['異星侵蝕','alien',960],['雪原','snow',720]]){g=fresh();g.s.route=createRoute(0,sides=>sides===12?BIOMES.findIndex(b=>b.id===id)+1:1);g.s.minutes=minutes;states[label]=g.s;}
 g=fresh();g.s.vehicle={model:'sedan',hp:30,maxHp:30,mods:[]};g.actor().level=5;g.s.party.push(g.person('alien','medic'));g.s.party[1].level=5;g.s.party[0].hp=10;g.s.party[1].hp=12;g.beginCombat();g.s.battle.enemies.forEach(e=>{e.hp=e.maxHp=100;e.attack=2});states['雙人角色戰鬥']=g.s;
 for(const [label,minutes] of [['行車接近事件',720],['夕陽入夜行車',1110]]){for(let seed=1;seed<2000;seed++){g=fresh();g.s.rng=seed;g.s.seed=0;g.s.minutes=minutes;g.depart();const preview=g.previewArrival();if(preview.current?.event.id==='road_001'){states[label]=g.s;break;}}}
 g=fresh();g.s.vehicle={model:'van',hp:40,maxHp:40,mods:[]};g.s.party.push(g.person('alien','medic'));g.s.party[1].level=5;g.s.party[1].gear.配件='charm';g.s.inventory=['pistol','vest','tools','charm','pistol'];states['裝備與同伴比較']=g.s;
@@ -23,4 +24,11 @@ g=fresh();g.s.vehicle={model:'bus',hp:55,maxHp:55,mods:['seat']};for(let i=1;i<4
 g=fresh();g.s.vehicle.model='bus';for(let i=0;i<4;i++)g.s.party.push(g.person());delete g.s.protagonistId;states['舊存檔五人隊伍']=g.s;
 for(const kind of ['companions','solo','radio']){for(let seed=1;seed<2000;seed++){g=fresh();g.s.vehicle.model='van';if(kind==='companions')g.s.party.push(g.person('alien','medic'));g.s.rng=seed;g.depart();if(g.s.travel?.voices.kind===kind){states[{'companions':'行車同伴閒聊','solo':'行車自言自語','radio':'行車電台報導'}[kind]]=g.s;break;}}}
 for(const [label,race,profession,focus] of [['外星人醫護 · 樂園願望','alien','medic','paradise'],['變種人技師 · 樂園願望','mutant','mechanic','paradise'],['外星人醫護 · 種族閒聊','alien','medic','race'],['外星人醫護 · 職業閒聊','alien','medic','profession']]){for(let seed=1;seed<2000;seed++){g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person(race,profession));g.s.rng=seed;g.depart();if(g.s.travel?.voices.kind==='companions'&&g.s.travel.voices.focus===focus){states[label]=g.s;break;}}}
+
+for(const [label,from,to] of [['森林 → 都市 · 區段過渡','forest','city'],['峽谷 → 海岸 · 區段過渡','canyon','coast'],['森林 → 森林 · 新地名','forest','forest']]){
+ let worldSeed=1;while(worldSeed<10000){const route=createRoute(worldSeed);if(route.regions[0].id===from&&route.regions[1].id===to)break;worldSeed++;}
+ for(let rng=1;rng<1000;rng++){g=new Game(d);g.start({seed:worldSeed});g.s.progress=6;g.s.rng=rng;g.depart();if(g.s.travel?.n===10){states[label]=g.s;break;}}
+}
+g=fresh();g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:19,event:structuredClone(d.events.events.find(e=>e.id==='road_001')),building:true,npc:null,resolved:false};g.s.notice=g.s.current.event.text;nameEncounter(g.s);states['D100 店名 · 加油站']=g.s;
+
 writeFileSync(new URL('../dist/qa.html',import.meta.url),`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一路向東測試情境</title><style>body{background:#14232d;color:#eee;font:18px sans-serif;padding:24px}button{display:block;margin:18px 0;padding:18px;width:100%}</style><h1>本機測試情境</h1><p>載入固定測試存檔，再按「繼續旅程」。</p><div id="cases"></div><script>const states=${JSON.stringify(states).replaceAll('<','\\u003c')};for(const [name,state] of Object.entries(states)){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{localStorage.setItem('eastward.save.v1',JSON.stringify(state));location.href='./'};document.querySelector('#cases').append(b)}</script></html>`);

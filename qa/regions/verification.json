@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-18",
+  "status": "tested_pending_publication",
+  "rules": {
+    "route_positions": 100,
+    "region_count": 10,
+    "positions_per_region": 10,
+    "terrain_die": "D12",
+    "terrain_count": 12,
+    "consecutive_repeats": true,
+    "place_name_die": "D100",
+    "place_names": 100
+  },
+  "automated_tests": {
+    "passed": 102,
+    "failed": 0
+  },
+  "browser_checks": [
+    "390x844: real drive from 石泉森林 to 浮光都市 with passing roadside name sign",
+    "390x844: consecutive forest regions 夜航森林 and 照野森林 keep terrain and show separate place names",
+    "360x800: 舊井加油站 name appears on facade and encounter heading without region-sign overlap",
+    "Entering building preserves its generated name",
+    "Saved game reload keeps region and building names",
+    "Module cache update verified by refreshed intro biome label",
+    "No browser console errors"
+  ],
+  "limitations": [
+    "Chrome phone-size viewports; physical phone performance not measured",
+    "Production gameplay save remains untouched during verification"
+  ],
+  "evidence": [
+    "forest-start.jpg",
+    "forest-city-crossing.jpg",
+    "repeated-forest-start.jpg",
+    "repeated-forest-sign.jpg",
+    "named-gas-station-360.jpg"
+  ]
+}

@@ -1,6 +1,7 @@
 // Lightweight 384px stage: layered pixel art, no physics engine or continuous DOM writes.
 import {reducedMotion} from './cinematics.js';
 import {phaseName} from './engine.js';
+import {routeView} from './route-runtime.js';
 import {biomeAt,tripPose,enemyLayout,lightingAt,mixHex,ease,clamp01} from './journey-view-model.js';
 const W=384,H=240,images=new Map();let reduced=reducedMotion();
 let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel=0,eventAt=0,key='',actionAt=-10,feedback=[],actionKind='',travelAt=0,tripDuration=12000,speed=1,viewZoom=.84,viewCarX=24,displayMinute=-1,selectedTarget=null,lightMinute=null,beat=null,beatAt=0,playback=false;
@@ -40,18 +41,34 @@ function roadside(b,near=false){const depth=near?3.6:1.45,spacing=near?128:164,o
   }
  }
 }
-function road(from,to,blend,light){landscape(from);if(from.id!==to.id)landscape(to,blend);
+let transitionLayer=null;
+function blendedLandscape(from,to,blend){
+ landscape(from);if(from.id===to.id||blend<=0)return;
+ if(blend>=1){landscape(to);return;}
+ // New terrain enters from the right through a broad, soft edge. One small
+ // offscreen buffer avoids duplicating the panorama work for every feather strip.
+ if(!transitionLayer){transitionLayer=document.createElement('canvas');transitionLayer.width=W;transitionLayer.height=180;}
+ const main=ctx,q=transitionLayer.getContext('2d');ctx=q;q.clearRect(0,0,W,180);q.imageSmoothingEnabled=false;landscape(to);
+ const edge=W+96-blend*(W+192),mask=q.createLinearGradient(edge-96,0,edge+96,0);mask.addColorStop(0,'#0000');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,W,180);q.globalCompositeOperation='source-over';ctx=main;ctx.drawImage(transitionLayer,0,0);
+}
+function road(from,to,blend,light){blendedLandscape(from,to,blend);
  // Atmospheric separation calms the artwork and puts the vehicle on a readable road.
  const haze=ctx.createLinearGradient(0,95,0,175);haze.addColorStop(0,'#38494c00');haze.addColorStop(1,'#485454bb');ctx.fillStyle=haze;ctx.fillRect(0,95,W,80);
  rect(0,165,W,75,'#303c43');rect(0,165,W,5,'#6c7569');rect(0,170,W,2,'#222f38');rect(0,174,W,1,'#8c907b');
- roadside(blend>.5?to:from);
- if(['city','coast','industrial'].includes((blend>.5?to:from).id)){for(let i=-1;i<12;i++){const x=i*40-roadTravel*1.8%40;rect(x,158,3,15,'#74817b');rect(x,155,40,3,'#9c9f8a');rect(x,158,40,2,'#48575a');}}
+ if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}
+ const rail=b=>['city','coast','industrial'].includes(b.id)?1:0;ctx.globalAlpha=rail(from)*(1-blend)+rail(to)*blend;if(ctx.globalAlpha>0){for(let i=-1;i<12;i++){const x=i*40-roadTravel*1.8%40;rect(x,158,3,15,'#74817b');rect(x,155,40,3,'#9c9f8a');rect(x,158,40,2,'#48575a');}}ctx.globalAlpha=1;
 
  for(let i=-1;i<8;i++){const x=i*96-roadTravel*3.7%96;rect(x,223,48,3,'#c7bd92');rect(x+3,224,39,1,'#aaa68c');poly([[x+31,184],[x+39,189],[x+35,194],[x+50,201]],'#222d35');}
  for(let i=0;i<62;i++){const x=(i*71-roadTravel*(2.4+rnd(i)*1.2)%440+440)%440;rect(x,178+rnd(i+46)*57,2+i%4,1,i%3?'#465157':'#626d6a');}
  rect(0,234,W,2,'#949680');rect(0,236,W,4,'#525f57');
  const marker=490-roadTravel*.85%930;paint(assets.occupation.pylon,marker,87,27,72);
  if(light.night){ctx.globalAlpha=.35;for(let i=0;i<16;i++)rect(rnd(i)*W,rnd(i+91)*45,1,1,'#c0c9cf');ctx.globalAlpha=1;}
+}
+function regionSign(view){if(!view.sign)return;const x=view.signX,y=63,w=178,h=65;
+ rect(x+18,y+h,5,47,'#555f5d');rect(x+w-23,y+h,5,47,'#555f5d');rect(x+19,y+h,2,46,'#b2b8a3');rect(x+w-22,y+h,2,46,'#b2b8a3');
+ rect(x+2,y+3,w,h,'#0c1a24');rect(x,y,w,h,'#93a898');rect(x+2,y+2,w-4,h-4,'#284e4e');rect(x+5,y+5,w-10,h-10,'#426963');rect(x+6,y+6,w-12,h-12,'#284e4e');
+ text('東行公路  /  歡迎來到',x+13,y+17,'#b6c9b4',8);text(view.sign.name,x+13,y+43,'#f0ebce',Math.min(18,144/view.sign.name.length));
+ text('EAST  →',x+114,y+57,'#c8cba7',8);rect(x+11,y+h-7,51,1,'#577c70');
 }
 function room(){const eventKind=encounters[state.current?.event.id]?.kind,raw=({gas:'garage',clinic:'clinic',pharmacy:'clinic',motel:'hotel',stall:'shop',market:'shop',nest:'nest',eggs:'nest',spores:'nest'}[eventKind]||state.frames?.at(-1)?.scene||'warehouse'),kind=({gas:'garage',pharmacy:'clinic',motel:'hotel',market:'shop',stall:'shop',nest:'nest'}[raw]||raw),valid=['warehouse','clinic','garage','shop','hotel','laboratory','ruin','nest'],scene=valid.includes(kind)?kind:'warehouse';paint(assets.scenes[scene],0,0,W,H);
  if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const cw=sh*W/H;sx+=(sw-cw)/2;sw=cw;ctx.drawImage(p,sx,sy,sw,sh,0,0,W,H);}}
@@ -75,7 +92,7 @@ function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  }if(kind==='storm'&&Math.sin(t*.9)>.996){rect(0,0,W,H,'#c6d6ce88')}
 }
 function battle(){const b=state.battle;if(!b)return;const enemies=playback?b.enemies:b.enemies.filter(e=>e.hp>0),layout=enemyLayout(enemies.length),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
- if(!vehicleFight){if(state.current?.inside||state.frames?.at(-1)?.kind==='building')room();else panorama(biomeAt(state.progress,state.seed),0,0,W,H);rect(0,0,W,H,'#0e192bc7');
+ if(!vehicleFight){if(state.current?.inside||state.frames?.at(-1)?.kind==='building')room();else panorama(biomeAt(state.progress,state.seed,state.route),0,0,W,H);rect(0,0,W,H,'#0e192bc7');
   const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
  }
  enemies.forEach((e,i)=>{const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0),attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack',impact=age>=.22&&age<.56;
@@ -123,37 +140,38 @@ function drawBattleBeat(enemies,layout,vehicleFight,age){if(!beat||age<0||age>.7
 }
 function encounterArt(current){let a=encounters[current?.event?.id];if(current?.inside&&a&&!a.interior){const inner={gas:'019',garage:'020',clinic:'021',motel:'022',pharmacy:'017',market:'016',stall:'016',cars:'025',warehouse:'001'}[a.kind];if(inner)a=encounters['building_'+inner];}return a;}
 function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const height=203*facade.rect[3]/facade.rect[2];ctx.drawImage(sheet,...facade.rect,x,196-height,203,height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
+ if(current.place&&!current.place.inherited){const label=current.place.name;if(!interior){rect(x+22,133,3,20,'#7b837a');rect(x+179,133,3,20,'#7b837a');}rect(x+8,interior?45:110,187,24,'#142d36');rect(x+10,interior?47:112,183,1,'#b8b28c');text(label,x+18,interior?62:127,'#ece1b9',Math.min(13,166/label.length));}
  if(collected)text('已搜索',x+65,145,'#d4c28b',10);
  ctx.save();ctx.translate(x-174,0);particles(a.effect,clock);ctx.restore();
  (a.creatures||[]).forEach((k,i)=>paintEnemy(k,x+23+i*37,131+Math.sin(clock*2+i)*2,50,58));
  if(current.npc)person(current.npc,x+(interior?104:114),interior?147:153,interior?54:43);
  if(!preview&&(interior||current.dialogue)){const actor=state.party.find(p=>p.id===state.actorId&&p.hp>0)||state.party.find(p=>p.hp>0);if(actor)person(actor,interior?48:134,interior?157:166,interior?49:38,clock-eventAt<1.5)}
 }
-function updateReadouts(minutes,pose,biome,driving){const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.id+':'+driving;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;}
+function updateReadouts(minutes,pose,biome,driving){const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;}
 function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||document.hidden){lastTime=time;return}if(time-lastFrame<33)return;const dt=Math.min((time-lastTime)/1000,.08)||.033;lastTime=time;lastFrame=time;clock+=dt;reduced=reducedMotion();
  const s=state,driving=s.mode==='driving',carFight=s.battle?.mode==='vehicle',u=driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=s.current?.inside||s.frames?.at(-1)?.kind==='building';
  // Both travelling and stopped use this camera, including the very last frame.
  const settle=1-Math.exp(-dt*8);viewZoom+=(pose.zoom-viewZoom)*settle;viewCarX+=(pose.carX-viewCarX)*settle;
  if(driving||carFight)roadTravel+=dt*(carFight?60:pose.speed)*speed;
  const minute=s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
- const from=biomeAt(s.progress,s.seed),to=biomeAt(s.progress+(driving?s.travel.n:0),s.seed);ctx.clearRect(0,0,W,H);
- if(interior&&!driving&&!s.battle)room();else road(from,to,ease(u),light);
+ const view=routeView(s,u),{from,to,blend}=view;ctx.clearRect(0,0,W,H);
+ if(interior&&!driving&&!s.battle)room();else{road(from,to,blend,light);if(!s.battle&&(driving||!s.current))regionSign(view);}
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
   if(driving&&s.travel.preview?.battle&&!current){const e=s.travel.preview.battle.enemies[0];if(e){if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
  }
- if(!interior&&(!s.battle||carFight)){roadside(ease(u)>.5?to:from,true);}
+ if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from,true);else{ctx.globalAlpha=1-blend;roadside(from,true);ctx.globalAlpha=blend;roadside(to,true);ctx.globalAlpha=1;}}
  if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,0,W,H,'#07152c');ctx.globalAlpha=1;
  if(light.light<.68&&!interior){const x=(viewCarX+184)*viewZoom,y=185*viewZoom+220*(1-viewZoom);ctx.globalAlpha=(.68-light.light)*.55;poly([[x,y],[W,y-29],[W,y+18]],'#ffdf99');ctx.globalAlpha=1;rect(x-3,y-2,4,3,'#f3d894');}}
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));
- ctx.globalAlpha=.018;for(let y=0;y<H;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,ease(u)>.5?to:from,driving);
+ ctx.globalAlpha=.018;for(let y=0;y<H;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,view.current,driving);
 }
 requestAnimationFrame(frame);
 export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false}={}){canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;
  const next=s.current?.instance+':'+s.mode+':'+!!s.current?.inside;if(next!==key){eventAt=clock;key=next}
  // Warm actual approaching art so it is already on screen before stopping.
- const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image);
+ const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image);
  canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，隊伍狀態與指令在下方':encounters[s.current?.event.id]?.title||'公路旁的車輛');}
 export function captureVisual(s){return {party:Object.fromEntries(s.party.map(p=>[p.id,p.hp])),hp:s.party.reduce((n,p)=>n+p.hp,0),vehicle:s.vehicle.hp,enemies:s.battle?.enemies.reduce((n,e)=>n+e.hp,0)||0,fuel:s.resources.fuel,scrap:s.resources.scrap,medicine:s.resources.medicine,round:s.battle?.round,mode:s.mode}}
 export function animateResult(before,s,type){const after=captureVisual(s);for(const p of s.party){const el=document.querySelector(`[data-person="${p.id}"]`),diff=p.hp-(before.party?.[p.id]??p.hp);if(el&&diff){el.classList.add(diff<0?'was-hit':'was-healed');}}feedback=[];for(const [key,label,x,col] of [['hp','HP',45,'#e58d79'],['vehicle','車況',48,'#e58d79'],['enemies','',174,'#f0d38e'],['fuel','汽油',176,'#a8d0b8'],['scrap','廢料',176,'#d9bc79'],['medicine','藥品',176,'#a8d0b8']]){const diff=after[key]-before[key];if(diff)feedback.push({text:`${label} ${diff>0?'+':''}${diff}`,x,color:col})}if(feedback.length||before.round!==after.round||type==='psi'){actionAt=clock;actionKind=after.enemies<before.enemies?(type==='psi'?'psi':'attack'):'none'}}

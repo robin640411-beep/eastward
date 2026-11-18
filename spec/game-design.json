@@ -650,5 +650,19 @@
     "pacing": "每段行車呈現長度有變化，不依骰點決定播放秒數；世界時間與資源仍遵循既定規則。",
     "commands": "隊伍狀態、現場描述、情境行動與常駐選單分層呈現；沒有下拉選單。",
     "continuation": "選擇繼續上路後，尚有停靠內事件則先處理；停靠結束且可行車則直接出發。資源不足留在車旁。"
+  },
+  "route_regions": {
+    "source": "spec/route-regions.json",
+    "distance_range": [
+      1,
+      100
+    ],
+    "region_ranges": "1–10、11–20、…、91–100",
+    "region_count": 10,
+    "terrain_oracle": "route_terrain / D12，獨立且可重複",
+    "naming_oracle": "location_name / D100，100 個名稱與地貌或設施類型組合",
+    "names_persist": true,
+    "boundary_behavior": "按實際行駛距離切換，不因停靠次數變更；新景色從右方漸入，大型路牌立在區段入口。",
+    "arrival": "樂園只在距離 100 時抵達；綠丘是可能出現的地貌，不代表樂園。"
   }
 }
