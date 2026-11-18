@@ -417,6 +417,26 @@
     "interiors": 14,
     "vehicle_weapons": 7,
     "roadside_silhouettes": 16,
-    "release": "22-relief"
+    "release": "22-relief",
+    "release_receipt": {
+      "status": "succeeded",
+      "commit_sha": "75e4834ef200434002c66106469ef7c57fcf7c4b",
+      "deployment_id": "appgdep_6afdf5be50408191b84b01baac30bc4f",
+      "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_3870827ec6f88191889f239c6539d517",
+      "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+      "entry_module": "app.js?v=22-relief",
+      "live_intro_vehicle_canvas": true
+    }
+  },
+  "active_presentation": {
+    "mode": "classic_pixel",
+    "art_source": "8f732e1",
+    "release": "23-pixel",
+    "layout": "vehicle, four party slots, scene, messages, navigation",
+    "screenshots": [
+      "qa/pixel-return/drive-390.jpg",
+      "qa/pixel-return/interior-390.jpg",
+      "qa/pixel-return/battle-360.jpg"
+    ]
   }
 }

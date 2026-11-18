@@ -28,16 +28,15 @@ export function cloudLayout(seed,seconds,travel=0,soft=false){
 
 // Downsample distant detail before filtering. No live full-screen CSS blur.
 // Temporary canvases are released; the caller retains only the 512 × 224 result.
-export function distantPanorama(picture,region,{fadeSky=false,hd=false}={}){
+export function distantPanorama(picture,region,{fadeSky=false}={}){
  const make=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
- const sample=hd?[416,182]:[160,70],output=hd?[768,336]:[512,224];
- const small=make(...sample),s=small.getContext('2d');s.imageSmoothingEnabled=true;
- s.drawImage(picture,...region.rect,0,0,...sample);
- const result=make(...output),q=result.getContext('2d');q.imageSmoothingEnabled=true;
- q.filter=hd?'blur(0.85px) saturate(0.80) contrast(0.86)':'blur(0.7px) saturate(0.48) contrast(0.72) brightness(1.02)';
- q.drawImage(small,-2,-1,output[0]+4,output[1]+2);q.filter='none';
- const air=q.createLinearGradient(0,0,0,output[1]);air.addColorStop(0,'#a0adb538');air.addColorStop(.55,'#9baab04a');air.addColorStop(1,'#788b9620');q.fillStyle=air;q.fillRect(0,0,...output);
- if(fadeSky){const mask=q.createLinearGradient(0,0,0,output[1]*.38);mask.addColorStop(0,'#0000');mask.addColorStop(.45,'#0006');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,...output);q.globalCompositeOperation='source-over';}
+ const small=make(160,70),s=small.getContext('2d');s.imageSmoothingEnabled=true;
+ s.drawImage(picture,...region.rect,0,0,160,70);
+ const result=make(512,224),q=result.getContext('2d');q.imageSmoothingEnabled=true;
+ q.filter='blur(0.7px) saturate(0.48) contrast(0.72) brightness(1.02)';
+ q.drawImage(small,-2,-1,516,226);q.filter='none';
+ const air=q.createLinearGradient(0,0,0,224);air.addColorStop(0,'#a0adb538');air.addColorStop(.55,'#9baab04a');air.addColorStop(1,'#788b9620');q.fillStyle=air;q.fillRect(0,0,512,224);
+ if(fadeSky){const mask=q.createLinearGradient(0,0,0,86);mask.addColorStop(0,'#0000');mask.addColorStop(.45,'#0006');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,512,224);q.globalCompositeOperation='source-over';}
  return result;
 }
 

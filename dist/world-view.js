@@ -1,10 +1,6 @@
-import {groundShadow,drawFacade} from './volume-light.js';
-import {eventVolume,interiorSet,propSize} from './volume-events.js';
-import {sizeStage,stageMargins,paintRoadPlane,contactShadow,stageLight} from './hd-stage.js';
 import {distantPanorama,drawJourneySky,drawDistanceMist} from './atmosphere.js';
 import {npcBattleArt} from './npc-presentation.js';
-import {enemyAttackStyle} from './battle-presentation.js';
-import {drawVehicleVolume} from './vehicle-volume.js';
+import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
 import {weatherLayers} from './weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from './weather-art.js';
 import {drawBattleEffects} from './battle-effects.js';
@@ -12,34 +8,36 @@ import {drawBattleEffects} from './battle-effects.js';
 import {reducedMotion} from './cinematics.js';
 import {phaseName} from './engine.js';
 import {routeView} from './route-runtime.js';
-import {drawRoadside,drawRoadsideProp,roadsideAsset} from './roadside-art.js';
+import {drawRoadside} from './roadside-art.js';
 import {biomeAt,tripPose,enemyLayout,lightingAt,mixHex,ease,clamp01} from './journey-view-model.js';
 const W=384,H=240,images=new Map();let imageRevision=0;let reduced=reducedMotion(),stormStrength=0,stormStarted=0,stormKey='';
-let stage={scale:1,top:0,bottom:0},stageSize='',sky,playerLamp=null;
 let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel=0,eventAt=0,key='',actionAt=-10,feedback=[],actionKind='',travelAt=0,tripDuration=12000,speed=1,viewZoom=.84,viewCarX=24,displayMinute=-1,selectedTarget=null,lightMinute=null,beat=null,beatAt=0,playback=false;
+// Keep the original sprite grid. A taller screen reveals more sky and shoulder.
+let stageTop=0,stageHeight=H,observedCanvas;
+function fitPixelStage(){
+ if(!canvas?.isConnected||!canvas.clientWidth||!canvas.clientHeight)return;
+ stageHeight=Math.max(1,Math.round(W*canvas.clientHeight/canvas.clientWidth));
+ stageTop=Math.round((stageHeight-H)*.55);
+ if(canvas.height!==stageHeight)canvas.height=stageHeight;
+ ctx.setTransform(1,0,0,1,0,stageTop);
+ ctx.imageSmoothingEnabled=false;
+ const style=canvas.parentElement.style;
+ style.setProperty('--viewport-top',(stageTop/stageHeight*100)+'%');
+ style.setProperty('--viewport-height',(H/stageHeight*100)+'%');
+}
+const stageResize=globalThis.ResizeObserver?new ResizeObserver(fitPixelStage):null;
+if(!stageResize)globalThis.addEventListener?.('resize',fitPixelStage);
 function img(path){if(!path)return null;if(!images.has(path)){const i=new Image();i.onload=()=>imageRevision++;i.src='assets/'+path;images.set(path,i)}const i=images.get(path);return i.complete&&i.naturalWidth?i:null}
 function paint(path,x,y,w,h){const i=img(path);if(i)ctx.drawImage(i,Math.round(x),Math.round(y),w,h)}
 function paintEnemy(key,x,y,w,h){const a=assets.enemyAtlas?.[key],p=a&&img(a.image);if(p){const [, ,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(p,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else paint(assets.enemies[key]?.image,x,y,w,h);}
-function paintNpcBattle(p,x,y,w,h){
- if(assets.hd2d){
-  const width=Math.min(w,h*.67),left=x+(w-width)/2;
-  contactShadow(ctx,x+w/2,y+h+1,width*.53,6);
-  ctx.save();ctx.translate(left+width,0);ctx.scale(-1,1);
-  paint(assets.characters[p.race+'_'+p.profession],0,y,width,h);
-  ctx.restore();
-  const gripX=left+width*.29,gripY=y+h*.63;
-  if(p.gear?.武器==='pistol'){rect(gripX-13,gripY-4,17,5,'#122433');rect(gripX-13,gripY-4,15,1,'#a6adb1');rect(gripX-2,gripY,4,5,'#423834');}
-  else{poly([[gripX-15,gripY+15],[gripX-12,gripY+18],[gripX+5,gripY-7],[gripX+1,gripY-9]],'#4c3830');poly([[gripX-19,gripY+16],[gripX-13,gripY+20],[gripX-5,gripY+11],[gripX-13,gripY+7]],'#8b866f');}
-  return;
- }
-const a=npcBattleArt(assets,p),picture=a&&img(a.image);if(picture){const [,,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(picture,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else if(!a)paintEnemy('raider',x,y,w,h);}
+function paintNpcBattle(p,x,y,w,h){const a=npcBattleArt(assets,p),picture=a&&img(a.image);if(picture){const [,,sw,sh]=a.rect,scale=Math.min(w/sw,h/sh),dw=sw*scale,dh=sh*scale;ctx.drawImage(picture,...a.rect,Math.round(x+(w-dw)/2),Math.round(y+h-dh),dw,dh);}else if(!a)paintEnemy('raider',x,y,w,h);}
 function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
 function poly(points,c){ctx.fillStyle=c;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()}
 function text(s,x,y,col='#e9d6a3',size=8){ctx.font=`bold ${size}px monospace`;ctx.textAlign='left';ctx.fillStyle='#13242c';ctx.fillText(s,x+1,y+1);ctx.fillStyle=col;ctx.fillText(s,x,y)}
 function rnd(i){return ((Math.sin(i*127.1+41.7)*43758.5453)%1+1)%1}
 const quietLandscapes=new Map();
 function panorama(b,x=0,y=0,w=W,h=174,alpha=1,fadeSky=false){const id=b.id||b,region=assets.worlds?.[id],picture=region&&img(region.image);ctx.save();ctx.globalAlpha=alpha;
- if(picture){const key=id+':'+fadeSky;let quiet=quietLandscapes.get(key);if(!quiet){quiet=distantPanorama(picture,region,{fadeSky,hd:assets.hd2d});quietLandscapes.set(key,quiet);}ctx.drawImage(quiet,x,y,w,h);}
+ if(picture){const key=id+':'+fadeSky;let quiet=quietLandscapes.get(key);if(!quiet){quiet=distantPanorama(picture,region,{fadeSky});quietLandscapes.set(key,quiet);}ctx.drawImage(quiet,x,y,w,h);}
  else{rect(x,y,w,h,'#344452');paint(assets.scenes[(id==='city'?'city':id==='forest'?'forest':'alien')+'_morning'],x,y,w,h);}ctx.restore();}
 function landscape(b,alpha=1){
  // Mirrored adjacent panels meet at the same edge; the horizon never stops scrolling.
@@ -70,40 +68,38 @@ function blendedLandscape(from,to,blend){
  }finally{ctx=main;}ctx.drawImage(transitionLayer,0,0);
 }
 function road(from,to,blend,light){
- sky=drawJourneySky(ctx,{seed:state.seed,seconds:clock,travel:roadTravel,minutes:lightMinute,from,to,blend,light,storm:stormStrength,soft:reduced,above:stage.top});
+ const sky=drawJourneySky(ctx,{seed:state.seed,seconds:clock,travel:roadTravel,minutes:lightMinute,from,to,blend,light,storm:stormStrength,soft:reduced,above:Math.max(0,stageTop)});
  blendedLandscape(from,to,blend);drawDistanceMist(ctx,{light,mist:sky.mist});
  // Atmospheric separation calms the artwork and puts the vehicle on a readable road.
  const haze=ctx.createLinearGradient(0,95,0,175);haze.addColorStop(0,'#38494c00');haze.addColorStop(1,'#485454bb');ctx.fillStyle=haze;ctx.fillRect(0,95,W,80);
- if(assets.hd2d)paintRoadPlane(ctx,{travel:roadTravel,light,storm:stormStrength});else{
  rect(0,165,W,75,'#303c43');rect(0,165,W,5,'#6c7569');rect(0,170,W,2,'#222f38');rect(0,174,W,1,'#8c907b');
-
+ const scenery=b=>drawRoadside(ctx,{seed:state.seed,region:b,travel:roadTravel,seconds:clock,assets,image:img});
+ if(from.id===to.id)scenery(from);else{ctx.globalAlpha=1-blend;scenery(from);ctx.globalAlpha=blend;scenery(to);ctx.globalAlpha=1;}
 
  for(let i=-1;i<8;i++){const x=i*96-roadTravel*3.7%96;rect(x,223,48,3,'#c7bd92');rect(x+3,224,39,1,'#aaa68c');poly([[x+31,184],[x+39,189],[x+35,194],[x+50,201]],'#222d35');}
  for(let i=0;i<62;i++){const x=(i*71-roadTravel*(2.4+rnd(i)*1.2)%440+440)%440;rect(x,178+rnd(i+46)*57,2+i%4,1,i%3?'#465157':'#626d6a');}
  rect(0,234,W,2,'#949680');rect(0,236,W,4,'#525f57');
+ const below=stageHeight-stageTop-H;
+ if(below>0){
+  rect(0,H,W,below,'#525f57');
+  for(let i=0;i<26;i++){
+   const x=(i*71-(roadTravel*3.8)%473+473)%473-40,y=H+Math.floor(rnd(i+8)*below);
+   rect(x,y,4+i%12,1,i%3?'#626d60':'#424e4c');
+  }
  }
- const marker=490-roadTravel*.85%930;
- if(marker>-50&&marker<W&&assets.props.pylon)drawProp('pylon',marker,159,30,73);
- const scenery=b=>drawRoadside(ctx,{seed:state.seed,region:b,travel:roadTravel,seconds:clock,assets,image:img,minute:lightMinute,storm:stormStrength});
- if(from.id===to.id)scenery(from);else{ctx.globalAlpha=1-blend;scenery(from);ctx.globalAlpha=blend;scenery(to);ctx.globalAlpha=1;}
+ const marker=490-roadTravel*.85%930;paint(assets.occupation.pylon,marker,87,27,72);
 }
-function room(extend=false){
- const top=extend?-stage.top:0,height=H+(extend?stage.top+stage.bottom:0);
- const scene=interiorSet(encounters[state.current?.event?.id],state.frames?.at(-1)?.scene);
- const asset=assets.interiors[scene],picture=asset&&img(asset.image);
- if(!picture){rect(0,top,W,height,'#253138');return;}
- // Keep the set in proportion. A portrait stage crops the sides of the room.
- const [sx,sy,sw,sh]=asset.rect,scale=Math.max(W/sw,height/sh);
- const cw=W/scale,ch=height/scale;
- ctx.drawImage(picture,sx+(sw-cw)/2,sy+(sh-ch)/2,cw,ch,0,top,W,height);
+function room(top=0,height=H){const eventKind=encounters[state.current?.event.id]?.kind,raw=({gas:'garage',clinic:'clinic',pharmacy:'clinic',motel:'hotel',stall:'shop',market:'shop',nest:'nest',eggs:'nest',spores:'nest'}[eventKind]||state.frames?.at(-1)?.scene||'warehouse'),kind=({gas:'garage',pharmacy:'clinic',motel:'hotel',market:'shop',stall:'shop',nest:'nest'}[raw]||raw),valid=['warehouse','clinic','garage','shop','hotel','laboratory','ruin','nest'],scene=valid.includes(kind)?kind:'warehouse';paint(assets.scenes[scene],0,top,W,height);
+ if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const scale=Math.max(W/sw,height/sh),cw=W/scale,ch=height/scale;ctx.drawImage(p,sx+(sw-cw)/2,sy+(sh-ch)/2,cw,ch,0,top,W,height);}}
+ rect(0,top,W,height,'#26313c2b');const pulse=.07+Math.sin(clock*1.6)*.025;ctx.globalAlpha=pulse;poly([[166,35],[194,35],[264,197],[83,197]],'#f3c48c');ctx.globalAlpha=1;
 }
-function vehicle(v,party,x,y,w,rolling=false){
- const h=w*72/160;
- drawVehicleVolume(ctx,{assets,vehicle:v,party,image:img,x,y,width:w,travel:roadTravel,rolling,reduced,
-  onLamp:v===state.vehicle?point=>{playerLamp=point;}:undefined,onGround:foot=>groundShadow(ctx,{...foot,minute:lightMinute??state.minutes,storm:stormStrength,kind:'vehicle'})});
- if(rolling&&!reduced)for(let i=0;i<5;i++){const k=(roadTravel*.065+i*.21)%1;rect(x+7-k*35,y+h-7-k*8,3+k*9,2+k*4,`rgba(194,177,139,${.18*(1-k)})`)}
+function vehicle(v,party,x,y,w,rolling=false){const a=vehicleArt(assets,v),scale=w/160,bump=rolling&&!reduced?Math.round(Math.sin(roadTravel*.14)+Math.sin(roadTravel*.3)*.35)*scale*.55:0,h=w*72/160;y+=bump;
+ rect(x+10,y+h-5,w-15,4,'#1d2c31');a.windows.forEach((win,i)=>{if(party[i])paint(assets.portraits[party[i].race],x+win.x*scale,y+win.y*scale,Math.min(win.width,win.height)*scale,Math.min(win.width,win.height)*scale)});paint(a.image,x,y,w,h);
+ if(rolling&&!reduced)for(const wx of [36,124]){const cx=x+wx*scale,cy=y+59*scale;ctx.save();ctx.translate(cx,cy);ctx.rotate(roadTravel*.32);rect(-3*scale,-1*scale,6*scale,2*scale,'#b4b9a6');rect(-1*scale,-3*scale,2*scale,6*scale,'#7b8d89');ctx.restore()}
+ (vehicleStats(assets,v).weapon.bonus>0&&vehicleStats(assets,v).weapon.style!=='ram'?['gun']:(v.mods||[]).filter(m=>m==='lamp').slice(0,1)).forEach(m=>paint(assets.mods[m],x+w*.36,y-11*scale,w*.3,w*.3));
+ if(rolling)for(let i=0;i<5;i++){const k=(roadTravel*.065+i*.21)%1;rect(x+7-k*35,y+h-7-k*8,3+k*9,2+k*4,`rgba(194,177,139,${.24*(1-k)})`)}
 }
-function person(p,x,y,h=48,walk=false){const t=walk&&!reduced?Math.floor(Math.sin(clock*17))*2:Math.floor(Math.sin(clock*2+p.level))*1;if(assets.hd2d)contactShadow(ctx,x+h/3,y+h,h*.31,4);else rect(x+3,y+h+1,h*.6,2,'#172a32');paint(assets.characters[p.race+'_'+p.profession],x,y+t,h*2/3,h);}
+function person(p,x,y,h=48,walk=false){const t=walk&&!reduced?Math.floor(Math.sin(clock*17))*2:Math.floor(Math.sin(clock*2+p.level))*1;paint(assets.characters[p.race+'_'+p.profession],x,y+t,h*2/3,h);rect(x+3,y+h+1,h*.6,2,'#172a32');}
 function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  for(let i=0;i<30;i++){const a=rnd(i+4),b=rnd(i+91),v=(t*(.2+b*.3)+a)%1;
  if(['fire','smoke','gas','spores'].includes(kind)){const x=244+Math.sin(i+t)*25+a*52,y=166-v*94;const color=kind==='fire'?(i%2?'#ecb451':'#d27642'):kind==='spores'?'#a7b679':kind==='gas'?'#b1b577':'#88918a';ctx.globalAlpha=(1-v)*.65;rect(x,y,kind==='spores'?2:5+v*12,kind==='spores'?2:7+v*10,color)}
@@ -115,13 +111,13 @@ function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  }
 }
 let arenaCanvas=null,arenaKey='';
-function battleBackground(){const indoors=state.current?.inside||state.frames?.at(-1)?.kind==='building',biome=biomeAt(state.progress,state.seed,state.route),next=[indoors,biome.id,state.current?.event?.id,state.frames?.at(-1)?.scene,imageRevision].join(':');
- const density=assets.hd2d?2:1;
- if(!arenaCanvas||arenaCanvas.width!==W*density){arenaCanvas=document.createElement('canvas');arenaCanvas.width=W*density;arenaCanvas.height=H*density;}
- if(next!==arenaKey){const main=ctx;try{ctx=arenaCanvas.getContext('2d');ctx.setTransform(density,0,0,density,0,0);ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,W,H);if(indoors)room();else panorama(biome,0,0,W,H);rect(0,0,W,H,'#0e192bc7');
-  const glow=ctx.createRadialGradient(192,140,10,192,140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);arenaKey=next;
+function battleBackground(){const indoors=state.current?.inside||state.frames?.at(-1)?.kind==='building',biome=biomeAt(state.progress,state.seed,state.route),next=[indoors,biome.id,state.current?.event?.id,state.frames?.at(-1)?.scene,imageRevision,stageHeight].join(':');
+ if(!arenaCanvas){arenaCanvas=document.createElement('canvas');arenaCanvas.width=W;}
+ if(arenaCanvas.height!==stageHeight){arenaCanvas.height=stageHeight;arenaKey='';}
+ if(next!==arenaKey){const main=ctx;try{ctx=arenaCanvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,W,stageHeight);if(indoors)room(0,stageHeight);else{const w=Math.max(W,W*stageHeight/H);panorama(biome,(W-w)/2,0,w,stageHeight);}rect(0,0,W,stageHeight,'#0e192bc7');
+  const glow=ctx.createRadialGradient(192,stageTop+140,10,192,stageTop+140,210);glow.addColorStop(0,'#415c5e55');glow.addColorStop(1,'#121c2b00');ctx.fillStyle=glow;ctx.fillRect(0,0,W,stageHeight);arenaKey=next;
  }finally{ctx=main;}}
- ctx.drawImage(arenaCanvas,0,-stage.top,W,H+stage.top+stage.bottom);
+ ctx.drawImage(arenaCanvas,0,-stageTop);
 }
 function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies),vehicleFight=b.mode==='vehicle',age=(performance.now()-beatAt)/1000;
  if(!vehicleFight)battleBackground();
@@ -130,56 +126,15 @@ function battle(){const b=state.battle;if(!b)return;const enemies=b.enemies,layo
   const y=l.cy-l.h/2+lunge+(reduced?0:Math.sin(clock*1.8+i));
   ctx.save();ctx.translate(recoil,0);ctx.globalAlpha=e.hp<=0?(struck&&age<.9?Math.max(0,1-(age-.36)/.54):0):struck&&impact&&Math.floor(age*35)%2?.4:1;
   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',baseWeapon:(e.attackStyle||enemyAttackStyle(e,'vehicle'))==='cannon'?'gun':'ram',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paintNpcBattle(e.npc,l.cx-l.w/2-7,y,l.w+14,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
+  if(vehicleFight){const width=enemies.length>1?106:175;vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2,112+lunge,width,true);}else e.image?paint(e.image,l.cx-l.w/2,y,l.w,l.h):e.npc?paintNpcBattle(e.npc,l.cx-l.w/2-7,y,l.w+14,l.h):paintEnemy(e.key,l.cx-l.w/2-7,y,l.w+14,l.h);
   ctx.restore();
  });
  if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
  drawBattleEffects(ctx,{beat,age,enemies,layout,party:state.party,soft:reduced});
 }
 function encounterArt(current){let a=encounters[current?.event?.id];if(current?.inside&&a&&!a.interior){const inner={gas:'019',garage:'020',clinic:'021',motel:'022',pharmacy:'017',market:'016',stall:'016',cars:'025',warehouse:'001'}[a.kind];if(inner)a=encounters['building_'+inner];}return a;}
-function drawProp(key,center,baseline,maxW,maxH,interior=false){
- const a=assets.props[key],picture=a&&img(a.image);if(!picture)return;
- const [,,sw,sh]=a.rect,scale=Math.min(maxW/sw,maxH/sh),w=sw*scale,h=sh*scale;
- const floating=key==='lamp',top=floating?22:baseline-h,x=center-w/2;
- if(!floating){
-  if(interior)contactShadow(ctx,center,baseline,w*.46,Math.min(4,h*.07));
-  else groundShadow(ctx,{x,y:baseline,w,h,minute:lightMinute,kind:'prop',picture,rect:a.rect,storm:stormStrength});
- }
- ctx.drawImage(picture,...a.rect,x,top,w,h);
-}
-function drawEventSet(a,visual,x,inside){
- const center=x+97,base=inside?195:190;
- if(visual.type==='facade'){
-  const asset=assets.facilities[visual.key],picture=img(asset.image);
-  if(!picture)return;
-  const [,,sw,sh]=asset.rect,scale=Math.min(205/sw,140/sh),w=sw*scale,h=sh*scale;
-  drawFacade(ctx,{asset,picture,x:center-w/2,y:base,w,h,minute:lightMinute,kind:visual.key,storm:stormStrength});
-  if(visual.extra)drawProp(visual.extra,x+65,base+4,32,20);
- }else if(visual.type==='prop'){
-  const [w,h]=propSize(visual.key);drawProp(visual.key,center,base,w,h,inside);
- }else if(visual.type==='fleet'){
-  for(const [i,model] of visual.models.entries()){
-   const w=visual.models.length===1?140:101+i*13;
-   vehicle({model,mods:[]},[],center-w/2+(visual.models.length===1?0:((i-.5)*75)),base+i*3-w*.45,w);
-  }
- }else if(visual.type==='roadside'){
-  drawRoadsideProp(ctx,{type:visual.key,variant:state.stop||0,region:biomeAt(state.progress,state.seed,state.route),
-    image:img,x:center-69,y:base,width:138,height:103,minute:lightMinute,storm:stormStrength});
- }else if(visual.type==='legacy')paint(a.image,x,inside?68:54,inside?195:203,inside?136:142);
-}
-function placePlaque(label,x){
- ctx.save();ctx.font='bold 9px system-ui';
- const w=Math.min(108,Math.ceil(ctx.measureText(label).width)+14),y=181;
- rect(x+4,y+12,2,9,'#46433a');rect(x+w-6,y+12,2,9,'#46433a');
- rect(x,y,w,14,'#273c40');rect(x,y,w,1,'#c5ba91');rect(x+1,y+1,1,12,'#827c68');
- ctx.fillStyle='#e6d9ad';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x+w/2,y+7,w-7);ctx.restore();
-}
-function drawEncounter(current,x,interior=false,preview=false){
- const a=encounterArt(current);if(!a)return;
- const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);
- ctx.save();if(collected)ctx.globalAlpha*=.45;
- drawEventSet(a,eventVolume(a,interior,assets),x,interior);ctx.restore();
- if(!interior&&current.place&&!current.place.inherited)placePlaque(current.place.name,x+15);
+function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const height=203*facade.rect[3]/facade.rect[2];ctx.drawImage(sheet,...facade.rect,x,196-height,203,height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
+ if(current.place&&!current.place.inherited){const label=current.place.name;if(!interior){rect(x+22,133,3,20,'#7b837a');rect(x+179,133,3,20,'#7b837a');}rect(x+8,interior?45:110,187,24,'#142d36');rect(x+10,interior?47:112,183,1,'#b8b28c');text(label,x+18,interior?62:127,'#ece1b9',Math.min(13,166/label.length));}
  if(collected)text('已搜索',x+65,145,'#d4c28b',10);
  if(a.effect!=='storm'){ctx.save();ctx.translate(x-174,0);particles(a.effect,clock);ctx.restore();}
  (a.creatures||[]).forEach((k,i)=>paintEnemy(k,x+23+i*37,131+Math.sin(clock*2+i)*2,50,58));
@@ -193,61 +148,33 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  const settle=1-Math.exp(-dt*8);viewZoom+=(pose.zoom-viewZoom)*settle;viewCarX+=(pose.carX-viewCarX)*settle;
  if(driving||carFight)roadTravel+=dt*(carFight?60:pose.speed)*speed;
  const minute=s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
- const view=routeView(s,u),{from,to,blend}=view;
- if(assets.hd2d){
-  const dimensions=canvas.clientWidth+':'+canvas.clientHeight;
-  if(dimensions!==stageSize){stage=sizeStage(canvas);stageSize=dimensions;}
-  ctx.setTransform(stage.scale,0,0,stage.verticalScale??stage.scale,0,stage.top*stage.scale);
- }
- ctx.imageSmoothingEnabled=false;ctx.clearRect(0,-stage.top,W,H+stage.top+stage.bottom);
+ const view=routeView(s,u),{from,to,blend}=view;ctx.clearRect(0,-stageTop,W,stageHeight);
  const outdoors=!(interior&&!driving)&&(!s.battle||carFight),currentWeather=driving?s.travel.preview?.current:s.current;
  const stormTarget=outdoors&&encounters[currentWeather?.event?.id]?.effect==='storm'?(driving?ease((u-.15)/.5):1):0;
  const weatherKey=s.seed+':'+(currentWeather?.instance??s.stop)+':storm';if(stormTarget>0&&weatherKey!==stormKey){stormKey=weatherKey;stormStarted=clock;}
  stormStrength+=(stormTarget-stormStrength)*(1-Math.exp(-dt*2));
  const weather=outdoors?{seed:s.seed,seconds:clock,travel:roadTravel,layers:weatherLayers({seed:s.seed,from,to,blend,seconds:clock,storm:stormStrength}),soft:reduced,light:light.light}:null;
- if(assets.hd2d)stageMargins(ctx,stage,{light,interior,battle:!!s.battle&&!carFight,travel:roadTravel});
- if(!s.battle||carFight){if(interior&&!driving&&!s.battle)room(assets.hd2d);else road(from,to,blend,light);}
+ if(!s.battle||carFight){if(interior&&!driving&&!s.battle)room(-stageTop,stageHeight);else road(from,to,blend,light);}
  if(outdoors)drawWeatherSky(ctx,{seed:stormKey,seconds:clock-stormStarted,storm:stormStrength,soft:reduced});
- playerLamp=null;
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
   if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.image)paint(e.image,pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
  }
  if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}}
- if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,-stage.top,W,H+stage.top+stage.bottom,'#07152c');ctx.globalAlpha=1;
- if(light.light<.68&&!interior&&playerLamp){
-  const x=carFight?playerLamp.x:playerLamp.x*viewZoom;
-  const y=carFight?playerLamp.y:playerLamp.y*viewZoom+220*(1-viewZoom);
-  const range=Math.min(W-x,155),beam=ctx.createLinearGradient(x,y,x+range,y);
-  beam.addColorStop(0,'#ffdfa16b');beam.addColorStop(.55,'#ffdfa132');beam.addColorStop(1,'#ffdfa100');
-  ctx.save();ctx.globalAlpha=Math.min(1,(.68-light.light)*1.9);
-  poly([[x,y-1],[x+range,y-13],[x+range,y+21],[x,y+1]],beam);
-  rect(x-1,y-1,3,2,'#ffe1a3');ctx.restore();
- }}
- if(assets.hd2d)stageLight(ctx,{stage,light,interior,battle:!!s.battle,sun:outdoors?sky:null,storm:stormStrength});
+ if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,-stageTop,W,stageHeight,'#07152c');ctx.globalAlpha=1;
+ if(light.light<.68&&!interior){const x=(viewCarX+184)*viewZoom,y=185*viewZoom+220*(1-viewZoom);ctx.globalAlpha=(.68-light.light)*.55;poly([[x,y],[W,y-29],[W,y+18]],'#ffdf99');ctx.globalAlpha=1;rect(x-3,y-2,4,3,'#f3d894');}}
  if(outdoors)drawWeatherParticles(ctx,weather);
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));
- if(!assets.hd2d){ctx.globalAlpha=.018;for(let y=0;y<H;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;}updateReadouts(minute,pose,view,driving);
+ ctx.globalAlpha=.018;for(let y=-stageTop;y<stageHeight-stageTop;y+=3)rect(0,y,W,1,'#101d25');ctx.globalAlpha=1;updateReadouts(minute,pose,view,driving);
 }
 requestAnimationFrame(frame);
-export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false}={}){stageSize='';canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;
+export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false}={}){canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;
+ if(observedCanvas!==canvas){stageResize?.disconnect();stageResize?.observe(canvas);observedCanvas=canvas;}
+ fitPixelStage();
  const next=s.current?.instance+':'+s.mode+':'+!!s.current?.inside;if(next!==key){eventAt=clock;key=next}
  // Warm actual approaching art so it is already on screen before stopping.
- const current=s.mode==='driving'?s.travel?.preview?.current:s.current,ahead=encounterArt(current);
- const inside=s.mode!=='driving'&&(s.current?.inside||s.frames?.at(-1)?.kind==='building');
- if(ahead){
-  const v=eventVolume(ahead,inside,assets);
-  if(v.type==='facade')img(assets.facilities[v.key].image);
-  if(v.type==='prop')img(assets.props[v.key].image);
-  if(v.type==='roadside')img(roadsideAsset(v.key)?.image);
-  if(v.type==='fleet')v.models.forEach(model=>img(assets.vehicles[model].image));
-  if(v.type==='legacy')img(ahead.image);
- }
- if(inside)img(assets.interiors[interiorSet(encounters[s.current?.event?.id],s.frames?.at(-1)?.scene)]?.image);
- img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);
- if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);
- if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image||(e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
+ const current=s.mode==='driving'?s.travel?.preview?.current:s.current;img(encounterArt(current)?.image);const facade=assets.facilities?.[encounterArt(current)?.kind];if(facade){img(facade.image);img(assets.interiors?.warehouse?.image);}img(assets.worlds?.[biomeAt(s.progress,s.seed,s.route).id]?.image);if(s.travel)img(assets.worlds?.[biomeAt(s.progress+s.travel.n,s.seed,s.route).id]?.image);if(s.current?.inside&&assets.interiors)Object.values(assets.interiors).slice(0,1).forEach(a=>img(a.image));if(s.mode==='driving')for(const e of s.travel.preview?.battle?.enemies||[])img(e.image|| (e.npc?assets.characters[e.npc.race+'_'+e.npc.profession]:assets.enemyAtlas?.[e.key]?.image||assets.enemies[e.key]?.image));
  if(current?.npc)img(npcBattleArt(assets,current.npc)?.image);
  for(const e of s.battle?.enemies||[])if(e.npc)img(npcBattleArt(assets,e.npc)?.image);else if(e.image)img(e.image);
  canvas.setAttribute('aria-label',s.mode==='driving'?'車輛向東行駛，沿途景色向後流動':s.battle?'敵人在中央，隊伍在上方，戰鬥指令在下方訊息窗':encounters[s.current?.event.id]?.title||'公路旁的車輛');}

@@ -1,5 +1,5 @@
 /* Five rows share one viewport. The third row is the scene at every game state. */
-.game-shell.hd-layout {
+.game-shell.portrait-layout {
   --play-height: 100dvh;
   width: min(100%, 550px, 80dvh);
   height: var(--play-height);
@@ -11,7 +11,7 @@
   overflow: hidden;
   background: #151b24;
 }
-.hd-layout > * { min-width: 0 }
+.portrait-layout > * { min-width: 0 }
 .vehicle-hud {
   display: grid;
   grid-template-rows: 1.35fr 1fr .7fr;
@@ -65,7 +65,7 @@
   white-space: nowrap;
 }
 .vehicle-meta > span:first-child { overflow: hidden; text-overflow: ellipsis }
-.hd-layout > .party-strip {
+.portrait-layout > .party-strip {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
   gap: 5px;
@@ -74,7 +74,7 @@
   overflow: hidden;
   background: #12212a;
 }
-.hd-layout .party-strip .battle-slot .member:only-child {
+.portrait-layout .party-strip .battle-slot .member:only-child {
   display: grid;
   grid-template-rows: minmax(0,1fr) auto;
   grid-template-columns: minmax(0,1fr);
@@ -91,31 +91,31 @@
   background: linear-gradient(135deg,#283e45,#192932);
   box-shadow: inset 0 1px #c1d3ce18;
 }
-.hd-layout .party-strip .member.active,.hd-layout .party-strip .acting .member {
+.portrait-layout .party-strip .member.active,.portrait-layout .party-strip .acting .member {
   border-color: #d8b979;
   background: linear-gradient(135deg,#485143,#263535);
 }
-.hd-layout .party-strip .member.ally-target { border-color: #9bcca6 }
-.hd-layout .party-strip .empty-member {
+.portrait-layout .party-strip .member.ally-target { border-color: #9bcca6 }
+.portrait-layout .party-strip .empty-member {
   background: #14212b;
   border-color: #2e404b;
   box-shadow: inset 0 0 0 2px #192933;
 }
-.hd-layout .party-strip .member-identity {
+.portrait-layout .party-strip .member-identity {
   display: flex;
   min-height: 0;
   gap: 3px;
   align-items: center;
 }
-.hd-layout .party-strip .member-identity img {
+.portrait-layout .party-strip .member-identity img {
   display: block;
   width: clamp(18px, 6vw, 29px);
   height: clamp(18px, 6vw, 29px);
   object-fit: contain;
   background: #10222a;
 }
-.hd-layout .party-strip .member-identity strong { font-size: clamp(9px,2.9vw,13px) }
-.hd-layout .party-strip .member-identity small {
+.portrait-layout .party-strip .member-identity strong { font-size: clamp(9px,2.9vw,13px) }
+.portrait-layout .party-strip .member-identity small {
   margin-top: 0;
   font-size: 8px;
   line-height: 1.1;
@@ -123,12 +123,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.hd-layout .party-strip .member-vitals { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3px }
-.hd-layout .party-strip .member-vitals > div > span { display: block; font-size: 8px; line-height: 1.02; white-space: nowrap }
-.hd-layout .party-strip .member-vitals b { display: block; font-size: 10px }
-.hd-layout .party-strip .battle-slot .member:only-child .member-vitals b small { display: none }
-.hd-layout .party-strip .member-vitals .bar { height: 3px; margin: 2px 0 0 }
-.hd-layout .party-strip .order-state {
+.portrait-layout .party-strip .member-vitals { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3px }
+.portrait-layout .party-strip .member-vitals > div > span { display: block; font-size: 8px; line-height: 1.02; white-space: nowrap }
+.portrait-layout .party-strip .member-vitals b { display: block; font-size: 10px }
+.portrait-layout .party-strip .battle-slot .member:only-child .member-vitals b small { display: none }
+.portrait-layout .party-strip .member-vitals .bar { height: 3px; margin: 2px 0 0 }
+.portrait-layout .party-strip .order-state {
   position: absolute;
   top: 1px;
   right: 1px;
@@ -136,14 +136,14 @@
   font-size: 7px;
   background: #16262de6;
 }
-.hd-layout > .world-stage {
+.portrait-layout > .world-stage {
   aspect-ratio: auto;
   overflow: hidden;
   background: #25353e;
   border-block: 1px solid #797868;
 }
-.hd-layout .world-stage canvas { image-rendering: auto }
-.hd-layout > .message-window {
+.portrait-layout .world-stage canvas { image-rendering: pixelated }
+.portrait-layout > .message-window {
   height: auto;
   min-height: 0;
   max-height: none;
@@ -154,21 +154,21 @@
   overscroll-behavior: contain;
   background: #1a2b35;
 }
-.hd-layout .message-heading { margin-bottom: 2px }
-.hd-layout .message-scroll { min-height: 24px }
-.hd-layout .message-commands { margin-top: 3px }
-.hd-layout .message-commands button,.hd-layout .message-actions button { min-height: clamp(32px,4.6dvh,44px); padding: 3px 4px }
-.hd-layout .choice-pagination button { min-height: 25px }
-.hd-layout .nav {
+.portrait-layout .message-heading { margin-bottom: 2px }
+.portrait-layout .message-scroll { min-height: 24px }
+.portrait-layout .message-commands { margin-top: 3px }
+.portrait-layout .message-commands button,.portrait-layout .message-actions button { min-height: clamp(32px,4.6dvh,44px); padding: 3px 4px }
+.portrait-layout .choice-pagination button { min-height: 25px }
+.portrait-layout .nav {
   position: relative;
   inset: auto;
   padding: 1px 8px max(2px,env(safe-area-inset-bottom));
   margin: 0;
   opacity: 1;
 }
-.hd-layout .nav > button { min-height: 44px; padding: 3px; gap: 3px }
-.hd-layout .world-targets { inset: var(--viewport-top,0%) 0 auto; height: var(--viewport-height,100%) }
-.hd-layout .stage-actor {
+.portrait-layout .nav > button { min-height: 44px; padding: 3px; gap: 3px }
+.portrait-layout .world-targets { inset: var(--viewport-top,0%) 0 auto; height: var(--viewport-height,100%) }
+.portrait-layout .stage-actor {
   position: absolute;
   left: calc(var(--slot) * 25%);
   bottom: 0;
@@ -178,34 +178,34 @@
   z-index: 2;
   pointer-events: none;
 }
-.hd-layout .actor-rise { width: 76px; height: 118px; object-fit: contain }
+.portrait-layout .actor-rise { width: 76px; height: 118px; object-fit: contain }
 @media (max-height:690px) {
-  .hd-layout .message-heading > small { display: none }
-  .hd-layout .message-line { margin-bottom: 4px }
-  .hd-layout .message-line p { font-size: 11px }
+  .portrait-layout .message-heading > small { display: none }
+  .portrait-layout .message-line { margin-bottom: 4px }
+  .portrait-layout .message-line p { font-size: 11px }
 }
 
 @media (max-height:625px) {
-  .game-shell.hd-layout {grid-template-rows: 55px 60px 50% minmax(0,1fr) auto}
+  .game-shell.portrait-layout {grid-template-rows: 55px 60px 50% minmax(0,1fr) auto}
   .vehicle-hud {grid-template-rows: 30px 15px 10px}
-  .hd-layout .nav > button { min-height: 40px }
-  .hd-layout .message-commands, .hd-layout .message-actions {margin-top:2px}
-  .hd-layout .message-commands button,.hd-layout .message-actions button {min-height:30px}
-  .hd-layout .choice-pagination button {min-height:22px}
-  .hd-layout .message-scroll {min-height:20px}
+  .portrait-layout .nav > button { min-height: 40px }
+  .portrait-layout .message-commands, .portrait-layout .message-actions {margin-top:2px}
+  .portrait-layout .message-commands button,.portrait-layout .message-actions button {min-height:30px}
+  .portrait-layout .choice-pagination button {min-height:22px}
+  .portrait-layout .message-scroll {min-height:20px}
 }
 @media (max-height:690px) {
-  .hd-layout .message-window:has(.choice-pagination) {position:relative}
-  .hd-layout .message-window:has(.choice-pagination) .message-heading {padding-right:100px}
-  .hd-layout .choice-pagination {
+  .portrait-layout .message-window:has(.choice-pagination) {position:relative}
+  .portrait-layout .message-window:has(.choice-pagination) .message-heading {padding-right:100px}
+  .portrait-layout .choice-pagination {
     position:absolute;
     top:1px;
     right:7px;
     margin:0;
     gap:4px;
   }
-  .hd-layout .choice-pagination button {width:30px;min-height:23px;font-size:0;padding:0}
-  .hd-layout .choice-pagination button::before {font-size:15px;content:'›'}
-  .hd-layout .choice-pagination button:first-child::before {content:'‹'}
-  .hd-layout .message-window:has(.choice-pagination) .message-heading {min-height:21px}
+  .portrait-layout .choice-pagination button {width:30px;min-height:23px;font-size:0;padding:0}
+  .portrait-layout .choice-pagination button::before {font-size:15px;content:'›'}
+  .portrait-layout .choice-pagination button:first-child::before {content:'‹'}
+  .portrait-layout .message-window:has(.choice-pagination) .message-heading {min-height:21px}
 }
