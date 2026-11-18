@@ -1,0 +1,133 @@
+{
+  "facilities": {
+    "file": "painted/facilities-atlas.png",
+    "width": 2172,
+    "height": 724,
+    "alpha": true,
+    "transparentPixels": 675922,
+    "cells": [
+      [
+        "gas",
+        0,
+        0,
+        543,
+        350
+      ],
+      [
+        "garage",
+        543,
+        0,
+        543,
+        350
+      ],
+      [
+        "motel",
+        1086,
+        0,
+        543,
+        350
+      ],
+      [
+        "clinic",
+        1629,
+        0,
+        543,
+        350
+      ],
+      [
+        "pharmacy",
+        0,
+        350,
+        543,
+        350
+      ],
+      [
+        "warehouse",
+        543,
+        350,
+        543,
+        350
+      ],
+      [
+        "shop",
+        1086,
+        350,
+        543,
+        350
+      ],
+      [
+        "checkpoint",
+        1629,
+        350,
+        543,
+        350
+      ]
+    ],
+    "note": "Each source rect retains transparent margins. Rows use y 0 and 350 so visible building baselines align at about source y 334/335, rather than uneven geometric cell margins. RGBA transparency verified."
+  },
+  "interiors": {
+    "file": "painted/interiors-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": false,
+    "cells": [
+      [
+        "warehouse",
+        0,
+        0,
+        626,
+        311
+      ],
+      [
+        "clinic",
+        628,
+        0,
+        626,
+        311
+      ],
+      [
+        "garage",
+        0,
+        315,
+        626,
+        309
+      ],
+      [
+        "shop",
+        628,
+        315,
+        626,
+        309
+      ],
+      [
+        "hotel",
+        0,
+        630,
+        626,
+        308
+      ],
+      [
+        "laboratory",
+        628,
+        630,
+        626,
+        308
+      ],
+      [
+        "ruin",
+        0,
+        944,
+        626,
+        310
+      ],
+      [
+        "nest",
+        628,
+        944,
+        626,
+        310
+      ]
+    ],
+    "note": "Safe rectangles avoid mixed pixels at x 627 and row transitions around 312/313,626/627,939-942. Each room roughly 2:1 with empty lower floor."
+  }
+}

@@ -1,0 +1,410 @@
+{
+  "asset": "dist/assets/painted/enemies-atlas.png",
+  "width": 1254,
+  "height": 1254,
+  "format": "RGBA PNG",
+  "columns": 4,
+  "rows": 4,
+  "method": "built-in image_gen; second pass preserves artwork and shrinks within cells",
+  "reference": "dist/assets/painted/world-atlas-a.png",
+  "source": "/Users/robin/.codex/generated_images/01a1ebf2-f620-77a2-a5fb-a4bc771ef2ed/exec-f9dd7ac0-083c-4741-a59c-e8acf0c541e8.png",
+  "alpha": {
+    "min": 0,
+    "max": 255,
+    "fullyTransparentPixels": 1078207,
+    "partlyTransparentPixels": 493803
+  },
+  "sprites": {
+    "raider": {
+      "index": 0,
+      "row": 0,
+      "column": 0,
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        54,
+        71,
+        204,
+        213
+      ],
+      "paddingPx": [
+        54,
+        71,
+        56,
+        30
+      ],
+      "bottomBaseline": 0.904
+    },
+    "soldier": {
+      "index": 1,
+      "row": 0,
+      "column": 1,
+      "cell": [
+        314,
+        0,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        376,
+        61,
+        200,
+        223
+      ],
+      "paddingPx": [
+        62,
+        61,
+        51,
+        30
+      ],
+      "bottomBaseline": 0.904
+    },
+    "mutant": {
+      "index": 2,
+      "row": 0,
+      "column": 2,
+      "cell": [
+        627,
+        0,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        673,
+        63,
+        223,
+        222
+      ],
+      "paddingPx": [
+        46,
+        63,
+        44,
+        29
+      ],
+      "bottomBaseline": 0.908
+    },
+    "infected": {
+      "index": 3,
+      "row": 0,
+      "column": 3,
+      "cell": [
+        940,
+        0,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        1020,
+        63,
+        166,
+        221
+      ],
+      "paddingPx": [
+        80,
+        63,
+        68,
+        30
+      ],
+      "bottomBaseline": 0.904
+    },
+    "crawler": {
+      "index": 4,
+      "row": 1,
+      "column": 0,
+      "cell": [
+        0,
+        314,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        48,
+        379,
+        220,
+        183
+      ],
+      "paddingPx": [
+        48,
+        65,
+        46,
+        65
+      ],
+      "bottomBaseline": 0.792
+    },
+    "hound": {
+      "index": 5,
+      "row": 1,
+      "column": 1,
+      "cell": [
+        314,
+        314,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        364,
+        396,
+        221,
+        163
+      ],
+      "paddingPx": [
+        50,
+        82,
+        42,
+        68
+      ],
+      "bottomBaseline": 0.783
+    },
+    "nest": {
+      "index": 6,
+      "row": 1,
+      "column": 2,
+      "cell": [
+        627,
+        314,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        669,
+        363,
+        227,
+        202
+      ],
+      "paddingPx": [
+        42,
+        49,
+        44,
+        62
+      ],
+      "bottomBaseline": 0.802
+    },
+    "swarm": {
+      "index": 7,
+      "row": 1,
+      "column": 3,
+      "cell": [
+        940,
+        314,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        989,
+        386,
+        216,
+        158
+      ],
+      "paddingPx": [
+        49,
+        72,
+        49,
+        83
+      ],
+      "bottomBaseline": 0.735
+    },
+    "drone": {
+      "index": 8,
+      "row": 2,
+      "column": 0,
+      "cell": [
+        0,
+        627,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        54,
+        697,
+        209,
+        164
+      ],
+      "paddingPx": [
+        54,
+        70,
+        51,
+        79
+      ],
+      "bottomBaseline": 0.748
+    },
+    "turret": {
+      "index": 9,
+      "row": 2,
+      "column": 1,
+      "cell": [
+        314,
+        627,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        375,
+        675,
+        195,
+        192
+      ],
+      "paddingPx": [
+        61,
+        48,
+        57,
+        73
+      ],
+      "bottomBaseline": 0.767
+    },
+    "worker": {
+      "index": 10,
+      "row": 2,
+      "column": 2,
+      "cell": [
+        627,
+        627,
+        313,
+        313
+      ],
+      "visibleBounds": [
+        674,
+        674,
+        221,
+        195
+      ],
+      "paddingPx": [
+        47,
+        47,
+        45,
+        71
+      ],
+      "bottomBaseline": 0.773
+    },
+    "sentinel": {
+      "index": 11,
+      "row": 2,
+      "column": 3,
+      "cell": [
+        940,
+        627,
+        314,
+        313
+      ],
+      "visibleBounds": [
+        1005,
+        670,
+        189,
+        199
+      ],
+      "paddingPx": [
+        65,
+        43,
+        60,
+        71
+      ],
+      "bottomBaseline": 0.773
+    },
+    "lurker": {
+      "index": 12,
+      "row": 3,
+      "column": 0,
+      "cell": [
+        0,
+        940,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        60,
+        984,
+        199,
+        186
+      ],
+      "paddingPx": [
+        60,
+        44,
+        55,
+        84
+      ],
+      "bottomBaseline": 0.732
+    },
+    "brute": {
+      "index": 13,
+      "row": 3,
+      "column": 1,
+      "cell": [
+        314,
+        940,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        362,
+        1013,
+        220,
+        146
+      ],
+      "paddingPx": [
+        48,
+        73,
+        45,
+        95
+      ],
+      "bottomBaseline": 0.697
+    },
+    "wing": {
+      "index": 14,
+      "row": 3,
+      "column": 2,
+      "cell": [
+        627,
+        940,
+        313,
+        314
+      ],
+      "visibleBounds": [
+        673,
+        1014,
+        223,
+        136
+      ],
+      "paddingPx": [
+        46,
+        74,
+        44,
+        104
+      ],
+      "bottomBaseline": 0.669
+    },
+    "parasite": {
+      "index": 15,
+      "row": 3,
+      "column": 3,
+      "cell": [
+        940,
+        940,
+        314,
+        314
+      ],
+      "visibleBounds": [
+        997,
+        981,
+        199,
+        183
+      ],
+      "paddingPx": [
+        57,
+        41,
+        58,
+        90
+      ],
+      "bottomBaseline": 0.713
+    }
+  },
+  "validation": {
+    "allSixteenPresent": true,
+    "visibleBoundsStayInsideOwnCell": true,
+    "maxAlphaAtCellDivider": 1,
+    "twelvePercentPaddingUniform": false,
+    "notes": "Actual true alpha and nonintersection validated. Padding and baseline are recorded per sprite; image generation did not achieve a perfectly identical baseline or 12 percent padding on every side. Fit visibleBounds into a common destination box to normalize display scale."
+  }
+}

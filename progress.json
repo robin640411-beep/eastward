@@ -5,7 +5,7 @@
   "site_registered": true,
   "deployed": true,
   "assets": {
-    "files": 546,
+    "files": 554,
     "characters": 240,
     "portraits": 12,
     "vehicles": 8,
@@ -13,10 +13,13 @@
     "scenes": 28,
     "icons": 16,
     "mods": 4,
-    "generator": "tools/make_art.py",
+    "generator": "tools/rebuild_art.py",
     "gallery": "dist/art.html",
     "vehicle_seat_variants": 20,
-    "encounter_images": 202
+    "encounter_images": 202,
+    "redrawn_existing": 546,
+    "painted_atlases": 5,
+    "occupation_props": 3
   },
   "implemented": [
     "原創像素 SVG 素材",
@@ -47,7 +50,11 @@
     "共享行車與停靠鏡頭，提前呈現實際擲骰事件、拉遠與減速",
     "12 種沿途地貌與連續日夜光線、星月、車燈",
     "中央敵人與下方隊伍 JRPG 戰鬥介面，直接點擊敵人或治療對象",
-    "超能力子選單、上一人指令修改、受傷與治療回饋"
+    "超能力子選單、上一人指令修改、受傷與治療回饋",
+    "全部 546 張原有美術重新繪製，角色、車輛、敵人、圖示、場景和事件物件一致更新",
+    "12 個高細節佔領區全景、8 建築外觀、8 室內、16 戰鬥敵人原創圖集",
+    "母艦、資源抽取、黑紫生體設施、巡邏機和人類設施監控器",
+    "新版大型敵人等比顯示並共用腳底線，車窗位置與座位保留"
   ],
   "verification": [
     "324 個 SVG XML 與引用檢查",
@@ -70,27 +77,31 @@
     "兩位隊員攻擊、藥品、超能力與防禦實際回合結算，返回上一人成功",
     "自動行車抵達加油站與進入建築成功；鹽原、峽谷、夜間森林、清晨海岸目視檢查",
     "82% 接近鏡頭可見前方加油站；99.99% 與正式停靠車身位置和尺寸一致",
-    "100 組種子預覽事件與實際事件一致且不消耗正式資源或隨機數"
+    "100 組種子預覽事件與實際事件一致且不消耗正式資源或隨機數",
+    "62 項測試全數通過；正式站載入原有存檔、顯示新地貌與精簡狀態列，無瀏覽器錯誤",
+    "比對基準 commit，全部 546 張既有 SVG 均已更新，沒有遺漏",
+    "全部 28 車型／座位圖的 147 個窗孔保留原座標，11 人車窗實際可見",
+    "390×844／360×780 實際檢查新行車、加油站、室內、夜間森林、佔領城市與戰鬥，點選敵人及回合結算正常"
   ],
   "must_finish_before_completion": [],
   "tools": {
     "node": "/Users/robin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
     "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
     "local_preview": "http://127.0.0.1:8765/",
-    "preview_exec_session": 18938,
-    "browser": "Chrome id 1",
-    "browser_tab": "2093001319"
+    "preview_exec_session": null,
+    "browser": "Chrome id 3",
+    "browser_tab": "2093001341"
   },
   "next_step": "可開始使用者試玩；後續依回饋調整數值與內容。",
   "deployment": {
-    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "commit_sha": "91527d7dcc8fac0a9ae64936d40f49e79938e6cd",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_70333dfcfff48191b3e578dc130299cd",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_5db1a8c65edc8191bb60a0d66ec8f75b",
+    "commit_sha": "b2327f094b7ed173682578b44c4f6fac3f07aa43",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "continuous-camera-and-jrpg-ui",
+    "name": "occupied-earth-art-remake",
     "status": "locally-verified-awaiting-deployment",
     "physical_phone_tested": false
   }

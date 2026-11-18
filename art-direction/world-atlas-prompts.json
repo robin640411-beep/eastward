@@ -1,0 +1,41 @@
+{
+  "type": "game-background-atlas",
+  "generation": "built-in image_gen",
+  "style": "original detailed 16-bit pixel art; occupied Earth; crescent black-violet architecture, amber alien energy",
+  "atlases": [
+    {
+      "file": "dist/assets/painted/world-atlas-a.png",
+      "source": "/Users/robin/.codex/generated_images/01a1ebf3-7b9c-7a02-ac5e-0a33136100e4/exec-236e342b-8913-4e3b-9219-cbd6d9bfa5a1.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 2,
+      "rows": 3,
+      "biomes": [
+        "salt",
+        "canyon",
+        "forest",
+        "city",
+        "coast",
+        "industrial"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production pixel-art background atlas for a portrait mobile post-alien-invasion road-trip JRPG, NOT a mockup.\nCreate ONE full-bleed image with EXACTLY SIX distinct panoramic game backgrounds in a strict 2-COLUMN by 3-ROW rectangular grid. All cells same width and height, no gutters, no frames, no labels, no text anywhere. Overall image landscape 1536x1024, 3:2. Each of the six cells is a wide panorama 768 by 341 approximately, around 2.25:1. Each panel occupies its own entire rectangle and MUST NOT blend across grid boundaries.\nStyle: exceptionally polished original hand-painted 16-bit pixel art. Intentional crisp square pixel clusters, sophisticated silhouette shapes, rich but controlled environmental detail, layered atmospheric depth. A mature 1990s cinematic pixel JRPG, not crude block art, not vector shapes, not a 3D render, not photographic. Cohesive dark navy, desaturated forest teal, ochre sandstone, coral rust, warm pale sky, ominous amber alien energy. Broad readable shapes must remain clear when each cell is displayed at 384x175.\nSetting: Earth has been conquered by alien invaders several years ago. All six landscapes unmistakably show occupation: beautiful but menacing black-violet crescent-shaped biomechanical structures, amber glyph-free light strips, airborne surveillance, giant distant hovering citadel. Familiar human architecture has been appropriated, not simply ruined. No written words or text glyphs.\nComposition common to all six: strict SIDE VIEW scenery for a horizontal road game. No foreground vehicle, no people, no diagonal road receding to a vanishing point. Lower 10 percent is a relatively clear dark horizontal flat roadside ledge for layering animated vehicles separately. Landscape starts above that ledge. Sky occupies top 30-40 percent. Keep key buildings and landmarks in the central broad band. No visible grid lines.\nSix scenes in exact reading order:\nTOP LEFT: vast pale salt flats, cracked white earth and dark alien extraction towers siphoning minerals, floating angular mining ship and long thin cable arrays, rugged distant hills.\nTOP RIGHT: spectacular terracotta canyon strata with an alien segmented arch bridge suspended between cliffs, amber-lit pylons and tiny surveying drones. Arid and sculptural, distinct from the salt plain.\nMIDDLE LEFT: haunting dense dead woodland invaded by rich teal bioluminescent fungi and sinewy violet parasite vines, enormous alien growth emerging beyond tree line, mist in layered forest.\nMIDDLE RIGHT: human coastal mid-rise city under occupation, broken apartment blocks with alien armor grafted onto them, unmistakably ENORMOUS hovering alien mothership dominates the sky over the skyline, amber searchlight columns. Restrained beautiful atmospheric blues.\nBOTTOM LEFT: rocky turquoise coast with tidal pools, huge offshore alien harvester and black curved landing platforms above the sea, remote ships and industrial coral-like growth. Ocean visibly distinct.\nBOTTOM RIGHT: human rusted industrial refinery converted to an alien production complex, pipes and gantries intertwined with curved violet biomechanical furnaces, amber reactor glow, beautiful long smoke clouds.\nDo not add UI, logos, borders, people, foreground cars, lettering or labels. This is a high-quality game asset atlas, not an infographic."
+    },
+    {
+      "file": "dist/assets/painted/world-atlas-b.png",
+      "source": "/Users/robin/.codex/generated_images/01a1ebf3-7b9c-7a02-ac5e-0a33136100e4/exec-b8479d38-18bf-46b0-9560-f0119f91bea1.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 2,
+      "rows": 3,
+      "biomes": [
+        "marsh",
+        "desert",
+        "farmland",
+        "snow",
+        "alien",
+        "oasis"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: second production pixel-art game background atlas.\nThe attached six-panel atlas is a STYLE AND GRID reference. Create a NEW companion atlas in exactly the same polished pixel-art style and exact same 2-COLUMN by 3-ROW panel layout, full bleed, no gutters, no borders, no lettering. Keep overall landscape image 1536x1024, 3:2. Every cell must be a wide 2.25:1 panoramic side-view game landscape suitable for a scrolling road-trip JRPG. Do not reproduce the specific environments in the reference; replace all six with the following new environments.\nAESTHETIC to preserve: exquisite original 16-bit hand-crafted pixel clusters, subtle directional light and material texture, sophisticated silhouettes, layered atmosphere, dark navy/teal/rust/coral/sandstone, alien black-violet swept crescent-shaped biomechanical architecture with amber energy strips. Do not use vector art, crude blocks, 3D rendering, photography or blurry painting. Earth occupied by an alien civilization for several years, with unmistakable invasion evidence in EVERY panel.\nCOMMON COMPOSITION: foreground road is drawn separately in game. Bottom 10% of each cell should be clear, mostly flat dark horizontal roadside ledge, no cars or people. No diagonal highway perspective. Top 30–40% sky, rich readable silhouettes in middle. Keep separate scenes cleanly contained in the 2x3 grid. Absolutely NO labels, NO UI, NO text or glyphs.\nNEW six scenes in precise reading order:\nTOP LEFT — FLOODED WETLAND: dark teal marsh, reed beds and drowned human houses, giant translucent alien incubation spheres growing from water between curved violet spires, distant mist and hovering monitoring devices. Organic, damp, atmospheric.\nTOP RIGHT — WIND-CARVED DESERT: ochre and coral dunes with fine ridges, buried concrete human highway infrastructure and monumental alien archaeological excavation machine shaped like a dark curved ring, thin amber energy beams extracting something from sand. Monumental open space.\nMIDDLE LEFT — OCCUPIED FARMLAND: layered olive and gold fields, farmhouse and silo appropriated by aliens, black-purple harvesting striders at FAR distance and huge hovering cargo collector, crop circles with amber light tracks, wind turbines in ruin. A readable agrarian landscape under organized occupation, no close human figures.\nMIDDLE RIGHT — FROZEN MOUNTAIN PASS: pale blue snowy mountain peaks, frozen pines, human radio station converted into a towering alien amber beacon with serrated violet biomechanical antennae. Snowdrifts, ice reflections, frosty atmosphere, distinct cold palette while maintaining same shared world.\nBOTTOM LEFT — FULL ALIEN TERRAFORMING: Earth's surface transformed into enormous teal fungal terraces and twisting violet coral towers, glowing amber pores and segmented roots, a floating alien citadel beyond a mist-filled chasm. Beautiful strange organic ecology, no human architecture remains dominant, strong readable layered silhouettes.\nBOTTOM RIGHT — DISTANT EASTERN OASIS: sheltered green valley with turquoise water and a SMALL inviting survivors' settlement among lush trees, makeshift warm-lit cottages and solar panels, hopeful atmosphere; an imposing alien mothership remains faintly visible far behind mountain ridges to show the world is still occupied. No castle, no fantasy medieval village.\nAll scenes should be very beautiful, detailed but readable at mobile resolution, cinematic atmosphere within strict pixel-art medium. Grid must remain EXACTLY two columns by three rows."
+    }
+  ]
+}

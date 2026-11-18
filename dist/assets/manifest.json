@@ -1,5 +1,5 @@
 {
-  "style": "原創低解析度像素；整數座標 SVG，縮放不模糊",
+  "style": "精緻16位元像素；黑紫生體裝甲、琥珀能源、青綠人類設施與鏽蝕修補",
   "portraits": {
     "human": "portraits/human.svg",
     "alien": "portraits/alien.svg",
@@ -1463,5 +1463,591 @@
     "armor": "mods/armor.svg",
     "seat": "mods/seat.svg",
     "lamp": "mods/lamp.svg"
+  },
+  "artVersion": "occupation-2",
+  "worlds": {
+    "salt": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        0,
+        0,
+        768,
+        339
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "canyon": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        768,
+        0,
+        768,
+        339
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "forest": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        0,
+        343,
+        768,
+        337
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "city": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        768,
+        343,
+        768,
+        337
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "coast": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        0,
+        683,
+        768,
+        341
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "industrial": {
+      "image": "painted/world-atlas-a.png",
+      "rect": [
+        768,
+        683,
+        768,
+        341
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "marsh": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        0,
+        0,
+        768,
+        338
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "desert": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        768,
+        0,
+        768,
+        338
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "farmland": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        0,
+        342,
+        768,
+        337
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "snow": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        768,
+        342,
+        768,
+        337
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "alien": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        0,
+        682,
+        768,
+        342
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "oasis": {
+      "image": "painted/world-atlas-b.png",
+      "rect": [
+        768,
+        682,
+        768,
+        342
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "facilities": {
+    "gas": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        0,
+        0,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "garage": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        543,
+        0,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "motel": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        1086,
+        0,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "clinic": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        1629,
+        0,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "pharmacy": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        0,
+        350,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "warehouse": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        543,
+        350,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "shop": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        1086,
+        350,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    },
+    "checkpoint": {
+      "image": "painted/facilities-atlas.png",
+      "rect": [
+        1629,
+        350,
+        543,
+        350
+      ],
+      "size": [
+        2172,
+        724
+      ]
+    }
+  },
+  "interiors": {
+    "warehouse": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        0,
+        0,
+        626,
+        311
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "clinic": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        628,
+        0,
+        626,
+        311
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "garage": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        0,
+        315,
+        626,
+        309
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "shop": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        628,
+        315,
+        626,
+        309
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "hotel": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        0,
+        630,
+        626,
+        308
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "laboratory": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        628,
+        630,
+        626,
+        308
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "ruin": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        0,
+        944,
+        626,
+        310
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "nest": {
+      "image": "painted/interiors-atlas.png",
+      "rect": [
+        628,
+        944,
+        626,
+        310
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    }
+  },
+  "occupation": {
+    "carrier": "occupation/carrier.svg",
+    "drone": "occupation/drone.svg",
+    "pylon": "occupation/pylon.svg"
+  },
+  "enemyAtlas": {
+    "raider": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        48,
+        65,
+        216,
+        225
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "soldier": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        370,
+        55,
+        212,
+        235
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "mutant": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        667,
+        57,
+        235,
+        234
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "infected": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        1014,
+        57,
+        178,
+        233
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "crawler": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        42,
+        373,
+        232,
+        195
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "hound": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        358,
+        390,
+        233,
+        175
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "nest": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        663,
+        357,
+        239,
+        214
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "swarm": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        983,
+        380,
+        228,
+        170
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "drone": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        48,
+        691,
+        221,
+        176
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "turret": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        369,
+        669,
+        207,
+        204
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "worker": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        668,
+        668,
+        233,
+        207
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "sentinel": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        999,
+        664,
+        201,
+        211
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "lurker": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        54,
+        978,
+        211,
+        198
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "brute": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        356,
+        1007,
+        232,
+        158
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "wing": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        667,
+        1008,
+        235,
+        148
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "parasite": {
+      "image": "painted/enemies-atlas.png",
+      "rect": [
+        991,
+        975,
+        211,
+        195
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    }
   }
 }

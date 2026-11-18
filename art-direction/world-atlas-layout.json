@@ -1,0 +1,101 @@
+{
+  "atlasA": {
+    "path": "painted/world-atlas-a.png",
+    "width": 1536,
+    "height": 1024,
+    "cells": [
+      [
+        "salt",
+        0,
+        0,
+        768,
+        339
+      ],
+      [
+        "canyon",
+        768,
+        0,
+        768,
+        339
+      ],
+      [
+        "forest",
+        0,
+        343,
+        768,
+        337
+      ],
+      [
+        "city",
+        768,
+        343,
+        768,
+        337
+      ],
+      [
+        "coast",
+        0,
+        683,
+        768,
+        341
+      ],
+      [
+        "industrial",
+        768,
+        683,
+        768,
+        341
+      ]
+    ]
+  },
+  "atlasB": {
+    "path": "painted/world-atlas-b.png",
+    "width": 1536,
+    "height": 1024,
+    "cells": [
+      [
+        "marsh",
+        0,
+        0,
+        768,
+        338
+      ],
+      [
+        "desert",
+        768,
+        0,
+        768,
+        338
+      ],
+      [
+        "farmland",
+        0,
+        342,
+        768,
+        337
+      ],
+      [
+        "snow",
+        768,
+        342,
+        768,
+        337
+      ],
+      [
+        "alien",
+        0,
+        682,
+        768,
+        342
+      ],
+      [
+        "oasis",
+        768,
+        682,
+        768,
+        342
+      ]
+    ]
+  },
+  "note": "Cells are [biome,x,y,width,height]. Source rectangles exclude mixed rows at generated atlas seams; original PNG files unmodified."
+}
