@@ -168,5 +168,6 @@
     "generation_extension": "姓名、外號、12 種族、20 職業與態度分別生成；身分保存"
   },
   "npc_behavior_spec": "data/npc-spec.json",
-  "trait_spec": "data/traits.json"
+  "trait_spec": "data/traits.json",
+  "automatic_reward": "標記無代價取得的物資、裝備、服務或候選車輛。進入事件時結算並顯示實際結果，每次遭遇只領取一次。發現替代車後仍可比較車輛。免費醫護有多位傷者時只選受治者。"
 }

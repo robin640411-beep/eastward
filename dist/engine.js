@@ -16,12 +16,28 @@ export const phaseName=m=>({night:'夜晚',dawn:'清晨',morning:'上午',aftern
 export const display=p=>`「${p.nickname}」${p.name}`;
 export const ITEMS={club:{name:'球棒',slot:'武器',attack:2,price:3},pistol:{name:'舊手槍',slot:'武器',attack:4,price:7,ranged:true},coat:{name:'厚外套',slot:'防具',defense:1,price:3},vest:{name:'防護背心',slot:'防具',defense:3,price:8},tools:{name:'工具組',slot:'配件',defense:1,price:4},charm:{name:'共鳴石',slot:'配件',psyche:2,price:6}};
 export const MODS={...VEHICLE_MODS,lamp:{name:'車頂探照燈',price:4}};
-export const BUILDING_ROADS=new Set([1,2,3,4,5,14,15,21,25,26,28,29,34,35,36,37,38,39,40,44,45,48]);
+export const BUILDING_ROADS=new Set([1,2,3,4,5,14,15,21,26,28,29,34,35,36,37,38,39,40,44,45,48]);
 export const POWERS={
  human:[['念力推擊','strike'],['心靈復原','heal'],['意志屏障','shield']],alien:[['星芒','strike'],['靜默波','stun'],['腦域風暴','burst']],mutant:[['異變衝擊','strike'],['再生','heal'],['畸變爆發','burst']],synth:[['脈衝','strike'],['反應護盾','shield'],['系統震盪','stun']],uplift:[['野性共鳴','strike'],['生命回聲','heal'],['心靈嚎叫','burst']],chitin:[['碎甲念波','strike'],['甲殼屏障','shield'],['鎮壓','stun']],mycelial:[['孢子念波','strike'],['菌網修復','heal'],['眠霧','stun']],crystal:[['晶芒','strike'],['折射屏障','shield'],['共振崩解','burst']],amphibian:[['潮汐衝擊','strike'],['潮生修復','heal'],['深水屏障','shield']],mimic:[['幻影刺擊','strike'],['感官錯置','stun'],['幻象屏障','shield']],symbiote:[['共生鞭擊','strike'],['生命縫合','heal'],['雙重意識','shield']],lumen:[['光束','strike'],['溫光','heal'],['極光爆發','burst']]};
 export function learned(p){return POWERS[p.race].map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i]})).filter(x=>p.level>=x.level)}
 export class Game{
- constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);}
+ constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);
+  if(state?.mode==='event'&&state.current){
+   const c=state.current,e=c.event;
+   // A pending v24 choice is identifiable by its original option. An empty list
+   // means the old save already took or passed it, even without a receipt.
+   if(e?.options?.length&&!e.automatic_reward){
+    const catalog=e.id?.startsWith('building_')?data.buildings:data.events;
+    const def=catalog?.events.find(row=>row.id===e.id);
+    if(def?.automatic_reward&&e.options.some(o=>o.id===def.automatic_reward)){
+     e.automatic_reward=def.automatic_reward;e.reward_alternative=def.reward_alternative;
+     e.options=e.options.filter(o=>o.id===def.automatic_reward);
+    }
+   }
+   if(c.building&&!c.entered&&e?.id==='road_025')c.building=false;
+   this.collectReward();
+  }
+ }
  roll(sides=100){let x=this.s.rng>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;this.s.rng=x>>>0||1;return (this.s.rng%sides)+1;}
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
@@ -52,29 +68,98 @@ export class Game{
  }
  if(!npc&&e.bindings?.npc)npc=this.person();const building=frame.kind==='road'&&BUILDING_ROADS.has(e.d100);this.s.current={instance:++this.s.serial,event:e,npc,resolved:false,building,entered:false,service:null,dialogue:e.kind==='followup'&&npc&&!['敵對','掠奪'].includes(npc.attitude),giftGiven:false,frame:frame.kind};nameEncounter(this.s);this.s.mode='event';this.s.dice={kind:'D100',value:draw.roll};this.s.seen.push(e.id);this.s.notice=e.text.replace('{npc.display_name}',npc?display(npc):'旅人');
  if(npc&&!building&&['敵對','掠奪'].includes(npc.attitude))this.beginCombat('character',null,npc);
+ else this.collectReward();
  }
  finishEvent(){if(this.s.mode!=='event'||this.s.current?.resolved)return;if(this.s.current?.event.options?.length&&!this.s.current.dialogue)return;this.s.current.resolved=true;const frame=this.s.frames.at(-1);if(!frame){this.completeStop();this.s.current=null;this.s.mode='ready';return;}const threshold=[75,50,25][frame.count-1];const roll=threshold?this.roll():100;this.s.dice={kind:'追加 D100',value:roll};this.log('停靠片刻',threshold&&roll<=threshold?'準備離開時，你們又有了新的發現。':'整理好行囊，這裡的事情已經告一段落。');if(threshold&&roll<=threshold){this.nextEvent();return;}this.s.frames.pop();if(frame.kind==='building'){const parent=frame.parent;this.s.current=parent;this.s.current.entered=true;this.s.current.resolved=false;this.s.current.building=false;this.s.current.inside=false;this.s.mode='event';this.s.notice='你們回到車旁。這棟建築的探索已結束。';}else{this.completeStop();this.s.current=null;this.s.mode='ready';this.s.searched=false;this.s.notice='這次停靠已結束。'} }
- enterBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.building||c.entered)return false;c.entered=true;c.building=false;c.inside=true;this.s.notice='你們下車進入'+(c.place?.name||c.event.title)+'。';if(c.npc&&['敵對','掠奪'].includes(c.npc.attitude))this.beginCombat('character',null,c.npc);return true}
+ enterBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.building||c.entered)return false;c.entered=true;c.building=false;c.inside=true;this.s.notice='你們下車進入'+(c.place?.name||c.event.title)+'。';if(c.npc&&['敵對','掠奪'].includes(c.npc.attitude))this.beginCombat('character',null,c.npc);else this.collectReward();return true}
  exploreBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.inside||c.explored||c.event.options?.length)return false;c.explored=true;this.s.frames.push({kind:'building',count:0,scene:this.buildingScene(c.event),parent:clone(c)});this.nextEvent();return true}
  buildingScene(e){const t=e.title;return /醫|藥|診/.test(t)?'clinic':/修|車/.test(t)?'garage':/旅|客|休|驛/.test(t)?'hotel':/商|店|攤|市場/.test(t)?'shop':/研究|實驗/.test(t)?'laboratory':'warehouse'}
  currentScene(){if(this.s.current?.inside&&!this.s.battle)return this.buildingScene(this.s.current.event);if(this.s.battle)return this.s.battle.mode==='vehicle'?'road':this.s.frames.at(-1)?.scene||'ruin';if(this.s.frames.at(-1)?.kind==='building')return this.s.frames.at(-1).scene;return 'road'}
- options(){const c=this.s.current;if(!c)return [];if(c.building)return [{id:'enter',label:'下車進入建築',requires:[],effects:[]},{id:'pass',label:'留在車上，略過此處',requires:[],effects:[]}];return c.event.options||[]}
- choose(id){if(this.s.mode!=='event')return false;const c=this.s.current;if(c.resolved)return false;if(c.building){if(id==='enter')return this.enterBuilding();if(id==='pass'){c.building=false;c.event.options=[];this.finishEvent();return true;}}
+ options(){const c=this.s.current;if(!c)return [];
+ if(c.carePending)return this.alive().filter(p=>p.hp<p.maxHp).map(p=>({id:'care_'+p.id,label:p.name+' · 生命 '+p.hp+'/'+p.maxHp,requires:[],effects:[]}));
+ if(c.building)return [{id:'enter',label:'下車進入建築',requires:[],effects:[]},{id:'pass',label:'留在車上，略過此處',requires:[],effects:[]}];return c.event.options||[]}
+ choose(id){if(this.s.mode!=='event')return false;const c=this.s.current;if(c.resolved)return false;
+ if(id==='reward_specialist'&&!c.building&&c.event.options?.length){
+  const p=this.rewardSpecialist();return !!p&&this.selectActor(p.id)&&this.traitAction(c.event.reward_alternative);
+ }
+ if(!c.building&&id===c.event.automatic_reward)return this.collectReward(null,true);if(c.carePending)return id.startsWith('care_')&&this.collectReward(id.slice(5));if(c.building){if(id==='enter')return this.enterBuilding();if(id==='pass'){c.building=false;c.event.options=[];this.finishEvent();return true;}}
  const o=c.event.options?.find(x=>x.id===id);if(!o||!this.afford(o.requires))return false;if(o.requires?.some(x=>x.free_seats)&&this.s.party.length>=this.partyLimit())return false;
  // Resolve each option exactly once; service / battle owns the continuation.
  c.event.options=[];this.s.notice=/試玩|草案|依選項結算|依所選事件/.test(o.result_text||'')?'你們完成了這次行動。':o.result_text||'';for(const f of o.effects){this.effect(f);if(this.s.mode==='ending')break;}
  if(!o.effects.length)this.tell(o.label.includes('離開')||o.id==='skip'?'你們沒有停留。':'這裡沒有更多發現。');if(this.s.mode==='event'&&!c.service&&!c.dialogue)this.s.notice+='\n你們收拾好行囊。';return true;
  }
+ rewardSpecialist(){
+  const job=this.s.current?.event?.reward_alternative;
+  return job&&this.alive().find(p=>!p.asleep&&p.profession===job);
+ }
+ collectReward(recipientId=null,chosen=false){
+  const s=this.s,c=s?.current;
+  if(s?.mode!=='event'||!c||c.resolved||c.building||c.rewardReceipt)return false;
+  const key=c.event?.automatic_reward;
+  const option=key&&c.event.options?.find(o=>o.id===key);
+  if(!option)return false;
+  // A specialist may use time for a different or guaranteed result.
+  if(!chosen&&this.rewardSpecialist())return false;
+  let recipient=null;
+  if(option.effects.some(f=>f.op==='heal'&&f.target!=='vehicle')){
+   const injured=this.alive().filter(p=>p.hp<p.maxHp);
+   if(recipientId){recipient=injured.find(p=>p.id===recipientId);if(!recipient)return false;}
+   else if(injured.length>1){c.carePending=true;s.notice='有好幾位隊員受傷，想讓誰接受治療？';return false;}
+   else recipient=injured[0];
+  }
+  c.event.options=[];delete c.carePending;
+  c.searching=!c.npc&&(/search|take|open|salvage/.test(key)||/搜|回收/.test(option.label));
+  const result=option.effects.map(f=>this.rewardResult(f,recipient)).join('');
+  c.rewardReceipt=result;
+  const greeting=c.npc?display(c.npc)+' · '+npcDemeanor(c.npc,{seed:s.seed})+'\n':'';
+  s.notice=greeting+result;this.log(c.event.title,s.notice);
+  return true;
+ }
+ // Produce the receipt from the same values that enter inventory or restore HP.
+ rewardResult(f,recipient){
+  if(f.op==='resource'){
+   let n=f.amount;
+   if(f.key==='scrap'&&this.s.current?.searching){
+    const p=this.actor();n=Math.max(0,n+(p?.profession==='scavenger'?1:0)-(p?.flaw==='distracted'?1:0));
+   }
+   this.add(f.key,n);
+   const name={fuel:'汽油',scrap:'廢料',medicine:'藥品'}[f.key];
+   return n?'獲得'+name+' ×'+n+'。':'沒有找到可用的'+name+'。';
+  }
+  if(f.op==='heal'){
+   const vehicle=f.target==='vehicle',target=vehicle?this.s.vehicle:recipient;
+   if(!target)return '全隊生命值已滿，無須治療。';
+   const restored=Math.min(f.amount,target.maxHp-target.hp);target.hp+=restored;
+   if(vehicle)return restored?'免費修復車況 +'+restored+'（'+target.hp+'/'+target.maxHp+'）。':'車況完好，無須維修。';
+   return display(target)+'恢復 '+restored+' 點生命（'+target.hp+'/'+target.maxHp+'）。';
+  }
+  if(f.op==='event_check'){
+   const {effects}=this.checkEffects(f);
+   return effects.length?effects.map(effect=>this.rewardResult(effect,recipient)).join(''):'衣櫃的鎖沒能打開，沒有取得物品。';
+  }
+  const row=this.oracle(f.table);
+  if(f.table==='supplies')return row.effects.map(effect=>this.rewardResult(effect,recipient)).join('');
+  if(f.table==='equipment'){
+   this.s.inventory.push(row.value.id);
+   return '獲得'+(ITEMS[row.value.id]?.name||row.value.name)+' ×1。';
+  }
+  if(f.table==='vehicle'){
+   const v=row.value,model=this.d.assets.vehicles[v.id]?v.id:'sedan';
+   this.s.offerVehicle={model,hp:v.max_health,maxHp:v.max_health,mods:[],fuel:v.fuel};
+   return '發現可以行駛的'+v.name+'，車內還有 '+v.fuel+' 點汽油。';
+  }
+  throw Error('Unknown reward table '+f.table);
+ }
  effect(f){const p=this.actor();if(!p){this.end(false,'車內再也沒有人能繼續旅程。');return;}
  switch(f.op){
- case 'resource':{let n=f.amount;if(f.key==='scrap'&&n>0){if(p.profession==='scavenger')n++;if(p.flaw==='distracted')n=Math.max(0,n-1)}this.add(f.key,n);this.tell(`${{fuel:'汽油',scrap:'廢料',medicine:'藥品'}[f.key]} ${n>=0?'+':''}${n}`);break;}
+ case 'resource':{const n=f.amount;if(n>0){this.tell(this.rewardResult(f));break;}this.add(f.key,n);this.tell(`${{fuel:'汽油',scrap:'廢料',medicine:'藥品'}[f.key]} ${n>=0?'+':''}${n}`);break;}
  case 'resource_loss':this.add(f.key,-f.amount);this.tell(`損失 ${f.amount} 點${f.key==='fuel'?'汽油':'物資'}。`);break;
  case 'world_minutes':this.s.minutes+=f.amount;break;
  case 'open_service':this.openService(f.service);break;
  case 'npc_interaction':this.interact(f.service);break;
  case 'recruit':case 'offer_recruit':this.recruit();break;
  case 'reveal_history':this.reveal();break;
- case 'oracle':{const r=this.oracle(f.table);if(r.effects)r.effects.forEach(x=>this.effect(x));else if(f.table==='equipment'){this.s.inventory.push(r.value.id);this.tell('獲得 '+r.value.name)}else if(f.table==='vehicle'){const model=this.d.assets.vehicles[r.value.id]?r.value.id:'sedan';this.s.offerVehicle={model,hp:r.value.max_health,maxHp:r.value.max_health,mods:[],fuel:r.value.fuel};this.tell('發現可以行駛的'+r.value.name+'。可以選擇換車。')}else if(f.table==='reunion')r.effects?.forEach(x=>this.effect(x));else if(r.value)this.tell(typeof r.value==='string'?r.value:'有所發現。');if(r.text)this.tell(r.text);break;}
+ case 'oracle':{if(['equipment','supplies','vehicle'].includes(f.table)){this.tell(this.rewardResult(f));break;}const r=this.oracle(f.table);if(r.effects)r.effects.forEach(x=>this.effect(x));else if(f.table==='reunion')r.effects?.forEach(x=>this.effect(x));else if(r.value)this.tell(typeof r.value==='string'?r.value:'有所發現。');if(r.text)this.tell(r.text);break;}
  case 'combat':this.beginCombat(f.mode,f.enemy_category);break;
  case 'attempt_escape':this.beginCombat(f.mode);this.combatRound({type:'escape'});break;
  case 'damage':{const targets=['party','exploring_party'].includes(f.target)?this.alive():f.target==='vehicle'?[]:[p];if(f.target==='vehicle'){this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-f.amount);this.tell(`車輛損傷 ${f.amount}。`)}else targets.forEach(q=>this.hurt(q,f.amount,f.tags||[]));break;}
@@ -82,7 +167,10 @@ export class Game{
  case 'stamina_cost':p.st=Math.max(0,p.st-f.amount);break;
  case 'travel_cost':this.add('fuel',-f.fuel);this.tell('為了繞行消耗了額外汽油。');break;
  case 'schedule_followup':this.schedule(this.s.current.npc,false);break;
- case 'event_check':{const special={mechanical_lock:'locksmith',electric:'electrician',explosive:'demolition',dark_search:'lumen',alarm:'scout'}[f.check];const skilled=this.alive().some(q=>!q.asleep&&(q.profession===special||q.race===special));const ok=this.roll()<= (skilled?90:55);this.tell(ok?'處理成功。':'處理失敗。');(ok?f.success_effects:f.failure_effects||[]).forEach(x=>this.effect(x));break;}
+ case 'event_check':{
+  const {success,effects}=this.checkEffects(f);
+  this.tell(success?'處理成功。':'處理失敗。');effects.forEach(effect=>this.effect(effect));break;
+ }
  default:throw Error('Unimplemented effect '+f.op);
  }this.checkAlive();}
  interact(service=null){const c=this.s.current;if(!c.npc)c.npc=this.person();if(['敵對','掠奪'].includes(c.npc.attitude)){this.beginCombat('character',null,c.npc);return;}c.dialogue=true;c.service=service||null;this.s.notice=`${display(c.npc)}

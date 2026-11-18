@@ -10,6 +10,7 @@ import {reducedMotion} from './cinematics.js';
 import {phaseName} from './engine.js';
 import {routeView} from './route-runtime.js';
 import {drawRoadside} from './roadside-art.js';
+import {ROAD_GROUND,groundedBox,groundRatio,groundShadow} from './scenery-ground.js';
 import {biomeAt,tripPose,enemyLayout,lightingAt,mixHex,ease,clamp01} from './journey-view-model.js';
 const W=384,H=240,images=new Map();let imageRevision=0;let reduced=reducedMotion(),stormStrength=0,stormStarted=0,stormKey='';
 let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel=0,eventAt=0,key='',actionAt=-10,feedback=[],actionKind='',travelAt=0,tripDuration=12000,speed=1,viewZoom=.84,viewCarX=24,displayMinute=-1,selectedTarget=null,lightMinute=null,beat=null,beatAt=0,playback=false;
@@ -53,7 +54,7 @@ function landscape(b,alpha=1){
  const span=512,offset=roadTravel*.14,first=Math.floor(offset/span);
  for(let i=first;i<=first+1;i++){const x=i*span-offset;ctx.save();if(i%2){ctx.translate(x+span,0);ctx.scale(-1,1);panorama(b,0,28,span,152,alpha,true);}else panorama(b,x,28,span,152,alpha,true);ctx.restore();}
 }
-function roadside(b){const spacing=128,offset=roadTravel*3.6,first=Math.floor(offset/spacing),ground=237;
+function roadside(b){const spacing=128,offset=roadTravel*3.6,first=Math.floor(offset/spacing),ground=ROAD_GROUND.foreground;
  for(let j=first-1;j<=first+4;j++){const x=j*spacing-offset,c=b.id==='snow'?'#a7afa8':b.id==='salt'?'#868c7b':'#5c685b';
   poly([[x,ground],[x+5,ground-7],[x+6,ground],[x+12,ground-10],[x+12,ground],[x+22,ground-4],[x+30,ground+3]],c);
   rect(x+57,ground-2,13,4,'#4b5551');rect(x+61,ground-3,7,2,'#88907e');
@@ -82,9 +83,6 @@ function road(from,to,blend,light){
  // Atmospheric separation calms the artwork and puts the vehicle on a readable road.
  const haze=ctx.createLinearGradient(0,95,0,175);haze.addColorStop(0,'#38494c00');haze.addColorStop(1,'#485454bb');ctx.fillStyle=haze;ctx.fillRect(0,95,W,80);
  rect(0,165,W,75,'#303c43');rect(0,165,W,5,'#6c7569');rect(0,170,W,2,'#222f38');rect(0,174,W,1,'#8c907b');
- const scenery=b=>drawRoadside(ctx,{seed:state.seed,region:b,travel:roadTravel,seconds:clock,assets,image:img});
- if(from.id===to.id)scenery(from);else{ctx.globalAlpha=1-blend;scenery(from);ctx.globalAlpha=blend;scenery(to);ctx.globalAlpha=1;}
-
  for(let i=-1;i<8;i++){const x=i*96-roadTravel*3.7%96;rect(x,223,48,3,'#c7bd92');rect(x+3,224,39,1,'#aaa68c');poly([[x+31,184],[x+39,189],[x+35,194],[x+50,201]],'#222d35');}
  for(let i=0;i<62;i++){const x=(i*71-roadTravel*(2.4+rnd(i)*1.2)%440+440)%440;rect(x,178+rnd(i+46)*57,2+i%4,1,i%3?'#465157':'#626d6a');}
  rect(0,234,W,2,'#949680');rect(0,236,W,4,'#525f57');
@@ -96,19 +94,24 @@ function road(from,to,blend,light){
    rect(x,y,4+i%12,1,i%3?'#626d60':'#424e4c');
   }
  }
- const marker=490-roadTravel*.85%930;paint(assets.occupation.pylon,marker,87,27,72);
+ // Finish the asphalt before placing any grounded silhouettes. The pylon stands
+ // on the far verge; props and traffic can occlude it as they pass in front.
+ const marker=490-roadTravel*.85%930,pylon=assets.occupation.pylon,base=groundedBox(pylon,marker,ROAD_GROUND.pylon,27,72);
+ groundShadow(ctx,pylon,base);paint(pylon,base.x,base.y,base.width,base.height);
+ const scenery=b=>drawRoadside(ctx,{seed:state.seed,region:b,travel:roadTravel,seconds:clock,assets,image:img});
+ if(from.id===to.id)scenery(from);else{ctx.globalAlpha=1-blend;scenery(from);ctx.globalAlpha=blend;scenery(to);ctx.globalAlpha=1;}
 }
 function room(top=0,height=H){const eventKind=encounters[state.current?.event.id]?.kind,raw=({gas:'garage',clinic:'clinic',pharmacy:'clinic',motel:'hotel',stall:'shop',market:'shop',nest:'nest',eggs:'nest',spores:'nest'}[eventKind]||state.frames?.at(-1)?.scene||'warehouse'),kind=({gas:'garage',pharmacy:'clinic',motel:'hotel',market:'shop',stall:'shop',nest:'nest'}[raw]||raw),valid=['warehouse','clinic','garage','shop','hotel','laboratory','ruin','nest'],scene=valid.includes(kind)?kind:'warehouse';paint(assets.scenes[scene],0,top,W,height);
  if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const scale=Math.max(W/sw,height/sh),cw=W/scale,ch=height/scale;ctx.drawImage(p,sx+(sw-cw)/2,sy+(sh-ch)/2,cw,ch,0,top,W,height);}}
  rect(0,top,W,height,'#26313c2b');const pulse=.07+Math.sin(clock*1.6)*.025;ctx.globalAlpha=pulse;poly([[166,35],[194,35],[264,197],[83,197]],'#f3c48c');ctx.globalAlpha=1;
 }
-function vehicle(v,party,x,y,w,rolling=false){const a=vehicleArt(assets,v),scale=w/160,bump=rolling&&!reduced?Math.round(Math.sin(roadTravel*.14)+Math.sin(roadTravel*.3)*.35)*scale*.55:0,h=w*72/160;y+=bump;
- rect(x+10,y+h-5,w-15,4,'#1d2c31');a.windows.forEach((win,i)=>{if(party[i])paint(assets.portraits[party[i].race],x+win.x*scale,y+win.y*scale,Math.min(win.width,win.height)*scale,Math.min(win.width,win.height)*scale)});paint(a.image,x,y,w,h);
+function vehicle(v,party,x,y,w,rolling=false,ground=null){const a=vehicleArt(assets,v),scale=w/160,bump=rolling&&!reduced&&ground===null?Math.round(Math.sin(roadTravel*.14)+Math.sin(roadTravel*.3)*.35)*scale*.55:0,h=w*72/160;y=ground===null?y+bump:ground-h*groundRatio(a);
+ rect(x+10,ground===null?y+h-5:ground-1,w-15,ground===null?4:2,'#1d2c31');a.windows.forEach((win,i)=>{if(party[i])paint(assets.portraits[party[i].race],x+win.x*scale,y+win.y*scale,Math.min(win.width,win.height)*scale,Math.min(win.width,win.height)*scale)});paint(a.image,x,y,w,h);
  if(rolling&&!reduced)for(const wx of [36,124]){const cx=x+wx*scale,cy=y+59*scale;ctx.save();ctx.translate(cx,cy);ctx.rotate(roadTravel*.32);rect(-3*scale,-1*scale,6*scale,2*scale,'#b4b9a6');rect(-1*scale,-3*scale,2*scale,6*scale,'#7b8d89');ctx.restore()}
  (vehicleStats(assets,v).weapon.bonus>0&&vehicleStats(assets,v).weapon.style!=='ram'?['gun']:(v.mods||[]).filter(m=>m==='lamp').slice(0,1)).forEach(m=>paint(assets.mods[m],x+w*.36,y-11*scale,w*.3,w*.3));
  if(rolling)for(let i=0;i<5;i++){const k=(roadTravel*.065+i*.21)%1;rect(x+7-k*35,y+h-7-k*8,3+k*9,2+k*4,`rgba(194,177,139,${.24*(1-k)})`)}
 }
-function person(p,x,y,h=48,walk=false){const t=walk&&!reduced?Math.floor(Math.sin(clock*17))*2:Math.floor(Math.sin(clock*2+p.level))*1;paint(assets.characters[p.race+'_'+p.profession],x,y+t,h*2/3,h);rect(x+3,y+h+1,h*.6,2,'#172a32');}
+function person(p,x,y,h=48,walk=false){const picture=assets.characters[p.race+'_'+p.profession],ground=y+h,sway=walk&&!reduced?Math.round(Math.sin(clock*17)*.6):0,box=groundedBox(picture,x+sway,ground,h*2/3,h);groundShadow(ctx,picture,box,.5);paint(picture,box.x,box.y,box.width,box.height);}
 function particles(effect,t){const kind=effect||'none';if(kind==='none')return;
  for(let i=0;i<30;i++){const a=rnd(i+4),b=rnd(i+91),v=(t*(.2+b*.3)+a)%1;
  if(['fire','smoke','gas','spores'].includes(kind)){const x=244+Math.sin(i+t)*25+a*52,y=166-v*94;const color=kind==='fire'?(i%2?'#ecb451':'#d27642'):kind==='spores'?'#a7b679':kind==='gas'?'#b1b577':'#88918a';ctx.globalAlpha=(1-v)*.65;rect(x,y,kind==='spores'?2:5+v*12,kind==='spores'?2:7+v*10,color)}
@@ -219,11 +222,11 @@ function battleForeground(){
  drawBattleEffects(ctx,{beat,age,enemies,layout:points,party:state.party,partyY:bottom-29,vehicleTarget:fromCar?carAnchor:null,soft:reduced});
 }
 function encounterArt(current){let a=encounters[current?.event?.id];if(current?.inside&&a&&!a.interior){const inner={gas:'019',garage:'020',clinic:'021',motel:'022',pharmacy:'017',market:'016',stall:'016',cars:'025',warehouse:'001'}[a.kind];if(inner)a=encounters['building_'+inner];}return a;}
-function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const height=203*facade.rect[3]/facade.rect[2];ctx.drawImage(sheet,...facade.rect,x,196-height,203,height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
- if(current.place&&!current.place.inherited){const label=current.place.name;if(!interior){rect(x+22,133,3,20,'#7b837a');rect(x+179,133,3,20,'#7b837a');}rect(x+8,interior?45:110,187,24,'#142d36');rect(x+10,interior?47:112,183,1,'#b8b28c');text(label,x+18,interior?62:127,'#ece1b9',Math.min(13,166/label.length));}
+function drawEncounter(current,x,interior=false,preview=false){const a=encounterArt(current);if(!a)return;const collected=!preview&&!current?.event.options?.length&&!current?.dialogue&&['crate','luggage','toolbox','medicalbox','bag','cache','gift'].includes(a.kind);if(collected)ctx.globalAlpha=.45;const facade=!interior&&assets.facilities?.[a.kind],sheet=facade&&img(facade.image);if(sheet){const box=groundedBox(facade,x,ROAD_GROUND.encounter,203);groundShadow(ctx,facade,box,.35);ctx.drawImage(sheet,...facade.rect,box.x,box.y,box.width,box.height);}else paint(a.image,x,interior?68:54,interior?195:203,interior?136:142);ctx.globalAlpha=1;
+ if(current.place&&!current.place.inherited){const label=current.place.name;if(!interior){rect(x+22,133,3,ROAD_GROUND.encounter-133,'#7b837a');rect(x+179,133,3,ROAD_GROUND.encounter-133,'#7b837a');}rect(x+8,interior?45:110,187,24,'#142d36');rect(x+10,interior?47:112,183,1,'#b8b28c');text(label,x+18,interior?62:127,'#ece1b9',Math.min(13,166/label.length));}
  if(collected)text('已搜索',x+65,145,'#d4c28b',10);
  if(a.effect!=='storm'){ctx.save();ctx.translate(x-174,0);particles(a.effect,clock);ctx.restore();}
- (a.creatures||[]).forEach((k,i)=>paintEnemy(k,x+23+i*37,131+Math.sin(clock*2+i)*2,50,58));
+ (a.creatures||[]).forEach((k,i)=>{const floating=['drone','wing','swarm'].includes(k),left=x+23+i*37;if(!floating&&!interior)rect(left+10,ROAD_GROUND.encounter-1,30,2,'#172a3280');paintEnemy(k,left,floating||interior?131+Math.sin(clock*2+i)*2:ROAD_GROUND.encounter-58,50,58);});
  if(current.npc)person(current.npc,x+(interior?104:114),interior?147:153,interior?54:43);
  if(!preview&&(interior||current.dialogue)){const actor=state.party.find(p=>p.id===state.actorId&&p.hp>0)||state.party.find(p=>p.hp>0);if(actor)person(actor,interior?48:134,interior?157:166,interior?49:38,clock-eventAt<1.5)}
 }
@@ -244,8 +247,8 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(outdoors)drawWeatherSky(ctx,{seed:stormKey,seconds:clock-stormStarted,storm:stormStrength,soft:reduced});
  if(s.battle)battle();else if(interior&&!driving)drawEncounter(s.current,153,true);else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
   const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving);
-  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.bossId)paintCombatant(enemyCombatArt(e),pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
-  vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
+  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){const floating=['drone','wing','swarm'].includes(e.key)||e.bossId==='fallen_angel',left=pose.eventX+(e.bossId?25:53),width=e.bossId?132:55,height=e.bossId?132:67;if(!floating)rect(left+width*.2,ROAD_GROUND.encounter-1,width*.6,2,'#172a3280');if(e.npc)person(e.npc,left,ROAD_GROUND.encounter-height,height);else paintCombatant(enemyCombatArt(e),left,floating?(e.bossId?70:125):ROAD_GROUND.encounter-height,width,height);}}
+  vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2,ROAD_GROUND.player);ctx.restore();
  }
  if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}}
  if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,-stageTop,W,stageHeight,'#07152c');ctx.globalAlpha=1;

@@ -391,5 +391,6 @@
       "facade_cache": 8
     },
     "compatibility": "No save migration needed; existing route, characters and event sequence remain intact."
-  }
+  },
+  "ground_contact": "地面物件依可見底線放在所屬路面或路肩深度。附屬徽記須連接物件表面，雪堆與植被亦須貼附結構或接地。飛行物維持空中位置。"
 }

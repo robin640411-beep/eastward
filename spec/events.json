@@ -228,16 +228,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_007",
@@ -259,16 +253,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_008",
@@ -300,17 +288,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "婉拒",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "accept"
     },
     {
       "id": "road_009",
@@ -414,16 +396,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_012",
@@ -445,16 +421,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_013",
@@ -477,16 +447,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_014",
@@ -542,17 +506,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "婉拒",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "accept"
     },
     {
       "id": "road_016",
@@ -841,16 +799,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_023",
@@ -872,16 +824,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_024",
@@ -904,16 +850,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_025",
@@ -935,16 +875,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_026",
@@ -967,16 +901,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_027",
@@ -1134,17 +1062,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "take"
     },
     {
       "id": "road_032",
@@ -1167,16 +1089,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_033",
@@ -1199,16 +1115,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_034",
@@ -1363,17 +1273,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "婉拒",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "accept"
     },
     {
       "id": "road_038",
@@ -1527,17 +1431,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_042",
@@ -1559,16 +1457,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_043",
@@ -1591,16 +1483,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_044",
@@ -1713,17 +1599,11 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
       "status": "事件內容及效果數值草案；好壞比例為已確認規則",
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "inspect"
     },
     {
       "id": "road_047",
@@ -1746,16 +1626,10 @@
             }
           ],
           "result_text": "依選項結算；具體數值屬試玩草案。"
-        },
-        {
-          "id": "leave",
-          "label": "留下物資",
-          "requires": [],
-          "effects": [],
-          "result_text": "依選項結算；具體數值屬試玩草案。"
         }
       ],
-      "status": "事件內容及效果數值草案；好壞比例為已確認規則"
+      "status": "事件內容及效果數值草案；好壞比例為已確認規則",
+      "automatic_reward": "take"
     },
     {
       "id": "road_048",
@@ -3572,16 +3446,10 @@
             }
           ],
           "result_text": "對方遞來藥品，沒有再要求什麼。"
-        },
-        {
-          "id": "leave",
-          "label": "離開",
-          "requires": [],
-          "effects": [],
-          "result_text": "你們收起目光，準備繼續旅程。"
         }
       ],
-      "npc_display": "{npc.display_name}"
+      "npc_display": "{npc.display_name}",
+      "automatic_reward": "accept"
     },
     {
       "id": "former_companion",

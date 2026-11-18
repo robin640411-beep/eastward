@@ -1,0 +1,33 @@
+{
+  "release": "25-road-loot",
+  "viewport": [
+    390,
+    844
+  ],
+  "terrains": [
+    "salt",
+    "canyon",
+    "forest",
+    "city",
+    "coast",
+    "industrial",
+    "marsh",
+    "desert",
+    "farmland",
+    "snow",
+    "alien",
+    "oasis"
+  ],
+  "roadside_types": 10,
+  "checked_assets": 310,
+  "event_definitions": 37,
+  "tests_passed": 204,
+  "travel_test": {
+    "stop": "行李箱寶藏",
+    "receipt": "獲得工具組 ×1。",
+    "message_window_actions": [],
+    "continued_driving": true
+  },
+  "interior_test": "急救壁櫃自動收取藥品 ×1。",
+  "vehicle_test": "先展示備用車，再由玩家決定是否換車。"
+}

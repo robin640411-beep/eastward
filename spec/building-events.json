@@ -24,16 +24,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_002",
@@ -56,16 +50,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_003",
@@ -88,16 +76,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_004",
@@ -120,16 +102,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_005",
@@ -158,16 +134,11 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "open",
+      "reward_alternative": "locksmith"
     },
     {
       "id": "building_006",
@@ -189,16 +160,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_007",
@@ -220,16 +185,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_008",
@@ -252,16 +211,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_009",
@@ -284,16 +237,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_010",
@@ -306,7 +253,7 @@
       "options": [
         {
           "id": "take",
-          "label": "查看物品",
+          "label": "取走櫃內補給",
           "requires": [],
           "effects": [
             {
@@ -315,16 +262,11 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take",
+      "reward_alternative": "hacker"
     },
     {
       "id": "building_011",
@@ -346,16 +288,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_012",
@@ -378,16 +314,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_013",
@@ -409,16 +339,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_014",
@@ -441,16 +365,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_015",
@@ -472,16 +390,10 @@
             }
           ],
           "result_text": "依所選事件結果結算；效果數值為試玩設定。"
-        },
-        {
-          "id": "skip",
-          "label": "不處理這個發現",
-          "requires": [],
-          "effects": [],
-          "result_text": "依所選事件結果結算；效果數值為試玩設定。"
         }
       ],
-      "status": "通用建築事件首版；效果數值與檢定難度為草案"
+      "status": "通用建築事件首版；效果數值與檢定難度為草案",
+      "automatic_reward": "take"
     },
     {
       "id": "building_016",

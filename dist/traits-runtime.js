@@ -45,5 +45,11 @@ export function installTraits(Game,{clamp,display,clone}){
  Game.prototype.canChoose=function(o){const prepared=this.preparedOption(o);return this.afford(o.requires||[])&&Object.entries(this.optionCosts(prepared)).every(([k,v])=>(k==='stamina'?this.actor()?.st:k==='fuel'?this.availableFuel():this.s.resources[k])>=v)};
  const options=Game.prototype.options;Game.prototype.options=function(){const list=options.call(this);if(this.s.mode==='event'&&!this.s.current?.building&&list.length&&!list.some(o=>this.canChoose(o))){const staminaOnly=list.some(o=>Object.entries(this.optionCosts(this.preparedOption(o))).every(([k,v])=>k==='stamina'||(k==='fuel'?this.availableFuel():this.s.resources[k])>=v));return [...list,{id:staminaOnly?'__rest':'__supplies',label:staminaOnly?'體力不足，原地休息':'物資不足，尋找燃料或替代車輛',requires:[],effects:[]}]}return list};
  const choose=Game.prototype.choose;Game.prototype.choose=function(id){const c=this.s.current;if(this.s.mode!=='event'||!c)return false;if(id==='__rest'&&this.options().some(o=>o.id===id))return this.sleep();if(id==='__supplies'&&this.options().some(o=>o.id===id)){this.s.resourceBlock=clone(c);this.s.mode='ready';return this.searchStranded(true);}const o=c.event.options?.find(o=>o.id===id);if(o&&!c.building){if(!this.canChoose(o))return false;const ix=c.event.options.indexOf(o);c.event.options[ix]=this.preparedOption(o);c.searching=/search|take|open|salvage/.test(id)||/搜|回收/.test(o.label);}return choose.call(this,id)};
- const effect=Game.prototype.effect;Game.prototype.effect=function(f){const p=this.actor();if(f.op==='event_check'){const skill={mechanical_lock:'locksmith',electric:'electrician',explosive:'demolition',alarm:'scout'}[f.check];const chance=f.check==='dark_search'&&this.lit()?100:p?.profession===skill?90:55;const ok=this.roll()<=chance;this.tell(ok?'處理成功。':'處理失敗。');(ok?f.success_effects:f.failure_effects||[]).forEach(e=>this.effect(e));return;}if(f.op==='resource'&&f.key==='scrap'&&f.amount>0){let n=f.amount;if(this.s.current?.searching)n=Math.max(0,n+(p?.profession==='scavenger'?1:0)-(p?.flaw==='distracted'?1:0));this.add('scrap',n);this.tell(`廢料 +${n}`);return;}return effect.call(this,f)};
+ Game.prototype.checkEffects=function(f){
+  const specialist={mechanical_lock:'locksmith',electric:'electrician',explosive:'demolition',alarm:'scout'}[f.check];
+  const chance=f.check==='dark_search'&&this.lit()?100:this.actor()?.profession===specialist?90:55;
+  const success=this.roll()<=chance;
+  return {success,effects:(success?f.success_effects:f.failure_effects)||[]};
+ };
+
 }

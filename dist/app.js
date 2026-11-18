@@ -123,6 +123,7 @@ function refreshBattleBeat(phase){
  }
 }
 async function presentChange(before,effectType){
+ if(g.s?.current?.carePending)g.collectReward();
  const steps=g.visualSteps||[],start=g.visualStart,transition=transitionFor(before,g.s),visualBefore=before?captureVisual(before):null;
  resetVisuals();save();
  if(!steps.length&&!transition){render();if(visualBefore&&g.s)animateResult(visualBefore,g.s,effectType);return;}

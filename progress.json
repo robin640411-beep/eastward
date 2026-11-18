@@ -431,7 +431,7 @@
   "active_presentation": {
     "mode": "classic_pixel",
     "art_source": "8f732e1",
-    "release": "24-battle",
+    "release": "25-road-loot",
     "layout": "vehicle, four party slots, scene, messages, navigation",
     "screenshots": [
       "qa/pixel-return/drive-390.jpg",
@@ -440,5 +440,10 @@
     ],
     "combat_art": "固定像素角色、怪物與魔王，玩家及 NPC 共用種族、職業、武器圖",
     "combat_evidence": "qa/combat-pixel/verification.json"
+  },
+  "road_and_rewards": {
+    "evidence": "qa/road-loot/verification.json",
+    "placement": "各層使用素材可見底線接地，飾牌依結構附著。",
+    "reward_rule": "無代價拾取自動結算，一次入帳，以本次實際所得顯示在訊息窗。"
   }
 }

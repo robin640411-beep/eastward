@@ -8,6 +8,22 @@ import {createRoute,nameEncounter,BIOMES} from '../dist/route-runtime.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 const states={};function fresh(){const g=new Game(d);g.start({seed:445,race:'human',profession:'driver'});return g}
+// A normal seeded drive whose first stop is a suitcase and whose chain ends there.
+for(let seed=1;seed<2000;seed++){
+ const g=fresh();g.s.rng=seed;g.depart();
+ const after=new Game(d,structuredClone(g.s));after.arrive();
+ if(after.s.current?.event.id!=='road_012')continue;
+ after.finishEvent();if(after.s.mode!=='ready')continue;
+ states['行車抵達行李箱 · 領取後自動上路']=g.s;break;
+}
+for(const id of ['road_011','road_012','building_002','road_007']){
+ const g=fresh(),inside=id.startsWith('building_');
+ g.s.mode='event';g.s.frames=[{kind:'road',count:4}];
+ if(inside)g.s.frames.push({kind:'building',count:4,scene:'warehouse',parent:{instance:6,entered:true,explored:true,event:{id:'road_026',title:'隧道管理室',text:'你們回到車旁。',options:[]}}});
+ const e=structuredClone((inside?d.buildings:d.events).events.find(x=>x.id===id));
+ g.s.current={instance:7,event:e,frame:inside?'building':'road',resolved:false};
+ states['抵達自動收取 · '+e.title]=g.s;
+}
 let g=fresh();g.s.vehicle={model:'bus',hp:55,maxHp:55,mods:['seat','seat','seat']};for(let i=1;i<4;i++)g.s.party.push(g.person(d.catalog.races[i].id,d.catalog.professions[i].id));states['4 人車窗']=g.s;
 g=fresh();g.s.vehicle={model:'sedan',hp:30,maxHp:30,mods:['gun']};g.s.party.push(g.person('alien','medic'));g.beginCombat('vehicle');states['雙人車戰']=g.s;
 g=fresh();g.s.progress=99;states['抵達綠洲']=g.s;
