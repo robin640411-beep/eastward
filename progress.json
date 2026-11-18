@@ -119,15 +119,15 @@
   },
   "next_step": "等待使用者試玩回饋；後續完成更新可直接發布，維持原有私人網站。",
   "deployment": {
-    "commit_sha": "f80d598c693cb72a3c53a43e6977b439e3a74b33",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cda06015fbb88191b64b7437f8231c0e",
-    "deployment_id": "appgdep_6afdd5d9240c81919e82898bd5ef9327",
+    "commit_sha": "8f732e14d683d6c8a93da48bade4ca95a24d6c71",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_614843b326d0819188d318409db3c389",
+    "deployment_id": "appgdep_6afdea803988819185be4061b2d2bffc",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "road-atmosphere-and-day-night-sky",
+    "name": "hd2d-road-and-mobile-layout",
     "status": "local-verified-ready-to-publish",
     "physical_phone_tested": false
   },
@@ -382,7 +382,7 @@
     "audience": "owner-private"
   },
   "atmosphere": {
-    "status": "local_verified_ready_to_publish",
+    "status": "published_and_readonly_verified",
     "spec": "spec/atmosphere.json",
     "evidence": "qa/atmosphere/verification.json",
     "tests_passed": 167,
@@ -392,6 +392,16 @@
       "太陽、月亮、星點與緩慢飄移的像素雲",
       "日夜與暴雨遮光，柔和模式減慢雲層",
       "換景使用互補透明遮罩，避免天空重疊變濃"
-    ]
+    ],
+    "commit_sha": "8f732e14d683d6c8a93da48bade4ca95a24d6c71",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_614843b326d0819188d318409db3c389",
+    "deployment_id": "appgdep_6afdea803988819185be4061b2d2bffc",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "hd2d": {
+    "spec": "spec/hd2d.json",
+    "evidence": "qa/hd2d/verification.json",
+    "tests_passed": 169
   }
 }

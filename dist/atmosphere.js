@@ -28,15 +28,16 @@ export function cloudLayout(seed,seconds,travel=0,soft=false){
 
 // Downsample distant detail before filtering. No live full-screen CSS blur.
 // Temporary canvases are released; the caller retains only the 512 × 224 result.
-export function distantPanorama(picture,region,{fadeSky=false}={}){
+export function distantPanorama(picture,region,{fadeSky=false,hd=false}={}){
  const make=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
- const small=make(160,70),s=small.getContext('2d');s.imageSmoothingEnabled=true;
- s.drawImage(picture,...region.rect,0,0,160,70);
- const result=make(512,224),q=result.getContext('2d');q.imageSmoothingEnabled=true;
- q.filter='blur(0.7px) saturate(0.48) contrast(0.72) brightness(1.02)';
- q.drawImage(small,-2,-1,516,226);q.filter='none';
- const air=q.createLinearGradient(0,0,0,224);air.addColorStop(0,'#a0adb538');air.addColorStop(.55,'#9baab04a');air.addColorStop(1,'#788b9620');q.fillStyle=air;q.fillRect(0,0,512,224);
- if(fadeSky){const mask=q.createLinearGradient(0,0,0,86);mask.addColorStop(0,'#0000');mask.addColorStop(.45,'#0006');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,512,224);q.globalCompositeOperation='source-over';}
+ const sample=hd?[416,182]:[160,70],output=hd?[768,336]:[512,224];
+ const small=make(...sample),s=small.getContext('2d');s.imageSmoothingEnabled=true;
+ s.drawImage(picture,...region.rect,0,0,...sample);
+ const result=make(...output),q=result.getContext('2d');q.imageSmoothingEnabled=true;
+ q.filter=hd?'blur(0.85px) saturate(0.80) contrast(0.86)':'blur(0.7px) saturate(0.48) contrast(0.72) brightness(1.02)';
+ q.drawImage(small,-2,-1,output[0]+4,output[1]+2);q.filter='none';
+ const air=q.createLinearGradient(0,0,0,output[1]);air.addColorStop(0,'#a0adb538');air.addColorStop(.55,'#9baab04a');air.addColorStop(1,'#788b9620');q.fillStyle=air;q.fillRect(0,0,...output);
+ if(fadeSky){const mask=q.createLinearGradient(0,0,0,output[1]*.38);mask.addColorStop(0,'#0000');mask.addColorStop(.45,'#0006');mask.addColorStop(1,'#000');q.globalCompositeOperation='destination-in';q.fillStyle=mask;q.fillRect(0,0,...output);q.globalCompositeOperation='source-over';}
  return result;
 }
 
@@ -52,16 +53,26 @@ function cloudSprite(variant,top,bottom){
 }
 function disc(ctx,x,y,r,color){ctx.fillStyle=color;for(let dy=-r;dy<=r;dy++){const dx=Math.floor(Math.sqrt(r*r-dy*dy));ctx.fillRect(Math.round(x)-dx,Math.round(y)+dy,dx*2+1,1);}}
 
-export function drawJourneySky(ctx,{seed,seconds,travel,minutes,from,to=from,blend=0,light,storm=0,soft=false}){
+export function drawJourneySky(ctx,{seed,seconds,travel,minutes,from,to=from,blend=0,light,storm=0,soft=false,above=0}){
  const sky=skyState({minutes,from,to,blend,storm}),top=mixHex(light.sky,'#344654',sky.storm*.7),horizon=mixHex(light.horizon,'#72818a',sky.storm*.65);
- ctx.save();const gradient=ctx.createLinearGradient(0,0,0,174);gradient.addColorStop(0,top);gradient.addColorStop(1,horizon);ctx.fillStyle=gradient;ctx.fillRect(0,0,384,180);
- if(!sky.day){ctx.fillStyle='#d2dad8';ctx.globalAlpha=.65*(1-sky.cloud*.6);for(let i=0;i<24;i++){const h=visualHash(seed+':star:'+i);ctx.fillRect(h%384,(h>>>12)%65,1,1);}}
+ ctx.save();const gradient=ctx.createLinearGradient(0,-above,0,174);
+ gradient.addColorStop(0,above?mixHex(top,'#182433',.35):top);
+ if(above)gradient.addColorStop(above/(174+above),top);
+ gradient.addColorStop(1,horizon);ctx.fillStyle=gradient;ctx.fillRect(0,-above,384,180+above);
+ if(!sky.day){ctx.fillStyle='#d2dad8';ctx.globalAlpha=.65*(1-sky.cloud*.6);for(let i=0;i<24;i++){const h=visualHash(seed+':star:'+i);ctx.fillRect(h%384,(h>>>12)%Math.ceil(65+above)-above,1,1);}}
  const glow=ctx.createRadialGradient(sky.x,sky.y,3,sky.x,sky.y,sky.day?35:20);glow.addColorStop(0,light.sun+'70');glow.addColorStop(1,light.sun+'00');ctx.globalAlpha=sky.visibility;ctx.fillStyle=glow;ctx.fillRect(sky.x-36,sky.y-36,72,72);
  disc(ctx,sky.x,sky.y,sky.day?9:7,sky.day?light.sun:'#d5dfdd');
  if(!sky.day){disc(ctx,sky.x+3,sky.y-2,6,top);}
  // Three palette buckets avoid rebuilding a cloud sprite for every minute.
  const palette=sky.storm>.5?['#a4afb4','#697c8a']:!sky.day?['#66758b','#3c506a']:light.light<.8?['#e6c1a6','#b99ca3']:['#e2e4dc','#adbfc6'];
- for(const c of cloudLayout(seed,seconds,travel,soft)){ctx.globalAlpha=c.alpha*(.45+sky.cloud*.7);ctx.drawImage(cloudSprite(c.variant,...palette),Math.round(c.x),c.y,c.w,c.h);}
+ for(const c of cloudLayout(seed,seconds,travel,soft)){
+  ctx.globalAlpha=c.alpha*(.45+sky.cloud*.7);
+  ctx.drawImage(cloudSprite(c.variant,...palette),Math.round(c.x),c.y,c.w,c.h);
+  if(above>28&&c.variant!==1){
+   ctx.globalAlpha*=.58;
+   ctx.drawImage(cloudSprite(c.variant,...palette),Math.round(c.x+25),c.y-above*.86,c.w*1.3,c.h*1.25);
+  }
+ }
  ctx.restore();return sky;
 }
 export function drawDistanceMist(ctx,{light,mist}){

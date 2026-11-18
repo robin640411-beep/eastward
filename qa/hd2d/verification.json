@@ -1,0 +1,18 @@
+{
+  "status": "local_verified",
+  "checks": [
+    "390×844 Chrome 行車，場景 422px、全高 844px，順序正確，四人車窗",
+    "320×568 Chrome 戰鬥，場景 284px、全高 568px，一人三空格且無水平或整頁垂直捲動",
+    "透過下方指令及場景點擊敵人，傷害結算後進入第二回合",
+    "320×568 事件頁可以翻頁與交談，選項與訊息均在場景下方",
+    "底部隊伍和車輛按鈕可開啟原有詳情面板",
+    "Chrome 驗證流程未見主控台錯誤"
+  ],
+  "tests_passed": 169,
+  "screenshots": [
+    "travel-390.jpg",
+    "battle-390.jpg",
+    "event-320.jpg"
+  ],
+  "physical_phone_tested": false
+}
