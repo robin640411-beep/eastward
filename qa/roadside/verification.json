@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-18",
+  "status": "local_verified_ready_to_publish",
+  "automated_tests": {
+    "passed": 132,
+    "failed": 0
+  },
+  "browser_checks": [
+    "390x844 and 360x780 actual game UI: ordinary driving shows roadside objects before any encounter.",
+    "All 12 terrain fixtures rendered; region-specific density, facade/vehicle selection and weathering inspected.",
+    "City fixture visibly shows road barrier, water tower and wired utility pole; other fixtures show buildings, vehicles, sign, lamp, shelter, rail and container.",
+    "Snow caps follow top surfaces; forest/marsh vegetation and alien attachments remain subdued.",
+    "Nighttime objects use the same scene darkness and do not obscure the car or headlights.",
+    "Automatic travel still arrives at an actual roadside event; event choices remain available.",
+    "360x780 driving: page and viewport both 360x780, no horizontal or vertical overflow.",
+    "No browser console warnings or errors."
+  ],
+  "limitations": [
+    "Desktop Chrome at phone viewport; physical phone performance was not measured."
+  ],
+  "screenshots": [
+    "city-driving.jpg",
+    "forest-driving.jpg",
+    "snow-driving.jpg",
+    "alien-driving.jpg",
+    "industrial-driving.jpg",
+    "coast-driving.jpg",
+    "marsh-driving.jpg",
+    "desert-driving.jpg",
+    "salt-driving.jpg",
+    "canyon-driving.jpg",
+    "farmland-driving.jpg",
+    "oasis-driving.jpg",
+    "poles-and-tower.jpg",
+    "night-driving.jpg"
+  ]
+}

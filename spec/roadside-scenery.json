@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "date": "2026-11-18",
+  "types": [
+    {
+      "id": "building",
+      "name": "沿路建築"
+    },
+    {
+      "id": "vehicle",
+      "name": "路上車輛"
+    },
+    {
+      "id": "pole",
+      "name": "電線桿"
+    },
+    {
+      "id": "sign",
+      "name": "招牌"
+    },
+    {
+      "id": "lamp",
+      "name": "路燈"
+    },
+    {
+      "id": "shelter",
+      "name": "候車亭"
+    },
+    {
+      "id": "rail",
+      "name": "護欄"
+    },
+    {
+      "id": "barrier",
+      "name": "路障"
+    },
+    {
+      "id": "container",
+      "name": "貨櫃"
+    },
+    {
+      "id": "tower",
+      "name": "水塔"
+    }
+  ],
+  "profiles": {
+    "salt": {
+      "density": 0.86,
+      "wall": "#888e82",
+      "trim": "#bdbaa2",
+      "accent": "#8f7855",
+      "weather": "salt",
+      "facades": [
+        "warehouse",
+        "garage"
+      ],
+      "vehicles": [
+        "pickup",
+        "rover"
+      ],
+      "weights": [
+        9,
+        10,
+        15,
+        8,
+        3,
+        5,
+        9,
+        8,
+        8,
+        12
+      ]
+    },
+    "canyon": {
+      "density": 0.83,
+      "wall": "#8b786a",
+      "trim": "#b7a18b",
+      "accent": "#786d50",
+      "weather": "dust",
+      "facades": [
+        "garage",
+        "checkpoint"
+      ],
+      "vehicles": [
+        "pickup",
+        "rover"
+      ],
+      "weights": [
+        7,
+        9,
+        12,
+        11,
+        4,
+        3,
+        20,
+        14,
+        5,
+        6
+      ]
+    },
+    "forest": {
+      "density": 0.94,
+      "wall": "#5a6d62",
+      "trim": "#8b9b87",
+      "accent": "#9c8c63",
+      "weather": "vine",
+      "facades": [
+        "motel",
+        "shop"
+      ],
+      "vehicles": [
+        "compact",
+        "van"
+      ],
+      "weights": [
+        12,
+        9,
+        14,
+        8,
+        5,
+        10,
+        8,
+        7,
+        3,
+        5
+      ]
+    },
+    "city": {
+      "density": 1.32,
+      "wall": "#6c7c7d",
+      "trim": "#b0b8a8",
+      "accent": "#a38b62",
+      "weather": "occupied",
+      "facades": [
+        "shop",
+        "motel",
+        "clinic"
+      ],
+      "vehicles": [
+        "sedan",
+        "bus",
+        "van"
+      ],
+      "weights": [
+        20,
+        14,
+        11,
+        15,
+        13,
+        10,
+        8,
+        7,
+        5,
+        4
+      ]
+    },
+    "coast": {
+      "density": 1.08,
+      "wall": "#748b88",
+      "trim": "#b7beb0",
+      "accent": "#a79369",
+      "weather": "rust",
+      "facades": [
+        "shop",
+        "warehouse"
+      ],
+      "vehicles": [
+        "van",
+        "pickup"
+      ],
+      "weights": [
+        10,
+        11,
+        10,
+        10,
+        8,
+        9,
+        15,
+        5,
+        17,
+        6
+      ]
+    },
+    "industrial": {
+      "density": 1.24,
+      "wall": "#677779",
+      "trim": "#a1aba0",
+      "accent": "#bd9f69",
+      "weather": "rust",
+      "facades": [
+        "warehouse",
+        "garage"
+      ],
+      "vehicles": [
+        "pickup",
+        "armored",
+        "van"
+      ],
+      "weights": [
+        15,
+        12,
+        15,
+        8,
+        7,
+        4,
+        8,
+        10,
+        18,
+        14
+      ]
+    },
+    "marsh": {
+      "density": 0.83,
+      "wall": "#586d68",
+      "trim": "#8d9c89",
+      "accent": "#958f65",
+      "weather": "vine",
+      "facades": [
+        "warehouse",
+        "shop"
+      ],
+      "vehicles": [
+        "rover",
+        "pickup"
+      ],
+      "weights": [
+        6,
+        6,
+        16,
+        6,
+        3,
+        6,
+        10,
+        8,
+        7,
+        13
+      ]
+    },
+    "desert": {
+      "density": 0.74,
+      "wall": "#a18e71",
+      "trim": "#c6b79a",
+      "accent": "#8c7756",
+      "weather": "dust",
+      "facades": [
+        "gas",
+        "garage"
+      ],
+      "vehicles": [
+        "rover",
+        "pickup"
+      ],
+      "weights": [
+        6,
+        11,
+        14,
+        13,
+        3,
+        5,
+        4,
+        9,
+        9,
+        17
+      ]
+    },
+    "farmland": {
+      "density": 0.97,
+      "wall": "#7e8170",
+      "trim": "#b6b49a",
+      "accent": "#99775a",
+      "weather": "vine",
+      "facades": [
+        "warehouse",
+        "shop"
+      ],
+      "vehicles": [
+        "pickup",
+        "van"
+      ],
+      "weights": [
+        14,
+        10,
+        17,
+        7,
+        3,
+        8,
+        5,
+        7,
+        6,
+        20
+      ]
+    },
+    "snow": {
+      "density": 0.81,
+      "wall": "#7d8c8e",
+      "trim": "#c5ceca",
+      "accent": "#919b87",
+      "weather": "snow",
+      "facades": [
+        "motel",
+        "checkpoint"
+      ],
+      "vehicles": [
+        "rover",
+        "ambulance"
+      ],
+      "weights": [
+        9,
+        10,
+        12,
+        13,
+        6,
+        9,
+        16,
+        8,
+        5,
+        5
+      ]
+    },
+    "alien": {
+      "density": 0.9,
+      "wall": "#606e72",
+      "trim": "#93a29a",
+      "accent": "#9ca98e",
+      "weather": "alien",
+      "facades": [
+        "checkpoint",
+        "warehouse"
+      ],
+      "vehicles": [
+        "armored",
+        "rover"
+      ],
+      "weights": [
+        7,
+        7,
+        12,
+        10,
+        9,
+        4,
+        5,
+        18,
+        10,
+        13
+      ]
+    },
+    "oasis": {
+      "density": 1.03,
+      "wall": "#738778",
+      "trim": "#b0bd9e",
+      "accent": "#b1a270",
+      "weather": "vine",
+      "facades": [
+        "shop",
+        "motel"
+      ],
+      "vehicles": [
+        "compact",
+        "van",
+        "sedan"
+      ],
+      "weights": [
+        17,
+        10,
+        13,
+        10,
+        8,
+        10,
+        7,
+        5,
+        5,
+        9
+      ]
+    }
+  },
+  "behavior": {
+    "availability": "Ordinary driving and roadside stops, independently of encounters.",
+    "generation": "Stateless seed hash; no game RNG, resources, encounter rolls or saved game mutations.",
+    "movement": "Roadside objects move right-to-left with accumulated road travel. Passing traffic has additional movement. Distant scenery moves slower, near verge faster.",
+    "transitions": "Blend both regional roadside populations using the existing terrain transition.",
+    "placement": "Behind the player vehicle and actual encounter subjects; no interaction markers for scenery.",
+    "lighting": "Existing continuous day/night tint applies to all roadside objects.",
+    "limits": {
+      "decorations_per_region": 8,
+      "passing_vehicles_per_region": 2,
+      "canvas_sprite_cache": 96,
+      "sprite_size": [
+        112,
+        112
+      ],
+      "facade_cache": 8
+    },
+    "compatibility": "No save migration needed; existing route, characters and event sequence remain intact."
+  }
+}

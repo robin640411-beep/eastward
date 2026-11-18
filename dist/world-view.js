@@ -2,6 +2,7 @@
 import {reducedMotion} from './cinematics.js';
 import {phaseName} from './engine.js';
 import {routeView} from './route-runtime.js';
+import {drawRoadside} from './roadside-art.js';
 import {biomeAt,tripPose,enemyLayout,lightingAt,mixHex,ease,clamp01} from './journey-view-model.js';
 const W=384,H=240,images=new Map();let reduced=reducedMotion();
 let canvas,ctx,state,assets,encounters,lastFrame=0,lastTime=0,clock=0,roadTravel=0,eventAt=0,key='',actionAt=-10,feedback=[],actionKind='',travelAt=0,tripDuration=12000,speed=1,viewZoom=.84,viewCarX=24,displayMinute=-1,selectedTarget=null,lightMinute=null,beat=null,beatAt=0,playback=false;
@@ -21,23 +22,10 @@ function landscape(b,alpha=1){
  const span=512,offset=roadTravel*.14,first=Math.floor(offset/span);
  for(let i=first;i<=first+1;i++){const x=i*span-offset;ctx.save();if(i%2){ctx.translate(x+span,0);ctx.scale(-1,1);panorama(b,0,-20,span,200,alpha);}else panorama(b,x,-20,span,200,alpha);ctx.restore();}
 }
-function roadside(b,near=false){const depth=near?3.6:1.45,spacing=near?128:164,offset=roadTravel*depth,first=Math.floor(offset/spacing),ground=near?237:172;
- for(let j=first-1;j<=first+4;j++){const x=j*spacing-offset,seed=j+state.seed*3;
-  if(near){
-   // Close scrub, stones and broken verge race past underneath the car.
-   const c=b.id==='snow'?'#a7afa8':b.id==='salt'?'#868c7b':'#5c685b';
-   poly([[x,ground],[x+5,ground-7],[x+6,ground],[x+12,ground-10],[x+12,ground],[x+22,ground-4],[x+30,ground+3]],c);
-   rect(x+57,ground-2,13,4,'#4b5551');rect(x+61,ground-3,7,2,'#88907e');
-  }else{
-   // Alternating posts and vegetation form a continuous midground, behind the vehicle.
-   rect(x,ground-25,4,26,'#9f9e86');rect(x,ground-21,4,8,'#c2b36f');rect(x,ground-12,4,7,'#3b4747');rect(x-2,ground,9,2,'#252f32');
-   const t=rnd(seed+12);if(['city','industrial'].includes(b.id)){
-    rect(x+49,ground-36,29,36,'#36474c');rect(x+51,ground-34,25,4,'#63706b');rect(x+54,ground-25,8,11,'#1b2d35');rect(x+68,ground-23,5,8,'#a3906555');
-   }else if(['forest','marsh','alien'].includes(b.id)){
-    poly([[x+80,ground],[x+85,ground-74],[x+88,ground-92],[x+91,ground],[x+89,ground]],'#344548');
-    poly([[x+86,ground-43],[x+61,ground-65],[x+66,ground-66],[x+88,ground-50],[x+108,ground-73],[x+111,ground-72],[x+89,ground-38]],'#344548');
-   }else{poly([[x+58,ground],[x+68,ground-7-t*12],[x+77,ground-11],[x+91,ground]],b.id==='snow'?'#a2aba5':'#616c61');}
-  }
+function roadside(b){const spacing=128,offset=roadTravel*3.6,first=Math.floor(offset/spacing),ground=237;
+ for(let j=first-1;j<=first+4;j++){const x=j*spacing-offset,c=b.id==='snow'?'#a7afa8':b.id==='salt'?'#868c7b':'#5c685b';
+  poly([[x,ground],[x+5,ground-7],[x+6,ground],[x+12,ground-10],[x+12,ground],[x+22,ground-4],[x+30,ground+3]],c);
+  rect(x+57,ground-2,13,4,'#4b5551');rect(x+61,ground-3,7,2,'#88907e');
  }
 }
 let transitionLayer=null;
@@ -54,8 +42,8 @@ function road(from,to,blend,light){blendedLandscape(from,to,blend);
  // Atmospheric separation calms the artwork and puts the vehicle on a readable road.
  const haze=ctx.createLinearGradient(0,95,0,175);haze.addColorStop(0,'#38494c00');haze.addColorStop(1,'#485454bb');ctx.fillStyle=haze;ctx.fillRect(0,95,W,80);
  rect(0,165,W,75,'#303c43');rect(0,165,W,5,'#6c7569');rect(0,170,W,2,'#222f38');rect(0,174,W,1,'#8c907b');
- if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}
- const rail=b=>['city','coast','industrial'].includes(b.id)?1:0;ctx.globalAlpha=rail(from)*(1-blend)+rail(to)*blend;if(ctx.globalAlpha>0){for(let i=-1;i<12;i++){const x=i*40-roadTravel*1.8%40;rect(x,158,3,15,'#74817b');rect(x,155,40,3,'#9c9f8a');rect(x,158,40,2,'#48575a');}}ctx.globalAlpha=1;
+ const scenery=b=>drawRoadside(ctx,{seed:state.seed,region:b,travel:roadTravel,seconds:clock,assets,image:img});
+ if(from.id===to.id)scenery(from);else{ctx.globalAlpha=1-blend;scenery(from);ctx.globalAlpha=blend;scenery(to);ctx.globalAlpha=1;}
 
  for(let i=-1;i<8;i++){const x=i*96-roadTravel*3.7%96;rect(x,223,48,3,'#c7bd92');rect(x+3,224,39,1,'#aaa68c');poly([[x+31,184],[x+39,189],[x+35,194],[x+50,201]],'#222d35');}
  for(let i=0;i<62;i++){const x=(i*71-roadTravel*(2.4+rnd(i)*1.2)%440+440)%440;rect(x,178+rnd(i+46)*57,2+i%4,1,i%3?'#465157':'#626d6a');}
@@ -154,7 +142,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
   if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){if(e.image)paint(e.image,pose.eventX+25,70,132,132);else if(e.npc)paint(assets.characters[e.npc.race+'_'+e.npc.profession],pose.eventX+53,125,45,67);else paintEnemy(e.key,pose.eventX+53,125,55,67);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2);ctx.restore();
  }
- if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from,true);else{ctx.globalAlpha=1-blend;roadside(from,true);ctx.globalAlpha=blend;roadside(to,true);ctx.globalAlpha=1;}}
+ if(!interior&&(!s.battle||carFight)){if(from.id===to.id)roadside(from);else{ctx.globalAlpha=1-blend;roadside(from);ctx.globalAlpha=blend;roadside(to);ctx.globalAlpha=1;}}
  if(!s.battle||carFight){ctx.globalAlpha=(1-light.light)*.72;rect(0,0,W,H,'#07152c');ctx.globalAlpha=1;
  if(light.light<.68&&!interior){const x=(viewCarX+184)*viewZoom,y=185*viewZoom+220*(1-viewZoom);ctx.globalAlpha=(.68-light.light)*.55;poly([[x,y],[W,y-29],[W,y+18]],'#ffdf99');ctx.globalAlpha=1;rect(x-3,y-2,4,3,'#f3d894');}}
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));

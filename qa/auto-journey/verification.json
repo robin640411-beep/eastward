@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local_verified_ready_to_publish",
+  "status": "published_and_readonly_verified",
   "automated_tests": {
     "passed": 128,
     "failed": 0
@@ -36,5 +36,18 @@
     "rest-prompt.jpg",
     "battle-messages.jpg",
     "random-driving.jpg"
+  ],
+  "deployment": {
+    "commit_sha": "f7d9fd701e2df5dac81cdbef865b9ce73e6ca0df",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_f489ade3341c8191b4030dfe77d13113",
+    "deployment_id": "appgdep_6afda6e76f0c8191a4fff4a3930366fa",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Private deployment returned succeeded.",
+    "Production browser entry shows random traveller introduction, Start and existing Continue; no race or profession choices.",
+    "Production save was not loaded or modified during read-only verification."
   ]
 }

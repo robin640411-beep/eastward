@@ -115,17 +115,17 @@
     "browser": "Chrome id 3",
     "browser_tab": "2093001361"
   },
-  "next_step": "Publish the validated automatic-journey update to the existing private Site under the user standing authorization.",
+  "next_step": "Publish validated roadside update to existing owner-private Site.",
   "deployment": {
-    "commit_sha": "95afba501ceadcfd314feba0ddfdeeb468f2e5f1",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_3eb2746764fc8191b9ca7210ae3ad507",
-    "deployment_id": "appgdep_6afd99958744819190f0f1754cb14eb6",
+    "commit_sha": "f7d9fd701e2df5dac81cdbef865b9ce73e6ca0df",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_f489ade3341c8191b4030dfe77d13113",
+    "deployment_id": "appgdep_6afda6e76f0c8191a4fff4a3930366fa",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "automatic-journey-fixed-message-window",
+    "name": "ten-roadside-types-across-twelve-terrains",
     "status": "local_verified_ready_to_publish",
     "physical_phone_tested": false
   },
@@ -228,7 +228,7 @@
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site"
   },
   "road_hud": {
-    "status": "included_in_automatic_journey_release",
+    "status": "published_with_automatic_journey",
     "spec": "spec/route-regions.json",
     "evidence": "qa/road-hud/verification.json",
     "tests_passed": 118,
@@ -237,10 +237,15 @@
       "場景上方的地名、每局 D100 樂園名稱、1000 至 0 公里顯示",
       "自言自語、同伴、電台和安靜片刻移到車景上方",
       "行駛下方不再放置重複對話、升級摘要或繼續前進按鈕"
-    ]
+    ],
+    "commit_sha": "f7d9fd701e2df5dac81cdbef865b9ce73e6ca0df",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_f489ade3341c8191b4030dfe77d13113",
+    "deployment_id": "appgdep_6afda6e76f0c8191a4fff4a3930366fa",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
   },
   "automatic_journey": {
-    "status": "local_verified_ready_to_publish",
+    "status": "published_and_readonly_verified",
     "spec": "spec/automatic-journey.json",
     "evidence": "qa/auto-journey/verification.json",
     "tests_passed": 128,
@@ -250,6 +255,25 @@
       "直接隨機產生新人物",
       "開局與事件完成後自動前進",
       "體力低於 5 才詢問休息，同窗換手與守夜設定"
+    ],
+    "commit_sha": "f7d9fd701e2df5dac81cdbef865b9ce73e6ca0df",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_f489ade3341c8191b4030dfe77d13113",
+    "deployment_id": "appgdep_6afda6e76f0c8191a4fff4a3930366fa",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "roadside_scenery": {
+    "status": "local_verified_ready_to_publish",
+    "spec": "spec/roadside-scenery.json",
+    "evidence": "qa/roadside/verification.json",
+    "types": 10,
+    "terrain_profiles": 12,
+    "tests_passed": 132,
+    "features": [
+      "一般行駛即出現建築、車輛、電線桿、招牌、路燈、候車亭、護欄、路障、貨櫃與水塔",
+      "依地景調整分布密度、素材與積雪、植被、鏽蝕及異星痕跡",
+      "物件隨車速向後移動，另有偶爾經過的車流",
+      "分層繪製、最多 96 張小型物件快取、不消耗遊戲亂數"
     ]
   }
 }

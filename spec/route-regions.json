@@ -599,5 +599,11 @@
     "dialogue": "Fixed 140px message window above the scene; auto-scrolling conversation, radio, events, rewards and rest prompts.",
     "below_scene": "No dialogue, level summary or continue controls during driving.",
     "source": "spec/automatic-journey.json"
+  },
+  "ambient_scenery": {
+    "source": "spec/roadside-scenery.json",
+    "types": 10,
+    "available_without_encounter": true,
+    "profile_count": 12
   }
 }
