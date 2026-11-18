@@ -1,0 +1,19 @@
+export const VEHICLE_WEAPONS={
+ bumper:{name:'前保險桿',bonus:0,style:'ram'},ram:{name:'加固撞角',bonus:1,style:'ram'},
+ nail:{name:'鉚釘發射器',bonus:2,style:'bullet'},coil:{name:'電弧放電器',bonus:3,style:'shock'},
+ harpoon:{name:'牽引魚叉',bonus:3,style:'blade'},gun:{name:'輕型機槍',bonus:3,style:'burst_fire'},
+ spore:{name:'腐蝕噴管',bonus:3,style:'acid'}
+};
+export const STARTER_VEHICLES=[
+ {id:'courier',name:'荒路信使車',model:'compact',seats:1,fuel:18,capacity:24,hp:22,armor:0,weapon:'ram',limit:3,color:'#c49a52'},
+ {id:'sweeper',name:'回收清掃車',model:'compact',seats:1,fuel:26,capacity:34,hp:24,armor:1,weapon:'nail',limit:2,color:'#789b89'},
+ {id:'scout',name:'甲殼偵察車',model:'rover',seats:1,fuel:16,capacity:24,hp:32,armor:2,weapon:'coil',limit:2,color:'#837599'},
+ {id:'coupe',name:'舊城雙門轎車',model:'sedan',seats:2,fuel:24,capacity:32,hp:28,armor:0,weapon:'bumper',limit:3,color:'#5f9395'},
+ {id:'salvager',name:'拾荒短斗車',model:'pickup',seats:2,fuel:20,capacity:30,hp:36,armor:1,weapon:'harpoon',limit:3,color:'#ad6550'},
+ {id:'taxi',name:'流亡計程車',model:'sedan',seats:2,fuel:30,capacity:38,hp:24,armor:0,weapon:'nail',limit:2,color:'#c5a355'},
+ {id:'clinic',name:'流動診療車',model:'ambulance',seats:2,fuel:22,capacity:30,hp:30,armor:1,weapon:'bumper',limit:4,color:'#b4bcae'},
+ {id:'radio',name:'地下電台車',model:'van',seats:2,fuel:28,capacity:36,hp:26,armor:0,weapon:'coil',limit:3,color:'#798eac'},
+ {id:'patrol',name:'退役巡邏車',model:'armored',seats:2,fuel:16,capacity:24,hp:40,armor:3,weapon:'gun',limit:2,color:'#727a6e'},
+ {id:'sporevan',name:'孢殼旅行車',model:'rover',seats:2,fuel:24,capacity:32,hp:32,armor:1,weapon:'spore',limit:4,color:'#9a887e'}
+].map((v,i)=>({...v,roll:i+1}));
+export const VEHICLE_MODS={seat:{name:'額外座位',price:4,detail:'座位 +1（隊伍最多 4 人）'},armor:{name:'外掛裝甲',price:5,detail:'裝甲 +2，降低車戰傷害'},tank:{name:'擴充油箱',price:4,detail:'容量 +12，附 12 汽油'},gun:{name:'武器強化',price:7,detail:'車載武器傷害 +4'}};

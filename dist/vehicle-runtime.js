@@ -1,0 +1,26 @@
+import {STARTER_VEHICLES,VEHICLE_WEAPONS,VEHICLE_MODS} from './vehicle-catalog.js';
+export {STARTER_VEHICLES,VEHICLE_WEAPONS,VEHICLE_MODS};
+export function vehicleStats(assets,v){const starter=STARTER_VEHICLES.find(c=>c.id===v.starterId&&c.model===v.model),base=assets.vehicles[v.model],mods=v.mods||[],count=id=>mods.filter(m=>m===id).length,weapon=VEHICLE_WEAPONS[starter?.weapon||v.baseWeapon||'bumper'];
+ const guns=count('gun');return {name:starter?.name||base.name,seats:(starter?.seats??base.seats)+count('seat'),armor:(starter?.armor??v.baseArmor??0)+count('armor')*2,capacity:(starter?.capacity??v.baseFuelCapacity??60)+count('tank')*12,limit:starter?.limit??base.modSlots,used:mods.length,weapon:{...weapon,name:guns?(weapon.bonus?weapon.name+' · 強化 '+guns:'車載機槍 · '+guns+' 級'):weapon.name,bonus:weapon.bonus+guns*4,style:guns&&!weapon.bonus?'burst_fire':weapon.style}};
+}
+export function vehicleArt(assets,v){const info=vehicleStats(assets,v),base=assets.starters?.[v.starterId]||assets.vehicles[v.model];return {...base,...base.variants?.[info.seats],name:info.name};}
+export function normalizeVehicleState(s,assets){if(!s)return;s.resources.fuelReserve??=0;s.vehicle.mods??=[];if(!s.vehicle.starterId&&s.vehicle.baseFuelCapacity==null)s.vehicle.baseFuelCapacity=Math.max(60,s.resources.fuel-(s.vehicle.mods.filter(m=>m==='tank').length*12));const cap=vehicleStats(assets,s.vehicle).capacity;if(s.resources.fuel>cap){s.resources.fuelReserve+=s.resources.fuel-cap;s.resources.fuel=cap;}}
+export function starterVehicle(roll){const c=STARTER_VEHICLES[roll-1];return {model:c.model,starterId:c.id,hp:c.hp,maxHp:c.hp,mods:[]};}
+export function installVehicles(Game){
+ Game.prototype.vehicleStats=function(){return vehicleStats(this.d.assets,this.s.vehicle)};
+ Game.prototype.seats=function(){return this.vehicleStats().seats};
+ Game.prototype.availableFuel=function(){return this.s.resources.fuel+(this.s.resources.fuelReserve||0)};
+ Game.prototype.refillTank=function(){const r=this.s.resources,amount=Math.min(Math.max(0,this.vehicleStats().capacity-r.fuel),r.fuelReserve||0);r.fuel+=amount;r.fuelReserve=(r.fuelReserve||0)-amount;return amount;};
+ const start=Game.prototype.start;Game.prototype.start=function(...args){const s=start.apply(this,args);normalizeVehicleState(s,this.d.assets);return s;};
+ const add=Game.prototype.add;Game.prototype.add=function(key,n){if(key!=='fuel')return add.call(this,key,n);const r=this.s.resources,total=Math.max(0,this.availableFuel()+n);r.fuel=Math.min(total,this.vehicleStats().capacity);r.fuelReserve=total-r.fuel;};
+ const drive=Game.prototype.canDrive;Game.prototype.canDrive=function(){if(this.s.mode==='prologue')return false;return drive.call(this)||this.s.mode==='ready'&&this.availableFuel()>0&&this.driver()?.st>0&&this.s.vehicle.hp>0&&this.s.party.length<=this.partyLimit();};
+ const depart=Game.prototype.depart;Game.prototype.depart=function(){if(!this.canDrive())return false;this.refillTank();return depart.call(this);};
+ const arrive=Game.prototype.arrive;Game.prototype.arrive=function(){const result=arrive.call(this);if(this.s.mode!=='driving')this.refillTank();return result;};
+ const buy=Game.prototype.buy;Game.prototype.buy=function(kind,id){if(kind!=='mod')return buy.call(this,kind,id);const offer=this.modificationPreview(id);if(!offer.allowed)return false;this.add('scrap',-offer.price);this.s.vehicle.mods.push(id);if(id==='tank')this.add('fuel',12);this.tell('已安裝'+offer.name+'。'+offer.change+'；改裝額度 '+this.s.vehicle.mods.length+' / '+this.vehicleStats().limit+'。');return true;};
+ Game.prototype.modificationPreview=function(id){const mod=VEHICLE_MODS[id],before=this.vehicleStats(),after=vehicleStats(this.d.assets,{...this.s.vehicle,mods:[...this.s.vehicle.mods,id]}),shop=this.s.mode==='event'&&this.s.current?.dialogue&&this.s.current?.service==='garage';
+  const reason=!mod?'未知改裝':!shop?'需要進入修車廠':before.used>=before.limit?'額度已用完':id==='seat'&&before.seats>=4?'座位已滿':this.s.resources.scrap<mod.price?'廢料不足':'';
+  const change={seat:`座位 ${before.seats} → ${after.seats}`,armor:`裝甲 ${before.armor} → ${after.armor}`,tank:`油箱 ${before.capacity} → ${after.capacity}（附 12 汽油）`,gun:`武器加成 +${before.weapon.bonus} → +${after.weapon.bonus}`}[id];return {...mod,id,before,after,change,allowed:!reason,reason};};
+ const replace=Game.prototype.replaceVehicle;Game.prototype.replaceVehicle=function(){const fuel=this.availableFuel(),offer=this.s.offerVehicle,result=replace.call(this);if(result){this.s.resources.fuel=0;this.s.resources.fuelReserve=0;normalizeVehicleState(this.s,this.d.assets);this.add('fuel',fuel+(offer.fuel||0));}return result;};
+ const search=Game.prototype.searchStranded;Game.prototype.searchStranded=function(...args){this.refillTank();return search.apply(this,args);};
+ const resolve=Game.prototype.resolveSearch;Game.prototype.resolveSearch=function(...args){this.refillTank();return resolve.apply(this,args);};
+}

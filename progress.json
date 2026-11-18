@@ -12,7 +12,7 @@
     "enemies": 16,
     "scenes": 28,
     "icons": 16,
-    "mods": 4,
+    "mods": 5,
     "generator": "tools/rebuild_art.py",
     "gallery": "dist/art.html",
     "vehicle_seat_variants": 20,
@@ -21,7 +21,9 @@
     "painted_atlases": 5,
     "occupation_props": 3,
     "equipment_icons": 6,
-    "final_bosses": 5
+    "final_bosses": 5,
+    "starter_vehicles": 10,
+    "starter_seat_variants": 33
   },
   "implemented": [
     "原創像素 SVG 素材",
@@ -115,18 +117,18 @@
     "browser": "Chrome id 3",
     "browser_tab": "2093001361"
   },
-  "next_step": "Publish v15-weather to original owner-private Site.",
+  "next_step": "等待使用者試玩回饋；後續完成更新可直接發布，維持原有私人網站。",
   "deployment": {
-    "commit_sha": "205dd8a5c6aa9882ddd66fcde5fbe183689b2413",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_cf0399b98e188191b84426aed41fb0a1",
-    "deployment_id": "appgdep_6afdba9cdac8819195a1db79655a9b9f",
+    "commit_sha": "3ffa36d846fc62cd98a98b0d270a29a08f5b6a83",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_7130259ea8e08191af8cc78934eda8dc",
+    "deployment_id": "appgdep_6afdc6fd835c8191bc4b439d68ff0d9a",
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "random-branching-lightning-and-ambient-weather",
-    "status": "local-verified-awaiting-publication",
+    "name": "player-origins-random-starters-and-shared-vehicle-modifications",
+    "status": "local_verified_pending_publication",
     "physical_phone_tested": false
   },
   "natural_journey_ui": {
@@ -300,7 +302,7 @@
     "audience": "owner-private"
   },
   "road_weather": {
-    "status": "local-verified-awaiting-publication",
+    "status": "published_and_readonly_verified",
     "spec": "spec/weather.json",
     "evidence": "qa/weather/verification.json",
     "tests_passed": 145,
@@ -310,6 +312,31 @@
       "12 種場景配置飄葉、花瓣、雪、雨、沙塵、灰燼與孢子",
       "地景交界天氣漸變，平常行車即出現",
       "柔和模式降低粒子、移除天空閃光"
+    ],
+    "commit_sha": "3ffa36d846fc62cd98a98b0d270a29a08f5b6a83",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_7130259ea8e08191af8cc78934eda8dc",
+    "deployment_id": "appgdep_6afdc6fd835c8191bc4b439d68ff0d9a",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "audience": "owner-private"
+  },
+  "origins_and_vehicles": {
+    "status": "local_verified_pending_publication",
+    "spec": [
+      "spec/origins.json",
+      "spec/starter-vehicles.json"
+    ],
+    "evidence": "qa/origins/verification.json",
+    "past_entries": 100,
+    "motive_entries": 100,
+    "starter_vehicles": 10,
+    "tests_passed": 156,
+    "features": [
+      "兩張獨立 D100 決定角色過去與出發理由",
+      "固定訊息窗三頁開場，閱讀後才自動行車",
+      "D10 抽取 1 或 2 座起始車，車況、裝甲、汽油與武器不同",
+      "修車廠四類改裝共享各車上限，顯示前後差異與停用原因",
+      "所有乘員有對應車窗，車戰套用實際裝甲與武器特效",
+      "油箱與公共背包備用汽油，停靠自動補充；舊存檔保留"
     ]
   }
 }

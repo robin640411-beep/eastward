@@ -6,7 +6,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id)}};
  Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=this.alive().filter(p=>!p.asleep).map(p=>p.id);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
  Game.prototype.enemyAction=function(e){const b=this.s.battle;if(!b||e.hp<=0)return;if(e.stun>0){e.stun--;return;}
-  if(b.mode==='vehicle'){this.actionTarget='vehicle';const armor=this.s.vehicle.mods.filter(x=>x==='armor').length;const damage=Math.max(1,e.attack-armor*2-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
+  if(b.mode==='vehicle'){this.actionTarget='vehicle';const armor=this.vehicleStats().armor/2;const damage=Math.max(1,e.attack-armor*2-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
   else {const target=this.pick(this.alive());if(!target)return;this.actionTarget=target.id;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
  };
  Game.prototype.enemyTurn=function(){const b=this.s.battle;if(!b)return;b.guardIds??=[];for(const e of b.enemies){this.enemyAction(e);if(this.s.mode==='ending')break;}if(this.s.battle){b.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id);b.orders={};}};
@@ -40,7 +40,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
  const vehicleWeapon=b.mode==='vehicle'&&p.id===this.driver()?.id;const ranged=vehicleWeapon||ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&!vehicleWeapon&&p.flaw==='unsteady'?10:0)){this.log(display(p),'攻擊落空。');return;}
  let damage=Math.max(1,this.stat(p,'attack')-e.defense)+(p.profession==='soldier'&&(b.mode==='character'||p.id!==this.driver()?.id)?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(b.mode==='character'&&p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0);p.startled=false;
  if(b.mode==='character'&&p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!(e.machine??this.d.assets.enemies[e.key]?.machine)){damage+=2;b.usedHunter.push(p.id)}
- if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.s.vehicle.mods.filter(x=>x==='gun').length*4;
+ if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.vehicleStats().weapon.bonus;
  if(e.npc?.race==='chitin'&&b.mode==='character')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
  };
  // Record the actual initiative sequence for the view, including a final lethal hit.
@@ -54,7 +54,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
   const intended=command?.target||(side==='party'?b.enemies.find(e=>e.hp>0)?.id:null);
   this.actionTarget=null;const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
   const label=this.s.logs[0]!==lastLog?this.s.logs[0].text:stunned?'暫時無法行動。':'採取行動。';
-  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(unit,command,{...b,vehicleGun:this.s.vehicle.mods.includes('gun')},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
+  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(unit,command,{...b,vehicleGun:this.s.vehicle.mods.includes('gun'),vehicleStyle:this.vehicleStats().weapon.style},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
   return result;
  };}
  // Inventory changes cannot bypass the turn or move characters out of a moving car.

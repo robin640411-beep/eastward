@@ -1,3 +1,5 @@
+import {VEHICLE_MODS,normalizeVehicleState,installVehicles} from './vehicle-runtime.js';
+import {installOrigins} from './origin-runtime.js';
 import {normalizeFlow,installAutomaticJourney} from './automatic-journey.js';
 import {normalizeProgression,installProgression,makeRegionalEnemies} from './progression-runtime.js';
 import {normalizeRoute,nameEncounter} from './route-runtime.js';
@@ -12,13 +14,13 @@ export const phase=m=>{const h=Math.floor(m/60)%24;return h<5||h>=18?'night':h<8
 export const phaseName=m=>({night:'夜晚',dawn:'清晨',morning:'上午',afternoon:'下午'}[phase(m)]);
 export const display=p=>`「${p.nickname}」${p.name}`;
 export const ITEMS={club:{name:'球棒',slot:'武器',attack:2,price:3},pistol:{name:'舊手槍',slot:'武器',attack:4,price:7,ranged:true},coat:{name:'厚外套',slot:'防具',defense:1,price:3},vest:{name:'防護背心',slot:'防具',defense:3,price:8},tools:{name:'工具組',slot:'配件',defense:1,price:4},charm:{name:'共鳴石',slot:'配件',psyche:2,price:6}};
-export const MODS={gun:{name:'車載機槍',price:7},armor:{name:'外掛裝甲',price:5},seat:{name:'額外座位',price:4},lamp:{name:'車頂探照燈',price:4}};
+export const MODS={...VEHICLE_MODS,lamp:{name:'車頂探照燈',price:4}};
 export const BUILDING_ROADS=new Set([1,2,3,4,5,14,15,21,25,26,28,29,34,35,36,37,38,39,40,44,45,48]);
 export const POWERS={
  human:[['念力推擊','strike'],['心靈復原','heal'],['意志屏障','shield']],alien:[['星芒','strike'],['靜默波','stun'],['腦域風暴','burst']],mutant:[['異變衝擊','strike'],['再生','heal'],['畸變爆發','burst']],synth:[['脈衝','strike'],['反應護盾','shield'],['系統震盪','stun']],uplift:[['野性共鳴','strike'],['生命回聲','heal'],['心靈嚎叫','burst']],chitin:[['碎甲念波','strike'],['甲殼屏障','shield'],['鎮壓','stun']],mycelial:[['孢子念波','strike'],['菌網修復','heal'],['眠霧','stun']],crystal:[['晶芒','strike'],['折射屏障','shield'],['共振崩解','burst']],amphibian:[['潮汐衝擊','strike'],['潮生修復','heal'],['深水屏障','shield']],mimic:[['幻影刺擊','strike'],['感官錯置','stun'],['幻象屏障','shield']],symbiote:[['共生鞭擊','strike'],['生命縫合','heal'],['雙重意識','shield']],lumen:[['光束','strike'],['溫光','heal'],['極光爆發','burst']]};
 export function learned(p){return POWERS[p.race].map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i]})).filter(x=>p.level>=x.level)}
 export class Game{
- constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);}
+ constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);}
  roll(sides=100){let x=this.s.rng>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;this.s.rng=x>>>0||1;return (this.s.rng%sides)+1;}
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
@@ -33,7 +35,7 @@ export class Game{
  stat(p,k){let n={attack:5,defense:2,speed:5,psyche:5}[k]+p.level-1;for(const id of Object.values(p.gear))n+=ITEMS[id]?.[k]||0;if(k==='speed'&&p.flaw==='slow_reflex')n--;return Math.max(1,n)}
  log(title,text){this.s.logs.unshift({title,text,minutes:this.s.minutes,progress:this.s.progress});this.s.logs=this.s.logs.slice(0,100)}
  tell(text){this.s.notice=text;this.log('旅途紀錄',text)}
- afford(req){return req.every(r=>r.free_seats?this.s.party.length+r.free_seats<=this.partyLimit():this.s.resources[r.resource]>=r.minimum)}
+ afford(req){return req.every(r=>r.free_seats?this.s.party.length+r.free_seats<=this.partyLimit():(r.resource==='fuel'?this.availableFuel():this.s.resources[r.resource])>=r.minimum)}
  add(key,n){this.s.resources[key]=Math.max(0,(this.s.resources[key]||0)+n)}
  travelCost(n,p=this.driver()){if(!n)return {fuel:0,st:0};let st=n*(phase(this.s.minutes)==='night'?2:1)+(p.flaw==='night_strain'&&phase(this.s.minutes)==='night'?1:0)+(p.flaw==='poor_driver'?1:0)-(p.profession==='driver'?1:0);return {fuel:n+(p.flaw==='wasteful_driver'?1:0),st:Math.max(1,st)}}
  canDrive(){const p=this.driver();return this.s.mode==='ready'&&p&&p.st>0&&this.s.resources.fuel>0&&this.s.vehicle.hp>0&&this.s.party.length<=this.partyLimit()}
@@ -127,3 +129,6 @@ installDialogue(Game,{display});
 installProgression(Game,{display,learned});
 
 installAutomaticJourney(Game,{display});
+
+installVehicles(Game);
+installOrigins(Game);

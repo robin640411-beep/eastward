@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "date": "2026-11-18",
+  "version": 3,
+  "date": "2026-11-19",
   "character_creation": {
     "automatic": true,
     "selection_ui": false,
@@ -9,14 +9,17 @@
       "profession",
       "name",
       "nickname",
-      "flaw"
+      "flaw",
+      "past_D100",
+      "motive_D100",
+      "starting_vehicle_D10"
     ],
     "race_count": 12,
     "profession_count": 20,
     "method": "Existing seeded oracle draws; no AI and no visible dice."
   },
   "journey": {
-    "start": "Automatically drive after generating a character or resuming a ready save.",
+    "start": "After automatic character generation, show past, motive and starting vehicle in three fixed-window pages. Wait until the player starts the engine, then drive automatically. Resuming a ready save still drives automatically.",
     "resolved_events": "After a short reading pause, resolve the current event and chained events, then depart automatically.",
     "interactive_events": "Unresolved choices, NPC interaction, shops, buildings, replacement vehicles and battles wait for player action.",
     "generic_continue_prompt": false,
@@ -32,7 +35,8 @@
     },
     "rest": "Choose a watchkeeper in the same window; after safe sleep resume automatically when travel is possible. Existing sleep ambush rules remain.",
     "blocked": "No fuel or broken vehicle waits for salvage; no automatic endless search.",
-    "modal_pause": true
+    "modal_pause": true,
+    "prologue": "Page and independently drawn stories are saved; no movement, time or fuel consumption while reading. No visible dice or character selection."
   },
   "layout": {
     "top": "Current location and saved named Paradise distance, before title and party status.",
@@ -50,7 +54,8 @@
         "battle actions",
         "fatigue and watch prompts",
         "event choices",
-        "battle commands"
+        "battle commands",
+        "opening past, motive and starting vehicle"
       ],
       "auto_scroll": true,
       "manual_reread": true,
@@ -64,7 +69,7 @@
     },
     "below_driving_scene": "No dialogue, progress notices or continue panel; navigation remains available."
   },
-  "compatibility": "Existing saves are normalized without rerolling people, destination, route or enemies.",
+  "compatibility": "Existing saves continue unchanged without adding or rerolling origins or starting vehicles. Fuel overflow is preserved in the unlimited shared backpack.",
   "publication": {
     "standing_authorization": true,
     "user_instruction": "每當更新完成後都允許自動上傳，不需要再確認",

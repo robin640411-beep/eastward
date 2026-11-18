@@ -2,13 +2,13 @@ import {journalEntry} from './journey-ui.js';
 export function normalizeFlow(s){if(!s)return;s.journeyFlow??={declined:null,restSetup:false};s.messages??=[];s.messageSerial??=0;}
 export function appendMessage(s,title,text,personId=null){normalizeFlow(s);if(!text)return;const last=s.messages.at(-1);if(last?.text===text&&last.title===title)return;const message={id:++s.messageSerial,title,text,personId};s.messages.push(message);s.messages=s.messages.slice(-60);return message;}
 const restKey=g=>[g.s.stop,g.driver()?.id,g.driver()?.st].join(':');
-export function canContinueDriving(g){if(!g.canDrive())return false;const cost=g.travelCost(1,g.driver());return cost.fuel<=g.s.resources.fuel&&cost.st<=g.driver().st;}
+export function canContinueDriving(g){if(!g.canDrive())return false;const cost=g.travelCost(1,g.driver());return cost.fuel<=Math.min(g.vehicleStats().capacity,g.availableFuel())&&cost.st<=g.driver().st;}
 export function alternateDriver(g){return g.alive().filter(p=>p.id!==g.s.driver&&p.st>0&&!p.asleep).sort((a,b)=>b.st-a.st)[0];}
-export function automaticDecision(g){const s=g.s;if(!s||s.rosterReview||s.battle||s.mode==='ending')return 'wait';
+export function automaticDecision(g){const s=g.s;if(!s||s.rosterReview||s.battle||['ending','prologue'].includes(s.mode))return 'wait';
  if(s.journeyFlow?.restSetup)return 'restSetup';
  if(s.mode==='ready'){
   if(s.offerVehicle)return 'vehicle';
-  if(s.resources.fuel<=0||s.vehicle.hp<=0)return 'stranded';
+  if(g.availableFuel()<=0||s.vehicle.hp<=0)return 'stranded';
   const driver=g.driver();if(!driver||s.party.length>g.partyLimit())return 'blocked';
   if(driver.st<5&&(s.journeyFlow?.declined!==restKey(g)||!canContinueDriving(g)))return 'rest';
   return canContinueDriving(g)?'drive':'rest';

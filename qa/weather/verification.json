@@ -1,6 +1,6 @@
 {
   "date": "2026-11-18",
-  "status": "local-verified-awaiting-publication",
+  "status": "published_and_readonly_verified",
   "automated_tests": {
     "passed": 145,
     "failed": 0
@@ -17,10 +17,23 @@
     "storm-360.jpg",
     "leaves-driving-360.jpg",
     "petals-driving-360.jpg",
-    "snow-driving-360.jpg"
+    "snow-driving-360.jpg",
+    "production-entry.jpg"
   ],
   "limitations": [
     "Desktop Chrome phone viewport; physical phone performance not measured.",
     "All twelve weather profiles tested by model; representative storm/leaves/petals/snow visually verified."
+  ],
+  "deployment": {
+    "commit_sha": "3ffa36d846fc62cd98a98b0d270a29a08f5b6a83",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_7130259ea8e08191af8cc78934eda8dc",
+    "deployment_id": "appgdep_6afdc6fd835c8191bc4b439d68ff0d9a",
+    "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner-private"
+  },
+  "production_checks": [
+    "Private deployment succeeded; reloaded original Site entry with app.js?v=15-weather.",
+    "Entry loaded without browser warnings/errors. Production save not loaded or modified."
   ]
 }

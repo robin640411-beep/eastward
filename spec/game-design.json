@@ -403,7 +403,10 @@
     "food_system_enabled": false
   },
   "vehicles": {
-    "starting_seats_including_driver": 1,
+    "starting_seats_including_driver": [
+      1,
+      2
+    ],
     "seat_capacity_varies_by_vehicle": true,
     "seat_capacity_includes_driver": true,
     "replacement_seat_rule": {
@@ -423,24 +426,35 @@
     },
     "confirmed_modifications": [
       "增加座位",
-      "安裝車載武器",
-      "裝甲",
-      "特殊設備"
+      "增加裝甲",
+      "增加油量",
+      "增加武器"
     ],
     "model_determines": [
       "基本座位數",
       "基本生命值",
-      "改裝格數"
+      "起始汽油與油箱容量",
+      "裝甲",
+      "原車武器",
+      "改裝上限"
     ],
     "modification_slots": {
       "shared_between_types": true,
       "count_varies_by_vehicle_model": true,
       "types": {
-        "車載武器": "增加車戰指令",
-        "裝甲": "降低車戰受到的傷害",
-        "額外座位": "每件占一格改裝，增加一個座位",
-        "特殊設備": "提供公路事件中的額外選項"
-      }
+        "額外座位": "每次增加 1 席，隊伍總上限 4 人",
+        "裝甲": "每次增加 2 點車戰減傷",
+        "擴充油箱": "每次增加 12 容量，附 12 汽油",
+        "車載武器": "每次增加 4 點車載傷害，配合武器種類播放動畫"
+      },
+      "base_equipment_uses_slots": false,
+      "each_installation_uses": 1,
+      "starter_limit_range": [
+        2,
+        4
+      ],
+      "replacement": "原有改裝留在舊車；新車使用自己的額度，不繼承改裝。",
+      "legacy": "既有存檔的特殊設備保留效果，新修車廠只販售四類改裝。"
     },
     "health": {
       "single_vehicle_health_pool": true,
@@ -453,7 +467,28 @@
       "汽油耗盡",
       "目前駕駛體力耗盡"
     ],
-    "driver_replacement_can_enable_continued_travel": true
+    "driver_replacement_can_enable_continued_travel": true,
+    "starting_vehicle": {
+      "die": "D10",
+      "table": "spec/starter-vehicles.json",
+      "models": 10,
+      "single_seat_models": 3,
+      "double_seat_models": 7,
+      "randomized_on_new_game_only": true,
+      "differs_by": [
+        "外觀",
+        "起始汽油與油箱容量",
+        "裝甲",
+        "車況",
+        "原車武器",
+        "改裝上限"
+      ]
+    },
+    "fuel_storage": {
+      "overflow": "公共背包無限儲存備用汽油，不因油箱滿而丟棄。",
+      "refill": "停靠與出發前自動補入油箱。",
+      "display": "上方顯示全部可用汽油，車輛面板分別顯示油箱與備用汽油。"
+    }
   },
   "exploration": {
     "enabled": true,
@@ -677,5 +712,17 @@
     "regional_enemies": "10 個區段各有 5 種敵人，數值與體型隨區段提升，每次 1–3 隻；敵對 NPC 獨立由事件觸發。",
     "final_boss": "開局決定五選一魔王並保存；抵達 100 時進入入口決戰，擊敗後才抵達樂園。",
     "foreshadowing": "NPC 交談有 20% 機會補充魔王傳聞；同伴閒聊有 20% 機會選中魔王話題，不保證出現。"
+  },
+  "player_origin": {
+    "table": "spec/origins.json",
+    "past_die": "D100",
+    "motive_die": "D100",
+    "independent_draws": true,
+    "entries_per_table": 100,
+    "presentation": "在固定訊息視窗依序介紹過去、踏上旅程的理由與起始座駕；玩家按下發動引擎後才自動前進。",
+    "persistence": "過去、理由及開場頁碼隨存檔保存；角色面板與旅程紀錄可重讀。",
+    "runtime_ai": false,
+    "fantastical_experiences_allowed": true,
+    "stat_modifiers": false
   }
 }

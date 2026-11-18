@@ -35,7 +35,7 @@ export function actionVisual(unit,command,battle,side,driver){
  if(command?.type==='medicine')return fx('使用藥品','medicine','#b8d7be');
  if(command?.type==='defend')return fx('防禦','shield','#b0c7d2');
  if(command?.type==='escape')return fx('脫離戰鬥','escape','#bdc8cb');
- const id=side==='enemies'?(unit.attackStyle||enemyAttackStyle(unit,battle.mode)):battle.mode==='vehicle'&&unit.id===driver?(battle.vehicleGun?'burst_fire':'ram'):weaponStyle(unit);
+ const id=side==='enemies'?(unit.attackStyle||enemyAttackStyle(unit,battle.mode)):battle.mode==='vehicle'&&unit.id===driver?(battle.vehicleStyle||(battle.vehicleGun?'burst_fire':'ram')):weaponStyle(unit);
  return {...ATTACK_STYLES[id],id};
 }
 export const battleSlots=party=>Array.from({length:4},(_,i)=>party[i]||null);

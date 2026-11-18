@@ -1,3 +1,4 @@
+import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
 import {weatherLayers} from './weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from './weather-art.js';
 import {drawBattleEffects} from './battle-effects.js';
@@ -58,10 +59,10 @@ function room(){const eventKind=encounters[state.current?.event.id]?.kind,raw=({
  if(assets.interiors?.[scene]){const a=assets.interiors[scene],p=img(a.image);if(p){let [sx,sy,sw,sh]=a.rect;const cw=sh*W/H;sx+=(sw-cw)/2;sw=cw;ctx.drawImage(p,sx,sy,sw,sh,0,0,W,H);}}
  rect(0,0,W,H,'#26313c2b');const pulse=.07+Math.sin(clock*1.6)*.025;ctx.globalAlpha=pulse;poly([[166,35],[194,35],[264,197],[83,197]],'#f3c48c');ctx.globalAlpha=1;
 }
-function vehicle(v,party,x,y,w,rolling=false){const base=assets.vehicles[v.model],a={...base,...base.variants?.[base.seats+(v.mods||[]).filter(m=>m==='seat').length]},scale=w/160,bump=rolling&&!reduced?Math.round(Math.sin(roadTravel*.14)+Math.sin(roadTravel*.3)*.35)*scale*.55:0,h=w*72/160;y+=bump;
+function vehicle(v,party,x,y,w,rolling=false){const a=vehicleArt(assets,v),scale=w/160,bump=rolling&&!reduced?Math.round(Math.sin(roadTravel*.14)+Math.sin(roadTravel*.3)*.35)*scale*.55:0,h=w*72/160;y+=bump;
  rect(x+10,y+h-5,w-15,4,'#1d2c31');a.windows.forEach((win,i)=>{if(party[i])paint(assets.portraits[party[i].race],x+win.x*scale,y+win.y*scale,Math.min(win.width,win.height)*scale,Math.min(win.width,win.height)*scale)});paint(a.image,x,y,w,h);
  if(rolling&&!reduced)for(const wx of [36,124]){const cx=x+wx*scale,cy=y+59*scale;ctx.save();ctx.translate(cx,cy);ctx.rotate(roadTravel*.32);rect(-3*scale,-1*scale,6*scale,2*scale,'#b4b9a6');rect(-1*scale,-3*scale,2*scale,6*scale,'#7b8d89');ctx.restore()}
- (v.mods||[]).filter(m=>m==='gun'||m==='lamp').slice(0,1).forEach(m=>paint(assets.mods[m],x+w*.36,y-11*scale,w*.3,w*.3));
+ (vehicleStats(assets,v).weapon.bonus>0&&vehicleStats(assets,v).weapon.style!=='ram'?['gun']:(v.mods||[]).filter(m=>m==='lamp').slice(0,1)).forEach(m=>paint(assets.mods[m],x+w*.36,y-11*scale,w*.3,w*.3));
  if(rolling)for(let i=0;i<5;i++){const k=(roadTravel*.065+i*.21)%1;rect(x+7-k*35,y+h-7-k*8,3+k*9,2+k*4,`rgba(194,177,139,${.24*(1-k)})`)}
 }
 function person(p,x,y,h=48,walk=false){const t=walk&&!reduced?Math.floor(Math.sin(clock*17))*2:Math.floor(Math.sin(clock*2+p.level))*1;paint(assets.characters[p.race+'_'+p.profession],x,y+t,h*2/3,h);rect(x+3,y+h+1,h*.6,2,'#172a32');}

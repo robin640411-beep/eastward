@@ -7,7 +7,7 @@ paths=[]
 for category,items in m.items():
  if not isinstance(items,dict):continue
  for k,v in items.items():paths.append(v['image'] if isinstance(v,dict) else v)
-for v in m['vehicles'].values():
+for v in [*m['vehicles'].values(),*m.get('starters',{}).values()]:
  for capacity,variant in v.get('variants',{}).items():
   paths.append(variant['image']);assert len(variant['windows'])==int(capacity)
 for file in paths:
@@ -17,5 +17,5 @@ for file in paths:
  elif p.suffix=='.png':
   b=p.read_bytes();assert b[:8]==b'\x89PNG\r\n\x1a\n';assert all(n>0 for n in struct.unpack('>II',b[16:24]))
  else:raise AssertionError(file)
-for v in m['vehicles'].values():assert len(v['windows'])==v['seats']
+for v in [*m['vehicles'].values(),*m.get('starters',{}).values()]:assert len(v['windows'])==v['seats']
 print(f'Art validation passed: {len(paths)} files, SVG and PNG formats valid; all vehicle seats have window coordinates.')

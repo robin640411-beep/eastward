@@ -2,6 +2,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {Game} from '../dist/engine.js';
 import {setLevel} from '../dist/progression-runtime.js';
+import {STARTER_VEHICLES,starterVehicle} from '../dist/vehicle-runtime.js';
 import {GROWTH} from '../dist/progression-catalog.js';
 import {createRoute,nameEncounter,BIOMES} from '../dist/route-runtime.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
@@ -53,6 +54,11 @@ g=fresh();g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.s.
 g=fresh();g.driver().st=4;for(let seed=1;seed<100;seed++){const candidate=new Game(d,structuredClone(g.s));candidate.s.rng=seed;if(candidate.roll()>30){g.s.rng=seed;break;}}states['疲勞 · 平安睡眠']=g.s;
 
 for(const biome of BIOMES){g=fresh();if(biome.id==='city')g.s.seed=90;g.s.route=createRoute(445,sides=>sides===12?BIOMES.findIndex(b=>b.id===biome.id)+1:1);g.s.minutes=720;g.s.vehicle.model='van';g.s.party.push(g.person('alien','medic'));g.depart();g.s.travel.preview={current:null,battle:null};states['沿途景物 · '+biome.name]=g.s;}
+
+// Player-facing random opening and each starting vehicle. Local fixtures only.
+for(const c of STARTER_VEHICLES){g=fresh();g.startRandom(42);g.s.vehicle=starterVehicle(c.roll);g.s.startingVehicleRoll=c.roll;g.s.resources.fuel=c.fuel;states['開場與座駕 · '+c.name]=g.s;}
+g=fresh();g.startRandom(42);while(g.s.mode==='prologue')g.advancePrologue();g.s.vehicle=starterVehicle(7);g.s.resources.fuel=22;g.s.resources.scrap=60;g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:14,event:{id:'road_004',title:'修車廠',text:'修車師傅把四種改裝的報價寫在工作臺上。',options:[]},dialogue:true,service:'garage',inside:true,explored:true,npc:g.person()};g.s.current.npc.attitude='友善';states['修車廠 · 四種改裝']=g.s;
+g=fresh();g.startRandom(42);while(g.s.mode==='prologue')g.advancePrologue();g.s.vehicle=starterVehicle(4);g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:22,event:{id:'road_014',title:'第一位同伴',text:'旅人望向車內的另一個空位，詢問能否一起向東。',options:[]},dialogue:true,service:'npc_trade',npc:g.person('alien','medic')};g.s.current.npc.attitude='友善';states['雙座起步 · 第一位同伴']=g.s;
 
 // Weather uses real presentation and separate visual seeds, never combat rolls.
 for(const [label,biome,id] of [['暴雨與雷擊 · 隨機閃電','city','road_100'],['天氣 · 森林飄葉','forest','road_014'],['天氣 · 綠丘花瓣','oasis','road_014'],['天氣 · 雪山降雪','snow','road_014'],['天氣 · 海岸細雨','coast','road_014']]){g=fresh();g.s.route=createRoute(445,sides=>sides===12?BIOMES.findIndex(b=>b.id===biome)+1:1);g.s.mode='event';g.s.frames=[{kind:'road',count:1}];g.s.current={instance:100,event:structuredClone(d.events.events.find(e=>e.id===id)),resolved:false};states[label]=g.s;}
