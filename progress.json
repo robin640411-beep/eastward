@@ -5,7 +5,7 @@
   "site_registered": true,
   "deployed": true,
   "assets": {
-    "files": 554,
+    "files": 560,
     "characters": 240,
     "portraits": 12,
     "vehicles": 8,
@@ -19,7 +19,8 @@
     "encounter_images": 202,
     "redrawn_existing": 546,
     "painted_atlases": 5,
-    "occupation_props": 3
+    "occupation_props": 3,
+    "equipment_icons": 6
   },
   "implemented": [
     "原創像素 SVG 素材",
@@ -59,7 +60,14 @@
     "按實際速度順序播放普通攻擊、超能力、藥品、防禦與受傷；倒下動畫後返回事件",
     "動畫可略過且存檔立即保存已結算結果，連點不重複行動",
     "低彩度遠景、無上限遠景捲動、路標護欄與三層公路視差、起步加速與停靠減速",
-    "完整／柔和動畫切換並保存偏好，柔和模式仍保留必要動作提示"
+    "完整／柔和動畫切換並保存偏好，柔和模式仍保留必要動作提示",
+    "角色頭像可開啟角色面板，顯示三個裝備部位與目前屬性",
+    "裝備與背包整合角色選擇、分類、重複物品數量、原裝備與候選裝備對照",
+    "依實際引擎計算四屬性換裝前後與增減，含遠近武器及相關缺點提示",
+    "換裝後更新角色裝備與屬性，並明確回報舊裝備放回公共背包",
+    "商店裝備可先比較後購買，不直接替角色穿戴",
+    "移除所有下拉選單，種族職業、事件執行者、守夜與圖鑑改為卡片或按鈕",
+    "六個裝備獨立像素圖示，角色面板與彈出視窗可捲動、固定關閉入口"
   ],
   "verification": [
     "324 個 SVG XML 與引用檢查",
@@ -90,7 +98,11 @@
     "64 項測試通過，圖集裁切界線及真透明格式已檢查",
     "正式網站成功載入新版地景、角色與車輛，原有存檔可繼續，未見瀏覽器錯誤",
     "69 項測試通過，新增動畫紀錄不改骰值、花費或先後順序，最後一擊及睡眠被擊中者重播一致",
-    "390×844 Chrome 實際檢查自動行車、進屋轉場、開戰、普通攻擊與超能力、略過、快速連點及戰鬥勝利；無水平溢出或瀏覽器錯誤"
+    "390×844 Chrome 實際檢查自動行車、進屋轉場、開戰、普通攻擊與超能力、略過、快速連點及戰鬥勝利；無水平溢出或瀏覽器錯誤",
+    "正式私人網站載入 v4-motion、原有存檔、完整動畫切換正常，手機尺寸無溢出或瀏覽器錯誤",
+    "76 項測試通過，裝備預覽對照實際換裝結果，含等級、缺點、升級降級、配件取捨與不同同伴",
+    "390×844 與 360×780 瀏覽器檢查角色面板、裝備比較、重複點擊、舊物回袋、商店購買、守夜及選角卡片",
+    "所有下拉選單移除，12 種族與 20 職業選擇正常；圖鑑切換正常；無水平溢出、遺失圖像或瀏覽器錯誤"
   ],
   "must_finish_before_completion": [],
   "tools": {
@@ -105,12 +117,12 @@
   "deployment": {
     "url": "https://eastward-robin-adventure.robin640411.chatgpt.site",
     "status": "succeeded",
-    "commit_sha": "a182e0553b3cfcf782a5568daf902295c1c2c399",
-    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_37bbf16e5a9c81919114f82b6c96ef93",
+    "commit_sha": "e60d4572417b83815597d66c7214bcb25d42f5c4",
+    "version_id": "appgprj_6afcd475a5a481918126e986e4962f6a~appgver_35779b7b7d948191be760db17eb6697d",
     "audience": "owner-private"
   },
   "current_update": {
-    "name": "road-motion-and-combat-cinematics",
+    "name": "character-equipment-and-card-ui",
     "status": "local-verified-awaiting-publication",
     "physical_phone_tested": false
   }

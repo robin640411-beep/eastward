@@ -1,0 +1,20 @@
+{
+  "tests_passed": 76,
+  "viewports": [
+    "390x844",
+    "360x780"
+  ],
+  "checked": [
+    "current weapon, armor, accessory and effective attributes",
+    "upgrade 7 to 9 and downgrade 9 to 7",
+    "companion level 5 accessory defense +1 and psyche -2",
+    "double-click equips once and returns old item to shared bag",
+    "battle disables equip while comparison remains readable",
+    "shop vest purchase: defense preview 3 to 5, 30 scrap becomes 22",
+    "watch selection: selected companion 24 stamina becomes 20, remaining character sleeps during ambush",
+    "12 race cards and 20 profession cards; choice updates traits",
+    "art gallery race buttons change all 20 job pictures",
+    "zero native selects; no horizontal overflow; no broken equipment icons; no console errors"
+  ],
+  "real_phone_tested": false
+}
