@@ -4,3 +4,5 @@
 @media(max-width:370px){.game-panel,.choice-panel{padding-left:12px;padding-right:12px}.panel-header{margin-left:-12px;margin-right:-12px;padding:12px}.character-stats>div{padding:7px}.character-stats strong{font-size:19px}.character-profile{grid-template-columns:82px 1fr;gap:10px}.character-profile h3{font-size:14px}.creation-option{padding:9px 7px;grid-template-columns:35px 1fr}.creation-option>img{width:35px;height:55px}.creation-option>strong{font-size:13px}.loadout-slot strong{font-size:14px}}
 
 body.has-dialog{height:100dvh;padding:0;overflow:hidden}.has-dialog #app{height:100dvh;min-height:0;overflow:hidden}
+/* Leave room for the hosting toolbar and phone bottom overlays. */
+.game-panel,.choice-panel{padding-bottom:max(100px,env(safe-area-inset-bottom))}.equipment-comparison{scroll-margin-bottom:90px}

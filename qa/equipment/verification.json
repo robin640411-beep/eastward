@@ -14,7 +14,8 @@
     "watch selection: selected companion 24 stamina becomes 20, remaining character sleeps during ambush",
     "12 race cards and 20 profession cards; choice updates traits",
     "art gallery race buttons change all 20 job pictures",
-    "zero native selects; no horizontal overflow; no broken equipment icons; no console errors"
+    "zero native selects; no horizontal overflow; no broken equipment icons; no console errors",
+    "equipment confirm button retains 103 px of bottom clearance on 390 px phone viewport"
   ],
   "real_phone_tested": false
 }
