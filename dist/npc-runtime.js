@@ -1,3 +1,5 @@
+import {enrichProceduralNpc,personRaceName,personJobName} from './procedural-npc.js';
+
 const JOB_TRADE_ITEMS={
  soldier:'shotgun',hunter:'machete',guard:'vest',demolition:'scrap_plate',
  medic:'med_scanner',chemist:'hazmat',researcher:'amber_core',historian:'charm',
@@ -19,15 +21,23 @@ export function npcFavorInfo(p){
 
 export function installNpcs(Game,{clone,display,ITEMS}){
  const person=Game.prototype.person;
- Game.prototype.person=function(...args){
-  const p=person.apply(this,args);
+ Game.prototype.person=function(race=null,job=null){
+  const p=person.call(this,race,job);
   p.memories=[];p.stock={fuel:1,medicine:1,item:1};
   const preferred=JOB_TRADE_ITEMS[p.profession]||'tools';
   p.tradeItem=ITEMS[preferred]?preferred:'tools';
+  if(this.s?.party?.length>=1&&race===null&&job===null)enrichProceduralNpc(p,this.s.seed,this.d.catalog);
   return p;
  };
  const interact=Game.prototype.interact;
- Game.prototype.interact=function(service=null){interact.call(this,service);const c=this.s.current;if(this.s.mode==='event'&&c?.dialogue&&!c.service)c.service='npc_trade'};
+ Game.prototype.interact=function(service=null){
+  interact.call(this,service);
+  const c=this.s.current;
+  if(this.s.mode==='event'&&c?.dialogue&&!c.service)c.service='npc_trade';
+  if(this.s.mode==='event'&&c?.dialogue&&c.npc?.procedural?.appearance&&!this.s.notice.includes(c.npc.procedural.appearance)){
+   this.s.notice=`${display(c.npc)}（${personRaceName(c.npc,this.d.catalog)} · ${personJobName(c.npc,this.d.catalog)}）\n${c.npc.procedural.appearance}\n${this.s.notice.split('\n').slice(1).join('\n')}`;
+  }
+ };
  const next=Game.prototype.nextEvent;
  Game.prototype.nextEvent=function(){next.call(this);const c=this.s.current;if(c?.dialogue&&!c.service)c.service='npc_trade'};
  Game.prototype.remember=function(p,text){if(!p)return;p.memories??=[];if(!p.memories.includes(text))p.memories.push(text);p.memories=p.memories.slice(-8)};
@@ -43,8 +53,8 @@ export function installNpcs(Game,{clone,display,ITEMS}){
   this.s.minutes+=5;
   const cd=this.d.oracles.companion_dialogue;
   const rObj=cd?.races?.[p.race],jObj=cd?.professions?.[p.profession];
-  const rName=this.d.catalog.races.find(r=>r.id===p.race)?.name||p.race;
-  const jName=this.d.catalog.professions.find(j=>j.id===p.profession)?.name||p.profession;
+  const rName=personRaceName(p,this.d.catalog);
+  const jName=personJobName(p,this.d.catalog);
   const ex=(rObj?.exchanges?.length&&this.roll(2)===1)?this.pick(rObj.exchanges):jObj?.exchanges?.length?this.pick(jObj.exchanges):null;
   const wish=(rObj?.wishes?.length&&this.roll(2)===1)?this.pick(rObj.wishes):jObj?.wishes?.length?this.pick(jObj.wishes):'只是想活著看到沒有母艦的天空。';
   const lines=[`${display(p)}（${rName} · ${jName}）停下手邊的事，和你聊起自己的來歷：`];
