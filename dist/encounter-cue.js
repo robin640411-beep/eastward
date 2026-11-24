@@ -47,7 +47,8 @@ export function encounterScene(state,cue){
   frames:indoors?[{kind:'building',scene:alert?cue.previousRoom:pending.frames?.at(-1)?.scene}]:[]};
 }
 export function readingDelay(s){
- const description=s.current?.event?.text||'',result=s.notice||'';
- const length=(description===result?result:description+result).length;
- return Math.min(12000,Math.max(4000,1200+length*115));
+ const description=s.current?.event?.text||'',result=s.notice||'',latest=s.messages?.at(-1)?.text||'';
+ const combined=description===result?result:description+result;
+ const length=Math.max(combined.length,latest.length);
+ return Math.min(24000,Math.max(4500,2200+length*170));
 }

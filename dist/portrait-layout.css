@@ -223,3 +223,66 @@
 .encounter-notice .message-actions button { width: 100%; min-height: 40px }
 
 .portrait-layout.has-encounter-cue .travel-party .member:disabled { opacity: 1 }
+
+.message-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.message-tool-btn {
+  min-height: 20px;
+  padding: 2px 7px;
+  font-size: 10px;
+  line-height: 1.2;
+  border-radius: 3px;
+  border: 1px solid #4c6972;
+  background: #172731;
+  color: #cbb58d;
+  cursor: pointer;
+}
+.message-tool-btn.is-paused {
+  border-color: #e2b86d;
+  background: #4e3b1e;
+  color: #fff0cc;
+}
+.full-messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+.full-message-card {
+  background: #1a2a35;
+  border: 1px solid #354e58;
+  border-left: 3px solid #b59c6f;
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+.full-message-card.has-person {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 10px;
+}
+.full-message-card > img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: #121d29;
+}
+.full-message-card strong {
+  font-size: 13px;
+  color: #e6d2a4;
+}
+.full-message-card small {
+  font-size: 11px;
+  color: #9bb3b5;
+  margin-left: 6px;
+}
+.full-message-card p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #e9ebe0;
+  white-space: pre-line;
+  margin: 6px 0 0;
+}
