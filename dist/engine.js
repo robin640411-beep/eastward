@@ -14,7 +14,62 @@ export const clone=x=>JSON.parse(JSON.stringify(x));
 export const phase=m=>{const h=Math.floor(m/60)%24;return h<5||h>=18?'night':h<8?'dawn':h<12?'morning':'afternoon'};
 export const phaseName=m=>({night:'夜晚',dawn:'清晨',morning:'上午',afternoon:'下午'}[phase(m)]);
 export const display=p=>`「${p.nickname}」${p.name}`;
-export const ITEMS={club:{name:'球棒',slot:'武器',attack:2,price:3},pistol:{name:'舊手槍',slot:'武器',attack:4,price:7,ranged:true},coat:{name:'厚外套',slot:'防具',defense:1,price:3},vest:{name:'防護背心',slot:'防具',defense:3,price:8},tools:{name:'工具組',slot:'配件',defense:1,price:4},charm:{name:'共鳴石',slot:'配件',psyche:2,price:6}};
+export const ITEMS={
+ club:{name:'球棒',slot:'武器',attack:2,price:3},
+ machete:{name:'鋼刃開山刀',slot:'武器',attack:4,speed:1,price:6},
+ pistol:{name:'舊手槍',slot:'武器',attack:4,price:7,ranged:true},
+ arc_baton:{name:'電弧警棍',slot:'武器',attack:5,psyche:1,vsMachine:3,price:11},
+ shotgun:{name:'廢土霰彈槍',slot:'武器',attack:6,defense:1,price:12,ranged:true},
+ amber_rifle:{name:'琥珀脈衝槍',slot:'武器',attack:8,psyche:2,vsMachine:2,price:18,ranged:true},
+ coat:{name:'厚外套',slot:'防具',defense:1,price:3},
+ vest:{name:'防護背心',slot:'防具',defense:3,price:8},
+ hazmat:{name:'抗孢子防護衣',slot:'防具',defense:2,psyche:1,antiPollution:2,price:9},
+ stealth_cloak:{name:'光學迷彩披風',slot:'防具',defense:2,speed:3,escapeBonus:10,price:12},
+ scrap_plate:{name:'焊鐵重甲',slot:'防具',defense:5,speed:-1,price:13},
+ chitin_armor:{name:'鐮刀甲殼戰甲',slot:'防具',defense:6,attack:1,price:19},
+ tools:{name:'工具組',slot:'配件',defense:1,price:4},
+ charm:{name:'共鳴石',slot:'配件',psyche:2,price:6},
+ booster_boots:{name:'強化助跑靴',slot:'配件',speed:3,price:7},
+ med_scanner:{name:'戰地生命儀',slot:'配件',defense:1,psyche:1,healBonus:2,price:9},
+ emp_module:{name:'電磁干擾模組',slot:'配件',attack:1,defense:1,vsMachine:2,price:10},
+ amber_core:{name:'穩定琥珀晶核',slot:'配件',psyche:4,attack:1,price:16}
+};
+export const RACE_BONUSES={
+ human:{},
+ alien:{attack:1,psyche:1},
+ mutant:{maxHp:4,attack:1},
+ synth:{defense:2,maxSt:4},
+ uplift:{speed:2,attack:1},
+ chitin:{maxHp:4,defense:2},
+ mycelial:{psyche:1,maxEsp:3},
+ crystal:{psyche:2,maxEsp:4},
+ amphibian:{maxSt:4,speed:1},
+ mimic:{speed:2},
+ symbiote:{maxHp:4},
+ lumen:{psyche:1,speed:1,maxEsp:2}
+};
+export const JOB_BONUSES={
+ driver:{speed:1},
+ mechanic:{defense:1},
+ medic:{psyche:1},
+ soldier:{attack:2},
+ scout:{speed:2},
+ merchant:{speed:1},
+ scavenger:{maxSt:3},
+ engineer:{defense:1},
+ researcher:{psyche:2},
+ hacker:{psyche:1,speed:1},
+ hunter:{attack:1,speed:1},
+ guard:{maxHp:4,defense:2},
+ courier:{maxSt:4,speed:2},
+ diplomat:{psyche:1},
+ historian:{psyche:1,maxEsp:2},
+ locksmith:{speed:1},
+ demolition:{attack:2},
+ chemist:{psyche:1},
+ electrician:{defense:1},
+ performer:{psyche:1,speed:1}
+};
 export const MODS={...VEHICLE_MODS,lamp:{name:'車頂探照燈',price:4}};
 export const BUILDING_ROADS=new Set([1,2,3,4,5,14,15,21,26,28,29,34,35,36,37,38,39,40,44,45,48]);
 export const POWERS={
@@ -41,7 +96,7 @@ export class Game{
  roll(sides=100){let x=this.s.rng>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;this.s.rng=x>>>0||1;return (this.s.rng%sides)+1;}
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
- person(race=null,job=null){const p={id:'p'+(++this.s.serial),name:this.oracle('npc_name').value,nickname:this.oracle('npc_nickname').value,race:race||this.oracle('npc_race').value,profession:job||this.oracle('npc_profession').value,attitude:this.oracle('npc_attitude').value,flaw:this.oracle('npc_flaw').value,level:1,xp:0,asleep:false,gear:{武器:'club',防具:'coat',配件:null}};p.maxHp=24+(p.flaw==='frail'?-2:0);p.maxSt=24+(p.flaw==='low_endurance'?-2:0);p.maxEsp=10;p.hp=p.maxHp;p.st=p.maxSt;p.esp=p.maxEsp;return p;}
+ person(race=null,job=null){const p={id:'p'+(++this.s.serial),name:this.oracle('npc_name').value,nickname:this.oracle('npc_nickname').value,race:race||this.oracle('npc_race').value,profession:job||this.oracle('npc_profession').value,attitude:this.oracle('npc_attitude').value,flaw:this.oracle('npc_flaw').value,level:1,xp:0,asleep:false,gear:{武器:'club',防具:'coat',配件:null}};const rb=RACE_BONUSES[p.race]||{},jb=JOB_BONUSES[p.profession]||{};p.maxHp=24+(rb.maxHp||0)+(jb.maxHp||0)+(p.flaw==='frail'?-2:0);p.maxSt=24+(rb.maxSt||0)+(jb.maxSt||0)+(p.flaw==='low_endurance'?-2:0);p.maxEsp=10+(rb.maxEsp||0)+(jb.maxEsp||0);p.hp=p.maxHp;p.st=p.maxSt;p.esp=p.maxEsp;return p;}
  start({seed=Date.now(),race='human',profession='driver'}={}){this.s={version:1,rng:Number(seed)>>>0||1,seed:Number(seed),serial:0,progress:1,minutes:480,stop:0,mode:'ready',party:[],driver:null,resources:{fuel:24,scrap:8,medicine:3},inventory:['pistol','tools'],vehicle:{model:'compact',hp:24,maxHp:24,mods:[]},departed:[],pending:[],frames:[],current:null,battle:null,logs:[],history:[],seen:[],dice:null,travel:null,notice:'旅程從這裡開始。向東，直到看見綠洲。',end:null};const p=this.person(race,profession);p.attitude='友善';this.s.party=[p];this.s.driver=p.id;const hist=this.oracle('invasion_history').value;this.s.world={...hist,year:2070+this.roll(30),faction:this.pick(['先遣聯軍','軌道議會','遠征監督局','星門軍團']),archive:this.pick(['灰塔紀錄','最後的民防日誌','失落電台檔案','撤離列車手記'])};normalizeJourney(this.s);normalizeRoute(this.s);normalizeProgression(this.s);this.log('開始旅程',`${display(p)}踏上了往東的路。`);return this.s;}
  alive(){return this.s.party.filter(p=>p.hp>0)}
  actor(){return this.alive().find(p=>!p.asleep)||this.alive()[0]}
@@ -49,7 +104,7 @@ export class Game{
  partyLimit(){return Math.min(MAX_PARTY,this.seats())}
  canRecruit(){return this.s.party.length<this.partyLimit()}
  seats(){return this.d.assets.vehicles[this.s.vehicle.model].seats+this.s.vehicle.mods.filter(x=>x==='seat').length}
- stat(p,k){let n={attack:5,defense:2,speed:5,psyche:5}[k]+p.level-1;for(const id of Object.values(p.gear))n+=ITEMS[id]?.[k]||0;if(k==='speed'&&p.flaw==='slow_reflex')n--;return Math.max(1,n)}
+ stat(p,k){let n={attack:5,defense:2,speed:5,psyche:5}[k]+p.level-1+(RACE_BONUSES[p.race]?.[k]||0)+(JOB_BONUSES[p.profession]?.[k]||0)+(p.race==='human'?Math.floor((p.level-1)/3):0);for(const id of Object.values(p.gear))n+=ITEMS[id]?.[k]||0;if(k==='speed'&&p.flaw==='slow_reflex')n--;return Math.max(1,n)}
  log(title,text){this.s.logs.unshift({title,text,minutes:this.s.minutes,progress:this.s.progress});this.s.logs=this.s.logs.slice(0,100)}
  tell(text){this.s.notice=text;this.log('旅途紀錄',text)}
  afford(req){return req.every(r=>r.free_seats?this.s.party.length+r.free_seats<=this.partyLimit():(r.resource==='fuel'?this.availableFuel():this.s.resources[r.resource])>=r.minimum)}
@@ -181,9 +236,9 @@ ${npcDemeanor(c.npc,{seed:this.s.seed})}`;}
  dismiss(id){if(id===this.s.protagonistId||this.s.party.length<=1)return false;const p=this.s.party.find(p=>p.id===id);if(!p)return false;this.s.party=this.s.party.filter(q=>q.id!==id);this.s.departed.push(p);const roll=this.roll();if(roll<=80)this.schedule(p,roll>55);if(this.s.driver===id)this.s.driver=this.alive()[0]?.id;this.tell(`${display(p)}帶著身上的裝備離開。${roll>80?'從此失去消息。':'往後也許會再次相遇。'}`);return true;}
  changeDriver(id){if(!['ready','event'].includes(this.s.mode)||this.s.battle)return false;const p=this.s.party.find(p=>p.id===id&&p.hp>0&&p.st>0);if(!p)return false;this.s.driver=id;this.tell(display(p)+'接手駕駛。');return true;}
  reveal(){const w=this.s.world;const texts=[`現在是 ${w.currentYear} 年，外星統治的第十年。${w.year} 年，${w.faction}出現在天空。${w.process}。`,w.trace,`《${w.archive}》記載：部分先遣族拒絕繼續執行佔領命令。`,`變種人最早出現在改造物質散布區。變異並不意味著效忠入侵者。`,`最後的廣播把東方的水源地稱為「末日綠洲」。`];const t=texts.find(x=>!this.s.history.includes(x));if(t){this.s.history.push(t);this.tell(t)}else this.tell('這段文字印證了你已知的歷史。');}
- useMedicine(id){const p=this.s.party.find(q=>q.id===id);if(!p||p.hp<=0||p.hp>=p.maxHp||this.s.resources.medicine<1)return false;this.add('medicine',-1);const medic=this.actor()?.profession==='medic';p.hp=clamp(p.hp+8+(medic?2:0)-(p.flaw==='slow_healing'?1:0),0,p.maxHp);this.tell(display(p)+'使用藥品恢復生命。');return true;}
+ useMedicine(id){const p=this.s.party.find(q=>q.id===id);if(!p||p.hp<=0||p.hp>=p.maxHp||this.s.resources.medicine<1)return false;this.add('medicine',-1);const actor=this.actor(),medic=actor?.profession==='medic',chem=actor?.profession==='chemist',gearBonus=Object.values(actor?.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.healBonus||0),0);p.hp=clamp(p.hp+8+(medic?2:0)+(chem?1:0)+gearBonus-(p.flaw==='slow_healing'?1:0),0,p.maxHp);this.tell(display(p)+'使用藥品恢復生命。');return true;}
  equip(id,item){if(this.s.battle)return false;const p=this.s.party.find(q=>q.id===id),ix=this.s.inventory.indexOf(item),it=ITEMS[item];if(!p||!it||ix<0)return false;this.s.inventory.splice(ix,1);if(p.gear[it.slot])this.s.inventory.push(p.gear[it.slot]);p.gear[it.slot]=item;return true;}
- price(base){const p=this.actor();return Math.max(1,Math.ceil(base*(1+(p?.flaw==='bad_bargain'?.1:0)-(p?.profession==='merchant'?.1:0))))}
+ price(base){const p=this.actor();const disc=p?.profession==='merchant'?.1:p?.profession==='diplomat'?.05:0;return Math.max(1,Math.ceil(base*(1+(p?.flaw==='bad_bargain'?.1:0)-disc)))}
  buy(kind,id){const c=this.s.current;if(!c?.service||!c.dialogue||this.s.mode!=='event')return false;const shop=c.service;let price=0;
  if(kind==='fuel'&&['fuel_shop','general_shop'].includes(shop))price=this.price(3);
  if(kind==='medicine'&&['pharmacy','general_shop','clinic'].includes(shop))price=this.price(2);
@@ -202,7 +257,7 @@ ${npcDemeanor(c.npc,{seed:this.s.seed})}`;}
  this.log('睡眠',guard?`${display(guard)}守夜，其他人休息四小時。`:'全員睡了四小時，沒有人守夜。');
  if(!safe&&this.roll()<=30){this.beginCombat('character');this.s.battle.resume=before;this.s.battle.sleepAttack=true;this.s.battle.watchId=guard?.id;if(!guard)this.enemyTurn(true);this.s.notice=guard?'守夜者察覺了敵人！':'睡夢中遭遇襲擊，敵方先攻一輪！';}else{can.forEach(p=>p.asleep=false);this.tell('這段休息平安度過。')}return true;}
 
- hurt(p,n,tags=[]){let v=n;if(tags.includes('pollution'))v+= (p.race==='mutant'?-2:0)+(p.flaw==='chemical_sensitive'?1:0);if(tags.includes('physical')&&p.race==='chitin')v--;p.hp=Math.max(0,p.hp-Math.max(0,v));if(tags.includes('attack')){if(p.asleep&&p.flaw==='startled_awake')p.startled=true;p.asleep=false;}this.log('受傷',`${display(p)}受到 ${Math.max(0,v)} 傷害${p.hp<=0?'，倒下了':''}。`);}
+ hurt(p,n,tags=[]){let v=n;const antiPoll=Object.values(p.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.antiPollution||0),0);if(tags.includes('pollution'))v+=(p.race==='mutant'?-2:0)+(p.profession==='chemist'?-1:0)-antiPoll+(p.flaw==='chemical_sensitive'?1:0);if(tags.includes('physical')&&p.race==='chitin')v--;p.hp=Math.max(0,p.hp-Math.max(0,v));if(tags.includes('attack')){if(p.asleep&&p.flaw==='startled_awake')p.startled=true;p.asleep=false;}this.log('受傷',`${display(p)}受到 ${Math.max(0,v)} 傷害${p.hp<=0?'，倒下了':''}。`);}
  checkAlive(){if(!this.alive().length)this.end(false,'最後一位旅人倒下了。車停在公路上，東方的燈仍在遠處。');}
  beginCombat(mode='character',category=null,npc=null){const p=this.actor();if(!p)return;const enemies=category==='finalBoss'?[]:makeRegionalEnemies(this,mode,npc,{clone,display},category);this.s.battle={mode,enemies,ambush:/伏|突襲|狙擊/.test(this.s.current?.event.title||''),round:1,defend:false,resume:this.s.mode==='ready'?'ready':'event',usedHunter:[],guardUsed:[],shield:0};this.s.mode='combat';this.s.notice=mode==='vehicle'?'車輛戰鬥開始。':'人物戰鬥開始。';}
  finishCombat(win){const b=this.s.battle;this.s.battle=null;this.s.mode=b.resume||'event';this.s.party.forEach(p=>p.asleep=false);if(this.s.current&&!b.sleepAttack){this.s.current.event.options=[];this.s.current.dialogue=false;this.s.current.service=null;}this.checkAlive();}

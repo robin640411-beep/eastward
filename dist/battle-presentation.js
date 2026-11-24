@@ -28,7 +28,7 @@ export const POWER_STYLES={
  symbiote:[fx('共生鞭擊','tentacle','#bba2b8'),fx('生命縫合','heal','#d3afb4',5),fx('雙重意識','shield','#c5aabd',6)],
  lumen:[fx('光束','beam','#f1dba5'),fx('溫光','heal','#efdbab',6),fx('極光爆發','aurora','#d5d6b3')]
 };
-const weaponStyle=p=>p.gear?.武器==='pistol'?'bullet':p.gear?.武器==='club'?'club':'punch';
+const weaponStyle=p=>({pistol:'bullet',club:'club',machete:'blade',shotgun:'burst_fire',arc_baton:'shock',amber_rifle:'cannon'}[p.gear?.武器]||'punch');
 export function enemyAttackStyle(e,mode='character'){if(mode==='vehicle')return ['armored','bus'].includes(e.vehicle)?'cannon':'ram';if(e.npc)return weaponStyle(e.npc);return BOSS_ATTACKS[e.bossId]||ENEMY_ATTACKS[e.key]||'claw';}
 export function actionVisual(unit,command,battle,side,driver){
  if(command?.type==='psi')return {...(POWER_STYLES[unit.race]?.[Number(command.power)]||POWER_STYLES.human[0]),kind:'psi'};

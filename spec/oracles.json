@@ -739,30 +739,93 @@
       "rows": [
         {
           "min": 1,
-          "max": 35,
-          "value": {
-            "id": "club",
-            "name": "球棒",
-            "slot": "武器"
-          }
+          "max": 10,
+          "value": "club"
         },
         {
-          "min": 36,
-          "max": 65,
-          "value": {
-            "id": "coat",
-            "name": "厚外套",
-            "slot": "防具"
-          }
+          "min": 11,
+          "max": 20,
+          "value": "coat"
         },
         {
-          "min": 66,
+          "min": 21,
+          "max": 28,
+          "value": "tools"
+        },
+        {
+          "min": 29,
+          "max": 36,
+          "value": "machete"
+        },
+        {
+          "min": 37,
+          "max": 44,
+          "value": "pistol"
+        },
+        {
+          "min": 45,
+          "max": 52,
+          "value": "charm"
+        },
+        {
+          "min": 53,
+          "max": 59,
+          "value": "booster_boots"
+        },
+        {
+          "min": 60,
+          "max": 66,
+          "value": "vest"
+        },
+        {
+          "min": 67,
+          "max": 72,
+          "value": "hazmat"
+        },
+        {
+          "min": 73,
+          "max": 77,
+          "value": "med_scanner"
+        },
+        {
+          "min": 78,
+          "max": 82,
+          "value": "emp_module"
+        },
+        {
+          "min": 83,
+          "max": 86,
+          "value": "arc_baton"
+        },
+        {
+          "min": 87,
+          "max": 90,
+          "value": "stealth_cloak"
+        },
+        {
+          "min": 91,
+          "max": 93,
+          "value": "shotgun"
+        },
+        {
+          "min": 94,
+          "max": 96,
+          "value": "scrap_plate"
+        },
+        {
+          "min": 97,
+          "max": 98,
+          "value": "amber_core"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "value": "amber_rifle"
+        },
+        {
+          "min": 100,
           "max": 100,
-          "value": {
-            "id": "tools",
-            "name": "工具組",
-            "slot": "配件"
-          }
+          "value": "chitin_armor"
         }
       ]
     },

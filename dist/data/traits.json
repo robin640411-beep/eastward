@@ -16,7 +16,7 @@
       "source_type": "race",
       "source_id": "human",
       "trigger": "舊世界民用設施事件",
-      "effect": "可選擇「依操作標示處理」，取得該設施的一條可靠操作提示。",
+      "effect": "可選擇「依操作標示處理」，取得該設施的一條可靠操作提示。（被動：每 3 級全屬性額外 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -25,7 +25,7 @@
       "source_type": "race",
       "source_id": "alien",
       "trigger": "取得外星軍用訊息",
-      "effect": "可解讀訊息中的命令或識別碼，揭露一條隱藏情報，不自動改變對方態度。",
+      "effect": "可解讀訊息中的命令或識別碼，揭露一條隱藏情報，不自動改變對方態度。（被動：攻擊 +1、精神 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -34,7 +34,7 @@
       "source_type": "race",
       "source_id": "mutant",
       "trigger": "受到污染標籤的生命傷害",
-      "effect": "本角色每次污染傷害減少 2，最低為 0。",
+      "effect": "本角色每次污染傷害減少 2，最低為 0。（被動：生命上限 +4、攻擊 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -43,7 +43,7 @@
       "source_type": "race",
       "source_id": "synth",
       "trigger": "第一次讀取事件終端",
-      "effect": "可額外恢復一段已刪除的文字紀錄；不等同解除門禁。",
+      "effect": "可額外恢復一段已刪除的文字紀錄；不等同解除門禁。（被動：防禦 +2、體力上限 +4）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -52,7 +52,7 @@
       "source_type": "race",
       "source_id": "uplift",
       "trigger": "事件包含隱藏生物",
-      "effect": "互動前揭露藏匿生物是否存在，不預告尚未發生的公路事件。",
+      "effect": "互動前揭露藏匿生物是否存在，不預告尚未發生的公路事件。（被動：速度 +2、攻擊 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -61,7 +61,7 @@
       "source_type": "race",
       "source_id": "chitin",
       "trigger": "受到直接物理攻擊",
-      "effect": "本角色每次物理傷害減少 1，最低為 0；不保護車輛。",
+      "effect": "本角色每次物理傷害減少 1，最低為 0；不保護車輛。（被動：生命上限 +4、防禦 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -70,7 +70,7 @@
       "source_type": "race",
       "source_id": "mycelial",
       "trigger": "事件出現孢子或菌落",
-      "effect": "在接觸前顯示菌落是否有害，不自動提供治療。",
+      "effect": "在接觸前顯示菌落是否有害，不自動提供治療。（被動：精神 +1、靈能上限 +3）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -79,7 +79,7 @@
       "source_type": "race",
       "source_id": "crystal",
       "trigger": "事件內存在隱藏供能裝置",
-      "effect": "揭露一個仍有能量的裝置位置，不直接啟動或修理它。",
+      "effect": "揭露一個仍有能量的裝置位置，不直接啟動或修理它。（被動：精神 +2、靈能上限 +4）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -88,7 +88,7 @@
       "source_type": "race",
       "source_id": "amphibian",
       "trigger": "本人執行標記為涉水的探索選項",
-      "effect": "免除該選項的涉水額外體力成本，仍支付基礎成本。",
+      "effect": "免除該選項的涉水額外體力成本，仍支付基礎成本。（被動：體力上限 +4、速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -97,7 +97,7 @@
       "source_type": "race",
       "source_id": "mimic",
       "trigger": "人物戰中由本人執行逃跑",
-      "effect": "逃跑成功率增加 15 個百分點，不影響車輛逃跑。",
+      "effect": "逃跑成功率增加 15 個百分點，不影響車輛逃跑。（被動：速度 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -106,7 +106,7 @@
       "source_type": "race",
       "source_id": "symbiote",
       "trigger": "本人完成一次有效睡眠",
-      "effect": "額外恢復 2 生命，不超過上限；未睡眠的守夜者不能觸發。",
+      "effect": "額外恢復 2 生命，不超過上限；未睡眠的守夜者不能觸發。（被動：生命上限 +4）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -115,7 +115,7 @@
       "source_type": "race",
       "source_id": "lumen",
       "trigger": "本人參與黑暗建築事件",
-      "effect": "移除該事件因缺少照明而鎖定的選項，不揭露隱藏敵人。",
+      "effect": "移除該事件因缺少照明而鎖定的選項，不揭露隱藏敵人。（被動：精神 +1、速度 +1、靈能上限 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -124,7 +124,7 @@
       "source_type": "profession",
       "source_id": "driver",
       "trigger": "本人擔任當次駕駛",
-      "effect": "總駕駛體力成本減少 1；有實際前進時最低仍消耗 1，含夜間。",
+      "effect": "總駕駛體力成本減少 1；有實際前進時最低仍消耗 1，含夜間。（被動：速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -133,7 +133,7 @@
       "source_type": "profession",
       "source_id": "mechanic",
       "trigger": "本人參與修車廠維修",
-      "effect": "同次維修的車輛生命恢復量增加 3，不超過上限；不能路邊維修。",
+      "effect": "同次維修的車輛生命恢復量增加 3，不超過上限；不能路邊維修。（被動：防禦 +1；車戰中每回合自動減傷 1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -142,7 +142,7 @@
       "source_type": "profession",
       "source_id": "medic",
       "trigger": "本人使用藥品治療任一角色",
-      "effect": "本次藥品生命恢復量增加 2，不影響體力。",
+      "effect": "本次藥品生命恢復量增加 2，不影響體力。（被動：精神 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -151,7 +151,7 @@
       "source_type": "profession",
       "source_id": "soldier",
       "trigger": "本人以人物武器造成命中",
-      "effect": "本次武器傷害增加 1，不套用車載武器。",
+      "effect": "本次武器傷害增加 1，不套用車載武器。（被動：攻擊 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -160,7 +160,7 @@
       "source_type": "profession",
       "source_id": "scout",
       "trigger": "本人清醒參與伏擊事件",
-      "effect": "第一輪所受直接攻擊傷害減少 2，最低 0；睡眠中不生效。",
+      "effect": "第一輪所受直接攻擊傷害減少 2，最低 0；睡眠中不生效。（被動：速度 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -169,7 +169,7 @@
       "source_type": "profession",
       "source_id": "merchant",
       "trigger": "本人與願意交易的 NPC 議價",
-      "effect": "購買報價降低 10%，取整規則由交易系統統一處理，不可變成免費。",
+      "effect": "購買報價降低 10%，取整規則由交易系統統一處理，不可變成免費。（被動：速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -178,7 +178,7 @@
       "source_type": "profession",
       "source_id": "scavenger",
       "trigger": "本人完成有廢料獎勵的搜索",
-      "effect": "額外獲得 1 廢料；搜索無收穫時不憑空產生獎勵。",
+      "effect": "額外獲得 1 廢料；搜索無收穫時不憑空產生獎勵。（被動：體力上限 +3；戰鬥勝利額外 +1 廢料）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -187,7 +187,7 @@
       "source_type": "profession",
       "source_id": "engineer",
       "trigger": "事件含損壞的非車輛機械",
-      "effect": "解鎖修復機械的事件選項；材料與時間依選項支付。",
+      "effect": "解鎖修復機械的事件選項；材料與時間依選項支付。（被動：防禦 +1；對機械敵人傷害 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -196,7 +196,7 @@
       "source_type": "profession",
       "source_id": "researcher",
       "trigger": "取得未知外星樣本",
-      "effect": "揭露樣本用途或危害的一項資訊，不重擲本局歷史。",
+      "effect": "揭露樣本用途或危害的一項資訊，不重擲本局歷史。（被動：精神 +2；超能力威力 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -205,7 +205,7 @@
       "source_type": "profession",
       "source_id": "hacker",
       "trigger": "遇到運作中的電子鎖",
-      "effect": "解鎖繞過電子門禁的選項，不適用純機械鎖。",
+      "effect": "解鎖繞過電子門禁的選項，不適用純機械鎖。（被動：精神 +1、速度 +1；對機械敵人傷害 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -214,7 +214,7 @@
       "source_type": "profession",
       "source_id": "hunter",
       "trigger": "本人第一次攻擊本場生物敵人並命中",
-      "effect": "這次攻擊額外造成 2 傷害；每場戰鬥只觸發一次，不適用車輛與機械。",
+      "effect": "這次攻擊額外造成 2 傷害；每場戰鬥只觸發一次，不適用車輛與機械。（被動：攻擊 +1、速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -223,7 +223,7 @@
       "source_type": "profession",
       "source_id": "guard",
       "trigger": "本人清醒守夜且遭戰鬥",
-      "effect": "守衛本人首次受到的攻擊傷害減少 3，最低 0；不喚醒其他人。",
+      "effect": "守衛本人首次受到的攻擊傷害減少 3，最低 0；不喚醒其他人。（被動：生命上限 +4、防禦 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -232,7 +232,7 @@
       "source_type": "profession",
       "source_id": "courier",
       "trigger": "事件出現信使路標",
-      "effect": "解讀一條道路消息或通行線索，了解當地的傳聞。",
+      "effect": "解讀一條道路消息或通行線索，了解當地的傳聞。（被動：體力上限 +4、速度 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -241,7 +241,7 @@
       "source_type": "profession",
       "source_id": "diplomat",
       "trigger": "與非敵對且非掠奪 NPC 交談",
-      "effect": "解鎖「交換情報」選項，不強制交易成功，也不取消戰鬥態度。",
+      "effect": "解鎖「交換情報」選項，不強制交易成功，也不取消戰鬥態度。（被動：精神 +1；購物享 5% 議價折扣）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -250,7 +250,7 @@
       "source_type": "profession",
       "source_id": "historian",
       "trigger": "閱讀與既有紀錄相關的書籍",
-      "effect": "揭露兩份紀錄的一條關聯，不另抽末日起因。",
+      "effect": "揭露兩份紀錄的一條關聯，不另抽末日起因。（被動：精神 +1、靈能上限 +2）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -259,7 +259,7 @@
       "source_type": "profession",
       "source_id": "locksmith",
       "trigger": "遇到機械鎖容器或門",
-      "effect": "解鎖不用消耗破壞工具的開鎖選項，仍支付事件設定的時間。",
+      "effect": "解鎖不用消耗破壞工具的開鎖選項，仍支付事件設定的時間。（被動：速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -268,7 +268,7 @@
       "source_type": "profession",
       "source_id": "demolition",
       "trigger": "事件出現已識別爆炸裝置",
-      "effect": "提供拆除選項，並在確認前顯示失敗後果；不保證成功。",
+      "effect": "提供拆除選項，並在確認前顯示失敗後果；不保證成功。（被動：攻擊 +2；對重甲與機械敵人無視 1 點防禦）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -277,7 +277,7 @@
       "source_type": "profession",
       "source_id": "chemist",
       "trigger": "取得未標示化學品",
-      "effect": "揭露藥劑或毒物分類，避免未辨識就使用；不增加藥品數量。",
+      "effect": "揭露藥劑或毒物分類，避免未辨識就使用；不增加藥品數量。（被動：精神 +1；用藥回血 +1、污染傷害 -1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -286,7 +286,7 @@
       "source_type": "profession",
       "source_id": "electrician",
       "trigger": "遇到帶電設施障礙",
-      "effect": "解鎖切斷供電的選項，避免該選項的觸電傷害，不適用戰鬥電擊。",
+      "effect": "解鎖切斷供電的選項，避免該選項的觸電傷害，不適用戰鬥電擊。（被動：防禦 +1；對機械敵人傷害 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     },
     {
@@ -295,7 +295,7 @@
       "source_type": "profession",
       "source_id": "performer",
       "trigger": "本人在當次停靠開始時清醒，且至少有一名同伴",
-      "effect": "一次停靠可選擇講故事，使另一名清醒同伴恢復 1 體力；不能對自己使用或重複刷取。",
+      "effect": "一次停靠可選擇講故事，使另一名清醒同伴恢復 1 體力；不能對自己使用或重複刷取。（被動：精神 +1、速度 +1）",
       "implementation_status": "已接入遊戲執行器；自動測試覆蓋能力觸發與適用範圍"
     }
   ],

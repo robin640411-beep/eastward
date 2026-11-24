@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,existsSync} from 'node:fs';
-import {Game,ITEMS} from '../dist/engine.js';import {setLevel,bossDefinition} from '../dist/progression-runtime.js';import {GROWTH} from '../dist/progression-catalog.js';import {enemyLayout} from '../dist/journey-view-model.js';
+import {Game,ITEMS,RACE_BONUSES,JOB_BONUSES} from '../dist/engine.js';import {setLevel,bossDefinition} from '../dist/progression-runtime.js';import {GROWTH} from '../dist/progression-catalog.js';import {enemyLayout} from '../dist/journey-view-model.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 function fresh(seed=123){const g=new Game(d);g.start({seed});return g;}
@@ -20,8 +20,8 @@ test('victory does not award XP or a level before the outer event completes',()=
  const g=fresh();g.s.mode='event';g.s.stop=1;g.s.frames=[{kind:'road',count:4}];g.s.current=event();g.beginCombat();g.s.battle.enemies=g.s.battle.enemies.slice(0,1);Object.assign(g.s.battle.enemies[0],{hp:1,speed:0});g.roll=()=>1;g.combatRound({type:'attack'});assert.equal(g.actor().level,1);assert.equal(g.actor().xp,0);g.finishEvent();assert.equal(g.actor().level,2);
 });
 test('new recruits span protagonist plus-minus one, random equipment, and level bounds',()=>{
- const gear=new Set(),offsets=new Set();for(let level=1;level<=18;level++)for(let seed=1;seed<=30;seed++){const g=fresh(seed);setLevel(g.actor(),level);g.s.vehicle.model='van';const p=g.person();p.attitude='友善';g.s.mode='event';g.s.current={...event(),npc:p};assert(g.recruit());assert(p.level>=Math.max(1,level-1)&&p.level<=Math.min(18,level+1));assert.equal(p.maxHp,24-(p.flaw==='frail'?2:0)+(p.level-1)*3);Object.values(p.gear).filter(Boolean).forEach(id=>{assert(ITEMS[id]);gear.add(id);});if(level>1&&level<18)offsets.add(p.level-level);}
- assert.equal(gear.size,6);assert.deepEqual([...offsets].sort(),[-1,0,1]);
+ const gear=new Set(),offsets=new Set();for(let level=1;level<=18;level++)for(let seed=1;seed<=30;seed++){const g=fresh(seed);setLevel(g.actor(),level);g.s.vehicle.model='van';const p=g.person();p.attitude='友善';g.s.mode='event';g.s.current={...event(),npc:p};assert(g.recruit());assert(p.level>=Math.max(1,level-1)&&p.level<=Math.min(18,level+1));const hpBonus=(RACE_BONUSES[p.race]?.maxHp||0)+(JOB_BONUSES[p.profession]?.maxHp||0);assert.equal(p.maxHp,24+hpBonus-(p.flaw==='frail'?2:0)+(p.level-1)*3);Object.values(p.gear).filter(Boolean).forEach(id=>{assert(ITEMS[id]);gear.add(id);});if(level>1&&level<18)offsets.add(p.level-level);}
+ assert(gear.size>=6);assert.deepEqual([...offsets].sort(),[-1,0,1]);
 });
 test('rejoining companion retains worn gear while level matches the current protagonist',()=>{
  const g=fresh();g.s.vehicle.model='van';const p=g.person();p.gear={武器:'pistol',防具:'vest',配件:'charm'};const gear=structuredClone(p.gear);setLevel(g.actor(),15);g.s.mode='event';p.attitude='友善';g.s.current={...event(),npc:p};assert(g.recruit());assert(p.level>=14&&p.level<=16);assert.deepEqual(p.gear,gear);

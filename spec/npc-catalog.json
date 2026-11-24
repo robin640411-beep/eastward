@@ -2,90 +2,90 @@
   "version": "0.1.0",
   "background": "alien_invasion",
   "status": "12 種族與 20 職業各連結唯一優點，效果見 traits.json；數值為試玩草案",
-  "race_term": "遊戲中的可交談智慧族群分類；外星人專指先遣族，不泛指所有地外種族",
+  "race_term": "佔領地球第十年仍在公路上求生的 12 類智慧族群與異變體；包含原生人類、叛逃先遣軍、戰前合成人與遭異星生態／能源改寫的變異族群",
   "races": [
     {
       "id": "human",
       "name": "人類",
-      "origin": "地球原生人類，散居在殘存聚落與公路車隊。",
-      "specialty": "熟悉舊世界設備與人類遺跡",
+      "origin": "地球原生倖存者，散居在殘存地下聚落與改裝車隊中，靠堅韌適應力撐過十年佔領。",
+      "specialty": "全屬性均衡適應（每 3 級全屬性額外 +1）、熟悉舊世界設施",
       "advantage_id": "race_human"
     },
     {
       "id": "alien",
-      "name": "外星人",
-      "origin": "俗稱「先遣族」的入侵主族；個體可能是佔領者、逃兵或流亡者。",
-      "specialty": "熟悉入侵軍的語言與科技",
+      "name": "先遣叛兵",
+      "origin": "原屬外星佔領軍先遣部隊，親手挖除母艦神經晶片、脫離艦隊的叛逃戰士。",
+      "specialty": "攻擊 +1、精神 +1；熟悉佔領軍命令與外星科技",
       "advantage_id": "race_alien"
     },
     {
       "id": "mutant",
-      "name": "變種人",
-      "origin": "受外星改造物質影響的人類後裔，身體構造出現穩定變異。",
-      "specialty": "適應污染區域",
+      "name": "輻蝕變異者",
+      "origin": "長期暴露在琥珀抽取塔輻射與工業毒霧下產生穩定突變的地球人。",
+      "specialty": "生命上限 +4、攻擊 +1；污染傷害 -2",
       "advantage_id": "race_mutant"
     },
     {
       "id": "synth",
-      "name": "合成人",
-      "origin": "地球製造、具有自主意識的人工生命，戰後已脫離原主人。",
-      "specialty": "分析電子系統",
+      "name": "戰前合成人",
+      "origin": "舊世界遺留的自主仿生義體人，鎖死底層韌體以防佔領軍遠端覆寫。",
+      "specialty": "防禦 +2、體力上限 +4；電子終端復原、免疫獵人首擊",
       "advantage_id": "race_synth"
     },
     {
       "id": "uplift",
-      "name": "啟智獸族",
-      "origin": "外星實驗賦予地球獸類語言與自我意識形成的族群。",
-      "specialty": "嗅覺與聽覺敏銳",
+      "name": "實驗啟智獸",
+      "origin": "軌道轟炸炸毀舊世界生技地下槽後逃出的高智商強化獸類。",
+      "specialty": "速度 +2、攻擊 +1；敏銳嗅聞藏匿威脅",
       "advantage_id": "race_uplift"
     },
     {
       "id": "chitin",
-      "name": "甲殼族",
-      "origin": "隨入侵艦隊來到地球的外星族群，擁有堅硬外骨骼。",
-      "specialty": "身體防護",
+      "name": "外甲異化種",
+      "origin": "受異星生體裝甲基因污染、體表角質硬化成防彈甲殼的重裝異化者。",
+      "specialty": "生命上限 +4、防禦 +2；物理受擊傷害 -1",
       "advantage_id": "race_chitin"
     },
     {
       "id": "mycelial",
-      "name": "菌絲族",
-      "origin": "具有個體意識的外星菌絲集合體，依靠寄生外殼移動。",
-      "specialty": "感知生物分泌物",
+      "name": "孢子適應體",
+      "origin": "在寄生菌隔離區倖存並與本土共生菌融合、對毒孢免疫的變異者。",
+      "specialty": "精神 +1、靈能上限 +3；辨識異星寄生孢子危害",
       "advantage_id": "race_mycelial"
     },
     {
       "id": "crystal",
-      "name": "晶核族",
-      "origin": "以礦物晶格維持意識的外星生命，借助節肢狀肢體行動。",
-      "specialty": "感應能量異常",
+      "name": "琥珀共鳴體",
+      "origin": "遭佔領軍琥珀能源核心侵蝕、體內局部結晶化並獲得強大靈能的異變者。",
+      "specialty": "精神 +2、靈能上限 +4；感應周邊能源與供電設施",
       "advantage_id": "race_crystal"
     },
     {
       "id": "amphibian",
-      "name": "潮生族",
-      "origin": "兩棲外星族群，被迫在地球陸地上建立新生活。",
-      "specialty": "適應潮濕與淹水設施",
+      "name": "毒澤兩棲種",
+      "origin": "長期棲息於冷卻液淹沒港區與濕地、演化出鰓膜與抗酸體質的流亡者。",
+      "specialty": "體力上限 +4、速度 +1；涉水與淹水路段減少體力消耗",
       "advantage_id": "race_amphibian"
     },
     {
       "id": "mimic",
-      "name": "擬形族",
-      "origin": "能改變表層輪廓與色彩的外星生命，偽裝需要專注。",
-      "specialty": "外觀偽裝",
+      "name": "光學偽裝體",
+      "origin": "受佔領軍滲透兵種基因影響、能短暫改寫表皮色素與輪廓的潛行異能者。",
+      "specialty": "速度 +2；人物戰逃跑成功率 +15%",
       "advantage_id": "race_mimic"
     },
     {
       "id": "symbiote",
-      "name": "共生族",
-      "origin": "地球宿主與外星共生體融合後形成具有雙重感知的個體。",
-      "specialty": "感知宿主的生理變化",
+      "name": "異星共生宿主",
+      "origin": "體內寄宿著脫離母巢的良性外星共生組織，具備高速修復創傷能力的宿主。",
+      "specialty": "生命上限 +4；每次睡眠額外恢復 +2 生命",
       "advantage_id": "race_symbiote"
     },
     {
       "id": "lumen",
-      "name": "光膜族",
-      "origin": "身體包覆發光薄膜的外星族群，可控制自身的發光強度。",
-      "specialty": "昏暗環境辨識",
+      "name": "冷光輻射體",
+      "origin": "受軌道電離與大氣改造輻射影響、表皮可自主散發冷光與能量波的異能者。",
+      "specialty": "精神 +1、速度 +1、靈能上限 +2；暗處常駐照明",
       "advantage_id": "race_lumen"
     }
   ],

@@ -87,32 +87,32 @@
       {
         "min": 1,
         "max": 1,
-        "value": "白榆"
+        "value": "焦鐵"
       },
       {
         "min": 2,
         "max": 2,
-        "value": "暮鐘"
+        "value": "鏽鋼"
       },
       {
         "min": 3,
         "max": 3,
-        "value": "灰港"
+        "value": "黑曜"
       },
       {
         "min": 4,
         "max": 4,
-        "value": "長風"
+        "value": "琥珀"
       },
       {
         "min": 5,
         "max": 5,
-        "value": "霧松"
+        "value": "灰燼"
       },
       {
         "min": 6,
         "max": 6,
-        "value": "赤砂"
+        "value": "斷軌"
       },
       {
         "min": 7,
@@ -122,467 +122,467 @@
       {
         "min": 8,
         "max": 8,
-        "value": "鹿鳴"
+        "value": "零號"
       },
       {
         "min": 9,
         "max": 9,
-        "value": "碎月"
+        "value": "殘星"
       },
       {
         "min": 10,
         "max": 10,
-        "value": "遠燈"
+        "value": "赤蝕"
       },
       {
         "min": 11,
         "max": 11,
-        "value": "青岬"
+        "value": "碎穹"
       },
       {
         "min": 12,
         "max": 12,
-        "value": "黑杉"
+        "value": "暗潮"
       },
       {
         "min": 13,
         "max": 13,
-        "value": "晨露"
+        "value": "冷核"
       },
       {
         "min": 14,
         "max": 14,
-        "value": "銀溪"
+        "value": "白骨"
       },
       {
         "min": 15,
         "max": 15,
-        "value": "鐵橋"
+        "value": "鐵幕"
       },
       {
         "min": 16,
         "max": 16,
-        "value": "雙塔"
+        "value": "裂谷"
       },
       {
         "min": 17,
         "max": 17,
-        "value": "南星"
+        "value": "輻塵"
       },
       {
         "min": 18,
         "max": 18,
-        "value": "舊橡"
+        "value": "深淵"
       },
       {
         "min": 19,
         "max": 19,
-        "value": "白鷺"
+        "value": "荒原"
       },
       {
         "min": 20,
         "max": 20,
-        "value": "殘虹"
+        "value": "空殼"
       },
       {
         "min": 21,
         "max": 21,
-        "value": "風鈴"
+        "value": "舊港"
       },
       {
         "min": 22,
         "max": 22,
-        "value": "藍石"
+        "value": "廢爐"
       },
       {
         "min": 23,
         "max": 23,
-        "value": "落日"
+        "value": "幽光"
       },
       {
         "min": 24,
         "max": 24,
-        "value": "寒鴉"
+        "value": "紫霧"
       },
       {
         "min": 25,
         "max": 25,
-        "value": "煙雨"
+        "value": "電弧"
       },
       {
         "min": 26,
         "max": 26,
-        "value": "金穗"
+        "value": "晶脈"
       },
       {
         "min": 27,
         "max": 27,
-        "value": "石泉"
+        "value": "孢原"
       },
       {
         "min": 28,
         "max": 28,
-        "value": "夜航"
+        "value": "孤塔"
       },
       {
         "min": 29,
         "max": 29,
-        "value": "浮光"
+        "value": "死寂"
       },
       {
         "min": 30,
         "max": 30,
-        "value": "靜潮"
+        "value": "霜鐵"
       },
       {
         "min": 31,
         "max": 31,
-        "value": "回聲"
+        "value": "焚風"
       },
       {
         "min": 32,
         "max": 32,
-        "value": "火棘"
+        "value": "哨站"
       },
       {
         "min": 33,
         "max": 33,
-        "value": "孤帆"
+        "value": "暗礁"
       },
       {
         "min": 34,
         "max": 34,
-        "value": "北辰"
+        "value": "熔渣"
       },
       {
         "min": 35,
         "max": 35,
-        "value": "紅楓"
+        "value": "銀盾"
       },
       {
         "min": 36,
         "max": 36,
-        "value": "橋影"
+        "value": "破曉"
       },
       {
         "min": 37,
         "max": 37,
-        "value": "綠窗"
+        "value": "曙光"
       },
       {
         "min": 38,
         "max": 38,
-        "value": "青鳥"
+        "value": "餘燼"
       },
       {
         "min": 39,
         "max": 39,
-        "value": "冬泉"
+        "value": "盲區"
       },
       {
         "min": 40,
         "max": 40,
-        "value": "砂鐘"
+        "value": "逆流"
       },
       {
         "min": 41,
         "max": 41,
-        "value": "山嵐"
+        "value": "鐵錨"
       },
       {
         "min": 42,
         "max": 42,
-        "value": "銅葉"
+        "value": "風蝕"
       },
       {
         "min": 43,
         "max": 43,
-        "value": "渡鴉"
+        "value": "鋼骨"
       },
       {
         "min": 44,
         "max": 44,
-        "value": "雲隙"
+        "value": "隕坑"
       },
       {
         "min": 45,
         "max": 45,
-        "value": "照野"
+        "value": "蒼穹"
       },
       {
         "min": 46,
         "max": 46,
-        "value": "微光"
+        "value": "夜巡"
       },
       {
         "min": 47,
         "max": 47,
-        "value": "長堤"
+        "value": "血砂"
       },
       {
         "min": 48,
         "max": 48,
-        "value": "素雪"
+        "value": "寒鋼"
       },
       {
         "min": 49,
         "max": 49,
-        "value": "紅磚"
+        "value": "斷橋"
       },
       {
         "min": 50,
         "max": 50,
-        "value": "螢火"
+        "value": "焦土"
       },
       {
         "min": 51,
         "max": 51,
-        "value": "木棉"
+        "value": "孤星"
       },
       {
         "min": 52,
         "max": 52,
-        "value": "潮聲"
+        "value": "雷鳴"
       },
       {
         "min": 53,
         "max": 53,
-        "value": "蒼苔"
+        "value": "沉船"
       },
       {
         "min": 54,
         "max": 54,
-        "value": "眠鹿"
+        "value": "毒澤"
       },
       {
         "min": 55,
         "max": 55,
-        "value": "舊井"
+        "value": "重裝"
       },
       {
         "min": 56,
         "max": 56,
-        "value": "月灣"
+        "value": "遠望"
       },
       {
         "min": 57,
         "max": 57,
-        "value": "聽風"
+        "value": "邊界"
       },
       {
         "min": 58,
         "max": 58,
-        "value": "燈芯"
+        "value": "流亡"
       },
       {
         "min": 59,
         "max": 59,
-        "value": "秋葦"
+        "value": "殘響"
       },
       {
         "min": 60,
         "max": 60,
-        "value": "雨燕"
+        "value": "新星"
       },
       {
         "min": 61,
         "max": 61,
-        "value": "鏽鐘"
+        "value": "淨土"
       },
       {
         "min": 62,
         "max": 62,
-        "value": "遠山"
+        "value": "歸途"
       },
       {
         "min": 63,
         "max": 63,
-        "value": "苔石"
+        "value": "無聲"
       },
       {
         "min": 64,
         "max": 64,
-        "value": "星橋"
+        "value": "赤鐵"
       },
       {
         "min": 65,
         "max": 65,
-        "value": "藍鯨"
+        "value": "冰核"
       },
       {
         "min": 66,
         "max": 66,
-        "value": "晴川"
+        "value": "暗星"
       },
       {
         "min": 67,
         "max": 67,
-        "value": "暖燈"
+        "value": "裂地"
       },
       {
         "min": 68,
         "max": 68,
-        "value": "黑曜"
+        "value": "黑潮"
       },
       {
         "min": 69,
         "max": 69,
-        "value": "琥珀"
+        "value": "白霜"
       },
       {
         "min": 70,
         "max": 70,
-        "value": "雙河"
+        "value": "蒼藍"
       },
       {
         "min": 71,
         "max": 71,
-        "value": "小滿"
+        "value": "金盾"
       },
       {
         "min": 72,
         "max": 72,
-        "value": "風帆"
+        "value": "戰痕"
       },
       {
         "min": 73,
         "max": 73,
-        "value": "月桂"
+        "value": "荒城"
       },
       {
         "min": 74,
         "max": 74,
-        "value": "白樺"
+        "value": "舊軌"
       },
       {
         "min": 75,
         "max": 75,
-        "value": "霜谷"
+        "value": "死灣"
       },
       {
         "min": 76,
         "max": 76,
-        "value": "斜陽"
+        "value": "灰霧"
       },
       {
         "min": 77,
         "max": 77,
-        "value": "沙棘"
+        "value": "鐵壁"
       },
       {
         "min": 78,
         "max": 78,
-        "value": "春禾"
+        "value": "星門"
       },
       {
         "min": 79,
         "max": 79,
-        "value": "青瓦"
+        "value": "孤火"
       },
       {
         "min": 80,
         "max": 80,
-        "value": "空谷"
+        "value": "冷月"
       },
       {
         "min": 81,
         "max": 81,
-        "value": "綠籬"
+        "value": "末途"
       },
       {
         "min": 82,
         "max": 82,
-        "value": "星砂"
+        "value": "重鑄"
       },
       {
         "min": 83,
         "max": 83,
-        "value": "暮鷺"
+        "value": "碎鐵"
       },
       {
         "min": 84,
         "max": 84,
-        "value": "銀樺"
+        "value": "狂沙"
       },
       {
         "min": 85,
         "max": 85,
-        "value": "紅隼"
+        "value": "寂靜"
       },
       {
         "min": 86,
         "max": 86,
-        "value": "平野"
+        "value": "殘陽"
       },
       {
         "min": 87,
         "max": 87,
-        "value": "石榴"
+        "value": "深坑"
       },
       {
         "min": 88,
         "max": 88,
-        "value": "望川"
+        "value": "藍弧"
       },
       {
         "min": 89,
         "max": 89,
-        "value": "沉鐘"
+        "value": "紫晶"
       },
       {
         "min": 90,
         "max": 90,
-        "value": "海棠"
+        "value": "古壘"
       },
       {
         "min": 91,
         "max": 91,
-        "value": "雪燈"
+        "value": "暗道"
       },
       {
         "min": 92,
         "max": 92,
-        "value": "夏木"
+        "value": "絕壁"
       },
       {
         "min": 93,
         "max": 93,
-        "value": "柳岸"
+        "value": "荒嶺"
       },
       {
         "min": 94,
         "max": 94,
-        "value": "荒星"
+        "value": "鐵門"
       },
       {
         "min": 95,
         "max": 95,
-        "value": "晨鐘"
+        "value": "烽火"
       },
       {
         "min": 96,
         "max": 96,
-        "value": "燕歸"
+        "value": "晨星"
       },
       {
         "min": 97,
         "max": 97,
-        "value": "白礫"
+        "value": "微光"
       },
       {
         "min": 98,
         "max": 98,
-        "value": "楓橋"
+        "value": "終點"
       },
       {
         "min": 99,
         "max": 99,
-        "value": "天光"
+        "value": "黎明"
       },
       {
         "min": 100,
         "max": 100,
-        "value": "明河"
+        "value": "希望"
       }
     ]
   },
