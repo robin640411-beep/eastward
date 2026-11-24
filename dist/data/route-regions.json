@@ -1,0 +1,609 @@
+{
+  "version": 3,
+  "route": {
+    "start": 1,
+    "end": 100,
+    "regions": 10,
+    "region_length": 10,
+    "terrain_die": "D12",
+    "replacement": true,
+    "name_die": "D100",
+    "hidden_until_approach": true,
+    "persistent_on_save": true,
+    "generation": "Seeded world-only random stream; no AI; does not consume encounter or combat RNG."
+  },
+  "transition": {
+    "blend_distance": 2.4,
+    "style": "Directional feathered panorama transition; road, vehicle and motion remain continuous.",
+    "sign": "No roadside region sign. Current region name appears at the very top of the game, before the HUD."
+  },
+  "biomes": [
+    {
+      "id": "salt",
+      "name": "鹽原",
+      "description": "白色鹽殼與乾涸湖床，斷裂的輸送管沿路延伸。"
+    },
+    {
+      "id": "canyon",
+      "name": "峽谷",
+      "description": "紅岩峭壁夾著舊公路，佔領軍的環形設施跨過谷地。"
+    },
+    {
+      "id": "forest",
+      "name": "森林",
+      "description": "林木掩住廢棄民居，外星探針從枝葉間露出微光。"
+    },
+    {
+      "id": "city",
+      "name": "都市",
+      "description": "高樓、空街與異星監視塔，共同佔據舊日天際線。"
+    },
+    {
+      "id": "coast",
+      "name": "海岸",
+      "description": "公路貼著海灣，遠處的港口停著擱淺船隻。"
+    },
+    {
+      "id": "industrial",
+      "name": "工業區",
+      "description": "煙囪、輸送架與被異星機械接管的廠房。"
+    },
+    {
+      "id": "marsh",
+      "name": "濕地",
+      "description": "積水淹沒路外的低地，廢墟倒影與蘆葦相間。"
+    },
+    {
+      "id": "desert",
+      "name": "沙丘",
+      "description": "流沙緩慢吞下舊路，異星構造露出沙面的尖角。"
+    },
+    {
+      "id": "farmland",
+      "name": "農田",
+      "description": "休耕田塊、穀倉和斷裂灌溉管在窗外延伸。"
+    },
+    {
+      "id": "snow",
+      "name": "雪山",
+      "description": "雪覆山脊與荒廢觀測站，路緣留有車轍。"
+    },
+    {
+      "id": "alien",
+      "name": "侵蝕區",
+      "description": "異星菌落與晶化地表逐漸吞噬人類建設。"
+    },
+    {
+      "id": "oasis",
+      "name": "綠丘",
+      "description": "溪水與綠色丘陵之間仍有佔領軍設施；這裡不是旅程終點。"
+    }
+  ],
+  "name_oracle": {
+    "id": "location_name",
+    "die": "D100",
+    "rule": "名稱＋地貌／建築類型。例如：霧松森林、白榆加油站、遠燈旅館。",
+    "rows": [
+      {
+        "min": 1,
+        "max": 1,
+        "value": "白榆"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "value": "暮鐘"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "value": "灰港"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "value": "長風"
+      },
+      {
+        "min": 5,
+        "max": 5,
+        "value": "霧松"
+      },
+      {
+        "min": 6,
+        "max": 6,
+        "value": "赤砂"
+      },
+      {
+        "min": 7,
+        "max": 7,
+        "value": "星落"
+      },
+      {
+        "min": 8,
+        "max": 8,
+        "value": "鹿鳴"
+      },
+      {
+        "min": 9,
+        "max": 9,
+        "value": "碎月"
+      },
+      {
+        "min": 10,
+        "max": 10,
+        "value": "遠燈"
+      },
+      {
+        "min": 11,
+        "max": 11,
+        "value": "青岬"
+      },
+      {
+        "min": 12,
+        "max": 12,
+        "value": "黑杉"
+      },
+      {
+        "min": 13,
+        "max": 13,
+        "value": "晨露"
+      },
+      {
+        "min": 14,
+        "max": 14,
+        "value": "銀溪"
+      },
+      {
+        "min": 15,
+        "max": 15,
+        "value": "鐵橋"
+      },
+      {
+        "min": 16,
+        "max": 16,
+        "value": "雙塔"
+      },
+      {
+        "min": 17,
+        "max": 17,
+        "value": "南星"
+      },
+      {
+        "min": 18,
+        "max": 18,
+        "value": "舊橡"
+      },
+      {
+        "min": 19,
+        "max": 19,
+        "value": "白鷺"
+      },
+      {
+        "min": 20,
+        "max": 20,
+        "value": "殘虹"
+      },
+      {
+        "min": 21,
+        "max": 21,
+        "value": "風鈴"
+      },
+      {
+        "min": 22,
+        "max": 22,
+        "value": "藍石"
+      },
+      {
+        "min": 23,
+        "max": 23,
+        "value": "落日"
+      },
+      {
+        "min": 24,
+        "max": 24,
+        "value": "寒鴉"
+      },
+      {
+        "min": 25,
+        "max": 25,
+        "value": "煙雨"
+      },
+      {
+        "min": 26,
+        "max": 26,
+        "value": "金穗"
+      },
+      {
+        "min": 27,
+        "max": 27,
+        "value": "石泉"
+      },
+      {
+        "min": 28,
+        "max": 28,
+        "value": "夜航"
+      },
+      {
+        "min": 29,
+        "max": 29,
+        "value": "浮光"
+      },
+      {
+        "min": 30,
+        "max": 30,
+        "value": "靜潮"
+      },
+      {
+        "min": 31,
+        "max": 31,
+        "value": "回聲"
+      },
+      {
+        "min": 32,
+        "max": 32,
+        "value": "火棘"
+      },
+      {
+        "min": 33,
+        "max": 33,
+        "value": "孤帆"
+      },
+      {
+        "min": 34,
+        "max": 34,
+        "value": "北辰"
+      },
+      {
+        "min": 35,
+        "max": 35,
+        "value": "紅楓"
+      },
+      {
+        "min": 36,
+        "max": 36,
+        "value": "橋影"
+      },
+      {
+        "min": 37,
+        "max": 37,
+        "value": "綠窗"
+      },
+      {
+        "min": 38,
+        "max": 38,
+        "value": "青鳥"
+      },
+      {
+        "min": 39,
+        "max": 39,
+        "value": "冬泉"
+      },
+      {
+        "min": 40,
+        "max": 40,
+        "value": "砂鐘"
+      },
+      {
+        "min": 41,
+        "max": 41,
+        "value": "山嵐"
+      },
+      {
+        "min": 42,
+        "max": 42,
+        "value": "銅葉"
+      },
+      {
+        "min": 43,
+        "max": 43,
+        "value": "渡鴉"
+      },
+      {
+        "min": 44,
+        "max": 44,
+        "value": "雲隙"
+      },
+      {
+        "min": 45,
+        "max": 45,
+        "value": "照野"
+      },
+      {
+        "min": 46,
+        "max": 46,
+        "value": "微光"
+      },
+      {
+        "min": 47,
+        "max": 47,
+        "value": "長堤"
+      },
+      {
+        "min": 48,
+        "max": 48,
+        "value": "素雪"
+      },
+      {
+        "min": 49,
+        "max": 49,
+        "value": "紅磚"
+      },
+      {
+        "min": 50,
+        "max": 50,
+        "value": "螢火"
+      },
+      {
+        "min": 51,
+        "max": 51,
+        "value": "木棉"
+      },
+      {
+        "min": 52,
+        "max": 52,
+        "value": "潮聲"
+      },
+      {
+        "min": 53,
+        "max": 53,
+        "value": "蒼苔"
+      },
+      {
+        "min": 54,
+        "max": 54,
+        "value": "眠鹿"
+      },
+      {
+        "min": 55,
+        "max": 55,
+        "value": "舊井"
+      },
+      {
+        "min": 56,
+        "max": 56,
+        "value": "月灣"
+      },
+      {
+        "min": 57,
+        "max": 57,
+        "value": "聽風"
+      },
+      {
+        "min": 58,
+        "max": 58,
+        "value": "燈芯"
+      },
+      {
+        "min": 59,
+        "max": 59,
+        "value": "秋葦"
+      },
+      {
+        "min": 60,
+        "max": 60,
+        "value": "雨燕"
+      },
+      {
+        "min": 61,
+        "max": 61,
+        "value": "鏽鐘"
+      },
+      {
+        "min": 62,
+        "max": 62,
+        "value": "遠山"
+      },
+      {
+        "min": 63,
+        "max": 63,
+        "value": "苔石"
+      },
+      {
+        "min": 64,
+        "max": 64,
+        "value": "星橋"
+      },
+      {
+        "min": 65,
+        "max": 65,
+        "value": "藍鯨"
+      },
+      {
+        "min": 66,
+        "max": 66,
+        "value": "晴川"
+      },
+      {
+        "min": 67,
+        "max": 67,
+        "value": "暖燈"
+      },
+      {
+        "min": 68,
+        "max": 68,
+        "value": "黑曜"
+      },
+      {
+        "min": 69,
+        "max": 69,
+        "value": "琥珀"
+      },
+      {
+        "min": 70,
+        "max": 70,
+        "value": "雙河"
+      },
+      {
+        "min": 71,
+        "max": 71,
+        "value": "小滿"
+      },
+      {
+        "min": 72,
+        "max": 72,
+        "value": "風帆"
+      },
+      {
+        "min": 73,
+        "max": 73,
+        "value": "月桂"
+      },
+      {
+        "min": 74,
+        "max": 74,
+        "value": "白樺"
+      },
+      {
+        "min": 75,
+        "max": 75,
+        "value": "霜谷"
+      },
+      {
+        "min": 76,
+        "max": 76,
+        "value": "斜陽"
+      },
+      {
+        "min": 77,
+        "max": 77,
+        "value": "沙棘"
+      },
+      {
+        "min": 78,
+        "max": 78,
+        "value": "春禾"
+      },
+      {
+        "min": 79,
+        "max": 79,
+        "value": "青瓦"
+      },
+      {
+        "min": 80,
+        "max": 80,
+        "value": "空谷"
+      },
+      {
+        "min": 81,
+        "max": 81,
+        "value": "綠籬"
+      },
+      {
+        "min": 82,
+        "max": 82,
+        "value": "星砂"
+      },
+      {
+        "min": 83,
+        "max": 83,
+        "value": "暮鷺"
+      },
+      {
+        "min": 84,
+        "max": 84,
+        "value": "銀樺"
+      },
+      {
+        "min": 85,
+        "max": 85,
+        "value": "紅隼"
+      },
+      {
+        "min": 86,
+        "max": 86,
+        "value": "平野"
+      },
+      {
+        "min": 87,
+        "max": 87,
+        "value": "石榴"
+      },
+      {
+        "min": 88,
+        "max": 88,
+        "value": "望川"
+      },
+      {
+        "min": 89,
+        "max": 89,
+        "value": "沉鐘"
+      },
+      {
+        "min": 90,
+        "max": 90,
+        "value": "海棠"
+      },
+      {
+        "min": 91,
+        "max": 91,
+        "value": "雪燈"
+      },
+      {
+        "min": 92,
+        "max": 92,
+        "value": "夏木"
+      },
+      {
+        "min": 93,
+        "max": 93,
+        "value": "柳岸"
+      },
+      {
+        "min": 94,
+        "max": 94,
+        "value": "荒星"
+      },
+      {
+        "min": 95,
+        "max": 95,
+        "value": "晨鐘"
+      },
+      {
+        "min": 96,
+        "max": 96,
+        "value": "燕歸"
+      },
+      {
+        "min": 97,
+        "max": 97,
+        "value": "白礫"
+      },
+      {
+        "min": 98,
+        "max": 98,
+        "value": "楓橋"
+      },
+      {
+        "min": 99,
+        "max": 99,
+        "value": "天光"
+      },
+      {
+        "min": 100,
+        "max": 100,
+        "value": "明河"
+      }
+    ]
+  },
+  "destination": {
+    "name_oracle": "location_name D100",
+    "name_format": "名稱＋樂園",
+    "chosen_at": "start; stable in save and legacy migrations",
+    "distance_km": 1000,
+    "display": "Right edge of the route header at the very top of the game",
+    "mapping": "Round(1000 * clamp((100 - route_position) / 99, 0, 1)); display only, game positions remain 1..100.",
+    "driving": "Smoothly follows actual travelled distance; no encounter countdown."
+  },
+  "driving_ui": {
+    "dialogue": "Fixed 140px message window above the scene; auto-scrolling conversation, radio, events, rewards and rest prompts.",
+    "below_scene": "No dialogue, level summary or continue controls during driving.",
+    "source": "spec/automatic-journey.json"
+  },
+  "ambient_scenery": {
+    "source": "spec/roadside-scenery.json",
+    "types": 10,
+    "available_without_encounter": true,
+    "profile_count": 12
+  }
+}
