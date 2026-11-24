@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {Game,display} from '../dist/engine.js';
 import {syncMessageContext} from '../dist/automatic-journey.js';
 import {journalEntry} from '../dist/journey-ui.js';
-import {DEMEANOR_LINES,WELCOMING_GESTURES,npcDemeanor,concealAttitudeLabels,npcBattleArt} from '../dist/npc-presentation.js';
+import {DEMEANOR_LINES,WELCOMING_GESTURES,npcDemeanor,concealAttitudeLabels} from '../dist/npc-presentation.js';
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const data={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 const rawLabel=/態度[：:]|(?:·|｜)\s*(?:友善|同情|戒備|冷淡|敵對|掠奪)(?:。|$)/m;
@@ -22,8 +22,4 @@ test('hostile greetings and player-initiated attacks give readable reactions wit
 test('legacy labels are adapted only for display; ordinary dialogue and original save records stay intact',()=>{
   for(const attitude of Object.keys(DEMEANOR_LINES)){const line='「灰雀」夏林 · 合成人 · 商人 · '+attitude,old={title:'旅人',text:line};assert(!rawLabel.test(concealAttitudeLabels(line)));assert(!rawLabel.test(concealAttitudeLabels('看著你。態度：'+attitude+'。')));assert(!rawLabel.test(journalEntry(old).text));assert.equal(old.text,line);}
   const dialogue='「那群掠奪者摧毀了橋。我不需要你的同情。」';assert.equal(concealAttitudeLabels(dialogue),dialogue);
-});
-test('every race and profession selects the correct detailed weapon sprite with valid independent crop bounds',()=>{
-  assert.equal(Object.keys(data.assets.npcBattleAtlas).length,24);
-  for(const race of data.catalog.races)for(const job of data.catalog.professions)for(const weapon of ['club','pistol']){const a=npcBattleArt(data.assets,{race:race.id,profession:job.id,gear:{武器:weapon}});assert.equal(a.race,race.id);assert.equal(a.weapon,weapon);assert(a.image.endsWith('.png'));const [x,y,w,h]=a.rect,[cx,cy,cw,ch]=a.cell;assert(w>100&&h>200);assert(x>=cx&&y>=cy&&x+w<=cx+cw&&y+h<=cy+ch);const png=readFileSync(new URL('../dist/assets/'+a.image,import.meta.url));assert.equal(png[25],6,'genuine RGBA source');assert.deepEqual([png.readUInt32BE(16),png.readUInt32BE(20)],a.size);}
 });

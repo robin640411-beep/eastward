@@ -306,3 +306,39 @@
   margin-bottom: 0;
   color: #f0d8a8;
 }
+.storybook-opening {
+  margin: 12px 0 14px;
+  padding: 10px 14px;
+  background: rgba(24, 38, 49, 0.85);
+  border-left: 3px solid #d5b176;
+  border-radius: 4px;
+  color: #f3e2b8;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.intro .intro-scene.world-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 384 / 220;
+  height: auto;
+  margin: 16px 0;
+  border-top: 1px solid #6b7682;
+  border-bottom: 2px solid #968567;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1d2d36;
+}
+.intro .intro-scene.world-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+.intro .author-note {
+  color: #b7c4be;
+  font-size: 13.5px;
+  line-height: 1.75;
+  margin: 12px 0 18px;
+}

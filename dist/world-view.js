@@ -272,13 +272,13 @@ function drawEncounter(current,x,interior=false,preview=false){const a=encounter
 function updateReadouts(minutes,pose,view,driving){const biome=view.current;const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving+':'+view.remainingKm;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;const distance=document.getElementById('journey-distance'),progress=document.getElementById('journey-progress');if(distance)distance.textContent=view.remainingKm.toLocaleString('en-US');if(progress){progress.style.width=(100-view.remainingKm/10)+'%';progress.parentElement.setAttribute('aria-label','距離樂園還剩 '+view.remainingKm+' 公里');}}
 function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||document.hidden){lastTime=time;return}if(time-lastFrame<33)return;const dt=Math.min((time-lastTime)/1000,.08)||.033;lastTime=time;lastFrame=time;clock+=dt;reduced=reducedMotion();
  cueAnchor=null;
- const s=state,driving=s.mode==='driving',carFight=s.battle?.mode==='vehicle',u=driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=encounterCue?.inside??(s.current?.inside||s.frames?.at(-1)?.kind==='building');
+ const s=state,titleDrive=!!s.titleDrive,driving=s.mode==='driving'||titleDrive,carFight=s.battle?.mode==='vehicle',u=titleDrive?.5:driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=!titleDrive&&(encounterCue?.inside??(s.current?.inside||s.frames?.at(-1)?.kind==='building'));
  // Both travelling and stopped use this camera, including the very last frame.
  const settle=1-Math.exp(-dt*8);viewZoom+=(pose.zoom-viewZoom)*settle;viewCarX+=(pose.carX-viewCarX)*settle;
  if(driving||carFight)roadTravel+=dt*(carFight?60:pose.speed)*speed;
- const minute=s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
- const view=routeView(s,u),{from,to,blend}=view;ctx.clearRect(0,-stageTop,W,stageHeight);
- const outdoors=!(interior&&!driving)&&(!s.battle||carFight),currentWeather=driving?s.travel.preview?.current:s.current;
+ const minute=titleDrive?(s.minutes+clock*12)%1440:s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
+ const view=routeView(titleDrive?{...s,progress:1+(clock*.35)%98}:s,u),{from,to,blend}=view;ctx.clearRect(0,-stageTop,W,stageHeight);
+ const outdoors=!(interior&&!driving)&&(!s.battle||carFight),currentWeather=driving?s.travel?.preview?.current:s.current;
  const stormTarget=outdoors&&encounters[currentWeather?.event?.id]?.effect==='storm'?(driving?ease((u-.15)/.5):1):0;
  const weatherKey=s.seed+':'+(currentWeather?.instance??s.stop)+':storm';if(stormTarget>0&&weatherKey!==stormKey){stormKey=weatherKey;stormStarted=clock;}
  stormStrength+=(stormTarget-stormStrength)*(1-Math.exp(-dt*2));
@@ -286,8 +286,8 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(!s.battle||carFight){if(interior&&!driving&&!s.battle)room(-stageTop,stageHeight);else road(from,to,blend,light);}
  if(outdoors)drawWeatherSky(ctx,{seed:stormKey,seconds:clock-stormStarted,storm:stormStrength,soft:reduced});
  if(s.battle)battle();else if(interior&&!driving){drawEncounter(s.current,153,true);if(encounterCue)cueDriver();}else{ctx.save();ctx.translate(0,220*(1-viewZoom));ctx.scale(viewZoom,viewZoom);
-  const current=driving?s.travel.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving||!!current?.approaching);
-  if(driving&&s.travel.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){const floating=['drone','wing','swarm'].includes(e.key)||e.bossId==='fallen_angel',left=pose.eventX+(e.bossId?25:53),width=e.bossId?132:55,height=e.bossId?132:67;if(!floating)rect(left+width*.2,ROAD_GROUND.encounter-1,width*.6,2,'#172a3280');if(e.npc)person(e.npc,left,ROAD_GROUND.encounter-height,height);else paintCombatant(enemyCombatArt(e),left,floating?(e.bossId?70:125):ROAD_GROUND.encounter-height,width,height);}}
+  const current=driving?s.travel?.preview?.current:s.current;drawEncounter(current,driving?pose.eventX:210,false,driving||!!current?.approaching);
+  if(driving&&s.travel?.preview?.battle&&(!current||current.finalGate)){const e=s.travel.preview.battle.enemies[0];if(e){const floating=['drone','wing','swarm'].includes(e.key)||e.bossId==='fallen_angel',left=pose.eventX+(e.bossId?25:53),width=e.bossId?132:55,height=e.bossId?132:67;if(!floating)rect(left+width*.2,ROAD_GROUND.encounter-1,width*.6,2,'#172a3280');if(e.npc)person(e.npc,left,ROAD_GROUND.encounter-height,height);else paintCombatant(enemyCombatArt(e),left,floating?(e.bossId?70:125):ROAD_GROUND.encounter-height,width,height);}}
   vehicle(s.vehicle,s.party,viewCarX,140,190,driving&&pose.speed>2,ROAD_GROUND.player);ctx.restore();
   if(encounterCue)cueAnchor=vehicleDriverAnchor(assets,s,{x:viewCarX,y:140,width:190,ground:ROAD_GROUND.player,zoom:viewZoom});
  }

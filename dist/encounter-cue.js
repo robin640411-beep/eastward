@@ -1,3 +1,4 @@
+import {fillStory,partyLabel} from './storybook.js';
 // The event and any opening round have already been rolled once. Resume the
 // presentation from the save without replaying the action that produced them.
 export const ALERT_MS=1250;
@@ -19,7 +20,7 @@ export function createEncounterCue(before,after,{action,start,steps=[],display})
  const sleep=battle?.sleepAttack;
  const title=sleep?'夜裡的動靜':event?.place?.name||event?.event?.title||(battle?.mode==='vehicle'?'公路追逐':'路旁遇襲');
  let text=sleep?(battle.watchId?'守夜的同伴聽見響動，看見有敵人正摸向營地。':'車旁響起腳步聲。全隊都在睡夢中，敵人搶先出手。'):
-  (event?.event?.text||'').replaceAll('{npc.display_name}',event?.npc?display(event.npc):'旅人');
+  fillStory(event?.event?.text||'',incoming,display);
  let threat='';
  if(battle){
   if(sleep)threat=foes+'已經靠近了營地。';
@@ -27,8 +28,8 @@ export function createEncounterCue(before,after,{action,start,steps=[],display})
   else if(npc){
    if(/願意加入|想搭車|請求搭乘/.test(text)){
     text=display(npc)+(inside(incoming)?'在門旁':'在路旁')+'放下行李，抬手示意想搭一程。';
-    threat='你們剛靠近，對方就越過行李，猛地朝你們撲來。';
-   }else threat=display(npc)+'突然逼近，朝你們出手了。';
+    threat=`車門才剛停穩，對方就越過行李，猛地朝${partyLabel(incoming)}撲來。`;
+   }else threat=display(npc)+`突然逼近，朝${partyLabel(incoming)}出手了。`;
   }
   else if(battle.mode==='vehicle')threat=foes+'正從側面逼近。駕駛握緊方向盤，準備接戰。';
   else threat=foes+'擋住了去路，隊伍準備迎戰。';

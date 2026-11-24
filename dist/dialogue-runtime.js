@@ -22,7 +22,7 @@ export function installDialogue(Game,{display}){
   const topic=this.dialogueTopic(p),text=fillWorld(topic.responses[p.attitude]||topic.responses['冷淡'],this.s.world)+this.bossRumor(p);
   this.s.minutes+=5;
   let reunion='';if(c.event.kind==='followup'&&!c.recalled){c.recalled=true;reunion=`「又見面了。${p.memories?.at(-1)||'我還記得我們一起走過的路。'}」\n`;}
-  let gift='';if(p.attitude==='同情'&&!c.giftGiven){c.giftGiven=true;if(this.roll()<=60-(this.actor()?.flaw==='abrasive'?10:0)){this.add('medicine',1);gift='\n他從行囊中取出一份藥品交給你：「這個留著，路上用得上。」';}}
+  let gift='';if(p.attitude==='同情'&&!c.giftGiven){c.giftGiven=true;if(this.roll()<=60-(this.actor()?.flaw==='abrasive'?10:0)){this.add('medicine',1);const rec=(this.actor()||this.s.party[0])?.name||'旅人';gift=`\n對方從行囊中取出一份藥品塞進${rec}手裡：「這個留著，路上用得上。」`;}}
   c.conversation={npcId:p.id,title:topic.title,topicId:topic.id,attitude:p.attitude,year:topic.year};
   this.tell(`${display(p)}：\n${reunion}「${text}」${gift}`);c.conversation.notice=this.s.notice;
   this.s.oralHistory??=[];this.s.oralHistory.unshift({topicId:topic.id,title:topic.title,year:topic.year,speaker:display(p),attitude:p.attitude,text,minutes:this.s.minutes});this.s.oralHistory=this.s.oralHistory.slice(0,100);

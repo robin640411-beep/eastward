@@ -216,7 +216,7 @@
           "傳聞是星門監督官。我不知道傳聞有幾分真，但希望有一天，孩子不用知道「盤查」是什麼意思。"
         ]
       ],
-      "image": "painted/bosses/overseer.png"
+      "image": "combat/bosses/overseer.png"
     },
     {
       "id": "broodmother",
@@ -243,7 +243,7 @@
           "孵界母體吧。要真到了那裡，我們先彼此照應；我還想和你一起看看樂園的第一個早晨。"
         ]
       ],
-      "image": "painted/bosses/broodmother.png"
+      "image": "combat/bosses/broodmother.png"
     },
     {
       "id": "zero_core",
@@ -270,7 +270,7 @@
           "如果沒有人叫它停下來，也許能。歸零主機聽起來就是這種東西。我們可不能也只剩下往前走的命令。"
         ]
       ],
-      "image": "painted/bosses/zero_core.png"
+      "image": "combat/bosses/zero_core.png"
     },
     {
       "id": "graft_colossus",
@@ -297,7 +297,7 @@
           "我們先看清楚它，再找能通過的辦法。我答應自己要活著看到那片綠地，還沒打算把這句話收回去。"
         ]
       ],
-      "image": "painted/bosses/graft_colossus.png"
+      "image": "combat/bosses/graft_colossus.png"
     },
     {
       "id": "fallen_angel",
@@ -324,7 +324,7 @@
           "如果傳聞是真的，也許。那它也會知道我們為什麼還在往東走；有些願望不是知道了就能拿走的。"
         ]
       ],
-      "image": "painted/bosses/fallen_angel.png"
+      "image": "combat/bosses/fallen_angel.png"
     }
   ],
   "finale": {

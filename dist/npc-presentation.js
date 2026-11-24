@@ -78,7 +78,7 @@ export const WELCOMING_GESTURES={
 const hash=value=>{let h=2166136261;for(const ch of String(value))h=Math.imul(h^ch.charCodeAt(0),16777619);return h>>>0;};
 export function npcDemeanor(p,{seed=0,confronted=false}={}){
   if(!p)return '';
-  if(confronted&&!['敵對','掠奪'].includes(p.attitude))return '察覺你們準備動手，對方立刻收起原本的神情，後退一步，舉起武器迎戰。';
+  if(confronted&&!['敵對','掠奪'].includes(p.attitude))return '察覺對面準備動手，對方立刻收起原本的神情，後退一步，舉起武器迎戰。';
   const attitude=DEMEANOR_LINES[p.attitude]?p.attitude:'戒備',rows=DEMEANOR_LINES[attitude],index=hash([seed,p.id,p.name,p.race,attitude].join(':'))%rows.length;
   return attitude==='友善'&&index===0?(WELCOMING_GESTURES[p.race]||rows[0]):rows[index];
 }
@@ -88,4 +88,3 @@ export function concealAttitudeLabels(text){return String(text??'')
   .replace(new RegExp('態度[：:]\\s*('+attitudes+')[。.]?','g'),(_,attitude)=>npcDemeanor({attitude,id:text}))
   .replace(new RegExp('\\s*[·｜]\\s*('+attitudes+')(?=[。\\t ]*(?:\\n|$))','g'),(_,attitude)=>'\n'+npcDemeanor({attitude,id:text}));
 }
-export function npcBattleArt(assets,p){const weapon=p.gear?.武器==='pistol'?'pistol':'club';return assets.npcBattleAtlas?.[p.race+'_'+weapon]||assets.npcBattleAtlas?.['human_'+weapon];}
