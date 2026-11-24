@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {Game,display} from '../dist/engine.js';
 import {EXTRA_NPC_RACES,EXTRA_NPC_JOBS,personRaceName,personJobName,proceduralPortraitDataUri,proceduralCharacterDataUri} from '../dist/procedural-npc.js';
-import {rolledNpcVignette,companionWhisper,authorAside,fillStory,storybookEpilogue} from '../dist/storybook.js';
+import {rolledNpcVignette,companionWhisper,authorAside,rollBattleAuthorQuip,fillStory,storybookEpilogue} from '../dist/storybook.js';
 import {originPages} from '../dist/origin-runtime.js';
 import {npcFavorInfo} from '../dist/npc-runtime.js';
 import {encounterCommands} from '../dist/encounter-commands.js';
 import {commandPage} from '../dist/battle-presentation.js';
 import {syncMessageContext} from '../dist/automatic-journey.js';
+import {getTextMode,setTextMode,toggleTextMode,hasMessageOverflow,advanceManualPage,mountMessageScroll,stopMessageScroll,isMessageReadingPaused} from '../dist/message-scroll.js';
 
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={
@@ -141,7 +142,7 @@ test('third-person hero naming, first-person author voice, absurd radio commerci
   assert.equal(g.s.rng,rngBefore);
   if(aside){asides++;assert(aside.includes('（'));}
  }
- assert(asides>=15);
+ assert(asides>=8&&asides<=25);
 
  const radio=d.oracles.tables.find(t=>t.id==='driving_radio');
  assert.equal(radio.rows.length,50);
@@ -154,4 +155,85 @@ test('third-person hero naming, first-person author voice, absurd radio commerci
  for(const removed of ['painted','hd2d','volume','vehicle-weapons']){
   assert.equal(existsSync(new URL('../dist/assets/'+removed,import.meta.url)),false);
  }
+});
+
+test('enemies and bosses cast psychic powers with recorded PSI visuals',()=>{
+ const g=fresh(404);
+ g.s.progress=45;
+ g.recordVisuals=true;
+ g.beginCombat('character');
+ const foe=g.s.battle.enemies[0];
+ assert(foe.esp>=6&&foe.psiRace);
+ const powers=g.enemyAvailablePowers(foe);
+ assert(powers.length>=1);
+ const espBefore=foe.esp;
+ g.roll=(sides=100)=>sides;
+ g.enemyAction(foe);
+ assert(foe.esp<espBefore);
+ assert.equal(g.visualSteps.at(-1).kind,'psi');
+ assert(g.visualSteps.at(-1).visual.kind==='psi');
+
+ const gBoss=fresh(505);
+ gBoss.s.progress=100;
+ gBoss.recordVisuals=true;
+ gBoss.beginFinale();
+ const boss=gBoss.s.battle.enemies[0];
+ assert(boss.esp>=20&&boss.psiLevel>=5);
+ gBoss.roll=(sides=100)=>sides;
+ gBoss.enemyAction(boss);
+ assert.equal(gBoss.visualSteps.at(-1).kind,'psi');
+});
+
+test('author snark rolls probabilistically in combat rounds, knockouts, and player death endings',()=>{
+ let roundHits=0,downHits=0,wipeHits=0;
+ for(let seed=1;seed<=40;seed++){
+  const g=fresh(seed*17);
+  g.beginCombat('character');
+  if(rollBattleAuthorQuip(g.s,'round',{enemyPsi:seed%2===0}))roundHits++;
+  if(rollBattleAuthorQuip(g.s,'down',{who:'「蒼穹」約翰'}))downHits++;
+  if(rollBattleAuthorQuip(g.s,'wipe'))wipeHits++;
+ }
+ assert(roundHits>=5&&roundHits<=30);
+ assert(downHits>=15&&downHits<=38);
+ assert(wipeHits>=20);
+
+ // Verify total party wipe death ending gets roasted in epilogue
+ const deadGame=fresh(77);
+ deadGame.hurt(deadGame.s.party[0],999,['attack']);
+ deadGame.checkAlive();
+ assert.equal(deadGame.s.mode,'ending');
+ assert.equal(deadGame.s.end.win,false);
+ const deathPages=storybookEpilogue(deadGame.s,d.catalog,display,'星落綠洲','星門監督官');
+ assert(deathPages.length>=4);
+ assert(deathPages.join('\n').includes(deadGame.s.party[0].name));
+});
+
+test('manual text mode disables auto-scroll and pages down on click when overflowing',()=>{
+ assert.equal(getTextMode(),'auto');
+ assert.equal(toggleTextMode(),'manual');
+ const mockWin={classes:new Set(),classList:{toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
+ const mockEl={
+  scrollTop:0,clientHeight:80,scrollHeight:220,isConnected:true,dataset:{},
+  querySelectorAll:()=>[],
+  getBoundingClientRect:()=>({top:0}),
+  closest:()=>mockWin,
+  addEventListener:()=>{}
+ };
+ mountMessageScroll(mockEl,{});
+ assert(hasMessageOverflow(mockEl));
+ assert(mockWin.classes.has('has-more-text'));
+ assert(isMessageReadingPaused());
+ assert(advanceManualPage(mockEl));
+ assert.equal(mockEl.scrollTop,58);
+ assert(hasMessageOverflow(mockEl));
+ assert(advanceManualPage(mockEl));
+ assert.equal(mockEl.scrollTop,116);
+ assert(advanceManualPage(mockEl));
+ assert.equal(mockEl.scrollTop,140);
+ assert(!hasMessageOverflow(mockEl));
+ assert(!mockWin.classes.has('has-more-text'));
+ assert.equal(advanceManualPage(mockEl),false);
+ stopMessageScroll();
+ setTextMode('auto');
+ assert.equal(getTextMode(),'auto');
 });

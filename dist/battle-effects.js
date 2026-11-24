@@ -20,9 +20,10 @@ function targetAnchor(side,id,enemies,layout,party,options){
 }
 function recipients(beat,enemies,layout,party,options={},actualOnly=false){
  if(!beat)return [];
- const shape=beat.visual?.shape,heal=HEALING.has(shape),shield=shape==='shield',side=heal||shield||beat.side==='enemies'?'party':'enemies';
+ const shape=beat.visual?.shape,heal=HEALING.has(shape),shield=shape==='shield';
+ const side=(heal||shield)?beat.side:(beat.side==='enemies'?'party':'enemies');
  if(beat.kind==='defend')return actualOnly?[]:[{side:'party',id:beat.actor,point:allyAnchor(party,beat.actor,options)}].filter(r=>r.point);
- if(shield&&beat.power==='shield')return actualOnly?[]:party.filter(p=>p.hp>0).map(p=>({side:'party',id:p.id,point:allyAnchor(party,p.id,options)})).filter(r=>r.point);
+ if(shield&&beat.power==='shield')return actualOnly?[]:(beat.side==='enemies'?enemies.filter(e=>e.hp>0).map(e=>({side:'enemies',id:e.id,point:targetAnchor('enemies',e.id,enemies,layout,party,options)})):party.filter(p=>p.hp>0).map(p=>({side:'party',id:p.id,point:allyAnchor(party,p.id,options)}))).filter(r=>r.point);
  const effects=(beat.effects||[]).filter(f=>(f.side===side||(side==='party'&&f.side==='vehicle'))&&(heal?f.amount>0:f.amount<0));
  const records=effects.map(f=>({...f,point:targetAnchor(f.side,f.id,enemies,layout,party,options)})).filter(r=>r.point);
  if(!records.length&&!actualOnly&&beat.target){const targetSide=beat.target==='vehicle'?'vehicle':side;const point=targetAnchor(targetSide,beat.target,enemies,layout,party,options);if(point)records.push({side:targetSide,id:beat.target,point});}

@@ -228,7 +228,7 @@ function battle(){
   const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
   const knockout=e.hp<=0;
   if(knockout&&(!struck||since>=420))continue;
-  const attacking=beat?.side==='enemies'&&beat.actor===e.id&&beat.kind==='attack';
+  const attacking=beat?.side==='enemies'&&beat.actor===e.id&&['attack','psi'].includes(beat.kind);
   const victim=vehicleFight?carAnchor:partyAnchor(state.party,beat?.target);
   const direction=(victim?.cx??l.cx)>=l.cx?1:-1;
   const push=attacking&&!reduced?clamp01((age-.22)/.12)*(1-clamp01((age-.40)/.18)):0;

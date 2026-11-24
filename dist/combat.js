@@ -1,13 +1,74 @@
 import {battleFrame,frameEffects} from './motion-model.js';
 import {actionVisual} from './battle-presentation.js';
+import {appendMessage} from './automatic-journey.js';
+import {rollBattleAuthorQuip} from './storybook.js';
 // Each awake traveller commits one command. Only then does initiative resolve.
-export function installCombat(Game,{learned,ITEMS,clamp,display}) {
+export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
  const begin=Game.prototype.beginCombat;
  Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id)}};
  Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=this.alive().filter(p=>!p.asleep).map(p=>p.id);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
+
+ Game.prototype.enemyAvailablePowers=function(e){
+  const race=e?.npc?.race||e?.psiRace;
+  if(!race||!POWERS[race]||!(e.esp>0))return [];
+  const lvl=e.psiLevel||e.npc?.level||1;
+  const b=this.s.battle;
+  return POWERS[race]
+   .map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i],psiRace:race}))
+   .filter(pw=>lvl>=pw.level&&e.esp>=pw.cost)
+   .filter(pw=>pw.type!=='heal'||b?.enemies?.some(x=>x.hp>0&&x.hp<=x.maxHp*0.75))
+   .filter(pw=>pw.type!=='shield'||!b?.enemyShield);
+ };
+
+ Game.prototype.enemyCastPsi=function(e,power){
+  const b=this.s.battle;if(!b||!power||e.esp<power.cost)return false;
+  e.esp-=power.cost;
+  const psyche=e.psyche||(e.npc?this.stat(e.npc,'psyche'):5);
+  this.lastEnemyCommand={type:'psi',power:power.id,psiRace:power.psiRace||e.npc?.race||e.psiRace||'alien'};
+  b.roundEnemyPsi=true;
+  if(power.type==='heal'){
+   const ally=b.enemies.filter(x=>x.hp>0).sort((a,z)=>a.hp/a.maxHp-z.hp/z.maxHp)[0]||e;
+   this.actionTarget=ally.id;
+   const gain=Math.min(ally.maxHp-ally.hp,psyche+5);
+   ally.hp+=gain;
+   this.log(e.name,`施放超能力「${power.name}」，${ally.id===e.id?'自身':ally.name}恢復 ${gain} 點生命。`);
+  }else if(power.type==='shield'){
+   this.actionTarget=e.id;
+   b.enemyShield=2;
+   this.log(e.name,`施放超能力「${power.name}」，展開敵方精神屏障！`);
+  }else if(power.type==='burst'){
+   const targets=this.alive();
+   this.actionTarget=targets[0]?.id||null;
+   this.log(e.name,`施放超能力「${power.name}」，精神風暴席捲全隊！`);
+   for(const q of targets){
+    const dmg=Math.max(1,Math.floor(psyche*0.85)+1-Math.floor(this.stat(q,'psyche')/2)-(b.shield||0));
+    this.hurt(q,dmg,['psi','attack']);
+   }
+  }else{
+   const target=this.pick(this.alive());if(!target)return true;
+   this.actionTarget=target.id;
+   const dmg=Math.max(1,psyche+(power.type==='strike'?2:0)-Math.floor(this.stat(target,'psyche')/2)-(b.shield||0));
+   if(power.type==='stun'){target.st=Math.max(0,target.st-2);target.startled=true;}
+   this.log(e.name,`施放超能力「${power.name}」${power.type==='stun'?'震懾心神':''}！`);
+   this.hurt(target,dmg,['psi','attack']);
+  }
+  this.checkAlive();
+  return true;
+ };
+
  Game.prototype.enemyAction=function(e){const b=this.s.battle;if(!b||e.hp<=0)return;if(e.stun>0){e.stun--;return;}
   if(b.mode==='vehicle'){this.actionTarget='vehicle';const armor=this.vehicleStats().armor/2,mech=this.alive().some(q=>q.profession==='mechanic')?1:0;const damage=Math.max(1,e.attack-armor*2-mech-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
-  else {const target=this.pick(this.alive());if(!target)return;this.actionTarget=target.id;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
+  else {
+   // Enemies & bosses in character battles can unleash psychic powers when roll > threshold
+   if(!b.sleepAttack&&(e.esp||0)>=3){
+    const powers=this.enemyAvailablePowers(e);
+    const threshold=e.bossId?52:68;
+    if(powers.length&&this.roll()>threshold){
+     const chosen=this.pick(powers);
+     if(this.enemyCastPsi(e,chosen))return;
+    }
+   }
+   const target=this.pick(this.alive());if(!target)return;this.actionTarget=target.id;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){b.roundMissed=true;this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
  };
  Game.prototype.enemyTurn=function(){const b=this.s.battle;if(!b)return;b.guardIds??=[];for(const e of b.enemies){this.enemyAction(e);if(this.s.mode==='ending')break;}if(this.s.battle){b.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id);b.orders={};}};
  Game.prototype.combatRound=function(command){const b=this.s.battle;if(!b||this.s.mode!=='combat')return false;const p=this.commandActor();if(p){
@@ -18,7 +79,7 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
   if(command.target&&!(allies?this.alive():b.enemies.filter(e=>e.hp>0)).some(q=>q.id===command.target))return false;
   b.orders[p.id]={...command};if(this.commandActor())return true;
  }
- b.guardIds=[];
+ b.guardIds=[];b.roundEnemyPsi=false;b.roundMissed=false;
  const turns=[...this.alive().filter(q=>b.orders[q.id]).map(q=>({unit:q,ally:true,speed:this.stat(q,'speed')})),...b.enemies.filter(e=>e.hp>0).map(e=>({unit:e,ally:false,speed:e.speed}))].map((t,i)=>({...t,tie:this.roll(100),index:i})).sort((a,z)=>z.speed-a.speed||z.tie-a.tie||a.index-z.index);
  for(const t of turns){if(t.unit.hp<=0)continue;if(t.ally){if(t.unit.asleep)continue;this.partyAction(t.unit,b.orders[t.unit.id]);}else this.enemyAction(t.unit);
   if(this.s.battle!==b||this.s.mode==='ending')return true;
@@ -34,44 +95,55 @@ export function installCombat(Game,{learned,ITEMS,clamp,display}) {
     else if(dropRoll<=18){const f=3+Math.floor(region/4);this.add('fuel',f);loot+=` 另抽出 ${f} 點汽油。`;}
     else{const eq=this.oracle('equipment').value;if(ITEMS[eq]){this.s.inventory.push(eq);loot+=` 另繳獲裝備：${ITEMS[eq].name}！`;}}
    }
+   const winQuip=rollBattleAuthorQuip(this.s,'win');
+   if(winQuip)loot+=`\n${winQuip}`;
    this.tell(loot);this.finishCombat(true);return true;
   }
-  if(b.mode==='vehicle'&&this.s.vehicle.hp<=0){this.tell('車輛失去行駛能力，敵人離去。');this.finishCombat(false);return true;}
+  if(b.mode==='vehicle'&&this.s.vehicle.hp<=0){this.tell('車輛失去行駛能力，敵人揚長而去。');this.finishCombat(false);return true;}
  }
- this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=this.alive().filter(q=>!q.asleep).map(q=>q.id);return true;
+ this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');
+ const lowHp=this.alive().some(q=>q.hp<=Math.max(6,Math.floor(q.maxHp*0.28)));
+ const roundQuip=rollBattleAuthorQuip(this.s,'round',{enemyPsi:b.roundEnemyPsi,missed:b.roundMissed,lowHp});
+ if(roundQuip)appendMessage(this.s,'作者吐槽',roundQuip);
+ if(b.enemyShield>0)b.enemyShield--;
+ if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=this.alive().filter(q=>!q.asleep).map(q=>q.id);return true;
  };
  Game.prototype.partyAction=function(p,c){const b=this.s.battle;let e=b.enemies.find(e=>e.id===c.target&&e.hp>0)||b.enemies.find(e=>e.hp>0);if(!e)return;
  const target=this.alive().find(q=>q.id===c.target)||this.alive().slice().sort((a,z)=>a.hp/a.maxHp-z.hp/z.maxHp)[0];this.actionTarget=(c.type==='medicine'||c.type==='psi'&&learned(p).find(x=>x.id===Number(c.power))?.type==='heal')?target?.id:e.id;
  if(c.type==='defend'){b.guardIds.push(p.id);this.log(display(p),'採取防禦姿態。');return;}
  const gearSum=key=>Object.values(p.gear||{}).reduce((s,id)=>s+(ITEMS[id]?.[key]||0),0);
- if(c.type==='escape'){const chance=clamp(45+this.stat(p,'speed')*2+(b.mode==='character'&&p.race==='mimic'?15:0)+(b.mode==='character'?gearSum('escapeBonus'):0)-(b.mode==='character'&&p.flaw==='noisy'?10:0),5,95);if(this.roll()<=chance){this.tell('成功脫離戰鬥。');this.finishCombat(false);}else this.log(display(p),'逃跑失敗。');return;}
+ if(c.type==='escape'){const chance=clamp(45+this.stat(p,'speed')*2+(b.mode==='character'&&p.race==='mimic'?15:0)+(b.mode==='character'?gearSum('escapeBonus'):0)-(b.mode==='character'&&p.flaw==='noisy'?10:0),5,95);if(this.roll()<=chance){const escQuip=rollBattleAuthorQuip(this.s,'escape');this.tell('成功脫離戰鬥。'+(escQuip?'\n'+escQuip:''));this.finishCombat(false);}else this.log(display(p),'逃跑失敗。');return;}
  if(c.type==='medicine'){if(this.s.resources.medicine<1)return;this.add('medicine',-1);target.hp=clamp(target.hp+8+(p.profession==='medic'?2:0)+(p.profession==='chemist'?1:0)+gearSum('healBonus')-(target.flaw==='slow_healing'?1:0),0,target.maxHp);this.log(display(p),`為${display(target)}使用藥品。`);return;}
+ const shieldCut=b.enemyShield?1:0;
  if(c.type==='psi'){const power=learned(p).find(x=>x.id===Number(c.power));if(!power||p.esp<power.cost)return;p.esp-=power.cost;const psiBonus=p.profession==='researcher'?1:0;
   if(power.type==='heal'){target.hp=clamp(target.hp+this.stat(p,'psyche')+5+psiBonus,0,target.maxHp);this.log(power.name,display(target)+'恢復生命。');}
   else if(power.type==='shield'){b.shield=3;this.log(power.name,'展開隊伍屏障。');}
-  else {for(const enemy of power.type==='burst'?b.enemies.filter(x=>x.hp>0):[e]){enemy.hp=Math.max(0,enemy.hp-this.stat(p,'psyche')-(power.type==='burst'?3:2)-psiBonus);if(power.type==='stun')enemy.stun=1;}this.log(power.name,'超能力擊中了敵人。');}return;
+  else {for(const enemy of power.type==='burst'?b.enemies.filter(x=>x.hp>0):[e]){const d=Math.max(1,this.stat(p,'psyche')+(power.type==='burst'?3:2)+psiBonus-shieldCut);enemy.hp=Math.max(0,enemy.hp-d);if(power.type==='stun')enemy.stun=1;}this.log(power.name,'超能力擊中了敵人。');}return;
  }
- const vehicleWeapon=b.mode==='vehicle'&&p.id===this.driver()?.id;const ranged=vehicleWeapon||ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&!vehicleWeapon&&p.flaw==='unsteady'?10:0)){this.log(display(p),'攻擊落空。');return;}
+ const vehicleWeapon=b.mode==='vehicle'&&p.id===this.driver()?.id;const ranged=vehicleWeapon||ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&!vehicleWeapon&&p.flaw==='unsteady'?10:0)){b.roundMissed=true;this.log(display(p),'攻擊落空。');return;}
  const isMachine=!!(e.machine??this.d.assets.enemies[e.key]?.machine);
  const effDef=Math.max(0,e.defense-(p.profession==='demolition'&&(e.defense>=2||isMachine)?1:0));
- let damage=Math.max(1,this.stat(p,'attack')-effDef)+(p.profession==='soldier'&&(b.mode==='character'||p.id!==this.driver()?.id)?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(b.mode==='character'&&p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0);p.startled=false;
+ let damage=Math.max(1,this.stat(p,'attack')-effDef)+(p.profession==='soldier'&&(b.mode==='character'||p.id!==this.driver()?.id)?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(b.mode==='character'&&p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0)-shieldCut;p.startled=false;
  if(isMachine)damage+=gearSum('vsMachine')+({engineer:2,hacker:2,electrician:1}[p.profession]||0);
  if(b.mode==='character'&&p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!isMachine){damage+=2;b.usedHunter.push(p.id)}
  if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.vehicleStats().weapon.bonus;
  if(e.npc?.race==='chitin'&&b.mode==='character')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
  };
- // Record the actual initiative sequence for the view, including a final lethal hit.
- // Recording is opt-in, does not roll dice, and is separate from the persisted state.
+ // Record the actual initiative sequence for the view, including enemy psychic powers & lethal hits.
  for(const [method,side] of [['partyAction','party'],['enemyAction','enemies']]){const action=Game.prototype[method];Game.prototype[method]=function(unit,command){
   if(!this.recordVisuals||!this.s.battle||unit.hp<=0)return action.call(this,unit,command);
   this.visualSteps??=[];if(!this.visualSteps.length)this.visualStart=structuredClone(this.s);
   const b=this.s.battle,before=battleFrame(this.s,b),lastLog=this.s.logs[0],stunned=side==='enemies'&&unit.stun>0;
-  const power=command?.type==='psi'?learned(unit).find(p=>p.id===Number(command.power)):null;
-  const kind=stunned?'stun':command?.type||'attack';
   const intended=command?.target||(side==='party'?b.enemies.find(e=>e.hp>0)?.id:null);
-  this.actionTarget=null;const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
+  this.actionTarget=null;if(side==='enemies')this.lastEnemyCommand=null;
+  const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
+  const effCmd=side==='enemies'?this.lastEnemyCommand:command;
+  const psiTuple=effCmd?.type==='psi'?POWERS[effCmd.psiRace||unit.race]?.[Number(effCmd.power)]:null;
+  const power=psiTuple?{name:psiTuple[0],type:psiTuple[1]}:null;
+  const kind=stunned?'stun':effCmd?.type||'attack';
+  const visualUnit=effCmd?.psiRace?{...unit,race:effCmd.psiRace}:unit;
   const label=this.s.logs[0]!==lastLog?this.s.logs[0].text:stunned?'暫時無法行動。':'採取行動。';
-  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(unit,command,{...b,vehicleGun:this.s.vehicle.mods.includes('gun'),vehicleStyle:this.vehicleStats().weapon.style},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
+  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(visualUnit,effCmd,{...b,vehicleGun:this.s.vehicle.mods.includes('gun'),vehicleStyle:this.vehicleStats().weapon.style},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
   return result;
  };}
  // Inventory changes cannot bypass the turn or move characters out of a moving car.

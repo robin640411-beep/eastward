@@ -1,14 +1,14 @@
 import {npcDemeanor} from './npc-presentation.js';
 import {VEHICLE_MODS,normalizeVehicleState,installVehicles} from './vehicle-runtime.js';
 import {installOrigins} from './origin-runtime.js';
-import {normalizeFlow,installAutomaticJourney} from './automatic-journey.js';
+import { normalizeFlow,installAutomaticJourney,appendMessage } from './automatic-journey.js';
 import {normalizeProgression,installProgression,makeRegionalEnemies} from './progression-runtime.js';
 import {normalizeRoute,nameEncounter} from './route-runtime.js';
 import {MAX_PARTY,normalizeJourney,installDialogue} from './dialogue-runtime.js';
 import {installNpcs} from './npc-runtime.js';
 import {installTraits} from './traits-runtime.js';
 import {installCombat} from './combat.js';
-import {fillStory,heroShortName,partyLabel} from './storybook.js';
+import {fillStory,heroShortName,partyLabel,rollBattleAuthorQuip} from './storybook.js';
 // 一路向東 — deterministic state machine. No network or AI in gameplay.
 export const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const clone=x=>JSON.parse(JSON.stringify(x));
@@ -258,13 +258,13 @@ ${npcDemeanor(c.npc,{seed:this.s.seed})}`;}
  this.log('睡眠',guard?`${display(guard)}守夜，其他人休息四小時。`:'全員睡了四小時，沒有人守夜。');
  if(!safe&&this.roll()<=30){this.beginCombat('character');this.s.battle.resume=before;this.s.battle.sleepAttack=true;this.s.battle.watchId=guard?.id;if(!guard)this.enemyTurn(true);this.s.notice=guard?'守夜者察覺了敵人！':'睡夢中遭遇襲擊，敵方先攻一輪！';}else{can.forEach(p=>p.asleep=false);this.tell('這段休息平安度過。')}return true;}
 
- hurt(p,n,tags=[]){let v=n;const antiPoll=Object.values(p.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.antiPollution||0),0);if(tags.includes('pollution'))v+=(p.race==='mutant'?-2:0)+(p.profession==='chemist'?-1:0)-antiPoll+(p.flaw==='chemical_sensitive'?1:0);if(tags.includes('physical')&&p.race==='chitin')v--;p.hp=Math.max(0,p.hp-Math.max(0,v));if(tags.includes('attack')){if(p.asleep&&p.flaw==='startled_awake')p.startled=true;p.asleep=false;}this.log('受傷',`${display(p)}受到 ${Math.max(0,v)} 傷害${p.hp<=0?'，倒下了':''}。`);}
- checkAlive(){if(!this.alive().length)this.end(false,'最後一位旅人也倒下了。破車孤零零停在公路中央，看來我這本向東的故事書只能寫到這一頁了。');}
+ hurt(p,n,tags=[]){const wasAlive=p.hp>0;let v=n;const antiPoll=Object.values(p.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.antiPollution||0),0);if(tags.includes('pollution'))v+=(p.race==='mutant'?-2:0)+(p.profession==='chemist'?-1:0)-antiPoll+(p.flaw==='chemical_sensitive'?1:0);if(tags.includes('physical')&&p.race==='chitin')v--;p.hp=Math.max(0,p.hp-Math.max(0,v));if(tags.includes('attack')){if(p.asleep&&p.flaw==='startled_awake')p.startled=true;p.asleep=false;}this.log('受傷',`${display(p)}受到 ${Math.max(0,v)} 傷害${p.hp<=0?'，倒下了':''}。`);if(wasAlive&&p.hp<=0&&this.alive().length>0){const q=rollBattleAuthorQuip(this.s,'down',{who:display(p)});if(q)appendMessage(this.s,'作者吐槽',q);}}
+ checkAlive(){if(!this.alive().length){const q=rollBattleAuthorQuip(this.s,'wipe');const base='最後一位旅人也倒下了。破車孤零零停在公路中央，看來我這本向東的故事書只能寫到這一頁了。';this.end(false,q?`${base}\n${q}`:base);}}
  beginCombat(mode='character',category=null,npc=null){const p=this.actor();if(!p)return;const enemies=category==='finalBoss'?[]:makeRegionalEnemies(this,mode,npc,{clone,display},category);this.s.battle={mode,enemies,ambush:/伏|突襲|狙擊/.test(this.s.current?.event.title||''),round:1,defend:false,resume:this.s.mode==='ready'?'ready':'event',usedHunter:[],guardUsed:[],shield:0};this.s.mode='combat';this.s.notice=mode==='vehicle'?'車輛戰鬥開始。':'人物戰鬥開始。';}
  finishCombat(win){const b=this.s.battle;this.s.battle=null;this.s.mode=b.resume||'event';this.s.party.forEach(p=>p.asleep=false);if(this.s.current&&!b.sleepAttack){this.s.current.event.options=[];this.s.current.dialogue=false;this.s.current.service=null;}this.checkAlive();}
 }
 
-installCombat(Game,{learned,ITEMS,clamp,display});
+installCombat(Game,{learned,POWERS,ITEMS,clamp,display});
 
 installTraits(Game,{clamp,display,clone});
 
