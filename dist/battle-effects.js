@@ -3,9 +3,9 @@ const clamp=n=>Math.max(0,Math.min(1,n));
 const ease=n=>{n=clamp(n);return n*n*(3-2*n);};
 const lerp=(a,b,t)=>a+(b-a)*t;
 const LIGHT='#fff0cc',INK='#23303e';
-export const EFFECT_SHAPES=new Set(['impact','club','slash','claw','bite','slam','tentacle','bullet','burst_fire','cannon','acid','spores','shock','saw','dive','cross_slash','swarm','psychic','force','heal','shield','stars','silence','storm','rupture','eruption','pulse','overload','sonic','howl','shards','crush','sleep_mist','crystal','shatter','water','phantom','confuse','beam','aurora','medicine','escape']);
+export const EFFECT_SHAPES=new Set(['impact','club','slash','claw','bite','slam','ram','tentacle','bullet','burst_fire','cannon','acid','spores','shock','saw','dive','cross_slash','swarm','psychic','force','heal','shield','stars','silence','storm','rupture','eruption','pulse','overload','sonic','howl','shards','crush','sleep_mist','crystal','shatter','water','phantom','confuse','beam','aurora','medicine','escape']);
 const PROJECTILES=new Set(['bullet','burst_fire','cannon','acid','spores','swarm','shock','saw','dive','stars','shards','crystal','beam']);
-const MELEE=new Set(['impact','club','slash','claw','bite','slam','tentacle','cross_slash']);
+const MELEE=new Set(['impact','club','slash','claw','bite','slam','ram','tentacle','cross_slash']);
 const HEALING=new Set(['heal','medicine']);
 const validPoint=p=>p&&Number.isFinite(p.cx)&&Number.isFinite(p.cy);
 function allyAnchor(party,id,{partyY,vehicleTarget}={}){
@@ -51,6 +51,7 @@ function charge(p,source,shape,t,col,variant=0){
   if(shape==='club'){p.stroke([x+5,y-2],[x+11-8*t,y-28],INK,8);p.stroke([x+5,y-2],[x+11-8*t,y-28],'#b38c63',5);p.box(x+5,y-3,4,7,'#d7b984');}
   else if(shape==='bite'){for(const d of [-1,1])p.path([[x-9,y+d*10],[x-3,y+d*5],[x+3,y+d*10],[x+9,y+d*5]],col,2);}
   else if(shape==='tentacle'){p.path([[x-7,y+5],[x-13,y-6],[x-6,y-16],[x+5,y-10],[x+4,y-2]],col,3);}
+  else if(shape==='ram'){p.stroke([x-18,y+4],[x-6,y+4],col,2);p.stroke([x-22,y+8],[x-10,y+8],LIGHT,2);}
   else if(shape==='slam'){p.path([[x-11,y-5-t*10],[x-11,y-17-t*10],[x+9,y-17-t*10]],col,4);p.stroke([x-18,y+1],[x-18,y-8-t*9],col,2);}
   else if(shape==='impact'){p.box(x+4,y-15,10,8,INK);p.box(x+6,y-16,8,7,col);p.box(x+5,y-9,4,4,'#aa8769');}
   else {p.stroke([x-8,y+3],[x+8,y-22],INK,5);p.stroke([x-8,y+3],[x+8,y-22],col,3);p.stroke([x-12,y-1],[x-4,y+5],'#b59b71',3);}
@@ -115,6 +116,7 @@ function approach(p,source,target,shape,k,age,col){
  }
  if(MELEE.has(shape)){
   if(k<.52)return;const q=(k-.52)/.48;
+  if(shape==='ram')return;
   if(shape==='bite'){for(const d of [-1,1])p.path([[x-18,y+d*(26-q*10)],[x-9,y+d*(18-q*7)],[x,y+d*(24-q*10)],[x+9,y+d*(18-q*7)],[x+18,y+d*(26-q*10)]],col,2);}
   else if(shape==='slam'){p.path([[x-21,y-35+q*8],[x-21,y-43+q*8],[x+21,y-43+q*8],[x+21,y-35+q*8]],col,4);}
   else p.arc(x-5,y+2,29,25,-2.5,-2.5+q*.8,col,shape==='club'?5:2,8);
@@ -152,6 +154,8 @@ function contact(p,x,y,shape,u,col){
    slash(p,x,y,u,col,shape==='claw'?3:shape==='cross_slash'?4:shape==='phantom'?2:1,shape==='cross_slash');if(shape==='dive'&&u<.5)p.flecks(x,y,quick,5,18);break;
   case 'bite':
    for(const d of [-1,1])for(let i=0;i<4;i++){const xx=x-18+i*11;p.path([[xx,y+d*(15+late*5)],[xx+4,y+d*6],[xx+8,y+d*(15+late*5)]],col,3);}if(u<.2)p.box(x-2,y-2,4,4,LIGHT);break;
+  case 'ram':
+   if(u<.28){p.star(x,y,7,LIGHT);p.box(x-4,y-3,8,6,col);}p.flecks(x,y,quick,10,28,col);break;
   case 'slam':case 'crush':case 'rupture':case 'eruption':
    p.arc(x,y+15,8+quick*23,2+quick*6,0,Math.PI*2,col,2,16);
    for(let i=0;i<5;i++){const xx=x-22+i*11,hh=(shape==='eruption'?31:17)*(1-late),yy=y+12-Math.sin(quick*Math.PI)*hh;p.box(xx,yy,3+i%2,5+i%3,col);}

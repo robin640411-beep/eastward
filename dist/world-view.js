@@ -231,54 +231,62 @@ function paintBattleBusts(age,layout,bottom){
 function vehicleChase(){
  const b=state.battle,enemies=b.enemies,age=(performance.now()-beatAt)/1000,since=age*1000-IMPACT_MS;
  const isRam=beat?.kind==='attack'&&(beat.visual?.id==='ram'||!beat.ranged);
- const playerW=124,enemyW=enemies.length>1?108:136;
- // Player cruises along foreground highway lane; enemies weave ahead and behind on the parallel chase lane!
- const basePX=112+(reduced?0:Math.round(Math.sin(clock*1.15)*18)),basePY=168;
+ const playerW=120,enemyW=enemies.length>1?106:132;
+ // Player cruises along foreground highway lane; enemies dynamically surge ahead and fall behind!
+ const motionScale=reduced?.6:1;
+ const basePX=120+Math.round((Math.sin(clock*1.05)*24+Math.cos(clock*.55)*10)*motionScale),basePY=168;
  const enemyBases=enemies.map((e,i)=>({
-  x:126+(reduced?0:Math.round(Math.sin(clock*1.35+i*2.15)*92)),
-  y:112+(i%2)*8+(reduced?0:Math.round(Math.cos(clock*2.2+i)*2))
+  x:126+Math.round((Math.sin(clock*1.45+i*2.15)*96+Math.cos(clock*.72+i*1.3)*26)*motionScale),
+  y:116+(i%2)*8+Math.round(Math.cos(clock*2.1+i)*2*motionScale)
  }));
  let px=basePX,py=basePY;
  const exs=enemyBases.map(p=>p.x),eys=enemyBases.map(p=>p.y);
- // Ramming & weapon recoil choreography on live moving vehicles
- if(beat&&!reduced&&age>=0&&age<=BEAT_MS/1000){
-  const lunge=clamp01(age/(IMPACT_MS/1000)),recoil=since>=0?1-clamp01(since/240):0;
+ // Real physical ramming & weapon recoil choreography on live moving vehicles
+ if(beat&&age>=0&&age<=BEAT_MS/1000){
+  const lunge=clamp01(age/(IMPACT_MS/1000)),recoil=since>=0?1-clamp01(since/280):0;
+  const shudder=since>=0&&since<240?Math.round(Math.sin(since*.09)*4*recoil):0;
   if(beat.side==='party'&&beat.kind==='attack'){
    const ti=Math.max(0,enemies.findIndex(e=>e.id===beat.target));
    if(isRam){
-    const reach=since<0?lunge*lunge:recoil*0.35;
-    px=Math.round(basePX+(enemyBases[ti].x-basePX)*reach*0.72);
-    py=Math.round(basePY+(enemyBases[ti].y+18-basePY)*reach*0.85+(since>=0?recoil*8:0));
-    if(since>=0){exs[ti]+=Math.round((enemyBases[ti].x>=basePX?1:-1)*recoil*14);eys[ti]-=Math.round(recoil*10);}
+    // Player car physically accelerates & swerves directly into the enemy car's chassis!
+    const reach=since<0?Math.pow(lunge,1.6):recoil*0.25;
+    px=Math.round(basePX+(enemyBases[ti].x-basePX)*reach+shudder);
+    py=Math.round(basePY+(enemyBases[ti].y+6-basePY)*reach+(since>=0?recoil*12:0));
+    if(since>=0){
+     exs[ti]+=Math.round((enemyBases[ti].x>=basePX?1:-1)*recoil*22-shudder);
+     eys[ti]-=Math.round(recoil*14);
+    }
    }else{
     // Weapon fire kickback
-    px=basePX-Math.round(recoil*4);
-    if(since>=0)exs[ti]+=Math.round(recoil*6);
+    px=basePX-Math.round(recoil*6);
+    if(since>=0)exs[ti]+=Math.round(recoil*8+shudder);
    }
   }else if(beat.side==='enemies'&&beat.kind==='attack'){
    const ai=Math.max(0,enemies.findIndex(e=>e.id===beat.actor));
    if(isRam){
-    const reach=since<0?lunge*lunge:recoil*0.35;
-    exs[ai]=Math.round(enemyBases[ai].x+(basePX-enemyBases[ai].x)*reach*0.72);
-    eys[ai]=Math.round(enemyBases[ai].y+(basePY-18-enemyBases[ai].y)*reach*0.85-(since>=0?recoil*8:0));
-    if(since>=0){px+=Math.round((basePX>=enemyBases[ai].x?1:-1)*recoil*12);py+=Math.round(recoil*8);}
+    // Enemy car physically swerves & slams directly into the player car's chassis!
+    const reach=since<0?Math.pow(lunge,1.6):recoil*0.25;
+    exs[ai]=Math.round(enemyBases[ai].x+(basePX-enemyBases[ai].x)*reach+shudder);
+    eys[ai]=Math.round(enemyBases[ai].y+(basePY-6-enemyBases[ai].y)*reach-(since>=0?recoil*12:0));
+    if(since>=0){
+     px+=Math.round((basePX>=enemyBases[ai].x?1:-1)*recoil*20-shudder);
+     py+=Math.round(recoil*12);
+    }
    }else{
-    exs[ai]=enemyBases[ai].x-Math.round(recoil*4);
-    if(since>=0)py+=Math.round(recoil*4);
+    exs[ai]=enemyBases[ai].x-Math.round(recoil*6);
+    if(since>=0)py+=Math.round(recoil*6+shudder);
    }
   }
  }
  // Speed lines to emphasize continuous highway chase
- if(!reduced){
-  ctx.globalAlpha=.2;
-  for(let i=0;i<6;i++){const sx=W-((roadTravel*2.4+i*73)%(W+48));rect(sx,108+i*18,22+(i%3)*10,1,'#e8dec2');}
-  ctx.globalAlpha=1;
- }
+ ctx.globalAlpha=.22;
+ for(let i=0;i<6;i++){const sx=W-((roadTravel*2.6+i*73)%(W+48));rect(sx,108+i*18,24+(i%3)*10,1,'#e8dec2');}
+ ctx.globalAlpha=1;
  liveVehiclePoints=[];
  for(const [i,e] of enemies.entries()){
   const struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
   const knockout=e.hp<=0;
-  const ex=Math.max(6,Math.min(W-enemyW-6,exs[i])),ey=eys[i];
+  const ex=Math.max(4,Math.min(W-enemyW-4,exs[i])),ey=eys[i];
   liveVehiclePoints.push({cx:Math.round(ex+enemyW/2),cy:Math.round(ey+enemyW*72/160*0.5)});
   if(knockout&&(!struck||since>=420))continue;
   ctx.save();
@@ -286,15 +294,16 @@ function vehicleChase(){
   vehicle({model:e.vehicle||'armored',mods:e.hasWeapon?['gun']:[]},[],ex,ey,enemyW,true);
   ctx.restore();
  }
- const finalPX=Math.max(8,Math.min(W-playerW-8,px));
+ const finalPX=Math.max(4,Math.min(W-playerW-4,px));
  liveVehicleAnchor={cx:Math.round(finalPX+playerW/2),cy:Math.round(py+playerW*72/160*0.5)};
  vehicle(state.vehicle,state.party,finalPX,py,playerW,true);
- // Extra metallic collision sparks right between colliding chassis during a ram impact
- if(beat&&isRam&&since>=0&&since<280&&!reduced){
-  const u=since/280,ti=Math.max(0,enemies.findIndex(e=>e.id===(beat.side==='party'?beat.target:beat.actor)));
+ // Crisp metallic collision sparks right between colliding bumpers during a ram impact
+ if(beat&&isRam&&since>=0&&since<300){
+  const u=since/300,ti=Math.max(0,enemies.findIndex(e=>e.id===(beat.side==='party'?beat.target:beat.actor)));
   const ep=liveVehiclePoints[ti]||liveVehicleAnchor;
   const mx=Math.round((liveVehicleAnchor.cx+ep.cx)/2),my=Math.round((liveVehicleAnchor.cy+ep.cy)/2);
-  for(let k=0;k<10;k++){const a=k*0.628+u*2,r=6+u*24;rect(mx+Math.cos(a)*r,my+Math.sin(a)*r,k%2?3:2,2,k%3?'#fff0cc':'#f0a050');}
+  if(u<.28)rect(mx-5,my-3,10,6,'#fff4cc');
+  for(let k=0;k<12;k++){const a=k*0.523+u*1.8,r=5+u*28;rect(mx+Math.cos(a)*r,my+Math.sin(a)*r,k%2?3:2,2,k%3?'#fff0cc':'#f0a050');}
  }
 }
 function battle(){

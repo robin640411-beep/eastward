@@ -5,7 +5,7 @@ export const ATTACK_STYLES={
  bite:{name:'撕咬',shape:'bite',color:'#e4c1a1'},slam:{name:'重壓',shape:'slam',color:'#c8ad8a'},
  tentacle:{name:'觸手鞭擊',shape:'tentacle',color:'#b7a1bd'},bullet:{name:'手槍射擊',shape:'bullet',color:'#e6c38c'},
  burst_fire:{name:'連發射擊',shape:'burst_fire',color:'#e3ca98'},cannon:{name:'砲擊',shape:'cannon',color:'#e3a978'},
- ram:{name:'車體衝撞',shape:'slam',color:'#c1ced0'},acid:{name:'酸液噴吐',shape:'acid',color:'#b3c476'},
+ ram:{name:'車體衝撞',shape:'ram',color:'#f0b868'},acid:{name:'酸液噴吐',shape:'acid',color:'#b3c476'},
  spores:{name:'孢子噴散',shape:'spores',color:'#a2bd9a'},shock:{name:'電弧放電',shape:'shock',color:'#9bcfdf'},
  saw:{name:'旋刃切割',shape:'saw',color:'#c4d1d2'},dive:{name:'俯衝撲擊',shape:'dive',color:'#d2beb0'},
  cross_slash:{name:'四臂斬擊',shape:'cross_slash',color:'#d9cfac'},swarm:{name:'蟲群湧出',shape:'swarm',color:'#b6b88a'},
