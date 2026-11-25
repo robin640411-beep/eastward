@@ -5,7 +5,7 @@
   height: var(--play-height);
   min-height: 0;
   display: grid;
-  grid-template-rows: clamp(60px, 9.3dvh, 83px) clamp(62px, 10dvh, 92px) 50% minmax(0, 1fr) auto;
+  grid-template-rows: clamp(58px, 8.8dvh, 80px) clamp(60px, 9.5dvh, 88px) 40% minmax(0, 1fr) auto;
   padding: 0;
   margin: 0 auto;
   overflow: hidden;
@@ -147,17 +147,56 @@
   height: auto;
   min-height: 0;
   max-height: none;
-  padding: 4px 8px 5px;
+  padding: 6px 12px 7px;
   border: 0;
-  border-left: 2px solid #ac9364;
-  overflow: auto;
+  border-left: 3px solid #ac9364;
+  overflow: hidden;
   overscroll-behavior: contain;
   background: #1a2b35;
 }
-.portrait-layout .message-heading { margin-bottom: 2px }
-.portrait-layout .message-scroll { min-height: 24px }
-.portrait-layout .message-commands { margin-top: 3px }
-.portrait-layout .message-commands button,.portrait-layout .message-actions button { min-height: clamp(32px,4.6dvh,44px); padding: 3px 4px }
+.portrait-layout .message-heading {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+.portrait-layout .message-scroll {
+  min-height: 36px;
+  cursor: pointer;
+}
+.portrait-layout .message-line {
+  margin-bottom: 10px;
+}
+.portrait-layout .message-line.has-person {
+  grid-template-columns: 28px 1fr;
+  gap: 9px;
+}
+.portrait-layout .message-line > img {
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+}
+.portrait-layout .message-line strong {
+  font-size: clamp(14px, 3.8vw, 16px);
+  font-weight: 650;
+  color: #edd5a3;
+}
+.portrait-layout .message-line small {
+  font-size: 11.5px;
+}
+.portrait-layout .message-line p,
+.portrait-layout .travel-prompt,
+.mode-prologue .message-line p {
+  font-size: clamp(16px, 4.3vw, 18.5px);
+  line-height: 1.68;
+  color: #edf0e4;
+  margin-top: 3px;
+}
+.portrait-layout .message-commands { margin-top: 4px }
+.portrait-layout .message-commands button,
+.portrait-layout .message-actions button {
+  min-height: clamp(36px, 4.8dvh, 46px);
+  padding: 4px 8px;
+  font-size: clamp(13px, 3.5vw, 14.5px);
+}
 .portrait-layout .choice-pagination button { min-height: 25px }
 .portrait-layout .nav {
   position: relative;
@@ -186,18 +225,19 @@
 }
 @media (max-height:690px) {
   .portrait-layout .message-heading > small { display: none }
-  .portrait-layout .message-line { margin-bottom: 4px }
-  .portrait-layout .message-line p { font-size: 11px }
+  .portrait-layout .message-line { margin-bottom: 6px }
+  .portrait-layout .message-line p,
+  .portrait-layout .travel-prompt { font-size: 15px; line-height: 1.6 }
 }
 
 @media (max-height:625px) {
-  .game-shell.portrait-layout {grid-template-rows: 55px 60px 50% minmax(0,1fr) auto}
+  .game-shell.portrait-layout {grid-template-rows: 52px 58px 40% minmax(0,1fr) auto}
   .vehicle-hud {grid-template-rows: 30px 15px 10px}
   .portrait-layout .nav > button { min-height: 40px }
-  .portrait-layout .message-commands, .portrait-layout .message-actions {margin-top:2px}
-  .portrait-layout .message-commands button,.portrait-layout .message-actions button {min-height:30px}
+  .portrait-layout .message-commands, .portrait-layout .message-actions {margin-top:3px}
+  .portrait-layout .message-commands button,.portrait-layout .message-actions button {min-height:32px; font-size: 12.5px}
   .portrait-layout .choice-pagination button {min-height:22px}
-  .portrait-layout .message-scroll {min-height:20px}
+  .portrait-layout .message-scroll {min-height:28px}
 }
 @media (max-height:690px) {
   .portrait-layout .message-window:has(.choice-pagination) {position:relative}
@@ -216,11 +256,11 @@
 }
 
 .portrait-layout .encounter-notice { border-left-color: #da9464 }
-.encounter-copy { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 4px 6px; }
-.encounter-copy strong { color: #efd6a6; font-size: 14px }
-.encounter-copy p { color: #e4e8d9; margin: 4px 0; line-height: 1.55; font-size: 14px }
-.encounter-copy .previous-receipt { color: #aebdaf; font-size: 12px }
-.encounter-notice .message-actions button { width: 100%; min-height: 40px }
+.encounter-copy { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 6px 6px 8px; cursor: pointer; }
+.encounter-copy strong { color: #efd6a6; font-size: clamp(15px, 4vw, 17px) }
+.encounter-copy p { color: #edf0e4; margin: 6px 0; line-height: 1.65; font-size: clamp(16px, 4.3vw, 18px) }
+.encounter-copy .previous-receipt { color: #aebdaf; font-size: 13.5px }
+.encounter-notice .message-actions button { width: 100%; min-height: 42px; font-size: 14.5px }
 
 .portrait-layout.has-encounter-cue .travel-party .member:disabled { opacity: 1 }
 
@@ -351,16 +391,18 @@
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 2px 8px;
-  margin-top: 2px;
-  border-radius: 3px;
-  background: rgba(213, 177, 118, 0.14);
-  border: 1px dashed rgba(213, 177, 118, 0.55);
-  color: #f0d79e;
-  font-size: 11px;
+  padding: 4px 10px;
+  margin-top: 3px;
+  border-radius: 4px;
+  background: rgba(213, 177, 118, 0.18);
+  border: 1px dashed rgba(213, 177, 118, 0.65);
+  color: #f5dfa8;
+  font-size: 12.5px;
+  font-weight: 600;
   letter-spacing: 0.06em;
   cursor: pointer;
   user-select: none;
+  flex-shrink: 0;
   animation: cuePulse 1.4s ease-in-out infinite;
 }
 .message-window.has-more-text .manual-next-cue {

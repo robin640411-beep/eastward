@@ -23,7 +23,7 @@ let stageTop=0,stageHeight=H,observedCanvas;
 function fitPixelStage(){
  if(!canvas?.isConnected||!canvas.clientWidth||!canvas.clientHeight)return;
  stageHeight=Math.max(1,Math.round(W*canvas.clientHeight/canvas.clientWidth));
- stageTop=Math.round((stageHeight-H)*.55);
+ stageTop=stageHeight<H?Math.max(stageHeight-238,Math.round((stageHeight-H)*.8)):Math.round((stageHeight-H)*.55);
  if(canvas.height!==stageHeight)canvas.height=stageHeight;
  ctx.setTransform(1,0,0,1,0,stageTop);
  ctx.imageSmoothingEnabled=false;

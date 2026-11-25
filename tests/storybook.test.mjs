@@ -9,7 +9,7 @@ import {npcFavorInfo} from '../dist/npc-runtime.js';
 import {encounterCommands} from '../dist/encounter-commands.js';
 import {commandPage} from '../dist/battle-presentation.js';
 import {syncMessageContext} from '../dist/automatic-journey.js';
-import {getTextMode,setTextMode,toggleTextMode,hasMessageOverflow,advanceManualPage,mountMessageScroll,stopMessageScroll,isMessageReadingPaused} from '../dist/message-scroll.js';
+import {hasMessageOverflow,advanceManualPage,mountMessageScroll,stopMessageScroll,isMessageReadingPaused} from '../dist/message-scroll.js';
 
 const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={
@@ -208,9 +208,7 @@ test('author snark rolls probabilistically in combat rounds, knockouts, and play
  assert(deathPages.join('\n').includes(deadGame.s.party[0].name));
 });
 
-test('manual text mode disables auto-scroll and pages down on click when overflowing',()=>{
- assert.equal(getTextMode(),'auto');
- assert.equal(toggleTextMode(),'manual');
+test('pure manual page-flipping replaces auto-scroll and portrait layout uses 40:60 ratio with larger message text',()=>{
  const mockWin={classes:new Set(),classList:{toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
  const mockEl={
   scrollTop:0,clientHeight:80,scrollHeight:220,isConnected:true,dataset:{},
@@ -224,16 +222,19 @@ test('manual text mode disables auto-scroll and pages down on click when overflo
  assert(mockWin.classes.has('has-more-text'));
  assert(isMessageReadingPaused());
  assert(advanceManualPage(mockEl));
- assert.equal(mockEl.scrollTop,58);
+ assert.equal(mockEl.scrollTop,56);
  assert(hasMessageOverflow(mockEl));
  assert(advanceManualPage(mockEl));
- assert.equal(mockEl.scrollTop,116);
+ assert.equal(mockEl.scrollTop,112);
  assert(advanceManualPage(mockEl));
  assert.equal(mockEl.scrollTop,140);
  assert(!hasMessageOverflow(mockEl));
  assert(!mockWin.classes.has('has-more-text'));
  assert.equal(advanceManualPage(mockEl),false);
  stopMessageScroll();
- setTextMode('auto');
- assert.equal(getTextMode(),'auto');
+
+ const css=readFileSync(new URL('../dist/portrait-layout.css',import.meta.url),'utf8');
+ assert(css.includes('40% minmax(0, 1fr) auto'));
+ assert(!css.includes('50% minmax(0, 1fr) auto'));
+ assert(css.includes('font-size: clamp(16px, 4.3vw, 18.5px)'));
 });
