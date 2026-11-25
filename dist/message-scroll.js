@@ -98,6 +98,14 @@ export function resetMessageScroll(){
  stopMessageScroll();cursorId=0;lastSeenMaxId=0;nextId=null;oldTop=0;holdUntil=0;canContinue=false;
 }
 
+export function focusMessagesAfter(serial=0){
+ stopMessageScroll();
+ cursorId=0;
+ lastSeenMaxId=Number(serial)||0;
+ nextId=null;
+ oldTop=0;
+}
+
 export function isMessageReadingPaused(){
  return hasMessageOverflow()||performance.now()<holdUntil;
 }
@@ -107,7 +115,7 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
  stopMessageScroll();
  mounted=el;
  canContinue=battle?false:!!continuable;
- if(transient||battle){
+ if(transient){
   nextId=null;
   el.scrollTop=Math.max(0,el.scrollHeight-el.clientHeight);
   oldTop=el.scrollTop;

@@ -531,8 +531,11 @@
   color: #677d85;
 }
 
-/* Keep combat message pane focused on live battle log & author snark without paging cues */
-.in-combat .manual-next-cue,
+/* Hide event & combat choices until the current message text finishes displaying */
+.message-window.has-more-text .message-commands,
+.message-window.has-more-text .message-actions {
+  display: none !important;
+}
 .in-combat .manual-continue-cue {
   display: none !important;
 }

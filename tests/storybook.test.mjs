@@ -408,15 +408,19 @@ test('combat message pane scopes to current battle messages and hides tap-to-fli
 
  const mockWin={classes:new Set(['has-more-text','can-continue']),classList:{toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
  const mockEl={
-  scrollTop:0,clientHeight:80,scrollHeight:220,isConnected:true,dataset:{},
+  scrollTop:0,clientHeight:80,scrollHeight:80,isConnected:true,dataset:{},
   querySelectorAll:()=>[{dataset:{messageId:'10'}}],
   closest:()=>mockWin,
   addEventListener:()=>{}
  };
  mountMessageScroll(mockEl,{battle:true});
- assert.equal(mockEl.scrollTop,140);
+ assert.equal(mockEl.scrollTop,0);
  assert(!mockWin.classes.has('has-more-text'));
  assert(!mockWin.classes.has('can-continue'));
+ // When battle text overflows, has-more-text hides commands until player reads to the bottom
+ const longEl={...mockEl,scrollHeight:220};
+ mountMessageScroll(longEl,{battle:true});
+ assert(mockWin.classes.has('has-more-text'));
  stopMessageScroll();
 });
 
@@ -522,4 +526,16 @@ test('every equipment, supplies, and vehicle reward across all D100 faces resolv
   assert(!/undefined|null|NaN/i.test(vehText),`Bad vehicle reward at roll ${roll}: ${vehText}`);
  }
  assert(g.s.inventory.every(id=>typeof id==='string'&&id.length>0),'Inventory must never contain undefined');
+});
+
+test('focusMessagesAfter jumps immediately to new messages after player chooses an option',async()=>{
+ const {selectVisibleMessage,focusMessagesAfter,resetMessageScroll}=await import('../dist/message-scroll.js');
+ resetMessageScroll();
+ const msgs=[{id:1,title:'路邊廢墟',text:'發現一棟舊建築。'}];
+ assert.equal(selectVisibleMessage(msgs).current.id,1);
+ // Player picks an option -> new message id=2 arrives
+ msgs.push({id:2,title:'旅途紀錄',text:'找到 3 份廢料。'});
+ focusMessagesAfter(1);
+ assert.equal(selectVisibleMessage(msgs).current.id,2);
+ resetMessageScroll();
 });
