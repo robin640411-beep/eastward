@@ -444,3 +444,67 @@ test('single-event storybook display shows one yellow title at a time and merges
  assert(css.includes('p.msg-body'));
  assert(css.includes('p.msg-author'));
 });
+
+test('morality system: rob, steal, charity, merchant full loot, GTA wanted radio/police, and saint pacification',async()=>{
+ const {isWanted,isSaint,moralityLabel}=await import('../dist/morality-runtime.js');
+ const g=fresh(919);
+ assert.equal(g.s.morality,0);
+ assert.equal(isWanted(g.s),false);
+ assert.equal(isSaint(g.s),false);
+
+ // 1. Charity raises morality
+ g.s.mode='event';
+ const beggar=g.person('human','scavenger');
+ beggar.attitude='戒備';
+ g.s.current={instance:1,event:{id:'R1',title:'路邊旅人',text:'遇到旅人。',options:[]},npc:beggar,dialogue:true,service:'npc_trade',begRequest:{kind:'scrap',amount:2,label:'2 份廢料',line:'「能施捨 2 份廢料嗎？」'}};
+ assert(g.giveCharity());
+ assert.equal(g.s.morality,14);
+ assert.equal(beggar.attitude,'友善');
+
+ // 2. High morality (>= 30) pacifies hostile NPCs instead of forcing combat
+ g.changeMorality(20);
+ assert(isSaint(g.s));
+ assert.equal(moralityLabel(g.s.morality),'荒野聖人');
+ const raider=g.person('mutant','soldier');
+ raider.attitude='掠奪';
+ g.s.current={instance:2,event:{id:'R2',title:'廢棄站',text:'有人在裡面。',options:[]},npc:raider,building:true,entered:false,dialogue:false};
+ g.enterBuilding();
+ assert.equal(g.s.mode,'event','Saint morality should pacify hostile NPC instead of auto-combat');
+ assert.equal(g.s.current.dialogue,true);
+ assert.equal(raider.sparedByReputation,true);
+
+ // 3. Attacking a merchant lowers morality and winning loots ALL merchant stock
+ const merch=g.person('alien','merchant');
+ merch.attitude='友善';
+ g.s.current={instance:3,event:{id:'R3',title:'荒野商攤',text:'商人擺著攤。',options:[]},npc:merch,dialogue:true,service:'general_shop'};
+ const scrapBefore=g.s.resources.scrap,fuelBefore=g.availableFuel(),medBefore=g.s.resources.medicine,invBefore=g.s.inventory.length;
+ g.attackCurrentNpc();
+ assert.equal(g.s.mode,'combat');
+ assert(g.s.battle.merchantLoot);
+ assert(g.s.morality<30);
+ g.s.battle.enemies.forEach(e=>e.hp=0);
+ g.finishCombat(true);
+ assert(g.s.resources.scrap>scrapBefore&&g.availableFuel()>fuelBefore&&g.s.resources.medicine>medBefore&&g.s.inventory.length>invBefore,'Defeating merchant should loot all merchant goods');
+
+ // 4. Low morality (<= -30): GTA wanted radio news, friendly NPC shuns player, and police interception triggers
+ g.changeMorality(-50);
+ assert(isWanted(g.s));
+ g.roll=()=>1;
+ const radioText=g.ambient();
+ assert(radioText.includes('通緝'),'Wanted player should hear GTA-style wanted radio breaking news');
+
+ g.s.mode='event';
+ const friendly=g.person('human','driver');
+ friendly.attitude='友善';
+ g.s.current={instance:4,event:{id:'R4',title:'休息點',text:'遇到旅人。',options:[]},npc:friendly,dialogue:true,service:'npc_trade'};
+ g.talk();
+ assert(g.s.notice.includes('通緝'),'Friendly NPC should refuse to chat with wanted player');
+
+ g.s.frames=[{kind:'road',count:0,scene:null}];
+ g.roll=()=>1;
+ g.nextEvent();
+ assert(['police_human','police_alien'].includes(g.s.current.event.id),'Wanted player should encounter human or alien police');
+
+ const css=readFileSync(new URL('../dist/portrait-layout.css',import.meta.url),'utf8');
+ assert(css.includes('msg-char-name')&&css.includes('msg-npc-name')&&css.includes('wanted-pill'));
+});

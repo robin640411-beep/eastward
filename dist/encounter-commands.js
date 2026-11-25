@@ -6,16 +6,25 @@ export function encounterCommands(g,display){const s=g.s,c=s?.current,commands=[
  if(c.dialogue){
   const p=c.npc,favor=npcFavorInfo(p),vignette=rolledNpcVignette(s,p,favor);
   add('上前攀談 · 5 分鐘','talk');
-  if(vignette)add(vignette.label,vignette.action,'',vignette.style||'',!!vignette.disabled);
+  if(c.begRequest&&!c.charityGiven){
+   const req=c.begRequest;
+   const canGive=req.kind==='medicine'?s.resources.medicine>=req.amount:req.kind==='fuel'?g.availableFuel()>=req.amount:req.kind==='scrap'?s.resources.scrap>=req.amount:s.inventory.length>=req.amount;
+   add(`施捨對方 · ${req.label}`,'giveCharity','','',!canGive);
+  }else if(vignette){
+   add(vignette.label,vignette.action,'',vignette.style||'',!!vignette.disabled);
+  }
   add('交換隨身物資','panel','shop','',!c.service);
   if(!c.finalGate&&!c.building)add(s.offerVehicle?'保留原車並離開':'道別並回到車上','finish','','primary');
-  // Page 2+: secondary actions kept tidy out of the primary storybook view
+  // Page 2+: secondary & morality actions (recruit, rob, steal, attack merchant/NPC)
+  if(c.begRequest&&!c.charityGiven&&vignette)add(vignette.label,vignette.action,'',vignette.style||'',!!vignette.disabled);
   add(g.canRecruit()?'邀請上車同行':s.party.length>=4?'隊伍已滿 · 4 人':'車內沒有空位','recruit','','',!g.canRecruit());
+  add(c.stoleFromNpc?'已行竊過':'順手偷竊','stealNpc','','',!!c.stoleFromNpc);
+  add('威脅打劫','robNpc','','danger');
+  add(c.service?'攻擊商人（可洗劫貨架）':'拔武動手','attackNpc','','danger');
   for(const a of g.traitActions())add(a.label,'trait',a.id,'special-command');
   if(c.inside&&!c.explored&&!c.event.options?.length)add('往建築深處看看','explore');
   if(s.offerVehicle)add('查看發現的車輛','panel','offer','primary');
   if(s.party.filter(q=>q.hp>0&&!q.asleep).length>1)add('由 '+g.actor().name+' 交涉 · 換人','cycleActor','','quiet');
-  add('拔武動手','attackNpc','','danger');
   return commands;
  }
  for(const o of g.options()){const cost=Object.entries(g.optionCosts(g.preparedOption(o))).map(([k,v])=>' · '+v+' '+({fuel:'汽油',scrap:'廢料',medicine:'藥品',stamina:'體力'}[k]||k)).join('');add(o.label+cost,'choose',o.id,'',!g.canChoose(o));}

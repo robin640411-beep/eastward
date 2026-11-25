@@ -567,3 +567,38 @@
   color: #8fd8a8;
   margin-top: 6px;
 }
+
+/* Speaker styling: party character name in yellow, NPC name in blue, blank line before spoken text */
+.portrait-layout .message-line strong.msg-char-name {
+  color: #f3cf7a;
+}
+.portrait-layout .message-line strong.msg-npc-name,
+.portrait-layout .message-line .msg-npc-name {
+  color: #7cc4fa;
+  font-weight: 700;
+}
+.portrait-layout .message-line strong.msg-speaker {
+  display: block;
+  margin-bottom: 10px;
+}
+.portrait-layout .message-line p.msg-npc-line {
+  color: #c8d6dc;
+  margin-bottom: 8px;
+}
+.wanted-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(214, 72, 68, 0.25);
+  border: 1px solid #e06d66;
+  color: #ffbeb8;
+  font-size: 10px;
+  font-weight: 700;
+  vertical-align: middle;
+  animation: wantedPulse 1.1s ease-in-out infinite;
+}
+@keyframes wantedPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 109, 102, 0.5); }
+  50% { box-shadow: 0 0 8px 1px rgba(124, 196, 250, 0.55); }
+}

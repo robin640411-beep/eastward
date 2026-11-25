@@ -426,3 +426,47 @@ export function storybookEpilogue(s,catalog,display,destinationName,bossName='�
  }
  return paragraphs;
 }
+
+// 6. Rolled Morality & GTA Wanted Author Snark
+const MORALITY_QUIPS={
+ rob:[
+  hero=>`（大白天在公路旁明目張膽打劫路人——${hero}，我本來想把這本書寫成公路救贖文學，結果你硬生生把它玩成了《俠盜獵車手：廢土版》！）`,
+  hero=>`（看著${hero}熟練地把人家兜裡的廢料搜括一空，我都懷疑這傢伙出發前是不是偷偷考過強盜執照。）`
+ ],
+ steal:[
+  hero=>`（順手牽羊還一臉若無其事，${hero}這雙手不去舊時代演魔術師真是太可惜了。）`,
+  ()=>`（偷東西這檔事只要沒被抓到就不算犯罪……才怪！我這個作者可全都記在道德帳本上了。）`
+ ],
+ merchant_loot:[
+  hero=>`（連商人都敢動手洗劫一空！${hero}你這種「零元購」的消費習慣，遲早會把整條公路的物價指數打崩的。）`,
+  hero=>`（把商人的全部存貨搬進後車廂時，${hero}笑得像中了樂透——至於道德底線？大概早就掉在十公里外的排水溝裡了。）`
+ ],
+ wanted:[
+  hero=>`（恭喜${hero}正式登上末日電台頭條通緝榜！接下來連路邊友善的旅人都會把你當瘟神躲著走，警察也已經在熱車了，好自為之吧！）`,
+  ()=>`（太好了，現在連人類警察跟外星執法隊都開始追著這台破車跑了——我寫故事這麼多年，還沒見過主角自己把難度調成地獄級的。）`
+ ],
+ police:[
+  hero=>`（紅藍警燈閃成這樣，${hero}你還想裝作自己只是路過看風景的良民嗎？要嘛乖乖掏罰金，要嘛準備在公路上飆警匪片吧！）`,
+  ()=>`（末日都過了十年，居然還有人這麼敬業地出來開罰單抓通緝犯，我都想替這些警察鼓掌了。）`
+ ],
+ charity:[
+  hero=>`（居然真的把珍貴物資施捨給陌生人了！看著${hero}散發聖光的背影，我差點懷疑自己拿錯劇本了。）`,
+  hero=>`（難得做件好事！記住這份好口碑，將來${hero}在荒路上撞見脾氣再臭的惡徒，搞不好都會看在這點面子上收手喔。）`
+ ],
+ saint_spare:[
+  hero=>`（對方原本連武器都拔一半了，一聽見是${hero}的大名居然乖乖收回去——看來在廢土上當個老好人，有時候比裝兩挺機槍還管用！）`,
+  ()=>`（靠名聲就把一場原本必打的架給化解了，這大概是我寫過最省醫藥費的和平路線。）`
+ ],
+ wanted_refuse:[
+  hero=>`（人家明明平常超愛聊天，一聽見${hero}是電台通緝犯立刻縮回去——這就是到處打劫偷竊的社交代價啊。）`
+ ]
+};
+
+export function rollMoralityAuthorQuip(s,kind){
+ if(!s||!MORALITY_QUIPS[kind])return '';
+ const roll=authorD100(s,`morality:${kind}:${s.stop}:${s.logs?.length||0}:${s.morality||0}`);
+ if(roll>72)return '';
+ const list=MORALITY_QUIPS[kind];
+ const h=hash32(`mquip:${s.seed}:${kind}:${s.stop}:${s.logs?.length||0}`);
+ return list[h%list.length](heroShortName(s));
+}

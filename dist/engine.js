@@ -8,7 +8,8 @@ import {MAX_PARTY,normalizeJourney,installDialogue} from './dialogue-runtime.js'
 import {installNpcs} from './npc-runtime.js';
 import {installTraits} from './traits-runtime.js';
 import {installCombat} from './combat.js';
-import {fillStory,heroShortName,partyLabel,rollBattleAuthorQuip} from './storybook.js';
+import {fillStory,heroShortName,partyLabel,rollBattleAuthorQuip,rollMoralityAuthorQuip} from './storybook.js';
+import {installMorality,isSaint} from './morality-runtime.js';
 // 一路向東 — deterministic state machine. No network or AI in gameplay.
 export const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const clone=x=>JSON.parse(JSON.stringify(x));
@@ -123,11 +124,18 @@ export class Game{
  if(pending.length&&this.roll()<=15){const f=this.pick(pending);e={id:f.event,title:'再度相遇',text:`${display(f.actor)}在路邊認出了${heroShortName(this.s)}的車。${f.actor.memories?.at(-1)||'這位曾經同路的旅人還記得當初分別時的事。'}`,kind:'followup',options:[]};npc=clone(f.actor);npc.attitude=f.hostile?'敵對':'同情';this.s.usedStory.push(f.id);this.s.pending=this.s.pending.filter(x=>x.id!==f.id);}
  }
  if(!npc&&e.bindings?.npc)npc=this.person();const building=frame.kind==='road'&&BUILDING_ROADS.has(e.d100);this.s.current={instance:++this.s.serial,event:e,npc,resolved:false,building,entered:false,service:null,dialogue:e.kind==='followup'&&npc&&!['敵對','掠奪'].includes(npc.attitude),giftGiven:false,frame:frame.kind};nameEncounter(this.s);this.s.mode='event';this.s.dice={kind:'D100',value:draw.roll};this.s.seen.push(e.id);this.s.notice=fillStory(e.text,this.s,display);
- if(npc&&!building&&['敵對','掠奪'].includes(npc.attitude))this.beginCombat('character',null,npc);
+ if(npc&&!building&&['敵對','掠奪'].includes(npc.attitude)){
+  if(isSaint(this.s)){
+   npc.sparedByReputation=true;this.s.current.dialogue=true;this.s.current.service='npc_trade';
+   const q=rollMoralityAuthorQuip(this.s,'saint_spare');
+   this.s.notice+=`\n${display(npc)}原本握緊武器準備動手，認出${heroShortName(this.s)}在公路上的善名後卻緩緩放下了手，願意坐下來好好談一談。`;
+   if(q)appendMessage(this.s,'作者吐槽',q);
+  }else this.beginCombat('character',null,npc);
+ }
  else this.collectReward();
  }
  finishEvent(){if(this.s.mode!=='event'||this.s.current?.resolved)return;if(this.s.current?.event.options?.length&&!this.s.current.dialogue)return;this.s.current.resolved=true;const frame=this.s.frames.at(-1);if(!frame){this.completeStop();this.s.current=null;this.s.mode='ready';return;}const threshold=[75,50,25][frame.count-1];const roll=threshold?this.roll():100;this.s.dice={kind:'追加 D100',value:roll};this.log('停靠片刻',threshold&&roll<=threshold?`正準備發車時，${partyLabel(this.s)}又撞見了新的狀況。`:'收拾好行囊，這一站的小插曲總算翻篇了。');if(threshold&&roll<=threshold){this.nextEvent();return;}this.s.frames.pop();if(frame.kind==='building'){const parent=frame.parent;this.s.current=parent;this.s.current.entered=true;this.s.current.resolved=false;this.s.current.building=false;this.s.current.inside=false;this.s.mode='event';this.s.notice=`${partyLabel(this.s)}回到車旁。這棟建築的翻找已經告一段落。`;}else{this.completeStop();this.s.current=null;this.s.mode='ready';this.s.searched=false;this.s.notice='這次停靠已結束。'} }
- enterBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.building||c.entered)return false;c.entered=true;c.building=false;c.inside=true;this.s.notice=`${partyLabel(this.s)}推門走進`+(c.place?.name||c.event.title)+'。';if(c.npc&&['敵對','掠奪'].includes(c.npc.attitude))this.beginCombat('character',null,c.npc);else this.collectReward();return true}
+ enterBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.building||c.entered)return false;c.entered=true;c.building=false;c.inside=true;this.s.notice=`${partyLabel(this.s)}推門走進`+(c.place?.name||c.event.title)+'。';if(c.npc&&['敵對','掠奪'].includes(c.npc.attitude)){if(isSaint(this.s)){c.npc.sparedByReputation=true;c.dialogue=true;c.service='npc_trade';this.s.notice+=`\n裡頭的${display(c.npc)}原本戒心滿滿，認出${heroShortName(this.s)}的好名聲後竟收起武器點頭致意。`;}else this.beginCombat('character',null,c.npc);}else this.collectReward();return true}
  exploreBuilding(){const c=this.s.current;if(this.s.mode!=='event'||!c?.inside||c.explored||c.event.options?.length)return false;c.explored=true;this.s.frames.push({kind:'building',count:0,scene:this.buildingScene(c.event),parent:clone(c)});this.nextEvent();return true}
  buildingScene(e){const t=e.title;return /醫|藥|診/.test(t)?'clinic':/修|車/.test(t)?'garage':/旅|客|休|驛/.test(t)?'hotel':/商|店|攤|市場/.test(t)?'shop':/研究|實驗/.test(t)?'laboratory':'warehouse'}
  currentScene(){if(this.s.current?.inside&&!this.s.battle)return this.buildingScene(this.s.current.event);if(this.s.battle)return this.s.battle.mode==='vehicle'?'road':this.s.frames.at(-1)?.scene||'ruin';if(this.s.frames.at(-1)?.kind==='building')return this.s.frames.at(-1).scene;return 'road'}
@@ -278,3 +286,4 @@ installAutomaticJourney(Game,{display});
 
 installVehicles(Game);
 installOrigins(Game);
+installMorality(Game,{ITEMS,clamp,display,clone});

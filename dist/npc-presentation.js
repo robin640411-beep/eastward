@@ -76,9 +76,11 @@ export const WELCOMING_GESTURES={
   lumen:'對方身上的光膜泛起溫和的色澤，放低手臂，朝你們打招呼。'
 };
 const hash=value=>{let h=2166136261;for(const ch of String(value))h=Math.imul(h^ch.charCodeAt(0),16777619);return h>>>0;};
-export function npcDemeanor(p,{seed=0,confronted=false}={}){
+export function npcDemeanor(p,{seed=0,confronted=false,morality=0}={}){
   if(!p)return '';
   if(confronted&&!['敵對','掠奪'].includes(p.attitude))return '察覺對面準備動手，對方立刻收起原本的神情，後退一步，舉起武器迎戰。';
+  if(p.sparedByReputation)return '對方原本滿臉殺氣地按著武器，認出你們一路上的善名後竟緩緩鬆開手指，低聲說：「看在你們名聲不錯的份上，今天不動手。」';
+  if(morality<=-30&&!['敵對','掠奪'].includes(p.attitude))return '對方一認出你們正是電台播報的通緝犯，臉色瞬間發白，緊緊抱住行囊往後退了兩步，顯然不太想跟你們搭話。';
   const attitude=DEMEANOR_LINES[p.attitude]?p.attitude:'戒備',rows=DEMEANOR_LINES[attitude],index=hash([seed,p.id,p.name,p.race,attitude].join(':'))%rows.length;
   return attitude==='友善'&&index===0?(WELCOMING_GESTURES[p.race]||rows[0]):rows[index];
 }
