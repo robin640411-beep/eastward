@@ -89,7 +89,8 @@ test('companion whisper and storybook epilogue render rich narrative without adv
    whispered++;
    const beforeCount=g.s.messages.length;
    syncMessageContext(g,display);
-   assert.equal(g.s.messages.length,beforeCount+1);
+   assert.equal(g.s.messages.length,beforeCount+2);
+   assert.equal(g.s.messages.at(-1).speakerKind,'party');
    assert(g.s.messages.at(-1).text.includes('「'));
   }
  }

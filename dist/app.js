@@ -69,11 +69,12 @@ function encounterNotice(c){
  const message=reading?[c.text,c.threat].filter(Boolean):[c.alert];
  const receipt=!reading&&c.previous?.rewardReceipt;
  return `<section class="message-window encounter-notice" data-phase="${c.phase}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${reading?'迎戰之前':'停靠片刻'}</span></div>
-  <div class="encounter-copy" role="log" aria-live="polite" tabindex="0">${receipt?`<p class="previous-receipt">${esc(receipt)}</p>`:''}<strong>${esc(name)}</strong>${message.map(line=>`<p>${esc(line)}</p>`).join('')}</div>
+  <div class="encounter-copy" role="log" aria-live="polite" tabindex="0"><strong class="msg-title ${reading?'':'msg-char-name msg-speaker'}">${esc(name)}</strong>${message.map(line=>`<p class="msg-body">${esc(line)}</p>`).join('')}</div>
   ${reading?`<div class="message-actions">${btn(c.button,'ackEncounter','','primary')}</div>`:''}</section>`;
 }
 function speakerRole(m,s){
  if(!m?.title)return 'event';
+ if(m.speakerKind)return m.speakerKind;
  if(m.personId&&s.party.some(q=>q.id===m.personId))return 'party';
  if(s.party.some(q=>m.title===display(q)||m.title===q.name))return 'party';
  const npc=s.current?.npc;

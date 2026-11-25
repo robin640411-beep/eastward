@@ -124,19 +124,24 @@ const RACE_WHISPERS={
  lumen:'暗處的輪廓我都照清楚了，小心腳下碎鐵。'
 };
 
-export function companionWhisper(game,display){
+export function companionWhisperEntry(game,display){
  const s=game?.s,c=s?.current;
- if(!s||s.mode!=='event'||!c?.event||c.finalGate)return '';
+ if(!s||s.mode!=='event'||!c?.event||c.finalGate)return null;
  const heroId=s.protagonistId||s.party?.[0]?.id;
  const companions=(s.party||[]).filter(p=>p.id!==heroId&&p.hp>0&&!p.asleep);
- if(!companions.length)return '';
+ if(!companions.length)return null;
  const h=hash32(`whisper:${s.seed}:${s.stop}:${c.instance}:${c.event.id}`);
- if((h%100)>=60)return '';
+ if((h%100)>=60)return null;
  const speaker=companions[(h>>>4)%companions.length];
  const jobLines=JOB_WHISPERS[speaker.profession];
  const raceLine=RACE_WHISPERS[speaker.race];
  const line=(raceLine&&(h%3===0))?raceLine:jobLines?jobLines[(h>>>8)%jobLines.length]:'大家小心點，確認完狀況就繼續往東吧。';
- return `\n\n${display(speaker)}望了望四周，低聲說：「${line}」`;
+ return {speaker,personId:speaker.id,title:display(speaker),text:`「${line}」`};
+}
+
+export function companionWhisper(game,display){
+ const entry=companionWhisperEntry(game,display);
+ return entry?`\n\n${entry.title}望了望四周，低聲說：${entry.text}`:'';
 }
 
 // 3. Rolled Author Commentary on Stops (not every time: 52% roll!)
