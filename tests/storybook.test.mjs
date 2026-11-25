@@ -508,3 +508,17 @@ test('morality system: rob, steal, charity, merchant full loot, GTA wanted radio
  const css=readFileSync(new URL('../dist/portrait-layout.css',import.meta.url),'utf8');
  assert(css.includes('msg-char-name')&&css.includes('msg-npc-name')&&css.includes('wanted-pill'));
 });
+
+test('every equipment, supplies, and vehicle reward across all D100 faces resolves without undefined',()=>{
+ const g=fresh(101);
+ for(let roll=1;roll<=100;roll++){
+  g.roll=()=>roll;
+  const eqText=g.rewardResult({op:'oracle',table:'equipment'});
+  assert(!/undefined|null|NaN/i.test(eqText),`Bad equipment reward at roll ${roll}: ${eqText}`);
+  const supText=g.rewardResult({op:'oracle',table:'supplies'});
+  assert(!/undefined|null|NaN/i.test(supText),`Bad supplies reward at roll ${roll}: ${supText}`);
+  const vehText=g.rewardResult({op:'oracle',table:'vehicle'});
+  assert(!/undefined|null|NaN/i.test(vehText),`Bad vehicle reward at roll ${roll}: ${vehText}`);
+ }
+ assert(g.s.inventory.every(id=>typeof id==='string'&&id.length>0),'Inventory must never contain undefined');
+});

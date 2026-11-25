@@ -78,7 +78,7 @@ export const POWERS={
  human:[['念力推擊','strike'],['心靈復原','heal'],['意志屏障','shield']],alien:[['星芒','strike'],['靜默波','stun'],['腦域風暴','burst']],mutant:[['異變衝擊','strike'],['再生','heal'],['畸變爆發','burst']],synth:[['脈衝','strike'],['反應護盾','shield'],['系統震盪','stun']],uplift:[['野性共鳴','strike'],['生命回聲','heal'],['心靈嚎叫','burst']],chitin:[['碎甲念波','strike'],['甲殼屏障','shield'],['鎮壓','stun']],mycelial:[['孢子念波','strike'],['菌網修復','heal'],['眠霧','stun']],crystal:[['晶芒','strike'],['折射屏障','shield'],['共振崩解','burst']],amphibian:[['潮汐衝擊','strike'],['潮生修復','heal'],['深水屏障','shield']],mimic:[['幻影刺擊','strike'],['感官錯置','stun'],['幻象屏障','shield']],symbiote:[['共生鞭擊','strike'],['生命縫合','heal'],['雙重意識','shield']],lumen:[['光束','strike'],['溫光','heal'],['極光爆發','burst']]};
 export function learned(p){return POWERS[p.race].map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i]})).filter(x=>p.level>=x.level)}
 export class Game{
- constructor(data,state=null){this.d=data;this.s=state;normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);
+ constructor(data,state=null){this.d=data;this.s=state;if(state&&Array.isArray(state.inventory))state.inventory=state.inventory.filter(id=>ITEMS[id]);normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);
   if(state?.mode==='event'&&state.current){
    const c=state.current,e=c.event;
    // A pending v24 choice is identifiable by its original option. An empty list
@@ -182,12 +182,13 @@ export class Game{
  // Produce the receipt from the same values that enter inventory or restore HP.
  rewardResult(f,recipient){
   if(f.op==='resource'){
+   const key=f.key||f.resource;
    let n=f.amount;
-   if(f.key==='scrap'&&this.s.current?.searching){
+   if(key==='scrap'&&this.s.current?.searching){
     const p=this.actor();n=Math.max(0,n+(p?.profession==='scavenger'?1:0)-(p?.flaw==='distracted'?1:0));
    }
-   this.add(f.key,n);
-   const name={fuel:'汽油',scrap:'廢料',medicine:'藥品'}[f.key];
+   this.add(key,n);
+   const name={fuel:'汽油',scrap:'廢料',medicine:'藥品'}[key]||'物資';
    return n?'獲得'+name+' ×'+n+'。':'沒有找到可用的'+name+'。';
   }
   if(f.op==='heal'){
@@ -204,8 +205,14 @@ export class Game{
   const row=this.oracle(f.table);
   if(f.table==='supplies')return row.effects.map(effect=>this.rewardResult(effect,recipient)).join('');
   if(f.table==='equipment'){
-   this.s.inventory.push(row.value.id);
-   return '獲得'+(ITEMS[row.value.id]?.name||row.value.name)+' ×1。';
+   const eqId=typeof row.value==='string'?row.value:row.value?.id;
+   const item=ITEMS[eqId];
+   if(item){
+    this.s.inventory.push(eqId);
+    return '獲得'+item.name+' ×1。';
+   }
+   this.add('scrap',2);
+   return '獲得廢料 ×2。';
   }
   if(f.table==='vehicle'){
    const v=row.value,model=this.d.assets.vehicles[v.id]?v.id:'sedan';
