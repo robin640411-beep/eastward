@@ -2,7 +2,7 @@
   "road_001": {
     "image": "encounters/road_001.svg",
     "kind": "gas",
-    "effect": "none",
+    "effect": "lantern",
     "title": "加油站",
     "interior": false,
     "empty": false,
@@ -11,7 +11,7 @@
   "road_002": {
     "image": "encounters/road_002.svg",
     "kind": "motel",
-    "effect": "none",
+    "effect": "lantern",
     "title": "路邊旅館",
     "interior": false,
     "empty": false,
@@ -20,7 +20,7 @@
   "road_003": {
     "image": "encounters/road_003.svg",
     "kind": "stall",
-    "effect": "none",
+    "effect": "lantern",
     "title": "流動雜貨店",
     "interior": false,
     "empty": false,
@@ -29,7 +29,7 @@
   "road_004": {
     "image": "encounters/road_004.svg",
     "kind": "garage",
-    "effect": "none",
+    "effect": "weld",
     "title": "修車廠",
     "interior": false,
     "empty": false,
@@ -38,7 +38,7 @@
   "road_005": {
     "image": "encounters/road_005.svg",
     "kind": "pharmacy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "藥品攤",
     "interior": false,
     "empty": false,
@@ -47,7 +47,7 @@
   "road_006": {
     "image": "encounters/road_006.svg",
     "kind": "ambulance",
-    "effect": "none",
+    "effect": "glint",
     "title": "廢棄救護車",
     "interior": false,
     "empty": false,
@@ -56,7 +56,7 @@
   "road_007": {
     "image": "encounters/road_007.svg",
     "kind": "car",
-    "effect": "none",
+    "effect": "glint",
     "title": "完整備用車",
     "interior": false,
     "empty": false,
@@ -65,7 +65,7 @@
   "road_008": {
     "image": "encounters/road_008.svg",
     "kind": "rescue",
-    "effect": "none",
+    "effect": "weld",
     "title": "公路救援隊",
     "interior": false,
     "empty": false,
@@ -74,7 +74,7 @@
   "road_009": {
     "image": "encounters/road_009.svg",
     "kind": "tanker",
-    "effect": "none",
+    "effect": "glint",
     "title": "油罐車商人",
     "interior": false,
     "empty": false,
@@ -83,7 +83,7 @@
   "road_010": {
     "image": "encounters/road_010.svg",
     "kind": "convoy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "友善車隊",
     "interior": false,
     "empty": false,
@@ -92,7 +92,7 @@
   "road_011": {
     "image": "encounters/road_011.svg",
     "kind": "crate",
-    "effect": "none",
+    "effect": "glint",
     "title": "未拆封補給箱",
     "interior": false,
     "empty": false,
@@ -101,7 +101,7 @@
   "road_012": {
     "image": "encounters/road_012.svg",
     "kind": "luggage",
-    "effect": "none",
+    "effect": "glint",
     "title": "行李箱寶藏",
     "interior": false,
     "empty": false,
@@ -110,7 +110,7 @@
   "road_013": {
     "image": "encounters/road_013.svg",
     "kind": "locker",
-    "effect": "none",
+    "effect": "glint",
     "title": "工具鐵櫃",
     "interior": false,
     "empty": false,
@@ -128,7 +128,7 @@
   "road_015": {
     "image": "encounters/road_015.svg",
     "kind": "clinic",
-    "effect": "none",
+    "effect": "lantern",
     "title": "公共急救站",
     "interior": false,
     "empty": false,
@@ -137,7 +137,7 @@
   "road_016": {
     "image": "encounters/road_016.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "順路醫護",
     "interior": false,
     "empty": false,
@@ -146,7 +146,7 @@
   "road_017": {
     "image": "encounters/road_017.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "退休駕駛",
     "interior": false,
     "empty": false,
@@ -155,7 +155,7 @@
   "road_018": {
     "image": "encounters/road_018.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "變種嚮導",
     "interior": false,
     "empty": false,
@@ -164,7 +164,7 @@
   "road_019": {
     "image": "encounters/road_019.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "尋找隊伍的守夜人",
     "interior": false,
     "empty": false,
@@ -182,7 +182,7 @@
   "road_021": {
     "image": "encounters/road_021.svg",
     "kind": "scrapyard",
-    "effect": "none",
+    "effect": "weld",
     "title": "廢車回收場",
     "interior": false,
     "empty": false,
@@ -191,7 +191,7 @@
   "road_022": {
     "image": "encounters/road_022.svg",
     "kind": "tires",
-    "effect": "none",
+    "effect": "glint",
     "title": "輪胎堆中的零件箱",
     "interior": false,
     "empty": false,
@@ -200,7 +200,7 @@
   "road_023": {
     "image": "encounters/road_023.svg",
     "kind": "bridgegift",
-    "effect": "none",
+    "effect": "glint",
     "title": "橋下贈物架",
     "interior": false,
     "empty": false,
@@ -209,7 +209,7 @@
   "road_024": {
     "image": "encounters/road_024.svg",
     "kind": "clinic",
-    "effect": "none",
+    "effect": "lantern",
     "title": "避難所醫藥櫃",
     "interior": false,
     "empty": false,
@@ -218,7 +218,7 @@
   "road_025": {
     "image": "encounters/road_025.svg",
     "kind": "crate",
-    "effect": "none",
+    "effect": "glint",
     "title": "軍用儲物箱",
     "interior": false,
     "empty": false,
@@ -227,7 +227,7 @@
   "road_026": {
     "image": "encounters/road_026.svg",
     "kind": "tunnel",
-    "effect": "none",
+    "effect": "rubble",
     "title": "隧道管理室",
     "interior": false,
     "empty": false,
@@ -236,7 +236,7 @@
   "road_027": {
     "image": "encounters/road_027.svg",
     "kind": "motorcycle",
-    "effect": "none",
+    "effect": "glint",
     "title": "摩托車郵差",
     "interior": false,
     "empty": false,
@@ -245,7 +245,7 @@
   "road_028": {
     "image": "encounters/road_028.svg",
     "kind": "bookvan",
-    "effect": "none",
+    "effect": "lantern",
     "title": "公路書車",
     "interior": false,
     "empty": false,
@@ -254,7 +254,7 @@
   "road_029": {
     "image": "encounters/road_029.svg",
     "kind": "books",
-    "effect": "none",
+    "effect": "motes",
     "title": "舊報紙攤",
     "interior": false,
     "empty": false,
@@ -263,7 +263,7 @@
   "road_030": {
     "image": "encounters/road_030.svg",
     "kind": "memorial",
-    "effect": "none",
+    "effect": "motes",
     "title": "倖存者紀念牆",
     "interior": false,
     "empty": false,
@@ -272,7 +272,7 @@
   "road_031": {
     "image": "encounters/road_031.svg",
     "kind": "fuel",
-    "effect": "none",
+    "effect": "glint",
     "title": "善意燃料贈送",
     "interior": false,
     "empty": false,
@@ -281,7 +281,7 @@
   "road_032": {
     "image": "encounters/road_032.svg",
     "kind": "generator",
-    "effect": "none",
+    "effect": "weld",
     "title": "廢棄發電機油桶",
     "interior": false,
     "empty": false,
@@ -290,7 +290,7 @@
   "road_033": {
     "image": "encounters/road_033.svg",
     "kind": "medicalbox",
-    "effect": "none",
+    "effect": "glint",
     "title": "卸貨平台藥箱",
     "interior": false,
     "empty": false,
@@ -299,7 +299,7 @@
   "road_034": {
     "image": "encounters/road_034.svg",
     "kind": "market",
-    "effect": "none",
+    "effect": "lantern",
     "title": "露天裝備市場",
     "interior": false,
     "empty": false,
@@ -308,7 +308,7 @@
   "road_035": {
     "image": "encounters/road_035.svg",
     "kind": "cars",
-    "effect": "none",
+    "effect": "glint",
     "title": "二手車攤",
     "interior": false,
     "empty": false,
@@ -317,7 +317,7 @@
   "road_036": {
     "image": "encounters/road_036.svg",
     "kind": "garage",
-    "effect": "none",
+    "effect": "weld",
     "title": "專門改裝店",
     "interior": false,
     "empty": false,
@@ -326,7 +326,7 @@
   "road_037": {
     "image": "encounters/road_037.svg",
     "kind": "garage",
-    "effect": "none",
+    "effect": "weld",
     "title": "義務修車棚",
     "interior": false,
     "empty": false,
@@ -335,7 +335,7 @@
   "road_038": {
     "image": "encounters/road_038.svg",
     "kind": "clinic",
-    "effect": "none",
+    "effect": "lantern",
     "title": "路邊診所",
     "interior": false,
     "empty": false,
@@ -344,7 +344,7 @@
   "road_039": {
     "image": "encounters/road_039.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "安全休息庭院",
     "interior": false,
     "empty": false,
@@ -353,7 +353,7 @@
   "road_040": {
     "image": "encounters/road_040.svg",
     "kind": "checkpoint",
-    "effect": "none",
+    "effect": "alert",
     "title": "有守衛的驛站",
     "interior": false,
     "empty": false,
@@ -362,7 +362,7 @@
   "road_041": {
     "image": "encounters/road_041.svg",
     "kind": "gift",
-    "effect": "none",
+    "effect": "glint",
     "title": "舊友贈送物資",
     "interior": false,
     "empty": false,
@@ -371,7 +371,7 @@
   "road_042": {
     "image": "encounters/road_042.svg",
     "kind": "container",
-    "effect": "none",
+    "effect": "glint",
     "title": "貨運貨櫃",
     "interior": false,
     "empty": false,
@@ -380,7 +380,7 @@
   "road_043": {
     "image": "encounters/road_043.svg",
     "kind": "safe",
-    "effect": "none",
+    "effect": "motes",
     "title": "撞開的保險箱",
     "interior": false,
     "empty": false,
@@ -389,7 +389,7 @@
   "road_044": {
     "image": "encounters/road_044.svg",
     "kind": "pharmacy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "流動藥房",
     "interior": false,
     "empty": false,
@@ -398,7 +398,7 @@
   "road_045": {
     "image": "encounters/road_045.svg",
     "kind": "bus",
-    "effect": "none",
+    "effect": "glint",
     "title": "修復中的校車",
     "interior": false,
     "empty": false,
@@ -407,7 +407,7 @@
   "road_046": {
     "image": "encounters/road_046.svg",
     "kind": "convoy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "商隊酬謝",
     "interior": false,
     "empty": false,
@@ -416,7 +416,7 @@
   "road_047": {
     "image": "encounters/road_047.svg",
     "kind": "tanker",
-    "effect": "none",
+    "effect": "glint",
     "title": "被遺留的燃料拖車",
     "interior": false,
     "empty": false,
@@ -425,7 +425,7 @@
   "road_048": {
     "image": "encounters/road_048.svg",
     "kind": "warehouse",
-    "effect": "none",
+    "effect": "glint",
     "title": "倉庫清倉",
     "interior": false,
     "empty": false,
@@ -434,7 +434,7 @@
   "road_049": {
     "image": "encounters/road_049.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "倖存者口述紀錄",
     "interior": false,
     "empty": false,
@@ -452,25 +452,29 @@
   "road_051": {
     "image": "encounters/road_051.svg",
     "kind": "convoy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "掠奪車隊",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_052": {
     "image": "encounters/road_052.svg",
     "kind": "toll",
-    "effect": "none",
+    "effect": "alert",
     "title": "假收費站",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_053": {
     "image": "encounters/road_053.svg",
     "kind": "infected",
-    "effect": "none",
+    "effect": "alert",
     "title": "殭屍堵路",
     "interior": false,
     "empty": false,
@@ -483,7 +487,7 @@
   "road_054": {
     "image": "encounters/road_054.svg",
     "kind": "rocks",
-    "effect": "none",
+    "effect": "rubble",
     "title": "碎石落坡",
     "interior": false,
     "empty": false,
@@ -492,7 +496,7 @@
   "road_055": {
     "image": "encounters/road_055.svg",
     "kind": "pit",
-    "effect": "none",
+    "effect": "rubble",
     "title": "道路塌陷",
     "interior": false,
     "empty": false,
@@ -501,7 +505,7 @@
   "road_056": {
     "image": "encounters/road_056.svg",
     "kind": "bridge",
-    "effect": "none",
+    "effect": "rubble",
     "title": "橋梁斷裂",
     "interior": false,
     "empty": false,
@@ -537,7 +541,7 @@
   "road_060": {
     "image": "encounters/road_060.svg",
     "kind": "ice",
-    "effect": "none",
+    "effect": "frost",
     "title": "結冰路面",
     "interior": false,
     "empty": false,
@@ -546,7 +550,7 @@
   "road_061": {
     "image": "encounters/road_061.svg",
     "kind": "spikes",
-    "effect": "none",
+    "effect": "rubble",
     "title": "散落尖鐵",
     "interior": false,
     "empty": false,
@@ -555,7 +559,7 @@
   "road_062": {
     "image": "encounters/road_062.svg",
     "kind": "truck",
-    "effect": "none",
+    "effect": "rubble",
     "title": "傾倒貨車",
     "interior": false,
     "empty": false,
@@ -609,7 +613,7 @@
   "road_068": {
     "image": "encounters/road_068.svg",
     "kind": "beast",
-    "effect": "none",
+    "effect": "alert",
     "title": "巨獸攔路",
     "interior": false,
     "empty": false,
@@ -620,7 +624,7 @@
   "road_069": {
     "image": "encounters/road_069.svg",
     "kind": "chase",
-    "effect": "none",
+    "effect": "alert",
     "title": "追獵車",
     "interior": false,
     "empty": false,
@@ -629,34 +633,40 @@
   "road_070": {
     "image": "encounters/road_070.svg",
     "kind": "ambulance",
-    "effect": "none",
+    "effect": "glint",
     "title": "冒牌救援車",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_071": {
     "image": "encounters/road_071.svg",
     "kind": "market",
-    "effect": "none",
+    "effect": "lantern",
     "title": "假商隊伏擊",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_072": {
     "image": "encounters/road_072.svg",
     "kind": "checkpoint",
-    "effect": "none",
+    "effect": "alert",
     "title": "武裝封鎖線",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "soldier"
+    ]
   },
   "road_073": {
     "image": "encounters/road_073.svg",
     "kind": "car",
-    "effect": "none",
+    "effect": "glint",
     "title": "失控車輛",
     "interior": false,
     "empty": false,
@@ -665,7 +675,7 @@
   "road_074": {
     "image": "encounters/road_074.svg",
     "kind": "tunnel",
-    "effect": "none",
+    "effect": "rubble",
     "title": "隧道坍塌",
     "interior": false,
     "empty": false,
@@ -683,7 +693,7 @@
   "road_076": {
     "image": "encounters/road_076.svg",
     "kind": "vines",
-    "effect": "none",
+    "effect": "rubble",
     "title": "刺藤路障",
     "interior": false,
     "empty": false,
@@ -704,16 +714,18 @@
   "road_078": {
     "image": "encounters/road_078.svg",
     "kind": "motorcycle",
-    "effect": "none",
+    "effect": "glint",
     "title": "敵對摩托幫",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_079": {
     "image": "encounters/road_079.svg",
     "kind": "sniper",
-    "effect": "none",
+    "effect": "alert",
     "title": "狙擊威脅",
     "interior": false,
     "empty": false,
@@ -724,7 +736,7 @@
   "road_080": {
     "image": "encounters/road_080.svg",
     "kind": "bandit",
-    "effect": "none",
+    "effect": "alert",
     "title": "搶匪索取藥品",
     "interior": false,
     "empty": false,
@@ -735,7 +747,7 @@
   "road_081": {
     "image": "encounters/road_081.svg",
     "kind": "sign",
-    "effect": "none",
+    "effect": "motes",
     "title": "破損導航路牌",
     "interior": false,
     "empty": false,
@@ -762,7 +774,7 @@
   "road_084": {
     "image": "encounters/road_084.svg",
     "kind": "wreck",
-    "effect": "none",
+    "effect": "rubble",
     "title": "鬆動車體",
     "interior": false,
     "empty": false,
@@ -798,34 +810,40 @@
   "road_088": {
     "image": "encounters/road_088.svg",
     "kind": "bridge",
-    "effect": "none",
+    "effect": "rubble",
     "title": "橋頭伏擊",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_089": {
     "image": "encounters/road_089.svg",
     "kind": "toll",
-    "effect": "none",
+    "effect": "alert",
     "title": "追索過路費",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "raider"
+    ]
   },
   "road_090": {
     "image": "encounters/road_090.svg",
     "kind": "glass",
-    "effect": "none",
+    "effect": "rubble",
     "title": "車窗遭襲",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "wing"
+    ]
   },
   "road_091": {
     "image": "encounters/road_091.svg",
     "kind": "mud",
-    "effect": "none",
+    "effect": "rubble",
     "title": "道路泥濘",
     "interior": false,
     "empty": false,
@@ -834,7 +852,7 @@
   "road_092": {
     "image": "encounters/road_092.svg",
     "kind": "tree",
-    "effect": "none",
+    "effect": "rubble",
     "title": "倒下的巨樹",
     "interior": false,
     "empty": false,
@@ -843,7 +861,7 @@
   "road_093": {
     "image": "encounters/road_093.svg",
     "kind": "bandit",
-    "effect": "none",
+    "effect": "alert",
     "title": "陌生人的恐嚇",
     "interior": false,
     "empty": false,
@@ -854,7 +872,7 @@
   "road_094": {
     "image": "encounters/road_094.svg",
     "kind": "gunfight",
-    "effect": "none",
+    "effect": "alert",
     "title": "空曠路段槍戰",
     "interior": false,
     "empty": false,
@@ -875,7 +893,7 @@
   "road_096": {
     "image": "encounters/road_096.svg",
     "kind": "infected",
-    "effect": "none",
+    "effect": "alert",
     "title": "暴走的感染者",
     "interior": false,
     "empty": false,
@@ -888,7 +906,7 @@
   "road_097": {
     "image": "encounters/road_097.svg",
     "kind": "scrapyard",
-    "effect": "none",
+    "effect": "weld",
     "title": "報廢車陣",
     "interior": false,
     "empty": false,
@@ -897,16 +915,18 @@
   "road_098": {
     "image": "encounters/road_098.svg",
     "kind": "checkpoint",
-    "effect": "none",
+    "effect": "alert",
     "title": "公路強制徵用",
     "interior": false,
     "empty": false,
-    "creatures": []
+    "creatures": [
+      "soldier"
+    ]
   },
   "road_099": {
     "image": "encounters/road_099.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "glint",
     "title": "破裂的油桶",
     "interior": false,
     "empty": false,
@@ -924,7 +944,7 @@
   "grateful_traveler": {
     "image": "encounters/grateful_traveler.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "熟悉的招呼聲",
     "interior": false,
     "empty": false,
@@ -933,7 +953,7 @@
   "former_companion": {
     "image": "encounters/former_companion.svg",
     "kind": "traveler",
-    "effect": "none",
+    "effect": "lantern",
     "title": "再次相遇",
     "interior": false,
     "empty": false,
@@ -942,7 +962,7 @@
   "building_001": {
     "image": "encounters/building_001.svg",
     "kind": "crate",
-    "effect": "none",
+    "effect": "glint",
     "title": "未拆封木箱",
     "interior": true,
     "empty": false,
@@ -951,7 +971,7 @@
   "building_002": {
     "image": "encounters/building_002.svg",
     "kind": "medicalbox",
-    "effect": "none",
+    "effect": "glint",
     "title": "急救壁櫃",
     "interior": true,
     "empty": false,
@@ -960,7 +980,7 @@
   "building_003": {
     "image": "encounters/building_003.svg",
     "kind": "toolbox",
-    "effect": "none",
+    "effect": "glint",
     "title": "金屬工具箱",
     "interior": true,
     "empty": false,
@@ -969,7 +989,7 @@
   "building_004": {
     "image": "encounters/building_004.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "glint",
     "title": "備用燃料桶",
     "interior": true,
     "empty": false,
@@ -978,7 +998,7 @@
   "building_005": {
     "image": "encounters/building_005.svg",
     "kind": "locker",
-    "effect": "none",
+    "effect": "glint",
     "title": "上鎖衣櫃",
     "interior": true,
     "empty": false,
@@ -987,7 +1007,7 @@
   "building_006": {
     "image": "encounters/building_006.svg",
     "kind": "locker",
-    "effect": "none",
+    "effect": "glint",
     "title": "廢棄軍械櫃",
     "interior": true,
     "empty": false,
@@ -996,7 +1016,7 @@
   "building_007": {
     "image": "encounters/building_007.svg",
     "kind": "luggage",
-    "effect": "none",
+    "effect": "glint",
     "title": "行李堆",
     "interior": true,
     "empty": false,
@@ -1005,7 +1025,7 @@
   "building_008": {
     "image": "encounters/building_008.svg",
     "kind": "shelf",
-    "effect": "none",
+    "effect": "glint",
     "title": "維修備料架",
     "interior": true,
     "empty": false,
@@ -1014,7 +1034,7 @@
   "building_009": {
     "image": "encounters/building_009.svg",
     "kind": "medicalbox",
-    "effect": "none",
+    "effect": "glint",
     "title": "病房藥盒",
     "interior": true,
     "empty": false,
@@ -1023,7 +1043,7 @@
   "building_010": {
     "image": "encounters/building_010.svg",
     "kind": "locker",
-    "effect": "none",
+    "effect": "glint",
     "title": "封存補給櫃",
     "interior": true,
     "empty": false,
@@ -1032,7 +1052,7 @@
   "building_011": {
     "image": "encounters/building_011.svg",
     "kind": "cache",
-    "effect": "none",
+    "effect": "glint",
     "title": "隱藏夾層",
     "interior": true,
     "empty": false,
@@ -1041,7 +1061,7 @@
   "building_012": {
     "image": "encounters/building_012.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "glint",
     "title": "清潔間儲物桶",
     "interior": true,
     "empty": false,
@@ -1050,7 +1070,7 @@
   "building_013": {
     "image": "encounters/building_013.svg",
     "kind": "bag",
-    "effect": "none",
+    "effect": "glint",
     "title": "防水收納袋",
     "interior": true,
     "empty": false,
@@ -1059,7 +1079,7 @@
   "building_014": {
     "image": "encounters/building_014.svg",
     "kind": "coat",
-    "effect": "none",
+    "effect": "glint",
     "title": "工作服口袋",
     "interior": true,
     "empty": false,
@@ -1068,7 +1088,7 @@
   "building_015": {
     "image": "encounters/building_015.svg",
     "kind": "crate",
-    "effect": "none",
+    "effect": "glint",
     "title": "倉庫封箱",
     "interior": true,
     "empty": false,
@@ -1077,7 +1097,7 @@
   "building_016": {
     "image": "encounters/building_016.svg",
     "kind": "stall",
-    "effect": "none",
+    "effect": "lantern",
     "title": "櫃台雜貨店",
     "interior": true,
     "empty": false,
@@ -1086,7 +1106,7 @@
   "building_017": {
     "image": "encounters/building_017.svg",
     "kind": "pharmacy",
-    "effect": "none",
+    "effect": "lantern",
     "title": "屋內藥房",
     "interior": true,
     "empty": false,
@@ -1095,7 +1115,7 @@
   "building_018": {
     "image": "encounters/building_018.svg",
     "kind": "locker",
-    "effect": "none",
+    "effect": "glint",
     "title": "裝備交換室",
     "interior": true,
     "empty": false,
@@ -1104,7 +1124,7 @@
   "building_019": {
     "image": "encounters/building_019.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "glint",
     "title": "室內燃料販售點",
     "interior": true,
     "empty": false,
@@ -1113,7 +1133,7 @@
   "building_020": {
     "image": "encounters/building_020.svg",
     "kind": "garage",
-    "effect": "none",
+    "effect": "weld",
     "title": "修車工坊",
     "interior": true,
     "empty": false,
@@ -1122,7 +1142,7 @@
   "building_021": {
     "image": "encounters/building_021.svg",
     "kind": "clinic",
-    "effect": "none",
+    "effect": "lantern",
     "title": "臨時診所",
     "interior": true,
     "empty": false,
@@ -1131,7 +1151,7 @@
   "building_022": {
     "image": "encounters/building_022.svg",
     "kind": "bed",
-    "effect": "none",
+    "effect": "motes",
     "title": "收費客房",
     "interior": true,
     "empty": false,
@@ -1140,7 +1160,7 @@
   "building_023": {
     "image": "encounters/building_023.svg",
     "kind": "stall",
-    "effect": "none",
+    "effect": "lantern",
     "title": "零件攤位",
     "interior": true,
     "empty": false,
@@ -1149,7 +1169,7 @@
   "building_024": {
     "image": "encounters/building_024.svg",
     "kind": "stall",
-    "effect": "none",
+    "effect": "lantern",
     "title": "巡迴商人",
     "interior": true,
     "empty": false,
@@ -1158,7 +1178,7 @@
   "building_025": {
     "image": "encounters/building_025.svg",
     "kind": "cars",
-    "effect": "none",
+    "effect": "glint",
     "title": "車庫車商",
     "interior": true,
     "empty": false,
@@ -1167,7 +1187,7 @@
   "building_026": {
     "image": "encounters/building_026.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "獨居倖存者",
     "interior": true,
     "empty": false,
@@ -1176,7 +1196,7 @@
   "building_027": {
     "image": "encounters/building_027.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "躲藏的逃兵",
     "interior": true,
     "empty": false,
@@ -1185,7 +1205,7 @@
   "building_028": {
     "image": "encounters/building_028.svg",
     "kind": "bed",
-    "effect": "none",
+    "effect": "motes",
     "title": "受傷旅人",
     "interior": true,
     "empty": false,
@@ -1194,7 +1214,7 @@
   "building_029": {
     "image": "encounters/building_029.svg",
     "kind": "toolbox",
-    "effect": "none",
+    "effect": "glint",
     "title": "被困技師",
     "interior": true,
     "empty": false,
@@ -1212,7 +1232,7 @@
   "building_031": {
     "image": "encounters/building_031.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "變種人住客",
     "interior": true,
     "empty": false,
@@ -1221,7 +1241,7 @@
   "building_032": {
     "image": "encounters/building_032.svg",
     "kind": "cache",
-    "effect": "none",
+    "effect": "glint",
     "title": "潛伏拾荒者",
     "interior": true,
     "empty": false,
@@ -1230,7 +1250,7 @@
   "building_033": {
     "image": "encounters/building_033.svg",
     "kind": "sign",
-    "effect": "none",
+    "effect": "motes",
     "title": "失散信使",
     "interior": true,
     "empty": false,
@@ -1239,7 +1259,7 @@
   "building_034": {
     "image": "encounters/building_034.svg",
     "kind": "bed",
-    "effect": "none",
+    "effect": "motes",
     "title": "睡著的陌生人",
     "interior": true,
     "empty": false,
@@ -1248,7 +1268,7 @@
   "building_035": {
     "image": "encounters/building_035.svg",
     "kind": "camp",
-    "effect": "none",
+    "effect": "lantern",
     "title": "等待車隊的人",
     "interior": true,
     "empty": false,
@@ -1257,7 +1277,7 @@
   "building_036": {
     "image": "encounters/building_036.svg",
     "kind": "book",
-    "effect": "none",
+    "effect": "motes",
     "title": "舊日筆記",
     "interior": true,
     "empty": false,
@@ -1266,7 +1286,7 @@
   "building_037": {
     "image": "encounters/building_037.svg",
     "kind": "book",
-    "effect": "none",
+    "effect": "motes",
     "title": "避難名冊",
     "interior": true,
     "empty": false,
@@ -1293,7 +1313,7 @@
   "building_040": {
     "image": "encounters/building_040.svg",
     "kind": "paper",
-    "effect": "none",
+    "effect": "motes",
     "title": "災前報紙",
     "interior": true,
     "empty": false,
@@ -1311,7 +1331,7 @@
   "building_042": {
     "image": "encounters/building_042.svg",
     "kind": "map",
-    "effect": "none",
+    "effect": "motes",
     "title": "牆面路線圖",
     "interior": true,
     "empty": false,
@@ -1320,7 +1340,7 @@
   "building_043": {
     "image": "encounters/building_043.svg",
     "kind": "paper",
-    "effect": "none",
+    "effect": "motes",
     "title": "孩子的畫冊",
     "interior": true,
     "empty": false,
@@ -1329,7 +1349,7 @@
   "building_044": {
     "image": "encounters/building_044.svg",
     "kind": "sign",
-    "effect": "none",
+    "effect": "motes",
     "title": "求救留言",
     "interior": true,
     "empty": false,
@@ -1347,7 +1367,7 @@
   "building_046": {
     "image": "encounters/building_046.svg",
     "kind": "pit",
-    "effect": "none",
+    "effect": "rubble",
     "title": "地板塌陷",
     "interior": true,
     "empty": false,
@@ -1356,7 +1376,7 @@
   "building_047": {
     "image": "encounters/building_047.svg",
     "kind": "rocks",
-    "effect": "none",
+    "effect": "rubble",
     "title": "天花板落物",
     "interior": true,
     "empty": false,
@@ -1365,7 +1385,7 @@
   "building_048": {
     "image": "encounters/building_048.svg",
     "kind": "stairs",
-    "effect": "none",
+    "effect": "rubble",
     "title": "樓梯斷裂",
     "interior": true,
     "empty": false,
@@ -1374,7 +1394,7 @@
   "building_049": {
     "image": "encounters/building_049.svg",
     "kind": "glass",
-    "effect": "none",
+    "effect": "rubble",
     "title": "破碎玻璃",
     "interior": true,
     "empty": false,
@@ -1383,7 +1403,7 @@
   "building_050": {
     "image": "encounters/building_050.svg",
     "kind": "shelf",
-    "effect": "none",
+    "effect": "glint",
     "title": "倒塌書架",
     "interior": true,
     "empty": false,
@@ -1392,7 +1412,7 @@
   "building_051": {
     "image": "encounters/building_051.svg",
     "kind": "lamp",
-    "effect": "none",
+    "effect": "rubble",
     "title": "鬆動吊燈",
     "interior": true,
     "empty": false,
@@ -1437,7 +1457,7 @@
   "building_056": {
     "image": "encounters/building_056.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "glint",
     "title": "化學殘液",
     "interior": true,
     "empty": false,
@@ -1455,7 +1475,7 @@
   "building_058": {
     "image": "encounters/building_058.svg",
     "kind": "alarm",
-    "effect": "none",
+    "effect": "alert",
     "title": "絆線警報",
     "interior": true,
     "empty": false,
@@ -1464,7 +1484,7 @@
   "building_059": {
     "image": "encounters/building_059.svg",
     "kind": "bomb",
-    "effect": "none",
+    "effect": "alert",
     "title": "門後爆炸物",
     "interior": true,
     "empty": false,
@@ -1473,7 +1493,7 @@
   "building_060": {
     "image": "encounters/building_060.svg",
     "kind": "trap",
-    "effect": "none",
+    "effect": "alert",
     "title": "壓力陷阱",
     "interior": true,
     "empty": false,
@@ -1482,7 +1502,7 @@
   "building_061": {
     "image": "encounters/building_061.svg",
     "kind": "rocks",
-    "effect": "none",
+    "effect": "rubble",
     "title": "倒塌通道",
     "interior": true,
     "empty": false,
@@ -1500,7 +1520,7 @@
   "building_063": {
     "image": "encounters/building_063.svg",
     "kind": "door",
-    "effect": "none",
+    "effect": "motes",
     "title": "卡死防火門",
     "interior": true,
     "empty": false,
@@ -1509,7 +1529,7 @@
   "building_064": {
     "image": "encounters/building_064.svg",
     "kind": "tunnel",
-    "effect": "none",
+    "effect": "rubble",
     "title": "狹窄維修道",
     "interior": true,
     "empty": false,
@@ -1518,7 +1538,7 @@
   "building_065": {
     "image": "encounters/building_065.svg",
     "kind": "dark",
-    "effect": "none",
+    "effect": "motes",
     "title": "漆黑儲藏室",
     "interior": true,
     "empty": false,
@@ -1550,7 +1570,7 @@
   "building_068": {
     "image": "encounters/building_068.svg",
     "kind": "infected",
-    "effect": "none",
+    "effect": "alert",
     "title": "感染者群",
     "interior": true,
     "empty": false,
@@ -1563,7 +1583,7 @@
   "building_069": {
     "image": "encounters/building_069.svg",
     "kind": "beast",
-    "effect": "none",
+    "effect": "alert",
     "title": "食腐獸",
     "interior": true,
     "empty": false,
@@ -1595,7 +1615,7 @@
   "building_072": {
     "image": "encounters/building_072.svg",
     "kind": "soldier",
-    "effect": "none",
+    "effect": "alert",
     "title": "敵軍巡查",
     "interior": true,
     "empty": false,
@@ -1606,7 +1626,7 @@
   "building_073": {
     "image": "encounters/building_073.svg",
     "kind": "turret",
-    "effect": "none",
+    "effect": "alert",
     "title": "自動防衛機",
     "interior": true,
     "empty": false,
@@ -1615,7 +1635,7 @@
   "building_074": {
     "image": "encounters/building_074.svg",
     "kind": "robot",
-    "effect": "none",
+    "effect": "alert",
     "title": "失控機械工",
     "interior": true,
     "empty": false,
@@ -1626,7 +1646,7 @@
   "building_075": {
     "image": "encounters/building_075.svg",
     "kind": "sniper",
-    "effect": "none",
+    "effect": "alert",
     "title": "武裝伏兵",
     "interior": true,
     "empty": false,
@@ -1637,7 +1657,7 @@
   "building_076": {
     "image": "encounters/building_076.svg",
     "kind": "empty",
-    "effect": "none",
+    "effect": "motes",
     "title": "空房間",
     "interior": true,
     "empty": true,
@@ -1646,7 +1666,7 @@
   "building_077": {
     "image": "encounters/building_077.svg",
     "kind": "shelf",
-    "effect": "none",
+    "effect": "motes",
     "title": "被搜空的貨架",
     "interior": true,
     "empty": true,
@@ -1655,7 +1675,7 @@
   "building_078": {
     "image": "encounters/building_078.svg",
     "kind": "medicalbox",
-    "effect": "none",
+    "effect": "motes",
     "title": "空藥櫃",
     "interior": true,
     "empty": true,
@@ -1664,7 +1684,7 @@
   "building_079": {
     "image": "encounters/building_079.svg",
     "kind": "safe",
-    "effect": "none",
+    "effect": "motes",
     "title": "已開啟的保險箱",
     "interior": true,
     "empty": true,
@@ -1673,7 +1693,7 @@
   "building_080": {
     "image": "encounters/building_080.svg",
     "kind": "barrel",
-    "effect": "none",
+    "effect": "motes",
     "title": "乾涸儲油槽",
     "interior": true,
     "empty": true,
@@ -1682,7 +1702,7 @@
   "building_081": {
     "image": "encounters/building_081.svg",
     "kind": "generator",
-    "effect": "none",
+    "effect": "motes",
     "title": "報廢發電機",
     "interior": true,
     "empty": true,
@@ -1691,7 +1711,7 @@
   "building_082": {
     "image": "encounters/building_082.svg",
     "kind": "door",
-    "effect": "none",
+    "effect": "motes",
     "title": "堵死的出口",
     "interior": true,
     "empty": true,
@@ -1700,7 +1720,7 @@
   "building_083": {
     "image": "encounters/building_083.svg",
     "kind": "poster",
-    "effect": "none",
+    "effect": "motes",
     "title": "褪色廣告",
     "interior": true,
     "empty": true,
@@ -1718,7 +1738,7 @@
   "building_085": {
     "image": "encounters/building_085.svg",
     "kind": "stall",
-    "effect": "none",
+    "effect": "motes",
     "title": "無人櫃台",
     "interior": true,
     "empty": true,
@@ -1727,7 +1747,7 @@
   "building_086": {
     "image": "encounters/building_086.svg",
     "kind": "luggage",
-    "effect": "none",
+    "effect": "motes",
     "title": "空行李箱",
     "interior": true,
     "empty": true,
@@ -1745,7 +1765,7 @@
   "building_088": {
     "image": "encounters/building_088.svg",
     "kind": "bath",
-    "effect": "none",
+    "effect": "motes",
     "title": "廢棄浴室",
     "interior": true,
     "empty": true,
@@ -1754,7 +1774,7 @@
   "building_089": {
     "image": "encounters/building_089.svg",
     "kind": "shop",
-    "effect": "none",
+    "effect": "motes",
     "title": "結束營業的店鋪",
     "interior": true,
     "empty": true,
@@ -1763,7 +1783,7 @@
   "building_090": {
     "image": "encounters/building_090.svg",
     "kind": "bed",
-    "effect": "none",
+    "effect": "motes",
     "title": "空置病床",
     "interior": true,
     "empty": true,
@@ -1772,7 +1792,7 @@
   "building_091": {
     "image": "encounters/building_091.svg",
     "kind": "furniture",
-    "effect": "none",
+    "effect": "motes",
     "title": "倒放的桌椅",
     "interior": true,
     "empty": true,
@@ -1781,7 +1801,7 @@
   "building_092": {
     "image": "encounters/building_092.svg",
     "kind": "mural",
-    "effect": "none",
+    "effect": "motes",
     "title": "剝落壁畫",
     "interior": true,
     "empty": true,
@@ -1790,7 +1810,7 @@
   "building_093": {
     "image": "encounters/building_093.svg",
     "kind": "corridor",
-    "effect": "none",
+    "effect": "motes",
     "title": "只有回聲的走廊",
     "interior": true,
     "empty": true,
@@ -1799,7 +1819,7 @@
   "building_094": {
     "image": "encounters/building_094.svg",
     "kind": "glass",
-    "effect": "none",
+    "effect": "motes",
     "title": "破碎展示櫃",
     "interior": true,
     "empty": true,
@@ -1808,7 +1828,7 @@
   "building_095": {
     "image": "encounters/building_095.svg",
     "kind": "office",
-    "effect": "none",
+    "effect": "motes",
     "title": "搬空的辦公室",
     "interior": true,
     "empty": true,
@@ -1817,7 +1837,7 @@
   "building_096": {
     "image": "encounters/building_096.svg",
     "kind": "stove",
-    "effect": "none",
+    "effect": "motes",
     "title": "熄滅的爐房",
     "interior": true,
     "empty": true,
@@ -1826,7 +1846,7 @@
   "building_097": {
     "image": "encounters/building_097.svg",
     "kind": "garage",
-    "effect": "none",
+    "effect": "motes",
     "title": "空車庫",
     "interior": true,
     "empty": true,
@@ -1835,7 +1855,7 @@
   "building_098": {
     "image": "encounters/building_098.svg",
     "kind": "sign",
-    "effect": "none",
+    "effect": "motes",
     "title": "褪色路標牌",
     "interior": true,
     "empty": true,
@@ -1844,7 +1864,7 @@
   "building_099": {
     "image": "encounters/building_099.svg",
     "kind": "paper",
-    "effect": "none",
+    "effect": "motes",
     "title": "被撕毀的書頁",
     "interior": true,
     "empty": true,
@@ -1853,7 +1873,7 @@
   "building_100": {
     "image": "encounters/building_100.svg",
     "kind": "partition",
-    "effect": "none",
+    "effect": "motes",
     "title": "塵封隔間",
     "interior": true,
     "empty": true,

@@ -408,6 +408,26 @@
 .message-window.has-more-text .manual-next-cue {
   display: flex;
 }
+.manual-continue-cue {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  margin-top: 3px;
+  border-radius: 4px;
+  background: rgba(123, 182, 166, 0.16);
+  border: 1px solid rgba(123, 182, 166, 0.55);
+  color: #bde6d9;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+.message-window.can-continue:not(.has-more-text) .manual-continue-cue {
+  display: flex;
+}
 @keyframes cuePulse {
   50% { opacity: 0.55; }
 }

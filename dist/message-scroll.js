@@ -1,15 +1,23 @@
 // Pure manual page-flipping for the message viewport; auto-scrolling is disabled.
-let lastId=0,oldTop=0,holdUntil=0,mounted=null;
+let lastId=0,oldTop=0,holdUntil=0,mounted=null,canContinue=false;
 
 export function hasMessageOverflow(el=mounted){
  if(!el)return false;
- return el.scrollHeight-el.clientHeight-el.scrollTop>4;
+ return el.scrollHeight-el.clientHeight-el.scrollTop>8;
 }
 
-function syncOverflowCue(el=mounted){
+export function syncOverflowCue(el=mounted){
  if(!el)return;
  const win=el.closest?.('.message-window');
- if(win)win.classList.toggle('has-more-text',hasMessageOverflow(el));
+ if(!win)return;
+ const more=hasMessageOverflow(el);
+ win.classList.toggle('has-more-text',more);
+ win.classList.toggle('can-continue',!more&&canContinue);
+}
+
+export function setContinueCue(flag){
+ canContinue=!!flag;
+ syncOverflowCue();
 }
 
 export function advanceManualPage(el=mounted){
@@ -18,7 +26,7 @@ export function advanceManualPage(el=mounted){
  el.scrollTop=Math.min(el.scrollHeight-el.clientHeight,el.scrollTop+step);
  oldTop=el.scrollTop;
  syncOverflowCue(el);
- if(!hasMessageOverflow(el))holdUntil=performance.now()+2800;
+ if(!hasMessageOverflow(el))holdUntil=performance.now()+900;
  return true;
 }
 
@@ -28,31 +36,31 @@ export function stopMessageScroll(){
 }
 
 export function resetMessageScroll(){
- stopMessageScroll();lastId=0;oldTop=0;holdUntil=0;
+ stopMessageScroll();lastId=0;oldTop=0;holdUntil=0;canContinue=false;
 }
 
 export function isMessageReadingPaused(){
  return hasMessageOverflow()||performance.now()<holdUntil;
 }
 
-export function mountMessageScroll(el,{transient=false,focusTitle=null}={}){
+export function mountMessageScroll(el,{transient=false,focusTitle=null,continuable=false}={}){
  if(!el)return;
  stopMessageScroll();
  mounted=el;
+ canContinue=!!continuable;
  if(transient){el.scrollTop=el.scrollHeight;syncOverflowCue(el);return;}
  const rows=[...el.querySelectorAll('[data-message-id]')],latest=Number(rows.at(-1)?.dataset.messageId)||0;
  const newRows=rows.filter(row=>Number(row.dataset.messageId)>lastId);
  const firstNew=(focusTitle&&newRows.find(row=>row.querySelector('strong')?.textContent===focusTitle))||newRows[0];
  if(firstNew){
   el.scrollTop+=firstNew.getBoundingClientRect().top-el.getBoundingClientRect().top;
-  holdUntil=performance.now()+2800;
+  holdUntil=performance.now()+1200;
  }else{
   el.scrollTop=oldTop;
  }
  lastId=latest;
  oldTop=el.scrollTop;
  syncOverflowCue(el);
- // Re-check after layout settles so font rendering never misses an overflow cue.
  globalThis.requestAnimationFrame?.(()=>syncOverflowCue(el));
  el.addEventListener('scroll',()=>{oldTop=el.scrollTop;syncOverflowCue(el);},{passive:true});
 }

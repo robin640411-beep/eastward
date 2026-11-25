@@ -7,12 +7,12 @@ import {vehiclePanel,garagePanel} from './vehicle-ui.js';
 import {battleSlots,bustRole,enemyTargetRegions,commandPage,BEAT_MS,IMPACT_MS} from './battle-presentation.js';
 import {encounterCommands} from './encounter-commands.js';
 import {automaticDecision,automaticStep,canContinueDriving,declineRest,alternateDriver,syncMessageContext,appendMessage} from './automatic-journey.js';
-import {mountMessageScroll,stopMessageScroll,resetMessageScroll,isMessageReadingPaused,hasMessageOverflow,advanceManualPage} from './message-scroll.js';
+import {mountMessageScroll,stopMessageScroll,resetMessageScroll,isMessageReadingPaused,hasMessageOverflow,advanceManualPage,setContinueCue} from './message-scroll.js';
 import {destinationAt,remainingKm} from './route-runtime.js';
 import {tripDuration, journalEntry} from './journey-ui.js';
 import {characterPanel,inventoryPanel,peoplePicker,inspectedPerson,comparisonCard} from './ui-panels.js';
 import {equipmentPreview,itemBonuses} from './equipment-model.js';
-import {mountWorld,captureVisual,animateResult,playBattleBeat,clearBattleBeat} from './world-view.js';
+import {mountWorld,extendTravelDuration,captureVisual,animateResult,playBattleBeat,clearBattleBeat} from './world-view.js';
 import {applyBattleFrame,transitionFor} from './motion-model.js';
 import {sceneTransition,waitForBeat,reducedMotion,toggleMotion} from './cinematics.js';
 import {enemyLayout,biomeAt,BIOMES} from './journey-view-model.js';
@@ -81,10 +81,18 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
  let messages=presentation?[{id:0,title:playbackStep?.visual?.name||'戰況',text:playbackLabel||'準備行動…'}]:(s.messages||[]);
  const opening=s.mode==='prologue'?originPages(g)[s.prologue.step]:null;if(opening){heading='出發之前 · '+(s.prologue.step+1)+' / 3';messages=[{id:'origin-'+s.prologue.step,...opening,personId:s.protagonistId}];controls=`<div class="message-actions">${s.prologue.step?btn('前一頁','prologueBack','','quiet'):''}${btn(['那個向東的理由 ›','看看這次的座駕 ›','發動引擎'][s.prologue.step],'prologueNext','','primary')}</div>`;}
  const msgTools=`<div class="message-tools"><button class="message-tool-btn" data-action="panel" data-args="messages">展開紀錄</button></div>`;
- return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div><div class="manual-next-cue" aria-hidden="true">▼ 點擊畫面翻頁</div>${controls}</section>`;
+ return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div><div class="manual-next-cue" aria-hidden="true">▼ 點擊畫面翻頁</div><div class="manual-continue-cue" aria-hidden="true">▸ 點擊畫面繼續</div>${controls}</section>`;
 }
 
-function scheduleAutomatic(){clearTimeout(automaticTimer);automaticTimer=null;if(!g.s||panel||presentation||busy||document.hidden)return;const cue=currentCue();
+async function runAutomaticDecision(decision){
+ if(!g?.s||panel||busy||presentation||document.hidden||automaticDecision(g)!==decision)return false;
+ clearTimeout(automaticTimer);automaticTimer=null;
+ const before=structuredClone(g.s);resetVisuals();
+ try{automaticStep(g);await presentChange(before,decision);return true;}
+ catch(error){console.error(error);g.s.notice='行動暫停：'+error.message;render();return false;}
+}
+
+function scheduleAutomatic(afterManualFlip=false){clearTimeout(automaticTimer);automaticTimer=null;if(!g.s||panel||presentation||busy||document.hidden)return;const cue=currentCue();
  if(cue){
   if(cue.phase==='alert')automaticTimer=setTimeout(()=>{
    if(document.hidden||busy||currentCue()!==cue)return;
@@ -94,20 +102,17 @@ function scheduleAutomatic(){clearTimeout(automaticTimer);automaticTimer=null;if
   },ALERT_MS);
   return;
  }
- const decision=automaticDecision(g);if(!['drive','finish','resolveSearch'].includes(decision))return;
- const advance=async()=>{
+ const decision=automaticDecision(g),continuable=['drive','finish','resolveSearch'].includes(decision);
+ setContinueCue(continuable);
+ if(!continuable)return;
+ // While text overflows in manual mode, never auto-advance — wait for the player to flip pages.
+ if(hasMessageOverflow())return;
+ const waitMs=afterManualFlip?2400:(decision==='drive'?2600:Math.min(4800,Math.max(2600,readingDelay(g.s)*0.35)));
+ automaticTimer=setTimeout(()=>{
   automaticTimer=null;
-  if(panel||busy||document.hidden||automaticDecision(g)!==decision)return;
-  if(hasMessageOverflow()||isMessageReadingPaused()){
-   automaticTimer=setTimeout(advance,1200);return;
-  }
-  const before=structuredClone(g.s);resetVisuals();
-  try{automaticStep(g);await presentChange(before,decision);}
-  catch(error){console.error(error);g.s.notice='行動暫停：'+error.message;render();}
- };
- const latestLen=g.s.messages?.at(-1)?.text?.length||0;
- const driveWait=Math.min(7000,Math.max(2400,1400+latestLen*55));
- automaticTimer=setTimeout(advance,decision==='drive'?driveWait:readingDelay(g.s));
+  if(hasMessageOverflow())return;
+  runAutomaticDecision(decision);
+ },waitMs);
 }
 function navigation(){const paths={party:'M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM2 21v-2a6 6 0 0 1 12 0v2M16 5a4 4 0 0 1 0 7M17 15a5 5 0 0 1 5 5v1',bag:'M7 7V5a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v2M4 7h16v14H4ZM4 13h16M10 11v5h4v-5',vehicle:'M3 15l2-8h14l2 8v5h-3v-3H6v3H3ZM4 13h16M7 16h2m6 0h2',journal:'M4 3h12l4 4v14H4ZM8 8h5m-5 5h8m-8 4h6',menu:'M4 6h16M4 12h16M4 18h16'};return `<nav class="nav" aria-label="旅程選單">${[['party','隊伍'],['bag','背包'],['vehicle','車輛'],['journal','紀錄'],['menu','選單']].map(([id,label])=>`<button data-action="panel" data-args="${id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[id]}"/></svg><span>${label}</span></button>`).join('')}</nav>`}
 function combatBody(){const s=g.s,p=g.commandActor(),orders=Object.keys(s.battle.orders||{}),reserved=Object.values(s.battle.orders||{}).filter(o=>o.type==='medicine').length;let commands='';
@@ -137,10 +142,11 @@ function render(){if(!data)return;clearTimeout(automaticTimer);automaticTimer=nu
  if(previousCanvas)root.querySelector('#world-canvas')?.replaceWith(previousCanvas);
  const event=s.current;
  const focusTitle=focusEventMessage&&(event?.rewardReceipt?event.event.title:event?.place?.name||event?.event.title);
- mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle});
+ const continuable=!presentation&&!currentCue()&&['drive','finish','resolveSearch'].includes(automaticDecision(g));
+ mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle,continuable});
  focusEventMessage=false;
 
- restoreDialog(oldPanel,oldScroll);save();if(s.mode==='driving'&&!timer){travelStarted=performance.now();travelLength=tripDuration(s);const tryArrive=()=>{if(g.s?.mode!=='driving'){timer=null;return;}if(panel==='messages'||hasMessageOverflow()){travelLength=Math.max(travelLength,performance.now()-travelStarted+3200);const cv=document.getElementById('world-canvas');if(cv)mountWorld(cv,g.s,data.assets,data.encounters,{duration:travelLength,travelStart:travelStarted,target:selectedEnemy,playback:!!presentation});timer=setTimeout(tryArrive,1200);return;}timer=null;const before=structuredClone(g.s);resetVisuals();if(panel!=='messages')panel=null;g.arrive();presentChange(before,'arrive').catch(console.error)};timer=setTimeout(tryArrive,travelLength);}mountWorld(document.getElementById('world-canvas'),s,data.assets,data.encounters,{duration:travelLength,travelStart:travelStarted,target:selectedEnemy,playback:!!presentation,encounterCue:currentCue()?{key:currentCue().key,phase:currentCue().phase,inside:!!(s.current?.inside||s.frames?.at(-1)?.kind==='building')}:null});
+ restoreDialog(oldPanel,oldScroll);save();if(s.mode==='driving'&&!timer){travelStarted=performance.now();travelLength=tripDuration(s);const tryArrive=()=>{if(g.s?.mode!=='driving'){timer=null;return;}if(panel==='messages'||hasMessageOverflow()){travelLength=Math.max(travelLength,performance.now()-travelStarted+2200);extendTravelDuration(travelLength);timer=setTimeout(tryArrive,800);return;}timer=null;const before=structuredClone(g.s);resetVisuals();if(panel!=='messages')panel=null;g.arrive();presentChange(before,'arrive').catch(console.error)};timer=setTimeout(tryArrive,travelLength);}mountWorld(document.getElementById('world-canvas'),s,data.assets,data.encounters,{duration:travelLength,travelStart:travelStarted,target:selectedEnemy,playback:!!presentation,encounterCue:currentCue()?{key:currentCue().key,phase:currentCue().phase,inside:!!(s.current?.inside||s.frames?.at(-1)?.kind==='building')}:null});
  if(currentCue())root.querySelectorAll('button:not([data-action="ackEncounter"])').forEach(el=>el.disabled=true);
  if(presentation){root.querySelectorAll('button:not([data-action="skipPlayback"]),select').forEach(el=>el.disabled=true);}
  scheduleAutomatic();}
@@ -227,7 +233,7 @@ function browseCombat(action,args){if(!g.s?.battle||presentation||panel)return f
  updateBattleControls();return true;
 }
 function commitCommand(target){if(!pendingCommand)return;const {allies,...command}=pendingCommand;if(g.combatRound({...command,target})){pendingCommand=null;combatMenu='root';}}
-root.addEventListener('click',async e=>{if(e.target.classList.contains('panel-back')&&!busy){panel=null;ui.picker=null;render();return;}const b=e.target.closest('button[data-action]');if(!b){if(!panel&&!busy&&!e.target.closest('button,a,summary,input,select')){const copy=root.querySelector('.encounter-copy');if(advanceManualPage()||(copy&&advanceManualPage(copy))){audio();scheduleAutomatic();}}return;}if(b.disabled)return;const {action:a,args:x}=b.dataset;if(a==='skipPlayback'){playbackController?.abort();return;}if(busy)return;
+root.addEventListener('click',async e=>{if(e.target.classList.contains('panel-back')&&!busy){panel=null;ui.picker=null;render();return;}const b=e.target.closest('button[data-action]');if(!b){if(!panel&&!busy&&!presentation&&!e.target.closest('button,a,summary,input,select')){const copy=root.querySelector('.encounter-copy');if(advanceManualPage()||(copy&&advanceManualPage(copy))){audio();scheduleAutomatic(true);return;}const decision=automaticDecision(g);if(!currentCue()&&['drive','finish','resolveSearch'].includes(decision)){audio();await runAutomaticDecision(decision);return;}}return;}if(b.disabled)return;const {action:a,args:x}=b.dataset;if(a==='skipPlayback'){playbackController?.abort();return;}if(busy)return;
  if(currentCue()){
   const cue=currentCue();
   if(a==='ackEncounter'&&cue.combat&&cue.phase==='reading'){

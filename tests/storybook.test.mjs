@@ -237,4 +237,10 @@ test('pure manual page-flipping replaces auto-scroll and portrait layout uses 40
  assert(css.includes('40% minmax(0, 1fr) auto'));
  assert(!css.includes('50% minmax(0, 1fr) auto'));
  assert(css.includes('font-size: clamp(16px, 4.3vw, 18.5px)'));
+
+ const enc=read('assets/encounters.json');
+ assert.equal(Object.keys(enc).length,202);
+ for(const [id,a] of Object.entries(enc)){
+  assert(a.effect&&a.effect!=='none',`Encounter ${id} missing ambient animation effect`);
+ }
 });
