@@ -555,3 +555,15 @@
 .portrait-layout > .party-strip {
   border-top: 1px solid #354752;
 }
+
+/* Three-color storybook typography: Yellow title, White body, Green author snark */
+.portrait-layout .message-line strong.msg-title {
+  color: #f3cf7a;
+}
+.portrait-layout .message-line p.msg-body {
+  color: #f0f3ec;
+}
+.portrait-layout .message-line p.msg-author {
+  color: #8fd8a8;
+  margin-top: 6px;
+}

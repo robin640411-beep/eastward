@@ -418,3 +418,29 @@ test('combat message pane scopes to current battle messages and hides tap-to-fli
  assert(!mockWin.classes.has('can-continue'));
  stopMessageScroll();
 });
+
+test('single-event storybook display shows one yellow title at a time and merges author snark in green',async()=>{
+ const {selectVisibleMessage,resetMessageScroll}=await import('../dist/message-scroll.js');
+ resetMessageScroll();
+ const msgs=[
+  {id:1,title:'完整備用車',text:'發現可以行駛的小車。'},
+  {id:2,title:'作者吐槽',text:'（作者自言自語。）'},
+  {id:3,title:'冒牌救援車',text:'路邊停著一輛可疑救護車。'}
+ ];
+ // Starts at first unread when prologue/stepping, or advances one event per tap
+ const p1=selectVisibleMessage(msgs,{prologue:true});
+ assert.equal(p1.current.id,1);
+ assert.deepEqual(p1.current.authorNotes,['（作者自言自語。）']);
+ assert.equal(p1.hasNext,true);
+ assert.equal(advanceManualPage(null),'next');
+ const p2=selectVisibleMessage(msgs,{prologue:true});
+ assert.equal(p2.current.id,3);
+ assert.equal(p2.hasNext,false);
+ assert.equal(advanceManualPage(null),false);
+ resetMessageScroll();
+
+ const css=readFileSync(new URL('../dist/portrait-layout.css',import.meta.url),'utf8');
+ assert(css.includes('strong.msg-title'));
+ assert(css.includes('p.msg-body'));
+ assert(css.includes('p.msg-author'));
+});

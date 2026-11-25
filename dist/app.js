@@ -7,7 +7,7 @@ import {vehiclePanel,garagePanel} from './vehicle-ui.js';
 import {battleSlots,bustRole,enemyTargetRegions,commandPage,BEAT_MS,IMPACT_MS} from './battle-presentation.js';
 import {encounterCommands} from './encounter-commands.js';
 import {automaticDecision,automaticStep,canContinueDriving,declineRest,alternateDriver,syncMessageContext,appendMessage} from './automatic-journey.js';
-import {mountMessageScroll,stopMessageScroll,resetMessageScroll,isMessageReadingPaused,hasMessageOverflow,advanceManualPage,setContinueCue} from './message-scroll.js';
+import {mountMessageScroll,stopMessageScroll,resetMessageScroll,isMessageReadingPaused,hasMessageOverflow,advanceManualPage,setContinueCue,selectVisibleMessage} from './message-scroll.js';
 import {destinationAt,remainingKm} from './route-runtime.js';
 import {tripDuration, journalEntry} from './journey-ui.js';
 import {characterPanel,inventoryPanel,peoplePicker,inspectedPerson,comparisonCard} from './ui-panels.js';
@@ -71,6 +71,17 @@ function encounterNotice(c){
   <div class="encounter-copy" role="log" aria-live="polite" tabindex="0">${receipt?`<p class="previous-receipt">${esc(receipt)}</p>`:''}<strong>${esc(name)}</strong>${message.map(line=>`<p>${esc(line)}</p>`).join('')}</div>
   ${reading?`<div class="message-actions">${btn(c.button,'ackEncounter','','primary')}</div>`:''}</section>`;
 }
+function formatMessageParts(text,authorNotes=[]){
+ const lines=concealAttitudeLabels(text||'').split('\n').map(l=>l.trim()).filter(Boolean);
+ const html=lines.map(line=>{
+  const isAuthor=line.startsWith('（')&&line.endsWith('）');
+  return `<p class="${isAuthor?'msg-author':'msg-body'}">${esc(line)}</p>`;
+ });
+ for(const note of authorNotes||[]){
+  if(note)html.push(`<p class="msg-author">${esc(note)}</p>`);
+ }
+ return html.join('');
+}
 function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(currentCue());const s=shownState(),decision=presentation?'wait':automaticDecision(g);let prompt='',actions='';
  if(decision==='rest'){const p=g.driver(),other=alternateDriver(g);prompt=`${display(p)}的體力只剩 ${p.st}，眼皮重得快黏在方向盤上了。${canContinueDriving(g)?'我是覺得該讓他停車睡一覺，還是硬撐著再開一段？':'再硬開下去就要把車開進溝裡了，非得休息或換人接手不可。'}`;actions=btn('靠邊停車休息','restBegin','','primary')+btn('硬著頭皮再開一段','keepDriving','','',!canContinueDriving(g))+(other?btn('換 '+other.name+' 接手方向盤','restSwap'): '');}
  if(decision==='restSetup'){const guard=g.s.party.find(p=>p.id===ui.watchId&&p.st>0&&p.hp>0);if(!guard)ui.watchId=null;prompt=guard?`由${display(guard)}負責守夜，其餘人睡四小時。`:`整車人打算倒頭大睡四小時，連個守夜的都不留——要是半夜被摸上來挨揍可別怪我沒提醒。`;actions=btn('守夜：'+(guard?.name||'無人')+' ▸','cycleWatch')+btn('熄燈睡覺','sleep','','primary')+btn('算了，先不睡','restCancel');}
@@ -86,7 +97,7 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
  if(s.battle&&!presentation){
   const startId=s.battle.startMsgId||0;
   const battleMsgs=messages.filter(m=>m.id>startId);
-  messages=battleMsgs.length?battleMsgs.slice(-8):[{id:0,title:s.battle.mode==='vehicle'?'公路追逐':'遭遇戰',text:s.notice||(s.battle.mode==='vehicle'?'公路追逐開始，選擇座駕的下一步行動。':'遭遇戰開始，選擇下一步行動。')}];
+  messages=battleMsgs.length?battleMsgs:[{id:0,title:s.battle.mode==='vehicle'?'公路追逐':'遭遇戰',text:s.notice||(s.battle.mode==='vehicle'?'公路追逐開始，選擇座駕的下一步行動。':'遭遇戰開始，選擇下一步行動。')}];
  }
  const isPrologue=s.mode==='prologue';
  if(isPrologue){
@@ -95,10 +106,12 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
   messages=originPages(g).map((pg,idx)=>({id:idx+1,...pg,personId:idx===0?s.protagonistId:null}));
   controls='';
  }
+ const {current:activeMsg,hasNext}=selectVisibleMessage(messages,{battle:!!s.battle,prologue:isPrologue,transient:!!presentation});
+ const visibleMessages=activeMsg?[activeMsg]:[];
  const msgTools=`<div class="message-tools"><button class="message-tool-btn" data-action="panel" data-args="messages">展開紀錄</button></div>`;
  const cornerArrow=s.battle?'':'<span class="manual-next-cue" aria-hidden="true">▼</span>';
- const continueCue=!s.battle&&isPrologue?'<div class="manual-continue-cue" aria-hidden="true">▸ 點擊畫面發動引擎上路</div>':'';
- return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll-wrap"><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div>${cornerArrow}</div>${continueCue}${controls}</section>`;
+ const continueCue=!s.battle&&isPrologue&&!hasNext?'<div class="manual-continue-cue" aria-hidden="true">▸ 點擊畫面發動引擎上路</div>':'';
+ return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll-wrap"><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${visibleMessages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div>${m.title?`<strong class="msg-title">${esc(m.title)}</strong>`:''}${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}${formatMessageParts(m.text,m.authorNotes)}</div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div>${cornerArrow}</div>${continueCue}${controls}</section>`;
 }
 
 async function runAutomaticDecision(decision){
@@ -254,7 +267,7 @@ function browseCombat(action,args){if(!g.s?.battle||presentation||panel)return f
  updateBattleControls();return true;
 }
 function commitCommand(target){if(!pendingCommand)return;const {allies,...command}=pendingCommand;if(g.combatRound({...command,target})){pendingCommand=null;combatMenu='root';}}
-root.addEventListener('click',async e=>{if(e.target.classList.contains('panel-back')&&!busy){panel=null;ui.picker=null;render();return;}const b=e.target.closest('button[data-action]');if(!b){if(!panel&&!busy&&!presentation&&!e.target.closest('button,a,summary,input,select')){const copy=root.querySelector('.encounter-copy');if(advanceManualPage()||(copy&&advanceManualPage(copy))){audio();scheduleAutomatic(true);return;}if(g.s?.mode==='prologue'){audio();const before=structuredClone(g.s);resetVisuals();while(g.s.mode==='prologue')g.advancePrologue();resetMessageScroll();if(g.canDrive())g.depart();await presentChange(before,'depart');return;}const decision=automaticDecision(g);if(!currentCue()&&['drive','finish','resolveSearch'].includes(decision)){audio();await runAutomaticDecision(decision);return;}}return;}if(b.disabled)return;const {action:a,args:x}=b.dataset;if(a==='skipPlayback'){playbackController?.abort();return;}if(busy)return;
+root.addEventListener('click',async e=>{if(e.target.classList.contains('panel-back')&&!busy){panel=null;ui.picker=null;render();return;}const b=e.target.closest('button[data-action]');if(!b){if(!panel&&!busy&&!presentation&&!e.target.closest('button,a,summary,input,select')){const copy=root.querySelector('.encounter-copy');const adv=advanceManualPage();if(adv){audio();if(adv==='next')render();else scheduleAutomatic(true);return;}if(copy&&advanceManualPage(copy)){audio();scheduleAutomatic(true);return;}if(g.s?.mode==='prologue'){audio();const before=structuredClone(g.s);resetVisuals();while(g.s.mode==='prologue')g.advancePrologue();resetMessageScroll();if(g.canDrive())g.depart();await presentChange(before,'depart');return;}const decision=automaticDecision(g);if(!currentCue()&&['drive','finish','resolveSearch'].includes(decision)){audio();await runAutomaticDecision(decision);return;}}return;}if(b.disabled)return;const {action:a,args:x}=b.dataset;if(a==='skipPlayback'){playbackController?.abort();return;}if(busy)return;
  if(currentCue()){
   const cue=currentCue();
   if(a==='ackEncounter'&&cue.combat&&cue.phase==='reading'){
