@@ -171,21 +171,23 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
  // Vehicle combat: vehicle fires mounted weapon OR rams enemy car (trading armor/hull)!
  if(isVeh){
   const armed=hasVehicleWeapon(vStats);
+  const enemyArmor=e.armor??e.defense??0;
   if(armed){
    if(this.roll()>92){b.roundMissed=true;this.log(vStats.name,`${vStats.weapon.name}開火落空！`);return;}
-   const dmg=Math.max(2,vStats.weapon.bonus+Math.floor(this.stat(p,'attack')/2)-Math.floor(e.defense/2));
+   const dmg=Math.max(2,vStats.weapon.bonus+Math.floor(this.stat(p,'attack')/2)-Math.floor(enemyArmor/2));
    e.hp=Math.max(0,e.hp-dmg);
    let subMsg='';
    if(e.hp>0&&this.roll()<=30){
     if(e.hasWeapon){e.hasWeapon=false;e.attackStyle='ram';subMsg=' 擊毀了敵車武裝，對方只能改用衝撞！';}
-    else if(e.defense>0){e.defense=Math.max(0,e.defense-1);subMsg=' 打穿敵車裝甲！';}
+    else if(enemyArmor>0){e.armor=Math.max(0,enemyArmor-1);e.defense=e.armor;subMsg=' 打穿敵車裝甲（敵方裝甲 −1）！';}
     else{e.hp=Math.max(0,e.hp-2);subMsg=' 擊中敵車油箱引發爆燃（額外 −2）！';}
    }
    this.log(vStats.name,`以${vStats.weapon.name}開火，對${e.name}造成 ${dmg} 傷害。${subMsg}`);
   }else{
-   const dmg=Math.max(2,3+vStats.armor+Math.floor(this.stat(p,'attack')/3)-Math.floor(e.defense/2));
+   const dmg=Math.max(2,3+vStats.armor+Math.floor(this.stat(p,'attack')/3)-Math.floor(enemyArmor/2));
    e.hp=Math.max(0,e.hp-dmg);
-   const selfDmg=Math.max(1,2+Math.floor((e.defense||1)/2)-Math.floor(vStats.armor/3));
+   if(e.hp>0&&enemyArmor>0&&this.roll()<=35){e.armor=Math.max(0,enemyArmor-1);e.defense=e.armor;}
+   const selfDmg=Math.max(1,2+Math.floor(enemyArmor/2)-Math.floor(vStats.armor/3));
    this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-selfDmg);
    let armorMsg='';
    if(vStats.armor>0&&this.roll()<=30){

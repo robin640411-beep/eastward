@@ -52,14 +52,15 @@ function partyStrip(battle=false){const s=shownState(),actor=battle&&!presentati
  return `<div class="battle-slot ${pose==='attack'?'acting':pose?'targeted':''}" data-slot="${index}" ${pose?`data-pose="${pose}" data-phase="${playbackPhase}"`:''}>${card}</div>`;
  }).join('')}</div>`;
 }
-function hud(){
+function routeBar(){return `<header class="route-hud">${routeHeader()}</header>`;}
+function vehicleHud(){
  const s=shownState(),v=vehicleStats(data.assets,s.vehicle),fuel=s.resources.fuel,reserve=s.resources.fuelReserve||0;
  const metrics=[['油箱',fuel+'/'+v.capacity,'fuel'],['車況',s.vehicle.hp+'/'+s.vehicle.maxHp,'condition'],['裝甲',v.armor,'armor']];
- return `<header class="vehicle-hud">${routeHeader()}<div class="vehicle-readouts">${metrics.map(([label,value,id])=>`<span class="vehicle-stat ${id}"><small>${label}</small><b>${value}</b></span>`).join('')}<span class="vehicle-stat velocity"><b id="journey-speed">0</b><small>km/h</small></span></div><div class="vehicle-meta"><span>${esc(v.name)} · ${s.party.length}/${Math.min(4,v.seats)} 席${reserve?' · 備用油 '+reserve:''}</span><span id="journey-time">第 ${Math.floor(s.minutes/1440)+1} 天 · ${phaseName(s.minutes)}</span></div></header>`;
+ return `<section class="vehicle-hud" aria-label="玩家車輛狀態"><div class="vehicle-readouts">${metrics.map(([label,value,id])=>`<span class="vehicle-stat ${id}"><small>${label}</small><b>${value}</b></span>`).join('')}<span class="vehicle-stat velocity"><b id="journey-speed">0</b><small>km/h</small></span></div><div class="vehicle-meta"><span>${esc(v.name)} · ${s.party.length}/${Math.min(4,v.seats)} 席${reserve?' · 備用油 '+reserve:''}</span><span id="journey-time">第 ${Math.floor(s.minutes/1440)+1} 天 · ${phaseName(s.minutes)}</span></div></section>`;
 }
 function routeHeader(){const s=shownState(),km=remainingKm(s.progress),destination=destinationAt(s);return `<div class="route-header" aria-label="旅程位置"><strong id="journey-place">${esc(biomeAt(s.progress,s.seed,s.route).name)}</strong><div class="destination-readout"><span>距離 ${esc(destination.name)}</span><span>還剩 <b id="journey-distance">${km.toLocaleString('en-US')}</b> 公里</span></div><div class="route-track" role="img" aria-label="距離樂園還剩 ${km} 公里"><i id="journey-progress" style="width:${100-km/10}%"></i></div></div>`;}
-function enemyTargets(){const s=shownState();if(!s.battle)return '';const enemies=s.battle.enemies,regions=enemyTargetRegions(enemies,enemyLayout(enemies.length,enemies));return enemies.map((e,i)=>{const r=regions[i];return `<button class="world-target ${e.hp<=0?'defeated':''} ${selectedEnemy===e.id?'selected':''} ${pendingCommand&&!pendingCommand.allies?'await-target':''}" style="left:${r.left/384*100}%;width:${r.width/384*100}%;--caption-x:${r.caption/ r.width*100}%" data-enemy-id="${e.id}" ${e.hp<=0?'disabled aria-hidden="true"':''} data-action="targetEnemy" data-args="${e.id}" aria-label="${pendingCommand&&!pendingCommand.allies?'對':'鎖定'}${esc(e.name)}" aria-pressed="${selectedEnemy===e.id}"><span class="enemy-caption"><span>${esc(e.name)}</span><small>HP ${e.hp}/${e.maxHp}</small>${bar(e.hp,e.maxHp,'hp')}</span></button>`;}).join('');}
-function scene(){const s=shownState(),title=s.battle?(s.battle.finalBoss?'樂園前的決戰':s.battle.mode==='vehicle'?'公路追逐':'遭遇戰')+' · '+s.battle.round+' 回合':s.mode==='driving'?'向東行駛':s.current?.inside||s.frames?.at(-1)?.kind==='building'?(s.current?.place?.name||'建築內部'):(s.current?.place?.name||'公路旁');return `<section class="scene world-stage ${s.mode==='driving'?'driving':''} ${s.battle?'battle-stage':''}"><canvas id="world-canvas" width="384" height="240" role="img" aria-label="公路遊戲場景"></canvas><div class="scene-badge">${esc(title)}</div><span class="compass">${s.battle?'VS':'E →'}</span><div class="world-targets">${enemyTargets()}</div></section>`}
+function enemyTargets(){const s=shownState();if(!s.battle)return '';const enemies=s.battle.enemies,isVeh=s.battle.mode==='vehicle',regions=enemyTargetRegions(enemies,enemyLayout(enemies.length,enemies));return enemies.map((e,i)=>{const r=regions[i],statsLine=isVeh?`車況 ${e.hp}/${e.maxHp} · 裝甲 ${e.armor??e.defense??0} · ${e.hasWeapon?'武裝':'衝撞'}`:`HP ${e.hp}/${e.maxHp}`;return `<button class="world-target ${e.hp<=0?'defeated':''} ${selectedEnemy===e.id?'selected':''} ${pendingCommand&&!pendingCommand.allies?'await-target':''}" style="left:${r.left/384*100}%;width:${r.width/384*100}%;--caption-x:${r.caption/ r.width*100}%" data-enemy-id="${e.id}" ${e.hp<=0?'disabled aria-hidden="true"':''} data-action="targetEnemy" data-args="${e.id}" aria-label="${pendingCommand&&!pendingCommand.allies?'對':'鎖定'}${esc(e.name)}" aria-pressed="${selectedEnemy===e.id}"><span class="enemy-caption"><span>${esc(e.name)}</span><small>${statsLine}</small>${bar(e.hp,e.maxHp,'hp')}</span></button>`;}).join('');}
+function scene(){const s=shownState(),title=s.battle?(s.battle.finalBoss?'樂園前的決戰':s.battle.mode==='vehicle'?'公路追逐':'遭遇戰')+' · '+s.battle.round+' 回合':s.mode==='driving'?'向東行駛':s.current?.inside||s.frames?.at(-1)?.kind==='building'?(s.current?.place?.name||'建築內部'):(s.current?.place?.name||'公路旁');return `<section class="scene world-stage ${s.mode==='driving'?'driving':''} ${s.battle?'battle-stage':''} ${s.battle?.mode==='vehicle'?'vehicle-battle':''}"><canvas id="world-canvas" width="384" height="240" role="img" aria-label="公路遊戲場景"></canvas><div class="scene-badge">${esc(title)}</div><span class="compass">${s.battle?'VS':'E →'}</span><div class="world-targets">${enemyTargets()}</div></section>`}
 
 function encounterNotice(c){
  const reading=c.phase==='reading',driver=g.s.party.find(p=>p.id===g.s.driver);
@@ -158,7 +159,7 @@ function render(){if(!data)return;clearTimeout(automaticTimer);automaticTimer=nu
  if(s.mode==='driving'&&!s.travel.preview)s.travel.preview=g.previewArrival();
  const previousCanvas=root.querySelector('#world-canvas');
  root.classList.add('portrait-layout');if(currentCue())root.classList.add('has-encounter-cue');
- root.innerHTML=hud()+partyStrip(!!s.battle)+scene()+messageWindow()+navigation()+panelHtml();
+ root.innerHTML=routeBar()+scene()+messageWindow()+partyStrip(!!s.battle)+vehicleHud()+navigation()+panelHtml();
  if(previousCanvas)root.querySelector('#world-canvas')?.replaceWith(previousCanvas);
  const event=s.current;
  const focusTitle=focusEventMessage&&(event?.rewardReceipt?event.event.title:event?.place?.name||event?.event.title);
@@ -194,7 +195,7 @@ function refreshBattleBeat(phase){
  }else{
   root.querySelector('.world-targets').innerHTML=enemyTargets();
   root.querySelectorAll('.world-target').forEach(button=>button.disabled=true);
-  if(playbackStep.effects.some(f=>f.side==='vehicle'))root.querySelector('.vehicle-hud').outerHTML=hud();
+  if(playbackStep.effects.some(f=>f.side==='vehicle'))root.querySelector('.vehicle-hud').outerHTML=vehicleHud();
  }
 }
 async function presentChange(before,effectType){

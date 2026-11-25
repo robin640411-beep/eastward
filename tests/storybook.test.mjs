@@ -235,9 +235,12 @@ test('pure manual page-flipping replaces auto-scroll and portrait layout uses 40
  stopMessageScroll();
 
  const css=readFileSync(new URL('../dist/portrait-layout.css',import.meta.url),'utf8');
- assert(css.includes('40% minmax(0, 1fr) auto'));
+ assert(css.includes('auto 40% minmax(0, 1fr)'));
+ assert(css.includes('.vehicle-battle .world-target .enemy-caption'));
  assert(!css.includes('50% minmax(0, 1fr) auto'));
  assert(css.includes('font-size: clamp(16px, 4.3vw, 18.5px)'));
+ const appSrc=readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');
+ assert(appSrc.includes('routeBar()+scene()+messageWindow()+partyStrip(!!s.battle)+vehicleHud()+navigation()'));
 
  const enc=read('assets/encounters.json');
  assert.equal(Object.keys(enc).length,202);

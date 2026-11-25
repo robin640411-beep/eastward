@@ -1,40 +1,45 @@
-/* Five rows share one viewport. The third row is the scene at every game state. */
+/* Six rows share one viewport: Route (top) -> Scene (40%) -> Messages -> Party -> Vehicle -> Nav. */
 .game-shell.portrait-layout {
   --play-height: 100dvh;
   width: min(100%, 550px, 80dvh);
   height: var(--play-height);
   min-height: 0;
   display: grid;
-  grid-template-rows: clamp(58px, 8.8dvh, 80px) clamp(60px, 9.5dvh, 88px) 40% minmax(0, 1fr) auto;
+  grid-template-rows: auto 40% minmax(0, 1fr) clamp(54px, 8.4dvh, 72px) auto auto;
   padding: 0;
   margin: 0 auto;
   overflow: hidden;
   background: #151b24;
 }
 .portrait-layout > * { min-width: 0 }
-.vehicle-hud {
-  display: grid;
-  grid-template-rows: 1.35fr 1fr .7fr;
-  min-height: 0;
+.route-hud {
   background: linear-gradient(155deg,#263039,#151e27 75%);
   border-bottom: 1px solid #4c5152;
 }
-.vehicle-hud .route-header {
-  height: 100%;
+.route-hud .route-header {
   min-height: 0;
-  padding: 2px 12px 4px;
+  padding: 5px 12px 6px;
   border: 0;
   background: transparent;
 }
-.vehicle-hud .route-header > strong {
+.route-hud .route-header > strong {
   color: #f1dfbc;
-  font-size: clamp(12px, 3.6vw, 17px);
+  font-size: clamp(13px, 3.6vw, 17px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.vehicle-hud .destination-readout { line-height: 1.1 }
-.vehicle-hud .destination-readout b { color: #f9d394; font-size: clamp(15px, 4.3vw, 20px) }
+.route-hud .destination-readout { line-height: 1.1 }
+.route-hud .destination-readout b { color: #f9d394; font-size: clamp(15px, 4.3vw, 20px) }
+.vehicle-hud {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  min-height: 0;
+  padding: 4px 0 3px;
+  background: linear-gradient(155deg,#222d37,#141d26 75%);
+  border-top: 1px solid #3f505a;
+}
 .vehicle-readouts {
   display: grid;
   grid-template-columns: 1.15fr 1.05fr .85fr 1fr;
@@ -231,8 +236,7 @@
 }
 
 @media (max-height:625px) {
-  .game-shell.portrait-layout {grid-template-rows: 52px 58px 40% minmax(0,1fr) auto}
-  .vehicle-hud {grid-template-rows: 30px 15px 10px}
+  .game-shell.portrait-layout {grid-template-rows: auto 40% minmax(0,1fr) 52px auto auto}
   .portrait-layout .nav > button { min-height: 40px }
   .portrait-layout .message-commands, .portrait-layout .message-actions {margin-top:3px}
   .portrait-layout .message-commands button,.portrait-layout .message-actions button {min-height:32px; font-size: 12.5px}
@@ -527,4 +531,20 @@
 }
 .in-combat .message-scroll {
   padding-bottom: 4px;
+}
+
+/* Vehicle battle: keep enemy vehicle info centered in the upper sky, never covering player car */
+.vehicle-battle .world-target .enemy-caption {
+  top: 16%;
+  bottom: auto;
+  left: var(--caption-x, 50%);
+  width: min(176px, 92%);
+  transform: translateX(-50%);
+  padding: 4px 7px;
+}
+.vehicle-battle .world-target.await-target::before {
+  top: 6%;
+}
+.portrait-layout > .party-strip {
+  border-top: 1px solid #354752;
 }
