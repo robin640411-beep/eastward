@@ -43,12 +43,20 @@ export function isMessageReadingPaused(){
  return hasMessageOverflow()||performance.now()<holdUntil;
 }
 
-export function mountMessageScroll(el,{transient=false,focusTitle=null,continuable=false}={}){
+export function mountMessageScroll(el,{transient=false,focusTitle=null,continuable=false,battle=false}={}){
  if(!el)return;
  stopMessageScroll();
  mounted=el;
- canContinue=!!continuable;
- if(transient){el.scrollTop=el.scrollHeight;syncOverflowCue(el);return;}
+ canContinue=battle?false:!!continuable;
+ if(transient||battle){
+  const rows=[...el.querySelectorAll('[data-message-id]')],latest=Number(rows.at(-1)?.dataset.messageId)||0;
+  el.scrollTop=Math.max(0,el.scrollHeight-el.clientHeight);
+  if(battle&&latest>lastId)lastId=latest;
+  oldTop=el.scrollTop;
+  const win=el.closest?.('.message-window');
+  if(win){win.classList.toggle('has-more-text',false);win.classList.toggle('can-continue',false);}
+  return;
+ }
  const rows=[...el.querySelectorAll('[data-message-id]')],latest=Number(rows.at(-1)?.dataset.messageId)||0;
  const newRows=rows.filter(row=>Number(row.dataset.messageId)>lastId);
  const firstNew=(focusTitle&&newRows.find(row=>row.querySelector('strong')?.textContent===focusTitle))||newRows[0];

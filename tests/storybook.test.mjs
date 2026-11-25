@@ -390,3 +390,28 @@ test('front-seat window ordering, vehicle ramming/weapon/loss combat, and explic
  assert(gEsc.s.notice.includes('我方撤離'),`Expected explicit player escape notice, got: ${gEsc.s.notice}`);
  assert(gEsc.s.logs.some(l=>l.title.includes('我方逃跑')),'Expected explicit escape log entry');
 });
+
+test('combat message pane scopes to current battle messages and hides tap-to-flip cues',()=>{
+ const g=fresh(616);
+ g.log('停靠片刻','戰前的舊旅途訊息。');
+ const preBattleSerial=g.s.messageSerial;
+ g.beginCombat('character');
+ assert.equal(g.s.battle.startMsgId,preBattleSerial);
+ g.log('戰鬥','主角揮棒打中敵人。');
+ const battleOnly=g.s.messages.filter(m=>m.id>g.s.battle.startMsgId);
+ assert(!battleOnly.some(m=>m.text.includes('戰前的舊旅途訊息')));
+ assert(battleOnly.some(m=>m.text.includes('主角揮棒打中敵人')));
+
+ const mockWin={classes:new Set(['has-more-text','can-continue']),classList:{toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
+ const mockEl={
+  scrollTop:0,clientHeight:80,scrollHeight:220,isConnected:true,dataset:{},
+  querySelectorAll:()=>[{dataset:{messageId:'10'}}],
+  closest:()=>mockWin,
+  addEventListener:()=>{}
+ };
+ mountMessageScroll(mockEl,{battle:true});
+ assert.equal(mockEl.scrollTop,140);
+ assert(!mockWin.classes.has('has-more-text'));
+ assert(!mockWin.classes.has('can-continue'));
+ stopMessageScroll();
+});

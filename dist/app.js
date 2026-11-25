@@ -82,6 +82,11 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
  else if(actions)controls=`<div class="message-actions">${actions}</div>`;
  else if(events.length){const page=commandPage(events,ui.commandPage);controls=`<div class="message-commands" aria-label="事件選項"><div class="event-choice-grid">${page.items.map(c=>btn(c.label,c.action,c.args,c.style,c.disabled)).join('')}</div>${page.pages>1?`<div class="choice-pagination">${btn('‹ 上一頁','choicePage',page.page-1,'quiet',page.page===0)}<span>${page.page+1} / ${page.pages}</span>${btn('更多選項 ›','choicePage',page.page+1,'quiet',page.page===page.pages-1)}</div>`:''}</div>`;}
  let messages=presentation?[{id:0,title:playbackStep?.visual?.name||'戰況',text:playbackLabel||'準備行動…'}]:(s.messages||[]);
+ if(s.battle&&!presentation){
+  const startId=s.battle.startMsgId||0;
+  const battleMsgs=messages.filter(m=>m.id>startId);
+  messages=battleMsgs.length?battleMsgs.slice(-8):[{id:0,title:s.battle.mode==='vehicle'?'公路追逐':'遭遇戰',text:s.notice||(s.battle.mode==='vehicle'?'公路追逐開始，選擇座駕的下一步行動。':'遭遇戰開始，選擇下一步行動。')}];
+ }
  const isPrologue=s.mode==='prologue';
  if(isPrologue){
   const hero=s.party.find(p=>p.id===s.protagonistId)||s.party[0];
@@ -91,7 +96,8 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
  }
  const msgTools=`<div class="message-tools"><button class="message-tool-btn" data-action="panel" data-args="messages">展開紀錄</button></div>`;
  const continueLabel=isPrologue?'▸ 點擊畫面發動引擎上路':'▸ 點擊畫面繼續';
- return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div><div class="manual-next-cue" aria-hidden="true">▼ 點擊畫面翻頁</div><div class="manual-continue-cue" aria-hidden="true">${continueLabel}</div>${controls}</section>`;
+ const cues=s.battle?'':`<div class="manual-next-cue" aria-hidden="true">▼ 點擊畫面翻頁</div><div class="manual-continue-cue" aria-hidden="true">${continueLabel}</div>`;
+ return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div>${cues}${controls}</section>`;
 }
 
 async function runAutomaticDecision(decision){
@@ -157,7 +163,7 @@ function render(){if(!data)return;clearTimeout(automaticTimer);automaticTimer=nu
  const event=s.current;
  const focusTitle=focusEventMessage&&(event?.rewardReceipt?event.event.title:event?.place?.name||event?.event.title);
  const continuable=!presentation&&!currentCue()&&(s.mode==='prologue'||['drive','finish','resolveSearch'].includes(automaticDecision(g)));
- mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle,continuable});
+ mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle,continuable,battle:!!s.battle});
  focusEventMessage=false;
 
  restoreDialog(oldPanel,oldScroll);save();if(s.mode==='driving'&&!timer){travelStarted=performance.now();travelLength=tripDuration(s);const tryArrive=()=>{if(g.s?.mode!=='driving'){timer=null;return;}if(panel==='messages'||hasMessageOverflow()){travelLength=Math.max(travelLength,performance.now()-travelStarted+2200);extendTravelDuration(travelLength);timer=setTimeout(tryArrive,800);return;}timer=null;const before=structuredClone(g.s);resetVisuals();if(panel!=='messages')panel=null;g.arrive();presentChange(before,'arrive').catch(console.error)};timer=setTimeout(tryArrive,travelLength);}mountWorld(document.getElementById('world-canvas'),s,data.assets,data.encounters,{duration:travelLength,travelStart:travelStarted,target:selectedEnemy,playback:!!presentation,encounterCue:currentCue()?{key:currentCue().key,phase:currentCue().phase,inside:!!(s.current?.inside||s.frames?.at(-1)?.kind==='building')}:null});
@@ -235,7 +241,7 @@ async function playChange(steps,start,transition,acknowledging=false){
  }finally{presentation=null;playbackStep=null;playbackPhase=null;playbackController=null;clearBattleBeat();busy=false;render();}
 }
 function updateBattleControls(){
- stopMessageScroll();root.querySelector('.message-window').outerHTML=messageWindow();root.querySelector('.world-targets').innerHTML=enemyTargets();root.querySelector('.battle-party').outerHTML=partyStrip(true);mountMessageScroll(root.querySelector('.message-scroll'),{});
+ stopMessageScroll();root.querySelector('.message-window').outerHTML=messageWindow();root.querySelector('.world-targets').innerHTML=enemyTargets();root.querySelector('.battle-party').outerHTML=partyStrip(true);mountMessageScroll(root.querySelector('.message-scroll'),{battle:true});
 }
 function browseCombat(action,args){if(!g.s?.battle||presentation||panel)return false;
  if(action==='combat'&&['attack','medicine'].includes(args))pendingCommand={type:args,allies:args==='medicine'};

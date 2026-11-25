@@ -519,3 +519,12 @@
 .ending-card.locked strong {
   color: #677d85;
 }
+
+/* Keep combat message pane focused on live battle log & author snark without paging cues */
+.in-combat .manual-next-cue,
+.in-combat .manual-continue-cue {
+  display: none !important;
+}
+.in-combat .message-scroll {
+  padding-bottom: 4px;
+}

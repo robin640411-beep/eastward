@@ -7,7 +7,7 @@ const hasVehicleWeapon=vStats=>!!(vStats?.weapon&&vStats.weapon.bonus>0&&vStats.
 export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
  const battleRoster=game=>game.s.battle?.mode==='vehicle'?(game.driver()?[game.driver().id]:game.alive().slice(0,1).map(p=>p.id)):game.alive().filter(p=>!p.asleep).map(p=>p.id);
  const begin=Game.prototype.beginCombat;
- Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=battleRoster(this)}};
+ Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=battleRoster(this);this.s.battle.startMsgId=this.s.messageSerial||0;}};
  Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=battleRoster(this);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
 
  Game.prototype.applyVehicleLoss=function(){
