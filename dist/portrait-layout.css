@@ -391,26 +391,33 @@
   color: #f3dfb3;
   background: rgba(213, 177, 118, 0.16);
 }
+.message-scroll-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 .manual-next-cue {
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 10px;
-  margin-top: 3px;
-  border-radius: 4px;
-  background: rgba(213, 177, 118, 0.18);
-  border: 1px dashed rgba(213, 177, 118, 0.65);
-  color: #f5dfa8;
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  color: #f6d992;
+  font-size: 16px;
+  line-height: 1;
+  text-shadow: 0 1px 4px #091018, 0 0 8px rgba(246, 217, 146, 0.45);
+  pointer-events: none;
   user-select: none;
-  flex-shrink: 0;
-  animation: cuePulse 1.4s ease-in-out infinite;
+  animation: rpgCornerBlink 0.9s ease-in-out infinite;
 }
-.message-window.has-more-text .manual-next-cue {
-  display: flex;
+.message-window.has-more-text .manual-next-cue,
+.message-window.can-continue .manual-next-cue {
+  display: block;
+}
+@keyframes rpgCornerBlink {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.18; transform: translateY(2px); }
 }
 .manual-continue-cue {
   display: none;

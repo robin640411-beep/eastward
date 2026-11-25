@@ -96,9 +96,9 @@ function messageWindow(){if(currentCue()&&!presentation)return encounterNotice(c
   controls='';
  }
  const msgTools=`<div class="message-tools"><button class="message-tool-btn" data-action="panel" data-args="messages">展開紀錄</button></div>`;
- const continueLabel=isPrologue?'▸ 點擊畫面發動引擎上路':'▸ 點擊畫面繼續';
- const cues=s.battle?'':`<div class="manual-next-cue" aria-hidden="true">▼ 點擊畫面翻頁</div><div class="manual-continue-cue" aria-hidden="true">${continueLabel}</div>`;
- return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div>${cues}${controls}</section>`;
+ const cornerArrow=s.battle?'':'<span class="manual-next-cue" aria-hidden="true">▼</span>';
+ const continueCue=!s.battle&&isPrologue?'<div class="manual-continue-cue" aria-hidden="true">▸ 點擊畫面發動引擎上路</div>':'';
+ return `<section class="message-window ${prompt?'has-prompt':''} ${controls?'has-commands':''}" aria-label="旅途訊息視窗"><div class="message-heading"><span>${esc(heading)}</span>${msgTools}</div><div class="message-scroll-wrap"><div class="message-scroll" role="log" aria-label="訊息與對話" aria-live="polite" tabindex="0">${messages.map(m=>{const p=s.party.find(p=>p.id===m.personId);return `<article class="message-line ${p?'has-person':''}" data-message-id="${m.id}">${p?img(portrait(p),''):''}<div><strong>${esc(m.title)}</strong>${p?`<small>${personRaceName(p,data.catalog)} · ${personJobName(p,data.catalog)}</small>`:''}<p>${esc(concealAttitudeLabels(m.text))}</p></div></article>`;}).join('')}${prompt?`<p class="travel-prompt">${esc(prompt)}</p>`:''}</div>${cornerArrow}</div>${continueCue}${controls}</section>`;
 }
 
 async function runAutomaticDecision(decision){

@@ -228,6 +228,31 @@ function paintBattleBusts(age,layout,bottom){
   ctx.restore();
  }
 }
+function drawVehicleExplosion(cx,cy,u){
+ const t=clamp01(u),fade=1-t;
+ // Rising dark smoke plume
+ for(let i=0;i<6;i++){
+  const a=i*1.05+t*1.2,r=6+t*26+(i%2)*8,sz=Math.round((8+t*10)*fade+2);
+  ctx.globalAlpha=fade*.75;
+  rect(cx+Math.cos(a)*r-sz/2,cy-t*22+Math.sin(a)*r*.5-sz/2,sz,sz,i%2?'#323742':'#4e5461');
+ }
+ // Layered 16-bit pixel fireball (outer crimson -> mid orange -> white-hot core)
+ if(t<.85){
+  const k=clamp01(t/.35),shrink=1-clamp01((t-.35)/.5);
+  const r1=Math.round((10+k*20)*shrink),r2=Math.round((7+k*13)*shrink),r3=Math.round((4+k*7)*shrink);
+  ctx.globalAlpha=Math.min(1,shrink*1.2);
+  if(r1>1)rect(cx-r1,cy-r1*.75,r1*2,r1*1.5,'#d65a4f');
+  if(r2>1)rect(cx-r2,cy-r2*.75,r2*2,r2*1.5,'#f4a261');
+  if(r3>1&&t<.55)rect(cx-r3,cy-r3*.75,r3*2,r3*1.5,'#fff4cc');
+ }
+ // Flying pixel sparks & metal debris shards
+ ctx.globalAlpha=fade;
+ for(let i=0;i<12;i++){
+  const a=i*0.523+0.3,dist=8+t*44*(0.7+(i%3)*.25),gx=cx+Math.cos(a)*dist,gy=cy+Math.sin(a)*dist*.65+t*t*18;
+  rect(gx,gy,i%3?3:4,i%2?2:3,i%3===0?'#fff3c4':i%3===1?'#f4a261':'#7d8694');
+ }
+ ctx.globalAlpha=1;
+}
 function vehicleChase(){
  const b=state.battle,enemies=b.enemies,age=(performance.now()-beatAt)/1000,since=age*1000-IMPACT_MS;
  const isRam=beat?.kind==='attack'&&(beat.visual?.id==='ram'||!beat.ranged);
@@ -286,12 +311,29 @@ function vehicleChase(){
  for(const [i,e] of enemies.entries()){
   const struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
   const knockout=e.hp<=0;
-  const ex=Math.max(4,Math.min(W-enemyW-4,exs[i])),ey=eys[i];
-  liveVehiclePoints.push({cx:Math.round(ex+enemyW/2),cy:Math.round(ey+enemyW*72/160*0.5)});
-  if(knockout&&(!struck||since>=420))continue;
+  const koDrift=knockout&&struck&&since>=0?Math.round(since*.11):0;
+  const koShake=knockout&&struck&&since>=0&&since<240?Math.round(Math.sin(since*.12)*3):0;
+  const ex=Math.max(4,Math.min(W-enemyW-4,exs[i]-koDrift+koShake)),ey=eys[i];
+  const ec={cx:Math.round(ex+enemyW/2),cy:Math.round(ey+enemyW*72/160*0.5)};
+  liveVehiclePoints.push(ec);
+  if(knockout&&(!struck||since>=580))continue;
   ctx.save();
-  ctx.globalAlpha=knockout?1-clamp01((since-110)/310):1;
-  vehicle({model:e.vehicle||'armored',mods:e.hasWeapon?['gun']:[]},[],ex,ey,enemyW,true);
+  if(knockout&&struck&&since>=0){
+   // Rapid flicker before exploding into 16-bit fireballs & debris
+   if(since<240){
+    const blink=Math.floor(since/45)%2===0;
+    ctx.globalAlpha=blink?.28:1;
+    vehicle({model:e.vehicle||'armored',mods:e.hasWeapon?['gun']:[]},[],ex,ey,enemyW,true);
+    ctx.globalAlpha=.9;
+    rect(ec.cx-8+koShake,ec.cy-8,4,4,'#f4a261');
+    rect(ec.cx+6-koShake,ec.cy-10,5,5,'#3a3f4a');
+   }
+   if(since>=160){
+    drawVehicleExplosion(ec.cx,ec.cy,(since-160)/420);
+   }
+  }else{
+   vehicle({model:e.vehicle||'armored',mods:e.hasWeapon?['gun']:[]},[],ex,ey,enemyW,true);
+  }
   ctx.restore();
  }
  const finalPX=Math.max(4,Math.min(W-playerW-4,px));
@@ -315,7 +357,7 @@ function battle(){
  for(const [i,e] of enemies.entries()){
   const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
   const knockout=e.hp<=0;
-  if(knockout&&(!struck||since>=420))continue;
+  if(knockout&&(!struck||since>=580))continue;
   const attacking=beat?.side==='enemies'&&beat.actor===e.id&&['attack','psi'].includes(beat.kind);
   const victim=partyAnchor(state.party,beat?.target);
   const direction=(victim?.cx??l.cx)>=l.cx?1:-1;
@@ -324,11 +366,40 @@ function battle(){
   const actor=partyAnchor(state.party,beat?.actor);
   const away=l.cx>=(actor?.cx??l.cx)?1:-1;
   const dx=Math.round(push*6*direction+away*recoil*5);
-  const y=l.cy-l.h/2+Math.round(push*9-recoil*3+(reduced?0:Math.sin(clock*1.8+i)));
+  const y=l.cy-l.h/2+Math.round(push*9-recoil*3+(reduced||knockout?0:Math.sin(clock*1.8+i)));
   ctx.save();
-  ctx.globalAlpha=knockout?1-clamp01((since-110)/310):1;
-  rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  paintCombatant(art[i],l.cx-l.w/2-7+dx,y,l.w+14,l.h);
+  if(knockout&&struck&&since>=0){
+   const floating=['drone','wing','swarm'].includes(e.key)||e.bossId==='fallen_angel';
+   const fade=1-clamp01((since-220)/360);
+   const blink=since>=180?(Math.floor(since/52)%2===0?.15:1):1;
+   ctx.globalAlpha=fade*blink;
+   if(floating){
+    // Aerial enemy shudders, drops, and bursts with pixel sparks as it flickers out
+    const drop=Math.round(clamp01(since/320)*18),sh=Math.round(Math.sin(since*.14)*3);
+    paintCombatant(art[i],l.cx-l.w/2-7+sh,y+drop,l.w+14,l.h);
+    if(since<360){
+     const u=since/360;
+     for(let k=0;k<6;k++){const a=k*1.05+u,r=5+u*22;rect(l.cx+Math.cos(a)*r,l.cy+drop+Math.sin(a)*r,2,2,k%2?'#fff0cc':'#f0a050');}
+    }
+   }else{
+    // Grounded enemy topples sideways 90deg onto the ground, kicks up dust, then flickers out!
+    const fall=ease(clamp01(since/220)),dir=i%2===0?1:-1;
+    const pivX=l.cx,pivY=l.cy+l.h/2;
+    rect(l.cx-l.w*.42,pivY+3,l.w*.84,4,'#101b2b66');
+    ctx.save();
+    ctx.translate(pivX,pivY);
+    ctx.rotate(dir*Math.PI*0.48*fall);
+    paintCombatant(art[i],-l.w/2-7,-l.h,l.w+14,l.h);
+    ctx.restore();
+    if(since>=160&&since<380){
+     const du=(since-160)/220;ctx.globalAlpha=(1-du)*.65;
+     for(let k=0;k<5;k++)rect(pivX+dir*(10+k*8+du*12),pivY-2-du*10+(k%2)*3,3,2,'#c7bfa8');
+    }
+   }
+  }else{
+   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
+   paintCombatant(art[i],l.cx-l.w/2-7+dx,y,l.w+14,l.h);
+  }
   ctx.restore();
  }
 }
