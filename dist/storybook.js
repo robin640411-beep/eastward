@@ -314,8 +314,31 @@ export function rollBattleAuthorQuip(s,kind,ctx={}){
  return '';
 }
 
-// 5. Personalized Storybook Epilogue in third-person + rolled Author commentary (including player death!)
-export function storybookEpilogue(s,catalog,display,destinationName,bossName='守門者'){
+// 5. 100 Endings Selector & Personalized Storybook Epilogue (third-person + rolled Author commentary)
+export function endingOutcome(s){
+ if(!s?.end)return 'stranded';
+ if(s.end.win)return 'win';
+ return (s.party||[]).some(p=>p.hp>0)?'stranded':'death';
+}
+
+export function selectEnding(s,endings){
+ const list=Array.isArray(endings)?endings:endings?.endings;
+ if(!s?.end||!list?.length)return null;
+ const outcome=endingOutcome(s);
+ const pool=list.filter(e=>e.outcome===outcome);
+ const candidates=pool.length?pool:list;
+ const hero=heroOf(s);
+ const key=`ending:${outcome}:${s.seed}:${s.progress||0}:${s.stop||0}:${hero?.race||''}:${hero?.profession||''}:${hero?.origin?.past?.roll||0}:${hero?.origin?.motive?.roll||0}:${(s.party||[]).length}`;
+ return candidates[hash32(key)%candidates.length];
+}
+
+function fillEndingText(text,s,display,destinationName,bossName){
+ return fillStory(text,s,display)
+  .replace(/\{paradise\}/g,destinationName||'樂園')
+  .replace(/\{boss\}/g,bossName||'終點守門者');
+}
+
+export function storybookEpilogue(s,catalog,display,destinationName,bossName='守門者',ending=null){
  if(!s?.end)return [];
  const hero=heroOf(s);
  const heroName=hero?display(hero):'無名旅人';
@@ -331,7 +354,7 @@ export function storybookEpilogue(s,catalog,display,destinationName,bossName='�
  const aliveCompanions=(s.party||[]).filter(p=>p.id!==hero?.id&&p.hp>0);
  const fallenCompanions=(s.party||[]).filter(p=>p.id!==hero?.id&&p.hp<=0);
  const origin=hero?.origin;
- const endRoll=authorD100(s,'epilogue-snark');
+ const endRoll=authorD100(s,`epilogue-snark:${ending?.id||'default'}`);
 
  const paragraphs=[];
  // Paragraph 1: Fairy-tale echo + Prologue Past & Motive in 3rd person
@@ -344,9 +367,10 @@ export function storybookEpilogue(s,catalog,display,destinationName,bossName='�
  // Paragraph 2: The Road & Stops
  paragraphs.push(`整整 ${days} 個晝夜、${s.stop||0} 次停靠，這輛滿身焊痕的破車顛簸著輾過了${trailText}的風沙，伴隨著收音機裡那些沒人想買的末日商業廣告一路向東。`);
 
- // Paragraph 3+: Victory, Total Party Wipe (Death), or Stranded Ending + Rolled Author Snark
+ // Paragraph 3+: Victory, Total Party Wipe (Death), or Stranded Ending + Specific Ending Aftermath + Rolled Author Snark
  if(s.end.win){
   paragraphs.push(`當橫擋在百里終點前的「${bossName}」終於轟然倒下，道路盡頭第一次沒有琥珀掃描柱的嗡鳴，也沒有母艦遮住日光——${fillStory(s.end.text,s,display)}`);
+  if(ending?.text)paragraphs.push(fillEndingText(ending.text,s,display,destinationName,bossName));
   if(heroDead&&aliveCompanions.length){
    paragraphs.push(`（身為作者我實在忍不住吐槽：這本書原本的主角${shortName}居然在半路就先領便當躺平了，最後硬是靠同車夥伴把車開進終點——我寫故事這麼多年，還沒見過這麼愛偷懶的主角！）`);
   }
@@ -363,33 +387,39 @@ export function storybookEpilogue(s,catalog,display,destinationName,bossName='�
   if(fallenCompanions.length){
    paragraphs.push(`車門內側靜靜刻著${fallenCompanions.map(p=>display(p)).join('、')}的名字——他們沒能親眼看見最後的風景，卻陪這輛車走過了最黑的夜路。`);
   }
-  if(endRoll<=70){
-   paragraphs.push(`（至於我這個寫書的人？既然車真的開進了${destinationName}，害我事先擬好的三套淒涼悲劇結尾全成了廢紙，我也只好心甘情願地闔上稿本，承認這群傻瓜確實創造了一點小小的奇蹟。）`);
+  if(endRoll<=75){
+   paragraphs.push(ending?.author_quip?fillEndingText(ending.author_quip,s,display,destinationName,bossName):`（至於我這個寫書的人？既然車真的開進了${destinationName}，害我事先擬好的三套淒涼悲劇結尾全成了廢紙，我也只好心甘情願地闔上稿本，承認這群傻瓜確實創造了一點小小的奇蹟。）`);
   }else{
    paragraphs.push(`這本寫在鏽鐵、汽油與星光上的向東之書，終於在${destinationName}翻到了最後一頁。`);
   }
  }else if(allDead){
   paragraphs.push(`然而在第 ${s.progress}/100 里的荒路上，${fillStory(s.end.text,s,display)}`);
+  if(ending?.text)paragraphs.push(fillEndingText(ending.text,s,display,destinationName,bossName));
   if(endRoll<=80){
-   const h=hash32(`wipe-epilogue:${s.seed}:${s.progress}:${s.stop}`);
-   const deathSnarks=[
-    `（沒錯，全軍覆沒，死得透透的。我當初好不容易幫${shortName}編了那麼帥的外號跟身世，結果連${destinationName}的大門長什麼樣都沒摸到就全躺平了——這本書的頁數薄得連拿去墊桌腳都嫌矮！）`,
-    `（身為作者，看著${shortName}一行人整整齊齊倒在路邊餵食腐獸，我的心情十分複雜：一方面替他們難過三秒鐘，另一方面又覺得終於不用再幫這台破車算油耗了。）`,
-    `（這就是不把血條當回事的下場！${shortName}用生命向各位證明了：在末日公路上，光靠一腔熱血是擋不住子彈跟超能力的。等我喝口水削好鉛筆，下一本再換個命硬一點的倒楣鬼上路吧。）`
-   ];
-   paragraphs.push(deathSnarks[h%deathSnarks.length]);
+   if(ending?.author_quip){
+    paragraphs.push(fillEndingText(ending.author_quip,s,display,destinationName,bossName));
+   }else{
+    const h=hash32(`wipe-epilogue:${s.seed}:${s.progress}:${s.stop}`);
+    const deathSnarks=[
+     `（沒錯，全軍覆沒，死得透透的。我當初好不容易幫${shortName}編了那麼帥的外號跟身世，結果連${destinationName}的大門長什麼樣都沒摸到就全躺平了——這本書的頁數薄得連拿去墊桌腳都嫌矮！）`,
+     `（身為作者，看著${shortName}一行人整整齊齊倒在路邊餵食腐獸，我的心情十分複雜：一方面替他們難過三秒鐘，另一方面又覺得終於不用再幫這台破車算油耗了。）`,
+     `（這就是不把血條當回事的下場！${shortName}用生命向各位證明了：在末日公路上，光靠一腔熱血是擋不住子彈跟超能力的。等我喝口水削好鉛筆，下一本再換個命硬一點的倒楣鬼上路吧。）`
+    ];
+    paragraphs.push(deathSnarks[h%deathSnarks.length]);
+   }
   }else{
    paragraphs.push(`風沙慢慢蓋過冷卻的車輪印，只留下一本還沒寫完就被迫闔上的公路故事書。`);
   }
  }else{
   paragraphs.push(`然而荒路從不保證每次出發都有體面的收尾。在推進至第 ${s.progress}/100 里處時，${fillStory(s.end.text,s,display)}`);
+  if(ending?.text)paragraphs.push(fillEndingText(ending.text,s,display,destinationName,bossName));
   if(heroDead&&aliveCompanions.length){
    paragraphs.push(`（更尷尬的是，連主角${shortName}都在半路先一步躺進土裡了，只剩${aliveCompanions.map(p=>display(p)).join('、')}站在拋錨的破車旁面面相覷。）`);
   }else if(aliveCompanions.length){
    paragraphs.push(`車廂旁，${aliveCompanions.map(p=>display(p)).join('、')}沉默地收拾起剩餘的行囊，準備在沒有車的日子裡另謀生路。`);
   }
-  if(endRoll<=70){
-   paragraphs.push(`（沒死成，但也沒開到終點——老實說這種因為沒油或破車罷工而半途散夥的結局，比壯烈犧牲還要讓我這個作者沒面子。算了，留得青山在，下一本故事書再重新發車吧。）`);
+  if(endRoll<=75){
+   paragraphs.push(ending?.author_quip?fillEndingText(ending.author_quip,s,display,destinationName,bossName):`（沒死成，但也沒開到終點——老實說這種因為沒油或破車罷工而半途散夥的結局，比壯烈犧牲還要讓我這個作者沒面子。算了，留得青山在，下一本故事書再重新發車吧。）`);
   }else{
    paragraphs.push(`只要東邊的電台還在胡說八道，總有一天會有下一輛車順著這道輪胎印繼續往東開去。`);
   }

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 112" shape-rendering="crispEdges">
+<rect x="0" y="0" width="256" height="16" fill="#242442"/>
+<rect x="0" y="15" width="256" height="16" fill="#513558"/>
+<rect x="0" y="30" width="256" height="16" fill="#94485c"/>
+<rect x="0" y="45" width="256" height="16" fill="#d06d55"/>
+<rect x="0" y="60" width="256" height="16" fill="#f0a967"/>
+<rect x="163" y="10" width="18" height="18" fill="#f9e3a8"/>
+<rect x="161" y="13" width="22" height="12" fill="#f9e3a8" fill-opacity="0.5"/>
+<rect x="25" y="10" width="28" height="6" fill="#ffffff" fill-opacity="0.28"/>
+<rect x="31" y="6" width="16" height="4" fill="#ffffff" fill-opacity="0.24"/>
+<rect x="87" y="24" width="28" height="6" fill="#ffffff" fill-opacity="0.28"/>
+<rect x="93" y="20" width="16" height="4" fill="#ffffff" fill-opacity="0.24"/>
+<rect x="149" y="10" width="28" height="6" fill="#ffffff" fill-opacity="0.28"/>
+<rect x="155" y="6" width="16" height="4" fill="#ffffff" fill-opacity="0.24"/>
+<rect x="211" y="24" width="28" height="6" fill="#ffffff" fill-opacity="0.28"/>
+<rect x="217" y="20" width="16" height="4" fill="#ffffff" fill-opacity="0.24"/>
+<rect x="0" y="63" width="16" height="9" fill="#2c3e34"/>
+<rect x="16" y="60" width="16" height="12" fill="#2c3e34"/>
+<rect x="32" y="56" width="16" height="16" fill="#2c3e34"/>
+<rect x="48" y="51" width="16" height="21" fill="#2c3e34"/>
+<rect x="64" y="62" width="16" height="10" fill="#2c3e34"/>
+<rect x="80" y="65" width="16" height="7" fill="#2c3e34"/>
+<rect x="96" y="56" width="16" height="16" fill="#2c3e34"/>
+<rect x="112" y="65" width="16" height="7" fill="#2c3e34"/>
+<rect x="128" y="51" width="16" height="21" fill="#2c3e34"/>
+<rect x="144" y="66" width="16" height="6" fill="#2c3e34"/>
+<rect x="160" y="55" width="16" height="17" fill="#2c3e34"/>
+<rect x="176" y="55" width="16" height="17" fill="#2c3e34"/>
+<rect x="192" y="51" width="16" height="21" fill="#2c3e34"/>
+<rect x="208" y="64" width="16" height="8" fill="#2c3e34"/>
+<rect x="224" y="60" width="16" height="12" fill="#2c3e34"/>
+<rect x="240" y="55" width="16" height="17" fill="#2c3e34"/>
+<rect x="0" y="72" width="256" height="12" fill="#3b5245"/>
+<rect x="0" y="84" width="256" height="14" fill="#516e59"/>
+<rect x="0" y="98" width="256" height="14" fill="#6d8a6f"/>
+<rect x="147" y="26" width="22" height="50" fill="#d8d4c8"/>
+<rect x="147" y="34" width="22" height="5" fill="#4b5563"/>
+<rect x="147" y="46" width="22" height="5" fill="#4b5563"/>
+<rect x="147" y="58" width="22" height="5" fill="#4b5563"/>
+<rect x="147" y="70" width="22" height="5" fill="#4b5563"/>
+<rect x="145" y="22" width="26" height="5" fill="#2b303a"/>
+<rect x="151" y="14" width="14" height="8" fill="#e9c46a"/>
+<rect x="149" y="11" width="18" height="4" fill="#2b303a"/>
+<rect x="67" y="14" width="82" height="6" fill="#e9c46a" fill-opacity="0.25"/>
+<rect x="165" y="15" width="76" height="5" fill="#e9c46a" fill-opacity="0.22"/>
+<rect x="52" y="80" width="42" height="3" fill="#141821" fill-opacity="0.55"/>
+<rect x="54" y="72" width="38" height="8" fill="#e9c46a"/>
+<rect x="60" y="68" width="22" height="6" fill="#e9c46a"/>
+<rect x="62" y="69" width="8" height="4" fill="#243447"/>
+<rect x="72" y="69" width="8" height="4" fill="#243447"/>
+<rect x="90" y="74" width="3" height="3" fill="#f4d35e"/>
+<rect x="53" y="75" width="3" height="3" fill="#d65a4f"/>
+<rect x="59" y="78" width="7" height="5" fill="#191c24"/>
+<rect x="61" y="80" width="3" height="2" fill="#8c939e"/>
+<rect x="79" y="78" width="7" height="5" fill="#191c24"/>
+<rect x="81" y="80" width="3" height="2" fill="#8c939e"/>
+<rect x="108" y="75" width="4" height="5" fill="#1f2430"/>
+<rect x="108" y="70" width="4" height="5" fill="#e9c46a"/>
+<rect x="109" y="67" width="3" height="3" fill="#eac096"/>
+<rect x="245" y="108" width="2" height="2" fill="#e9c46a" fill-opacity="0.55"/>
+<rect x="233" y="108" width="2" height="2" fill="#e9c46a" fill-opacity="0.55"/>
+<rect x="0" y="0" width="256" height="112" fill="none" stroke="#141c29" stroke-width="2"/>
+</svg>

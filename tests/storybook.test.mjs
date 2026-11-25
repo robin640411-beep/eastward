@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {Game,display} from '../dist/engine.js';
 import {EXTRA_NPC_RACES,EXTRA_NPC_JOBS,personRaceName,personJobName,proceduralPortraitDataUri,proceduralCharacterDataUri} from '../dist/procedural-npc.js';
-import {rolledNpcVignette,companionWhisper,authorAside,rollBattleAuthorQuip,fillStory,storybookEpilogue} from '../dist/storybook.js';
+import {rolledNpcVignette,companionWhisper,authorAside,rollBattleAuthorQuip,fillStory,storybookEpilogue,selectEnding} from '../dist/storybook.js';
 import {originPages} from '../dist/origin-runtime.js';
 import {npcFavorInfo} from '../dist/npc-runtime.js';
 import {encounterCommands} from '../dist/encounter-commands.js';
@@ -243,4 +244,89 @@ test('pure manual page-flipping replaces auto-scroll and portrait layout uses 40
  for(const [id,a] of Object.entries(enc)){
   assert(a.effect&&a.effect!=='none',`Encounter ${id} missing ambient animation effect`);
  }
+});
+
+test('streamlined opening and NPC interaction do not repeat backstory, motive, or appearance text',()=>{
+ const g=new Game(d);
+ g.startRandom(2026);
+ assert.equal(g.s.mode,'prologue');
+ assert.equal(g.s.messages.length,0);
+ syncMessageContext(g,display);
+ assert.equal(g.s.messages.length,0);
+ while(g.s.mode==='prologue')g.advancePrologue();
+ assert.equal(g.s.mode,'ready');
+ assert.equal(g.s.messages.length,0);
+ g.depart();
+ syncMessageContext(g,display);
+ const origin=g.s.party[0].origin;
+ assert(!g.s.messages.some(m=>m.text.includes(origin.past.text)));
+ assert(!g.s.messages.some(m=>m.text.includes(origin.motive.text)));
+
+ // Verify NPC interact does not duplicate appearance/demeanor lines in messages
+ const gNpc=fresh(909);
+ gNpc.s.mode='event';
+ const npc=gNpc.person();
+ gNpc.s.current={instance:1,event:{id:'R1',title:'路邊旅人',text:'路邊站著一位旅人。',options:[]},npc};
+ syncMessageContext(gNpc,display);
+ gNpc.interact('npc_trade');
+ syncMessageContext(gNpc,display);
+ const combined=gNpc.s.messages.map(m=>m.text).join('\n');
+ const bioHits=combined.split(npc.procedural.appearance).length-1;
+ assert.equal(bioHits,1,'NPC appearance should appear exactly once in messages');
+});
+
+test('100 unique endings with distinct crisp pixel-art SVGs and rolled author snark',()=>{
+ const endingsData=read('data/endings.json');
+ assert.equal(endingsData.count,100);
+ assert.equal(endingsData.endings.length,100);
+ const wins=endingsData.endings.filter(e=>e.outcome==='win');
+ const stranded=endingsData.endings.filter(e=>e.outcome==='stranded');
+ const deaths=endingsData.endings.filter(e=>e.outcome==='death');
+ assert.equal(wins.length,60);
+ assert.equal(stranded.length,20);
+ assert.equal(deaths.length,20);
+
+ const titles=new Set(),digests=new Set();
+ let firstPersonCount=0;
+ for(const e of endingsData.endings){
+  assert(!titles.has(e.title),`Duplicate ending title: ${e.title}`);
+  titles.add(e.title);
+  assert(!/D100|神諭|擲骰/.test(e.text+e.author_quip),`Forbidden meta term in ${e.id}`);
+  assert(e.author_quip.startsWith('（')&&e.author_quip.endsWith('）')&&e.author_quip.length>=20,`Invalid author quip in ${e.id}`);
+  if(e.author_quip.includes('我'))firstPersonCount++;
+  const svgUrl=new URL('../dist/assets/'+e.image,import.meta.url);
+  assert(existsSync(svgUrl),`Missing ending SVG: ${e.image}`);
+  const svg=readFileSync(svgUrl,'utf8');
+  assert(svg.includes('shape-rendering="crispEdges"'),`Ending SVG not crisp pixel art: ${e.image}`);
+  const digest=createHash('sha256').update(svg).digest('hex');
+  assert(!digests.has(digest),`Duplicate ending SVG image: ${e.image}`);
+  digests.add(digest);
+ }
+ assert(firstPersonCount>=40,`Expected at least 40 first-person author quips, got ${firstPersonCount}`);
+
+ // Deterministic outcome matching without perturbing main RNG
+ const gWin=fresh(123);
+ gWin.s.mode='ending';
+ gWin.s.end={win:true,text:'{hero}終於開進了終點。'};
+ const rngBefore=gWin.s.rng;
+ const pickedWin=selectEnding(gWin.s,endingsData.endings);
+ assert.equal(gWin.s.rng,rngBefore);
+ assert.equal(pickedWin.outcome,'win');
+ const winPages=storybookEpilogue(gWin.s,d.catalog,display,'星落綠洲','星門監督官',pickedWin);
+ const expectedWinText=fillStory(pickedWin.text,gWin.s,display).replace(/\{paradise\}/g,'星落綠洲').replace(/\{boss\}/g,'星門監督官');
+ assert(winPages.some(p=>p.includes(expectedWinText)));
+
+ const gStranded=fresh(456);
+ gStranded.s.mode='ending';
+ gStranded.s.end={win:false,text:'油箱徹底乾了。'};
+ const pickedStranded=selectEnding(gStranded.s,endingsData.endings);
+ assert.equal(pickedStranded.outcome,'stranded');
+
+ const gDead=fresh(789);
+ gDead.hurt(gDead.s.party[0],999,['attack']);
+ gDead.checkAlive();
+ const pickedDeath=selectEnding(gDead.s,endingsData.endings);
+ assert.equal(pickedDeath.outcome,'death');
+ const deathPages=storybookEpilogue(gDead.s,d.catalog,display,'星落綠洲','星門監督官',pickedDeath);
+ assert(deathPages.length>=4);
 });

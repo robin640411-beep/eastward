@@ -1,0 +1,1606 @@
+{
+  "version": 1,
+  "count": 100,
+  "endings": [
+    {
+      "id": "ending_001",
+      "roll": 1,
+      "outcome": "win",
+      "title": "海風修理廠",
+      "text": "穿過{paradise}的防風林後，{party}把陪伴百里的破車改成了海岸第一家修理廠。每天都有新來的旅人推著冒煙的引擎上門，{hero}總會先遞上一杯冰水再開始敲扳手。",
+      "author_quip": "（開了一百里破車，結果到了樂園還繼續天天摸機油——我看{hero}這輩子大概是跟黑手黨……不對，是跟黑手師傅的命運鎖死了。）",
+      "image": "endings/ending_001.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "coast",
+        "subject": "garage",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_002",
+      "roll": 2,
+      "outcome": "win",
+      "title": "溫室裡的番茄王國",
+      "text": "{party}在{paradise}的廢棄玻璃穹頂裡翻出半包十年前的番茄種子。三年後，整座海灣都飄著酸甜的羅勒與番茄湯香氣，{hero}成了方圓百里最難預約的農夫。",
+      "author_quip": "（打贏{boss}的英雄跑去種番茄，聽起來很田園詩意；但我賭{hero}第一季肯定把肥料跟機油搞混過。）",
+      "image": "endings/ending_002.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "greenhouse",
+        "accent": "#e06d53",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_003",
+      "roll": 3,
+      "outcome": "win",
+      "title": "不再播廣告的燈塔電台",
+      "text": "{hero}爬上{paradise}最高的紅白燈塔，把整座發射台改裝成全波段廣播站。從此東方傳回荒野的不再是沒人買的生髮水廣告，而是真正能指引迷途車隊的路況預報。",
+      "author_quip": "（連我最愛寫的末日爛廣告都被{hero}砍掉了！看來下一本書我得自己兼職去念工商服務才行。）",
+      "image": "endings/ending_003.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "coast",
+        "subject": "lighthouse",
+        "accent": "#f0c36d",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_004",
+      "roll": 4,
+      "outcome": "win",
+      "title": "偷開走外星穿梭機",
+      "text": "擊倒{boss}後，{party}在{paradise}的秘密停機坪發現一艘忘了拔鑰匙的外星小型穿梭機。{hero}拍了拍儀表板，決定把這場公路旅行直接升級成太陽系自駕遊。",
+      "author_quip": "（我好不容易畫完一百里的柏油路，{hero}居然直接給我開太空船飛走了？下集難道要改名叫《一路向火星》嗎！）",
+      "image": "endings/ending_004.svg",
+      "scene": {
+        "sky": "aurora",
+        "ground": "crater",
+        "subject": "shuttle",
+        "accent": "#7ce2d4",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_005",
+      "roll": 5,
+      "outcome": "win",
+      "title": "廢土大排檔",
+      "text": "{party}拆下破車的引擎蓋當作超大鐵板，在{paradise}的碼頭邊開起深夜大排檔。無論是人類、變異體還是迷路的機器人，只要交兩顆螺絲就能換一碗熱騰騰的乾拌麵。",
+      "author_quip": "（拿引擎蓋煎蛋聽起來衛生局絕對不會過關，好在{paradise}沒有衛生局，只有餓了十年的食客。）",
+      "image": "endings/ending_005.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "harbor",
+        "subject": "market",
+        "accent": "#f39c6b",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_006",
+      "roll": 6,
+      "outcome": "win",
+      "title": "百里公路圖書館",
+      "text": "{hero}把沿途撿到的破舊日記、地圖與口述錄音全搬進{paradise}的舊車站，成立了一座誰都能借閱的公路圖書館。那段外星佔領十年的荒唐歲月，終於有人好好替它留底。",
+      "author_quip": "（居然把我的草稿也抄進去當館藏了！拜託記得在扉頁幫我註明「暢銷作家著」，版稅用兩箱乾淨礦泉水結算就行。）",
+      "image": "endings/ending_006.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "library",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_007",
+      "roll": 7,
+      "outcome": "win",
+      "title": "無照風力發電鎮長",
+      "text": "{party}靠著沿路搜刮的廢料，在{paradise}的山坡立起十二座嘎吱作響的風車。居民為了感謝終於能吹上電風扇，半推半就地把{hero}選成了第一任鎮長。",
+      "author_quip": "（連自己車子的漏油都修不好的傢伙居然當上了鎮長，我替{paradise}的財政預算捏一把冷汗。）",
+      "image": "endings/ending_007.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "hill",
+        "subject": "windmill",
+        "accent": "#9ad1c2",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_008",
+      "roll": 8,
+      "outcome": "win",
+      "title": "露天汽車電影院",
+      "text": "{hero}在{paradise}的沙灘旁掛起巨大的降落傘布，用老舊放映機循環播放十年前的B級科幻片。每到週末，數十輛拼裝破車並排按喇叭，笑聲比海浪還響。",
+      "author_quip": "（外星人真來了十年，結果大家在樂園裡最愛看的還是外星人入侵爛片——人類的黑色幽默果然連母艦都轟不爛。）",
+      "image": "endings/ending_008.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "coast",
+        "subject": "cinema",
+        "accent": "#f2d08a",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_009",
+      "roll": 9,
+      "outcome": "win",
+      "title": "跨物種相親事務所",
+      "text": "因為一路上見過太多奇形怪狀的旅人，{hero}乾脆在{paradise}開了家媒人茶館。沒過兩年，海灣裡到處都是半機械人牽著孢子族散步的奇特風景。",
+      "author_quip": "（我本來以為這是部硬派末日公路片，怎麼最後被{hero}玩成了荒野戀愛實境秀？）",
+      "image": "endings/ending_009.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "meadow",
+        "subject": "teahouse",
+        "accent": "#e88da3",
+        "weather": "fireflies"
+      }
+    },
+    {
+      "id": "ending_010",
+      "roll": 10,
+      "outcome": "win",
+      "title": "把破車種成花圃",
+      "text": "抵達{paradise}的隔天，那輛立下大功的座駕終於壽終正寢。{party}沒捨得拆它，反而把車廂填滿黑土種滿向日葵，讓它成了海角最醒目的地標。",
+      "author_quip": "（一台陪你撞飛過變異野狗的破車，最後的歸宿居然是當特大號花盆——說真的，這結局比我預期得還浪漫那麼一點點。）",
+      "image": "endings/ending_010.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "car_garden",
+        "accent": "#f4c95d",
+        "weather": "petals"
+      }
+    },
+    {
+      "id": "ending_011",
+      "roll": 11,
+      "outcome": "win",
+      "title": "海岸觀星天文台",
+      "text": "{party}修好了{paradise}山頂的圓頂望遠鏡。從此每個無雲的夜晚，{hero}都會對著天上的母艦殘骸喝一口麥茶，順便教鎮上的孩子認出哪顆才是真正的北極星。",
+      "author_quip": "（用望遠鏡偷看外星母艦有沒有再派兵，順便假裝自己在搞浪漫天文學，{hero}這招實在高明。）",
+      "image": "endings/ending_011.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "snow",
+        "subject": "observatory",
+        "accent": "#8ecae6",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_012",
+      "roll": 12,
+      "outcome": "win",
+      "title": "廢料爵士樂團",
+      "text": "抵達{paradise}後，{party}用消音管、汽油桶與生鏽輪框組了支打擊樂團。雖然每個音都不太準，但每晚碼頭邊依然擠滿了跟著拍手跳舞的倖存者。",
+      "author_quip": "（如果外星母艦哪天突然撤離地球，我敢保證八成是被{hero}這支走音樂團吵到受不了。）",
+      "image": "endings/ending_012.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "harbor",
+        "subject": "stage",
+        "accent": "#f4a261",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_013",
+      "roll": 13,
+      "outcome": "win",
+      "title": "太陽能澡堂老闆",
+      "text": "{hero}在{paradise}的溫泉裂谷架起一整排反光板，開出佔領區十年來第一家二十四小時熱水澡堂。據說排隊洗去十年的灰塵，比打贏{boss}還讓人想哭。",
+      "author_quip": "（寫了整本書都沒讓{hero}洗過一次澡，結局總算讓他泡進熱水裡了，我這個作者也算仁至義盡。）",
+      "image": "endings/ending_013.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "canyon",
+        "subject": "bathhouse",
+        "accent": "#a8dadc",
+        "weather": "steam"
+      }
+    },
+    {
+      "id": "ending_014",
+      "roll": 14,
+      "outcome": "win",
+      "title": "跨海帆船遠征隊",
+      "text": "在{paradise}休養半年後，{hero}望著東邊更遠的水平線又開始手癢。{party}把引擎裝上雙體帆船，決定去看看大海另一頭是不是還有另一個傳說。",
+      "author_quip": "（剛到終點沒幾天就又想出海，{hero}你是不是只要在同一個地方待超過三個月就會全身發癢？）",
+      "image": "endings/ending_014.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "sailboat",
+        "accent": "#74c0fc",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_015",
+      "roll": 15,
+      "outcome": "win",
+      "title": "舊時代漫畫重印社",
+      "text": "{party}在{paradise}地下室挖出一台老式油印機，開始憑記憶手繪重印十年前的熱血漫畫。雖然畫風歪七扭八，卻讓整座海灣的小孩每週搶破頭。",
+      "author_quip": "（畫得歪七扭八居然還有人搶著看？早知道我也去{paradise}開出版社，稿費一定比現在高。）",
+      "image": "endings/ending_015.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "printshop",
+        "accent": "#e9c46a",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_016",
+      "roll": 16,
+      "outcome": "win",
+      "title": "蜂蜜與孢子釀酒廠",
+      "text": "{hero}把旅途中收集的發光菌菇與海灣野花蜜混在一起發酵，意外釀出喝一口就會暫時忘記外星人的奇蹟果酒，{paradise}的酒館從此夜夜爆滿。",
+      "author_quip": "（拿路邊不明發光蘑菇釀酒居然沒把全鎮送進醫院，{hero}的運氣值絕對偷偷灌過水。）",
+      "image": "endings/ending_016.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "forest",
+        "subject": "brewery",
+        "accent": "#d4a373",
+        "weather": "fireflies"
+      }
+    },
+    {
+      "id": "ending_017",
+      "roll": 17,
+      "outcome": "win",
+      "title": "環島觀光巴士司機",
+      "text": "厭倦了槍林彈雨後，{hero}把破車刷上亮黃色油漆，在{paradise}開起收費環灣巴士。每次經過當年大戰{boss}的彈坑，都會用麥克風誇張地吹噓半小時。",
+      "author_quip": "（而且我保證{hero}每講一次，{boss}的身高就會多長高三公尺，這就是傳說誕生的真相。）",
+      "image": "endings/ending_017.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "bus_stop",
+        "accent": "#f4d35e",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_018",
+      "roll": 18,
+      "outcome": "win",
+      "title": "海岸郵差與信鴿隊",
+      "text": "{party}在{paradise}馴養了一群認得海岸線的信鴿，開始替分散各地的倖存者傳遞家書。每一封平安抵達的薄紙，都比十桶高辛烷值汽油還要珍貴。",
+      "author_quip": "（在連衛星都被外星人沒收的年代，靠鴿子送信反而成了最穩定的通訊協定，科技樹真是諷刺啊。）",
+      "image": "endings/ending_018.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "coast",
+        "subject": "dovecote",
+        "accent": "#cfe1b9",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_019",
+      "roll": 19,
+      "outcome": "win",
+      "title": "機器人退休養老院",
+      "text": "{hero}在{paradise}的山谷開了一間專門幫老舊合成人與作業機具上油換電池的院子。每天下午，滿院子都是曬著太陽發出呼嚕聲的鐵殼老頭。",
+      "author_quip": "（連機器人都有養老院了，反觀我這個作者還在熬夜趕稿寫第一百個結局，真是人不如鐵。）",
+      "image": "endings/ending_019.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "meadow",
+        "subject": "workshop",
+        "accent": "#8bbfb0",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_020",
+      "roll": 20,
+      "outcome": "win",
+      "title": "無人島貓咪保護區",
+      "text": "穿過{paradise}的潮間帶後，{party}發現一座外星掃描儀照不到的礁石小島，上頭住著上百隻流浪貓。{hero}從此每天划船送魚乾，成了名副其實的貓島國王。",
+      "author_quip": "（打倒終極魔王、穿越百里死地，結果人生巔峰是當鏟屎官——老實說，這可能是全書最划算的結局。）",
+      "image": "endings/ending_020.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "cat_island",
+        "accent": "#f4a261",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_021",
+      "roll": 21,
+      "outcome": "win",
+      "title": "地下鐵道觀光列車",
+      "text": "{party}把{paradise}廢棄的海岸隧道重新通電，修好一節只剩兩張長椅的老式電聯車。每天傍晚，全鎮的人都會搭著它繞海灣一圈，假裝世界從沒壞過。",
+      "author_quip": "（坐著哐當作響的破電車假裝還在十年前的通勤路上——沒想到末日之後大家最懷念的竟然是搭電車。）",
+      "image": "endings/ending_021.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "coast",
+        "subject": "train",
+        "accent": "#e76f51",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_022",
+      "roll": 22,
+      "outcome": "win",
+      "title": "高空熱氣球偵察隊",
+      "text": "{hero}用帆布與瓦斯爐拼出巨型熱氣球，從{paradise}升空俯瞰整片東方大地。第一次從雲端看見沒有母艦陰影的藍海時，{party}在吊籃裡安靜了整整十分鐘。",
+      "author_quip": "（用拼裝瓦斯爐飛上三百公尺高空，我這個作者在地面看著都替他們腿軟。）",
+      "image": "endings/ending_022.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "hill",
+        "subject": "balloon",
+        "accent": "#e63946",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_023",
+      "roll": 23,
+      "outcome": "win",
+      "title": "廢土最高法院法官",
+      "text": "因為{hero}一路上調停過太多荒唐的公路糾紛，{paradise}的居民乾脆請他坐在舊公車亭裡當調解官。所有爭吵只要喝完他泡的苦茶，多半都能握手言和。",
+      "author_quip": "（不是因為{hero}判案特別公正，純粹是因為那壺茶難喝到原告跟被告都想趕快和解逃跑。）",
+      "image": "endings/ending_023.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "courthouse",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_024",
+      "roll": 24,
+      "outcome": "win",
+      "title": "鹽田與冰棒工坊",
+      "text": "{party}在{paradise}的淺灘曬出潔白海鹽，又用太陽能壓縮機做出全海岸第一批海鹽檸檬冰棒。酷暑午後，連曾經最凶狠的雇傭兵都會乖乖排隊舔冰棍。",
+      "author_quip": "（誰能想到終結末日暴戾之氣的秘密武器，不是雷射槍，而是一根賣兩顆螺絲的海鹽冰棒。）",
+      "image": "endings/ending_024.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "salt_flat",
+        "accent": "#90e0ef",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_025",
+      "roll": 25,
+      "outcome": "win",
+      "title": "地下種子銀行守護者",
+      "text": "在{paradise}的岩洞深處，{party}找到一座保存完好的低溫種子庫。{hero}決定留下來守著這扇厚重鐵門，每年春天挑出十種新植物，慢慢把世界重新種綠。",
+      "author_quip": "（這個結局正經得連我都捨不得吐槽了……好吧，只吐槽一句：{hero}記得別把種子標籤貼反啊！）",
+      "image": "endings/ending_025.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "canyon",
+        "subject": "vault",
+        "accent": "#81b29a",
+        "weather": "fireflies"
+      }
+    },
+    {
+      "id": "ending_026",
+      "roll": 26,
+      "outcome": "win",
+      "title": "外星古董黑市鑑定師",
+      "text": "因為拆過太多外星殘骸與{boss}的裝甲，{hero}成了{paradise}最懂辨別真假外星零件的鑑定師。想拿生鏽電鍋冒充能量核心的騙子，現在連港區都不敢靠近。",
+      "author_quip": "（從被商人坑廢料的冤大頭，一路修煉成專門拆穿騙子的老狐狸，這才叫真正的角色成長曲線。）",
+      "image": "endings/ending_026.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "harbor",
+        "subject": "antique",
+        "accent": "#c77dff",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_027",
+      "roll": 27,
+      "outcome": "win",
+      "title": "海崖茶屋與舊唱片",
+      "text": "{party}在{paradise}面海的懸崖搭起一間木造茶屋，角落裡那台手搖留聲機永遠播著刮花的爵士黑膠。旅人來來去去，總有人在這裡把眼淚留給海風。",
+      "author_quip": "（一杯熱茶、一張老唱片、一片藍海——我突然很想把這台鍵盤摔了，也買張單程票去{hero}店裡蹭茶喝。）",
+      "image": "endings/ending_027.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "coast",
+        "subject": "cliff_cafe",
+        "accent": "#e9c46a",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_028",
+      "roll": 28,
+      "outcome": "win",
+      "title": "重組公路救援聯隊",
+      "text": "記起自己在荒野差點斷油的慘狀，{hero}在{paradise}號召了一批老司機組成免費救援隊。只要電台傳來求救訊號，他們就開著改裝拖吊車衝回西邊救人。",
+      "author_quip": "（當年自己開到拋錨時罵得要死，現在卻主動開車回去撈別人的破車——{hero}這傢伙果然是個嘴硬心軟的笨蛋。）",
+      "image": "endings/ending_028.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "canyon",
+        "subject": "convoy",
+        "accent": "#f4a261",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_029",
+      "roll": 29,
+      "outcome": "win",
+      "title": "海灣夜校的語文老師",
+      "text": "{hero}在{paradise}的舊禮堂掛起一塊裂成兩半的黑板，每晚教在佔領區長大的孩子識字、看地圖與分辨哪種罐頭已經膨罐不能吃。",
+      "author_quip": "（教小孩分辨膨罐罐頭，這門課的實用程度絕對輾壓舊時代所有的微積分。）",
+      "image": "endings/ending_029.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "meadow",
+        "subject": "school",
+        "accent": "#f2cc8f",
+        "weather": "fireflies"
+      }
+    },
+    {
+      "id": "ending_030",
+      "roll": 30,
+      "outcome": "win",
+      "title": "百里馬拉松創辦人",
+      "text": "為了紀念那趟荒唐的百里長征，{hero}在{paradise}發起一年一度的「向東徒步賽」。第一名沒有金牌，只有一罐完整無缺的舊時代水蜜桃罐頭。",
+      "author_quip": "（自己開了四個輪子過來，卻叫別人用兩條腿跑，{hero}你這個主辦單位是不是有點缺德？）",
+      "image": "endings/ending_030.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "archway",
+        "accent": "#e76f51",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_031",
+      "roll": 31,
+      "outcome": "win",
+      "title": "螢光蕈菇森林園丁",
+      "text": "{party}把一路上帶來的變異孢子種進{paradise}背陰的濕潤山谷。三年後，整座山谷入夜便化作發光的藍色童話森林，照亮了迷途旅人的最後一哩路。",
+      "author_quip": "（把末日變異菌種成打卡聖地，{hero}的商業頭腦要是放在十年前肯定能上市。）",
+      "image": "endings/ending_031.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "forest",
+        "subject": "mushroom",
+        "accent": "#64dfdf",
+        "weather": "spores"
+      }
+    },
+    {
+      "id": "ending_032",
+      "roll": 32,
+      "outcome": "win",
+      "title": "水上漂浮市集大亨",
+      "text": "{hero}用報廢油桶與廢船木板，在{paradise}的平靜港灣搭起一座隨潮汐起伏的漂浮市集。想買乾淨淡水、修車扳手或一首走音情歌，這裡全都找得到。",
+      "author_quip": "（海平面還沒漲起來，{hero}就先把威尼斯給蓋出來了，真是超前部署。）",
+      "image": "endings/ending_032.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "harbor",
+        "subject": "floating",
+        "accent": "#f4a261",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_033",
+      "roll": 33,
+      "outcome": "win",
+      "title": "專寫實話的公路史官",
+      "text": "抵達{paradise}後，{hero}買了滿滿一箱空白筆記本，一字不漏地把這趟旅途的蠢事、悲傷與奇蹟寫成厚厚三冊，成了海灣最暢銷的手抄故事書。",
+      "author_quip": "（喂喂喂，寫故事是我的工作耶！{hero}你把作家的飯碗搶走了，我接下來要去哪裡領稿費啊！）",
+      "image": "endings/ending_033.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "desk",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_034",
+      "roll": 34,
+      "outcome": "win",
+      "title": "舊時代鐘錶修復師",
+      "text": "{party}在{paradise}的鐘樓住下，專門替旅人修好停擺十年的機械錶與鬧鐘。當生鏽的齒輪再次滴答走動，大家才突然想起時間原來還在前進。",
+      "author_quip": "（在末日修好鬧鐘聽起來很詩意，直到星期一早上六點它真的響起來為止。）",
+      "image": "endings/ending_034.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "hill",
+        "subject": "clocktower",
+        "accent": "#e9c46a",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_035",
+      "roll": 35,
+      "outcome": "win",
+      "title": "與外星逃兵合開咖啡館",
+      "text": "在{paradise}的防波堤旁，{hero}遇見一名厭倦星際軍紀的外星逃兵。兩人一拍即合開了家咖啡館，一個負責烤焦咖啡豆，一個負責用反重力端盤子。",
+      "author_quip": "（跨星系飲食合作！希望那位外星店員別再把客人點的拿鐵誤加成液態甲烷了。）",
+      "image": "endings/ending_035.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "coast",
+        "subject": "alien_cafe",
+        "accent": "#9d4edd",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_036",
+      "roll": 36,
+      "outcome": "win",
+      "title": "懸崖風箏節發起人",
+      "text": "每個起風的十月，{party}都會在{paradise}的懸崖放飛用舊地圖縫成的巨型風箏。那些曾被佔領區困住的名字，終於乘著海風飛過了當年的封鎖線。",
+      "author_quip": "（用舊地圖當風箏，飛上天那一刻確實挺帥的——前提是別把唯一的補給點座標也一起放飛了。）",
+      "image": "endings/ending_036.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "kites",
+        "accent": "#e63946",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_037",
+      "roll": 37,
+      "outcome": "win",
+      "title": "廢棄潛艇改造旅社",
+      "text": "{party}把擱淺在{paradise}礁岩上的舊時代潛艇清乾淨，改成全海岸隔音最好、也最潮濕的特色民宿。{hero}當櫃檯，標榜「絕對防外星掃描」。",
+      "author_quip": "（確實防掃描，就是翻個身頭會撞到魚雷管，差評率大概只有三成。）",
+      "image": "endings/ending_037.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "coast",
+        "subject": "submarine",
+        "accent": "#457b9d",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_038",
+      "roll": 38,
+      "outcome": "win",
+      "title": "海鹽麵包烘焙屋",
+      "text": "{hero}用紅磚在{paradise}壘起一座柴燒窯，每天清晨五點出爐第一批剛烤好的海鹽麵包。香氣飄過整條海濱公路，成了比鬧鐘更準時的早安信號。",
+      "author_quip": "（寫到這裡我自己都餓了。{hero}你要是有良心，記得留一條剛出爐的麵包在稿紙旁邊。）",
+      "image": "endings/ending_038.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "bakery",
+        "accent": "#f4a261",
+        "weather": "steam"
+      }
+    },
+    {
+      "id": "ending_039",
+      "roll": 39,
+      "outcome": "win",
+      "title": "破車博物館館長",
+      "text": "{party}把陪伴百里的戰車完整停進{paradise}的廣場玻璃屋，旁邊寫滿每道彈孔與刮痕的由來。後來每個抵達樂園的新旅人，都會先來摸摸它的保險桿求好運。",
+      "author_quip": "（連左前門那個被路邊山羊頂出來的凹痕都被寫成「英勇戰損」，博物館文案的水分果然古今皆然。）",
+      "image": "endings/ending_039.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "museum",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_040",
+      "roll": 40,
+      "outcome": "win",
+      "title": "東岸氣象觀測員",
+      "text": "{hero}修好了{paradise}山頭的氣象雷達，每天準時手繪隔天的風向與降雨圖貼在公告欄。靠海吃飯的漁民說，這比外星母艦的廣播可靠一萬倍。",
+      "author_quip": "（就算偶爾報錯把晴天報成暴雨，大家也只會笑笑說「至少不是外星酸雨」，門檻真好混啊。）",
+      "image": "endings/ending_040.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "hill",
+        "subject": "radar",
+        "accent": "#8ecae6",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_041",
+      "roll": 41,
+      "outcome": "win",
+      "title": "免費單車共享站",
+      "text": "厭倦了滿世界找汽油的日子，{party}把沿途搜集來的廢棄腳踏車全數翻新，在{paradise}的林蔭道擺出整排免費單車。風吹過鈴鐺的聲音，成了樂園的新節奏。",
+      "author_quip": "（終於不用再算油耗跟油箱容量了！我這個作者雙手雙腳贊成全面改騎腳踏車！）",
+      "image": "endings/ending_041.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "bicycles",
+        "accent": "#52b788",
+        "weather": "petals"
+      }
+    },
+    {
+      "id": "ending_042",
+      "roll": 42,
+      "outcome": "win",
+      "title": "極光下的雪地木屋",
+      "text": "抵達{paradise}後，{party}繼續往東北的雪線推進了半天車程，在能看見極光的針葉林旁蓋起暖呼呼的木屋。壁爐裡的松木噼啪作響，外頭的世界彷彿遠在另一個世紀。",
+      "author_quip": "（千辛萬苦到了海邊樂園，結果又自己跑去零下十度看極光——{hero}你對「享受退休」的定義還真是硬派。）",
+      "image": "endings/ending_042.svg",
+      "scene": {
+        "sky": "aurora",
+        "ground": "snow",
+        "subject": "cabin",
+        "accent": "#72efdd",
+        "weather": "snow"
+      }
+    },
+    {
+      "id": "ending_043",
+      "roll": 43,
+      "outcome": "win",
+      "title": "海洋聲學錄音師",
+      "text": "{hero}用報廢收音機與防水麥克風，在{paradise}的海底錄下鯨魚重新回到東岸的歌聲。當這捲錄音帶在廣場播放時，連最硬漢的拾荒者都紅了眼眶。",
+      "author_quip": "（連鯨魚都回來了，看來這顆星球還是有救的——難得讓我這本嘴賤的故事書也正經感動一回。）",
+      "image": "endings/ending_043.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "coast",
+        "subject": "whale",
+        "accent": "#48cae4",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_044",
+      "roll": 44,
+      "outcome": "win",
+      "title": "廢土拼裝賽車冠軍",
+      "text": "在{paradise}的鹽沼賽道上，{hero}開著陪伴百里的老座駕橫掃所有改裝車手，拿下第一屆東岸盃冠軍。領獎台上，他舉起的是一罐沒開封的機油。",
+      "author_quip": "（開著一台隨時會解體的破車還能拿冠軍，其他參賽者大概都忙著在半路撿自己掉下來的輪胎吧。）",
+      "image": "endings/ending_044.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "salt",
+        "subject": "racetrack",
+        "accent": "#e63946",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_045",
+      "roll": 45,
+      "outcome": "win",
+      "title": "跨星系和平談判代表",
+      "text": "因為{party}擊敗{boss}的傳聞傳進軌道，外星駐軍派來一位禮貌得過分的使節。{hero}穿著補丁外套在海邊塑膠椅上跟對方談判，硬是替{paradise}談下五十年非軍事區。",
+      "author_quip": "（穿著破夾克坐在紅色塑膠椅上跟星際帝國簽停戰協定，這畫面要是印進歷史課本，後代一定以為是惡搞圖。）",
+      "image": "endings/ending_045.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "coast",
+        "subject": "diplomacy",
+        "accent": "#a8dadc",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_046",
+      "roll": 46,
+      "outcome": "win",
+      "title": "無人機果園守護者",
+      "text": "{party}把從{boss}殘骸拆下的核心改寫成自動灑水系統，讓{paradise}的柑橘園一年四季結實纍纍。曾經用來殺人的科技，最後全都學會了照顧橘子樹。",
+      "author_quip": "（外星帝國花費數億星幣研發的戰鬥核心，最終職務是「幫橘子樹澆水」——我給這個結局打一百分。）",
+      "image": "endings/ending_046.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "orchard",
+        "accent": "#f77f00",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_047",
+      "roll": 47,
+      "outcome": "win",
+      "title": "午夜靈異故事茶座",
+      "text": "每逢滿月，{hero}就會在{paradise}的廢棄燈塔下生起營火，講述自己這一路撞見的詭異廢墟與發光怪物。沒人分得清哪句是真、哪句是瞎編，但大家都聽得津津有味。",
+      "author_quip": "（照我對{hero}的了解，十句裡面大概有三句是真的、七句是自己加戲，還順便把我寫的劇情改得面目全非。）",
+      "image": "endings/ending_047.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "coast",
+        "subject": "campfire",
+        "accent": "#f4a261",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_048",
+      "roll": 48,
+      "outcome": "win",
+      "title": "太陽能玻璃吹製工坊",
+      "text": "{party}利用聚光鏡把{paradise}的白沙燒成晶瑩剔透的玻璃杯與彩繪窗。每當陽光穿透教堂廢墟的新窗戶，整座小鎮就像掉進萬花筒裡一樣閃亮。",
+      "author_quip": "（從廢土求生一路點滿藝術技能樹，{hero}你下一步是不是打算去開個人畫展？）",
+      "image": "endings/ending_048.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "glassworks",
+        "accent": "#90e0ef",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_049",
+      "roll": 49,
+      "outcome": "win",
+      "title": "老橋守門人與通行詩",
+      "text": "{hero}接手看守通往{paradise}的最後一座吊橋。他不收過路費，只要求每個想進城的新旅人留下一句旅途中最難忘的話，寫在橋頭那塊越掛越長的木板上。",
+      "author_quip": "（希望沒有哪個沒良心的旅人在木板上寫「這本故事書的作者話太多」，不然我會記仇的。）",
+      "image": "endings/ending_049.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "canyon",
+        "subject": "bridge",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_050",
+      "roll": 50,
+      "outcome": "win",
+      "title": "地下黑膠唱片行",
+      "text": "{party}把一路撿來的數百張舊唱片整理分類，在{paradise}開了間只換不賣的唱片行。用一首沒聽過的旋律換另一段回憶，成了海灣最浪漫的交易。",
+      "author_quip": "（如果有人拿末日電台的生髮水廣告黑膠去換，拜託{hero}直接把他轟出去。）",
+      "image": "endings/ending_050.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "meadow",
+        "subject": "vinyl",
+        "accent": "#e07a5f",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_051",
+      "roll": 51,
+      "outcome": "win",
+      "title": "海岸消防與急救站",
+      "text": "經歷過太多險些喪命的夜晚，{party}在{paradise}建起設備齊全的急救站。無論是燙傷、舊傷復發還是吃錯野果，這裡的燈永遠為旅人亮著。",
+      "author_quip": "（隊伍裡以前老是有人把藥品留到快全滅才肯吃，現在開急救站總算懂得及時止血了。）",
+      "image": "endings/ending_051.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "clinic",
+        "accent": "#e63946",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_052",
+      "roll": 52,
+      "outcome": "win",
+      "title": "懸浮結晶能源工坊",
+      "text": "{party}從{boss}的殘骸裡提取出穩定的微光結晶，替{paradise}點亮一整條不用燒油的夜間步道。淡藍色的燈火倒映在海面上，美得讓人忘了十年前的浩劫。",
+      "author_quip": "（既環保又省油，還能順便炫耀自己打贏過大頭目，這波戰利品利用得堪稱模範。）",
+      "image": "endings/ending_052.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "coast",
+        "subject": "crystal",
+        "accent": "#72efdd",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_053",
+      "roll": 53,
+      "outcome": "win",
+      "title": "荒野繪本插畫家",
+      "text": "{hero}用炭筆與植物汁液，把自己一路遇見的怪異旅人、破車與日落全畫成童話繪本。{paradise}的孩子們睡前最愛聽的，正是這段有點蠢卻很溫柔的向東冒險。",
+      "author_quip": "（畫得比我這套 16-bit 像素風還精緻的話，我可是會吃醋的喔，{hero}。）",
+      "image": "endings/ending_053.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "easel",
+        "accent": "#f4a261",
+        "weather": "petals"
+      }
+    },
+    {
+      "id": "ending_054",
+      "roll": 54,
+      "outcome": "win",
+      "title": "無盡公路的新地圖繪師",
+      "text": "抵達{paradise}三個月後，{hero}發現現有的東方地圖全是錯的。於是{party}重新加滿油箱，決定沿著海岸線往南北繼續測繪，替後人畫出第一份真正準確的末日地圖。",
+      "author_quip": "（剛把這本書翻到最後一頁就立刻幫續集埋伏筆，{hero}你簡直比出版社編輯還會催更。）",
+      "image": "endings/ending_054.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "coast",
+        "subject": "compass",
+        "accent": "#8bbfb0",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_055",
+      "roll": 55,
+      "outcome": "win",
+      "title": "海崖蜂蜜鬆餅攤",
+      "text": "{party}在{paradise}看日出的崖邊推起一輛改裝餐車，專賣淋滿野花蜜的熱鬆餅。很多人走了上百里荒路，最後卻是因為一口鬆餅決定留在這裡定居。",
+      "author_quip": "（說真的，如果我走了一百里吃沙喝髒水，看到剛煎好的蜂蜜鬆餅我也會當場宣布退休。）",
+      "image": "endings/ending_055.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "coast",
+        "subject": "foodtruck",
+        "accent": "#f4c95d",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_056",
+      "roll": 56,
+      "outcome": "win",
+      "title": "舊時代棒球場重啟",
+      "text": "{hero}帶著全鎮居民拔掉雜草、用白灰重新畫線，在{paradise}舉辦了十年來第一場九局棒球賽。當木棒擊出全壘打飛進海灣時，全場歡呼得像世界重獲新生。",
+      "author_quip": "（雖然九局下來有五顆球被變異海鷗叼走，但規則書早就燒光了，裁判說算分就算分！）",
+      "image": "endings/ending_056.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "meadow",
+        "subject": "baseball",
+        "accent": "#e76f51",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_057",
+      "roll": 57,
+      "outcome": "win",
+      "title": "潮汐發電與星光碼頭",
+      "text": "{party}修好{paradise}的潮汐發電機，讓整座老碼頭在夜裡亮起溫暖的琥珀燈串。漁船歸港的汽笛聲，從此取代了當年外星巡邏艇的警報。",
+      "author_quip": "（同樣是琥珀色光線，以前看到要立刻踩油門逃命，現在看到卻代表有烤魚可以吃，時代真的變了。）",
+      "image": "endings/ending_057.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "harbor",
+        "subject": "pier",
+        "accent": "#f4a261",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_058",
+      "roll": 58,
+      "outcome": "win",
+      "title": "山谷溫泉與慢生活協會",
+      "text": "擊敗{boss}的隔週，{hero}正式宣布成立「什麼都不幹協會」，每天的行程只有泡溫泉、曬太陽與幫破車擦灰塵。申請入會的名單短短一個月就排到港外。",
+      "author_quip": "（奮鬥了一百里，最後的終極夢想是合法躺平——我打從心底佩服{hero}的覺悟。）",
+      "image": "endings/ending_058.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "canyon",
+        "subject": "hotspring",
+        "accent": "#a8dadc",
+        "weather": "steam"
+      }
+    },
+    {
+      "id": "ending_059",
+      "roll": 59,
+      "outcome": "win",
+      "title": "靜默海灣的造船匠",
+      "text": "{party}拜一位隱居在{paradise}的老船匠為師，親手刨木頭打造出一艘純木造雙桅帆船。船頭刻著一路上同行過的每個名字，準備迎向沒有終點的藍海。",
+      "author_quip": "（從修破車一路進階到造帆船，{hero}的雙手大概是全末日最值錢的萬用工具箱。）",
+      "image": "endings/ending_059.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "harbor",
+        "subject": "shipyard",
+        "accent": "#d5b176",
+        "weather": "seagulls"
+      }
+    },
+    {
+      "id": "ending_060",
+      "roll": 60,
+      "outcome": "win",
+      "title": "真的只是好好睡了一覺",
+      "text": "抵達{paradise}的那天晚上，沒有守夜、沒有警報、沒有壞掉的引擎。{party}把車停在聽得見海浪的草地上，蓋著舊毯子一覺睡到隔天中午，醒來時陽光正好。",
+      "author_quip": "（沒有稱王、沒有發財、沒有驚天動地的史詩番外——就只是安安穩穩睡了一覺。說來慚愧，這竟然是我寫完一百個結局裡最羨慕的一個。）",
+      "image": "endings/ending_060.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "sleeping_car",
+        "accent": "#f2cc8f",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_061",
+      "roll": 61,
+      "outcome": "stranded",
+      "title": "路邊鐵皮休息站",
+      "text": "車子在荒野徹底罷工後，{party}索性把報廢的車身當成櫃檯，就地蓋起一間鐵皮休息站。雖然沒能看見{paradise}，卻成了無數向東旅人最溫暖的中繼點。",
+      "author_quip": "（去不了樂園，乾脆在半路開起收費休息站賺後續旅人的廢料——{hero}這招轉型速度連我都甘拜下風。）",
+      "image": "endings/ending_061.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "desert",
+        "subject": "roadside_inn",
+        "accent": "#e9c46a",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_062",
+      "roll": 62,
+      "outcome": "stranded",
+      "title": "改造成沙漠書屋的破車",
+      "text": "耗盡最後一滴油後，{hero}把熄火的座駕推到樹蔭下，拆掉座椅釘滿木架。路過的人只要留下一本舊書或一則傳聞，就能在車廂裡免費躲過最毒辣的正午太陽。",
+      "author_quip": "（既然開不動了，就地轉職成荒野圖書館長，至少不用再擔心半路爆胎。）",
+      "image": "endings/ending_062.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "desert",
+        "subject": "car_library",
+        "accent": "#d5b176",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_063",
+      "roll": 63,
+      "outcome": "stranded",
+      "title": "加入流浪商隊的護衛",
+      "text": "被困在荒路中央的第三天，一支綿延半里的駱駝與改裝車商隊經過。{party}把破車折價換成兩袋乾糧，從此跟著商隊在各大佔領區之間跑起長途生意。",
+      "author_quip": "（主角光環沒了不要緊，至少跟著商隊每天有熱湯喝，比自己盲目亂開靠譜多了。）",
+      "image": "endings/ending_063.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "desert",
+        "subject": "caravan",
+        "accent": "#f4a261",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_064",
+      "roll": 64,
+      "outcome": "stranded",
+      "title": "廢墟裡的無線電幽靈",
+      "text": "沒能繼續向東的{hero}爬上附近廢棄的轉播塔，靠太陽能板搭起一間小小電台。每天傍晚，公路上的司機都會聽到一個自稱「半路拋錨者」的毒舌DJ在報路況。",
+      "author_quip": "（等等，該不會一路上那些亂報新聞又播怪廣告的末日電台，全都是以前拋錨在半路的前輩開的吧？！）",
+      "image": "endings/ending_064.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "ruin",
+        "subject": "radio_tower",
+        "accent": "#8ecae6",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_065",
+      "roll": 65,
+      "outcome": "stranded",
+      "title": "沙漠仙人掌農夫",
+      "text": "車子再也發不動的那天，{party}在路邊發現一口半乾的舊水井。{hero}乾脆卸下行囊學著種起耐旱仙人掌與甜瓜，過上了離{paradise}很遠、卻意外平靜的日子。",
+      "author_quip": "（早知道種仙人掌也能活得這麼滋潤，當初何必花那麼多廢料幫那台破車換裝甲呢。）",
+      "image": "endings/ending_065.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "desert",
+        "subject": "cactus_farm",
+        "accent": "#81b29a",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_066",
+      "roll": 66,
+      "outcome": "stranded",
+      "title": "峽谷吊橋的收費員",
+      "text": "在油箱徹底見底的峽谷旁，{party}修好了一座搖搖欲墜的舊木橋。往後路過的旅人只要給半罐油或兩根螺絲就能安全通行，{hero}就這樣成了峽谷最有信用的人。",
+      "author_quip": "（此山是我開，此橋是我修——不過{hero}收費還算公道，比那些路邊攔路打劫的強盜體面多了。）",
+      "image": "endings/ending_066.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "canyon",
+        "subject": "toll_bridge",
+        "accent": "#d5b176",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_067",
+      "roll": 67,
+      "outcome": "stranded",
+      "title": "把破車改建成兩房一廳",
+      "text": "既然哪裡也去不了，{party}索性用廢鐵皮與舊帆布把報廢座駕擴建成一棟歪歪扭扭的兩層小屋。門牌上還倔強地寫著「距離{paradise}只差一點點」。",
+      "author_quip": "（違章建築蓋在廢土上最大的好處，就是絕對不會有建管處的人來貼拆除通知單。）",
+      "image": "endings/ending_067.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "desert",
+        "subject": "scrap_house",
+        "accent": "#e07a5f",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_068",
+      "roll": 68,
+      "outcome": "stranded",
+      "title": "廢土地下修車黑市",
+      "text": "{hero}把拋錨車上的可用零件一一拆解，在高速公路高架橋下擺起了流動修車攤。因為手藝過於熟練，半年後連外星巡邏隊的後勤兵都會偷偷跑來請他換輪胎。",
+      "author_quip": "（連敵軍都變成老主顧了，我看{hero}乾脆別去什麼樂園了，就在橋下把分店開滿全國吧。）",
+      "image": "endings/ending_068.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "ruin",
+        "subject": "underpass",
+        "accent": "#f4a261",
+        "weather": "sparks"
+      }
+    },
+    {
+      "id": "ending_069",
+      "roll": 69,
+      "outcome": "stranded",
+      "title": "跟變異野狗群和解",
+      "text": "斷油受困的第七天，原本虎視眈眈的變異犬群居然因為{hero}分出去的半塊肉乾而坐下來搖尾巴。{party}從此成了這片荒原上唯一沒人敢招惹的馴犬部落。",
+      "author_quip": "（沒到達樂園，卻意外收編了一支百犬軍團——下次誰敢在這條路上攔劫，大概會先被舔到懷疑人生。）",
+      "image": "endings/ending_069.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "desert",
+        "subject": "hound_camp",
+        "accent": "#e9c46a",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_070",
+      "roll": 70,
+      "outcome": "stranded",
+      "title": "舊加油站的夜間守望者",
+      "text": "{party}搬進一座早就抽不出油的老加油站，靠著收集雨水與替過路車隊指路換取物資。每個深夜，霓虹燈殘存的那半個「E」字依然固執地替東行者指方向。",
+      "author_quip": "（自己開不到東邊，卻替後來的人把路燈點亮——我承認，這句話讓我寫的時候鼻頭有點酸。）",
+      "image": "endings/ending_070.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "desert",
+        "subject": "gas_station",
+        "accent": "#f4a261",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_071",
+      "roll": 71,
+      "outcome": "stranded",
+      "title": "荒野古生物化石獵人",
+      "text": "在等待救援的無聊日子裡，{hero}拿鐵撬在路旁岩壁敲出一整具史前巨獸化石。沒多久，各路怪人學者紛紛帶著罐頭上門參觀，破車旁竟長出一座迷你自然史博物館。",
+      "author_quip": "（開往樂園失敗，結果轉行當起考古權威——命運這本劇本果然連我都猜不透。）",
+      "image": "endings/ending_071.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "canyon",
+        "subject": "fossil",
+        "accent": "#d5b176",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_072",
+      "roll": 72,
+      "outcome": "stranded",
+      "title": "半路轉頭往西走",
+      "text": "盯著徹底報廢的引擎看了半小時後，{hero}突然大笑一聲，背起背包朝著來時的西方邁開大步。既然東邊的門暫時進不去，不如回去把當年沒說完的再見補齊。",
+      "author_quip": "（書名明明叫《一路向東》，你最後居然給我掉頭往西走！編輯看到這頁絕對會氣到吐血。）",
+      "image": "endings/ending_072.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "desert",
+        "subject": "westward",
+        "accent": "#e76f51",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_073",
+      "roll": 73,
+      "outcome": "stranded",
+      "title": "被外星觀光艇誤當景點",
+      "text": "{party}把報廢車塗成鮮豔螢光色當作求救信號，不料引來幾艘愛看熱鬧的外星觀光飛艇。對方每天定時空投乾淨罐頭，只為了拍他們在沙漠裡生火煮泡麵的畫面。",
+      "author_quip": "（堂堂末日旅人淪為宇宙級實境秀主角，不過看在對方空投的是高級牛肉罐頭的份上，這波不虧。）",
+      "image": "endings/ending_073.svg",
+      "scene": {
+        "sky": "alien",
+        "ground": "desert",
+        "subject": "ufo_tour",
+        "accent": "#c77dff",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_074",
+      "roll": 74,
+      "outcome": "stranded",
+      "title": "鹽湖邊的風帆滑車手",
+      "text": "沒有汽油又怎樣？{hero}拆下報廢車的輪子與帳篷布，拼出三輛靠風力奔馳的鹽湖滑車。雖然爬不上往{paradise}的陡坡，卻在無邊白鹽上跑出了前所未有的自由。",
+      "author_quip": "（沒油就改用風帆，人類為了不想走路真是什麼怪點子都想得出來。）",
+      "image": "endings/ending_074.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "salt",
+        "subject": "land_yacht",
+        "accent": "#90e0ef",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_075",
+      "roll": 75,
+      "outcome": "stranded",
+      "title": "地鐵廢站裡的蘑菇公社",
+      "text": "為了躲避沙塵暴，{party}棄車躲進一處地下車站，意外加入住在裡頭的友善蘑菇農民公社。頭頂是外星人的世界，腳下卻有著溫暖的菇湯與永遠熄不滅的營火。",
+      "author_quip": "（雖然離藍海樂園差了十萬八千里，但至少不用再付停車費，也不用被砂石刮臉了。）",
+      "image": "endings/ending_075.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "ruin",
+        "subject": "subway",
+        "accent": "#64dfdf",
+        "weather": "spores"
+      }
+    },
+    {
+      "id": "ending_076",
+      "roll": 76,
+      "outcome": "stranded",
+      "title": "荒漠觀星隱士",
+      "text": "車子徹底沉進流沙後，{hero}搬進山壁上的天然岩洞，用撿來的鏡片自製望遠鏡。往後十年，路過商隊口中都流傳著一位能靠星象預知外星掃描路線的怪老頭。",
+      "author_quip": "（別人是開到樂園成傳說，{hero}是拋錨到變仙人，也算另類修成正果。）",
+      "image": "endings/ending_076.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "canyon",
+        "subject": "hermit",
+        "accent": "#8ecae6",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_077",
+      "roll": 77,
+      "outcome": "stranded",
+      "title": "廢棄遊樂園的維修工",
+      "text": "{party}把破車推到路旁一座荒廢的摩天輪下，乾脆住進售票亭。閒來無事便把旋轉木馬接上手搖發電機，成了荒原裡唯一一個晚上會亮起暖黃燈光的地方。",
+      "author_quip": "（荒野裡突然傳來走音的旋轉木馬音樂，雖然有點像恐怖片開場，但實際上裡面只住著幾個沒油的可憐旅人。）",
+      "image": "endings/ending_077.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "ruin",
+        "subject": "ferris",
+        "accent": "#f4a261",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_078",
+      "roll": 78,
+      "outcome": "stranded",
+      "title": "把遺憾寄給下一輛車",
+      "text": "明知這台車再也到不了{paradise}，{hero}在車門上仔細寫下沿途所有暗坑與補給點，把剩下的地圖與工具掛在後照鏡上，自己則帶著同伴步行前往最近的綠洲聚落。",
+      "author_quip": "（把攻略本留給下一位玩家，{hero}你這種前人種樹的精神，值得我在片尾名單給你加粗字體。）",
+      "image": "endings/ending_078.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "desert",
+        "subject": "note_car",
+        "accent": "#d5b176",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_079",
+      "roll": 79,
+      "outcome": "stranded",
+      "title": "廢土牌局傳奇莊家",
+      "text": "在路邊小鎮等零件一等就是三年，{hero}靠著一副缺了紅心七的撲克牌成了鎮上酒館最受歡迎的莊家。偶爾喝醉時，還是會指著門外生鏽的破車說「那台當年差點就到樂園了」。",
+      "author_quip": "（每家末日酒館裡好像都需要這麼一個吹噓當年勇的老司機，恭喜{hero}正式接班。）",
+      "image": "endings/ending_079.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "ruin",
+        "subject": "saloon",
+        "accent": "#e76f51",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_080",
+      "roll": 80,
+      "outcome": "stranded",
+      "title": "在半路遇見真正想留下的理由",
+      "text": "沒能開進{paradise}的{party}在無名河谷停了下來，幫忙重建一場風暴後的聚落。多年後有人問起東邊的樂園，{hero}望著炊煙裊裊的屋頂笑道：「這裡其實就挺好的。」",
+      "author_quip": "（好啦，我承認這結局挺治癒的——原來樂園不一定在地圖最東邊，有時候引擎熄火的地方就是家。）",
+      "image": "endings/ending_080.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "valley_home",
+        "accent": "#9ad1c2",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_081",
+      "roll": 81,
+      "outcome": "death",
+      "title": "無名公路紀念碑",
+      "text": "路過的商隊在荒路旁發現了早已冷卻的座駕，將{party}安葬在面朝東方的小土丘上，並用扭曲的車頭保險桿立起一座無名碑。每當東風吹過，鐵片仍會發出輕微鳴響。",
+      "author_quip": "（連個像樣的墓誌銘都沒來得及刻，只好由我這個作者在書頁空白處補寫一句：「此處長眠著一位差點就能看到結局的倒楣鬼」。）",
+      "image": "endings/ending_081.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "desert",
+        "subject": "memorial",
+        "accent": "#d5b176",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_082",
+      "roll": 82,
+      "outcome": "death",
+      "title": "成為外星自然史館展品",
+      "text": "全軍覆沒的隔天，外星巡邏艇將{hero}的破車與背包整套打包運回軌道母艦，標上「佔領區原生遷徙生物樣本 #404」放進玻璃展示櫃，每天供外星小學生隔著玻璃指指點點。",
+      "author_quip": "（生前沒出名，死後居然當上了外星博物館的鎮館標本——{hero}你這輩子也算另類衝出地球了。）",
+      "image": "endings/ending_082.svg",
+      "scene": {
+        "sky": "alien",
+        "ground": "crater",
+        "subject": "alien_case",
+        "accent": "#9d4edd",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_083",
+      "roll": 83,
+      "outcome": "death",
+      "title": "被拾荒者繼承的破車",
+      "text": "風沙掩埋了{party}的足跡三週後，一名年輕拾荒者修好了這輛滿身彈孔的車，在手套箱裡讀完了{hero}的日記，擦乾眼淚坐上駕駛座，替他們繼續踩下往東的油門。",
+      "author_quip": "（主角領完便當，結果裝備跟車子全被路人免費繼承——這就是末日最殘酷也最溫柔的接力賽。）",
+      "image": "endings/ending_083.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "desert",
+        "subject": "heir_car",
+        "accent": "#f4a261",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_084",
+      "roll": 84,
+      "outcome": "death",
+      "title": "電台DJ的三秒鐘悼念",
+      "text": "不知從哪裡聽說了{hero}客死半路的消息，那個總愛胡說八道的末日電台DJ破天荒收起笑聲，替{party}放了半首刮花的鋼琴曲，接著馬上插播了一則防水棺材特賣廣告。",
+      "author_quip": "（連悼念詞都能順便接業配廣告，看來我把末日電台的節操寫得還是太高估他們了。）",
+      "image": "endings/ending_084.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "ruin",
+        "subject": "radio_grave",
+        "accent": "#8ecae6",
+        "weather": "rain"
+      }
+    },
+    {
+      "id": "ending_085",
+      "roll": 85,
+      "outcome": "death",
+      "title": "長滿發光蘑菇的車骸",
+      "text": "多年以後，那輛永遠停在半路的車廂裡長出了成片散發淡藍微光的變異菌菇。夜裡經過的迷途旅人總會借這抹幽光辨認方向，卻沒人知道底下曾載過誰的夢想。",
+      "author_quip": "（人沒走到終點，屍骨跟破車倒是成了免費路燈——這算不算一種環保永續的悲劇美學？）",
+      "image": "endings/ending_085.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "forest",
+        "subject": "spore_wreck",
+        "accent": "#64dfdf",
+        "weather": "spores"
+      }
+    },
+    {
+      "id": "ending_086",
+      "roll": 86,
+      "outcome": "death",
+      "title": "禿鷹與鏽鐵的午後",
+      "text": "烈日炙烤著沉默的柏油路，幾隻變異禿鷹停在歪斜的後照鏡上打盹。{hero}懷裡那張寫著{paradise}方向的皺巴巴地圖，被一陣熱風捲起，越飄越遠，最終消失在東邊地平線。",
+      "author_quip": "（人死在半路，結果地圖自己隨風先到了東方——真是全書最諷刺的嘲笑。）",
+      "image": "endings/ending_086.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "desert",
+        "subject": "vulture",
+        "accent": "#e76f51",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_087",
+      "roll": 87,
+      "outcome": "death",
+      "title": "被寫進路邊酒館的警世笑話",
+      "text": "往後幾年，西邊的旅人們在酒館喝酒時總會提起{hero}的蠢事：「千萬別像那個傢伙一樣，血條見底還硬要往前衝！」大家笑完之後，卻還是默默舉杯敬了東方一口。",
+      "author_quip": "（能死到成為全公路的反面教材，也算變相名留青史了。下次開局記得多帶兩份藥品好嗎！）",
+      "image": "endings/ending_087.svg",
+      "scene": {
+        "sky": "dusk",
+        "ground": "ruin",
+        "subject": "tavern_toast",
+        "accent": "#f4a261",
+        "weather": "lanterns"
+      }
+    },
+    {
+      "id": "ending_088",
+      "roll": 88,
+      "outcome": "death",
+      "title": "暴雨沖刷過的輪胎印",
+      "text": "一場罕見的傾盆酸雨在{party}倒下後整整下了三天。當雲層終於散去，泥地上的車轍與血跡全都被沖得一乾二淨，彷彿這趟向東的旅程從來只是一場沒有證人的夢。",
+      "author_quip": "（連一點痕跡都沒留下，害我這個作者看著空蕩蕩的泥巴地，突然覺得剛才寫的那幾千字全白忙了。）",
+      "image": "endings/ending_088.svg",
+      "scene": {
+        "sky": "storm",
+        "ground": "ruin",
+        "subject": "rain_road",
+        "accent": "#6c757d",
+        "weather": "rain"
+      }
+    },
+    {
+      "id": "ending_089",
+      "roll": 89,
+      "outcome": "death",
+      "title": "機器鳥守著熄火的引擎",
+      "text": "一隻不知從哪裡飛來的老舊偵察機械鳥停在{hero}的車頂，反覆播放著早已失真的「系統正常、歡迎登車」提示音，直到電池在某個寒冬徹底耗盡。",
+      "author_quip": "（連台破機器都比{hero}還會撐場面，至少人家撐到冬天才斷電。）",
+      "image": "endings/ending_089.svg",
+      "scene": {
+        "sky": "storm",
+        "ground": "snow",
+        "subject": "robo_bird",
+        "accent": "#8ecae6",
+        "weather": "snow"
+      }
+    },
+    {
+      "id": "ending_090",
+      "roll": 90,
+      "outcome": "death",
+      "title": "半頁未完的旅途手記",
+      "text": "幾年後有旅人在車廂地板撿到{hero}被風吹散的筆記本，最後一頁只寫到一半便被暗紅污漬蓋住。沒人知道最後究竟發生了什麼，只知道他們曾拼命想往東看一眼。",
+      "author_quip": "（我知道發生了什麼，但我不想說——反正絕對跟某人低估敵人火力脫不了關係。）",
+      "image": "endings/ending_090.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "desert",
+        "subject": "open_book",
+        "accent": "#d5b176",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_091",
+      "roll": 91,
+      "outcome": "death",
+      "title": "沙丘吞沒的最後一哩",
+      "text": "連綿的沙暴緩緩推平了這段公路，把{party}與座駕溫柔地封存在金黃沙丘之下。也許一千年後會有人挖出這台破車，驚嘆十年前的人類居然敢開這種鐵盒挑戰世界。",
+      "author_quip": "（一千年後的考古學家大概會把這台破車命名為「早期自殺式自駕工具」，希望{hero}在天之靈別生氣。）",
+      "image": "endings/ending_091.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "desert",
+        "subject": "buried_car",
+        "accent": "#e9c46a",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_092",
+      "roll": 92,
+      "outcome": "death",
+      "title": "倒在終點大門前的身影",
+      "text": "最殘忍的是，從{party}倒下的山坡抬頭望去，其實已經隱約能看見{paradise}那抹遙遠的海色。他們走完了幾乎全部的苦路，卻只差最後一口氣就能推開門。",
+      "author_quip": "（這大概是全書最讓人拳頭硬起來的死法了……我都替{hero}覺得虧，乾脆立刻重開一局報仇吧！）",
+      "image": "endings/ending_092.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "coast",
+        "subject": "distant_gate",
+        "accent": "#f4a261",
+        "weather": "clouds"
+      }
+    },
+    {
+      "id": "ending_093",
+      "roll": 93,
+      "outcome": "death",
+      "title": "外星掃描柱下的靜默",
+      "text": "高空的琥珀色掃描光柱緩緩掠過靜止的車殼，確認再也沒有任何生命訊號後便漠然離去。荒原重新歸於死寂，只剩收音機裡還卡著半句沒播完的防曬乳廣告。",
+      "author_quip": "（人都沒了，收音機居然還在推銷防曬乳——這大概是末日最沒人性的黑色喜劇。）",
+      "image": "endings/ending_093.svg",
+      "scene": {
+        "sky": "alien",
+        "ground": "crater",
+        "subject": "scan_beam",
+        "accent": "#f4a261",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_094",
+      "roll": 94,
+      "outcome": "death",
+      "title": "野花開滿的方向盤",
+      "text": "隔年春天，一株頑強的野牽牛從碎裂的擋風玻璃縫隙鑽出來，把生鏽的方向盤纏得滿滿當當。{party}沒能抵達開滿鮮花的樂園，春天卻自己跑來覆蓋了他們。",
+      "author_quip": "（算了，這畫面美得我連吐槽都說不出口。晚安了，{hero}，這趟車開得夠累的了。）",
+      "image": "endings/ending_094.svg",
+      "scene": {
+        "sky": "dawn",
+        "ground": "meadow",
+        "subject": "flower_wheel",
+        "accent": "#e88da3",
+        "weather": "petals"
+      }
+    },
+    {
+      "id": "ending_095",
+      "roll": 95,
+      "outcome": "death",
+      "title": "被雪封存的向東雕像",
+      "text": "一場突如其來的寒潮將這段荒路凍成銀白世界。覆滿白霜的座駕靜靜停在路中央，車燈彷彿還凝視著東方，成了一座永遠不會融化的冰冷路標。",
+      "author_quip": "（開著沒暖氣的破車衝進暴風雪，這結果老實說並不意外，但我還是替{party}披上一句文字毛毯吧。）",
+      "image": "endings/ending_095.svg",
+      "scene": {
+        "sky": "storm",
+        "ground": "snow",
+        "subject": "frozen_car",
+        "accent": "#a8dadc",
+        "weather": "snow"
+      }
+    },
+    {
+      "id": "ending_096",
+      "roll": 96,
+      "outcome": "death",
+      "title": "海市蜃樓裡的幻影樂園",
+      "text": "在意識模糊的最後一秒，{hero}彷彿真的聽見了{paradise}的海浪聲與笑聲，甚至覺得引擎又奇蹟般發動了。事實上，那只是正午沙漠裡晃動的一片熱浪。",
+      "author_quip": "（至少在最後三秒鐘裡，{hero}以為自己真的贏了——這種善意的幻覺，也算老天爺最後的一點慈悲吧。）",
+      "image": "endings/ending_096.svg",
+      "scene": {
+        "sky": "noon",
+        "ground": "desert",
+        "subject": "mirage",
+        "accent": "#90e0ef",
+        "weather": "sun"
+      }
+    },
+    {
+      "id": "ending_097",
+      "roll": 97,
+      "outcome": "death",
+      "title": "散落公路的舊照片",
+      "text": "強風掀開了破碎的後車廂，十幾張褪色的舊時代照片與旅途剪影在荒原上翻滾飛舞，最後掛在遠處的鐵絲網上。那是{party}曾經存在於這個世界的最後證明。",
+      "author_quip": "（每一張飛走的照片都是我精心寫好的伏筆耶！全滅害我的伏筆全都隨風飄散了！）",
+      "image": "endings/ending_097.svg",
+      "scene": {
+        "sky": "sunset",
+        "ground": "ruin",
+        "subject": "photos",
+        "accent": "#d5b176",
+        "weather": "dust"
+      }
+    },
+    {
+      "id": "ending_098",
+      "roll": 98,
+      "outcome": "death",
+      "title": "野營火堆旁的最後一晚",
+      "text": "沒能撐過那個酷寒的夜晚，營火的餘燼在黎明前徹底熄滅。{party}靠在彼此肩上睡著了，再也沒有醒來面對明天那條永無止盡的破爛公路。",
+      "author_quip": "（這本書在這裡被迫提早收尾。別難過，把眼淚擦一擦，下一輪我一定多塞兩罐藥品在路邊草叢裡。）",
+      "image": "endings/ending_098.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "canyon",
+        "subject": "dead_fire",
+        "accent": "#6c757d",
+        "weather": "stars"
+      }
+    },
+    {
+      "id": "ending_099",
+      "roll": 99,
+      "outcome": "death",
+      "title": "成為傳說中的幽靈破車",
+      "text": "自從{party}消逝在迷霧路段後，常有夜行司機發誓看見一輛開著遠光燈、滿身焊痕的破車與自己擦肩而過，車窗裡還傳出模糊的廣播笑聲，轉眼卻不見蹤影。",
+      "author_quip": "（死了都不肯放棄繼續往東開，{hero}你這執念簡直比我拖稿的毅力還要驚人！）",
+      "image": "endings/ending_099.svg",
+      "scene": {
+        "sky": "night",
+        "ground": "ruin",
+        "subject": "ghost_car",
+        "accent": "#72efdd",
+        "weather": "spores"
+      }
+    },
+    {
+      "id": "ending_100",
+      "roll": 100,
+      "outcome": "death",
+      "title": "作者被迫撕掉大綱重寫",
+      "text": "隨著最後一名同伴倒下，這輛向東的車徹底靜止在無邊荒野中。遠方的{paradise}依舊在海風裡沉睡，等待著下一個比{hero}更命硬、也更懂得及時踩煞車的旅人。",
+      "author_quip": "（好了，全劇終！我現在要去倒杯咖啡、把這疊寫壞的草稿揉成紙球，等你按下「翻開下一本旅程」，我們再重新換個倒楣鬼發車！）",
+      "image": "endings/ending_100.svg",
+      "scene": {
+        "sky": "twilight",
+        "ground": "desert",
+        "subject": "crumpled_page",
+        "accent": "#e63946",
+        "weather": "stars"
+      }
+    }
+  ]
+}

@@ -36,7 +36,7 @@ export function installNpcs(Game,{clone,display,ITEMS}){
   const c=this.s.current;
   if(this.s.mode==='event'&&c?.dialogue&&!c.service)c.service='npc_trade';
   if(this.s.mode==='event'&&c?.dialogue&&c.npc?.procedural?.appearance&&!this.s.notice.includes(c.npc.procedural.appearance)){
-   this.s.notice=`${display(c.npc)}（${personRaceName(c.npc,this.d.catalog)} · ${personJobName(c.npc,this.d.catalog)}）\n${c.npc.procedural.appearance}\n${this.s.notice.split('\n').slice(1).join('\n')}`;
+   this.s.notice=`${display(c.npc)} · ${personRaceName(c.npc,this.d.catalog)} · ${personJobName(c.npc,this.d.catalog)}\n${c.npc.procedural.appearance}\n${this.s.notice.split('\n').slice(1).join('\n')}`;
   }
  };
  const next=Game.prototype.nextEvent;
