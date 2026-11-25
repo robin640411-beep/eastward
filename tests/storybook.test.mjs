@@ -330,3 +330,63 @@ test('100 unique endings with distinct crisp pixel-art SVGs and rolled author sn
  const deathPages=storybookEpilogue(gDead.s,d.catalog,display,'星落綠洲','星門監督官',pickedDeath);
  assert(deathPages.length>=4);
 });
+
+test('front-seat window ordering, vehicle ramming/weapon/loss combat, and explicit escape logs',async()=>{
+ const {vehicleArt}=await import('../dist/vehicle-runtime.js');
+ // 1. Driver (slot 0) always sits in the frontmost (rightmost) window across multi-seat vehicles
+ for(const model of ['sedan','van','pickup','bus','armored','rover','ambulance']){
+  const art=vehicleArt(d.assets,{model,mods:[]});
+  for(let i=1;i<art.windows.length;i++){
+   assert(art.windows[i-1].x>art.windows[i].x,`${model} windows should be ordered front-to-back`);
+  }
+ }
+
+ // 2. Vehicle combat: vehicle acts once per round (not per passenger), unarmed rams and trades hull, armed fires weapon, enemy hit can strip weapon/armor/fuel
+ const g=fresh(707);
+ g.s.vehicle={model:'van',hp:40,maxHp:40,mods:[]};
+ g.s.party.push(g.person('alien','soldier'));
+ g.recordVisuals=true;
+ g.beginCombat('vehicle');
+ assert.equal(g.s.battle.roster.length,1,'Vehicle combat should have 1 vehicle command per round');
+ g.s.battle.enemies=[{id:'e0',name:'敵方貨車',vehicle:'pickup',hasWeapon:false,hp:50,maxHp:50,attack:6,defense:2,speed:3,stun:0}];
+ g.roll=()=>90;
+ const vehHpBefore=g.s.vehicle.hp;
+ g.partyAction(g.driver(),{type:'attack',target:'e0'});
+ assert(g.s.battle.enemies[0].hp<50,'Unarmed ram should damage enemy vehicle');
+ assert(g.s.vehicle.hp<vehHpBefore,'Unarmed ram should also damage player vehicle');
+ assert.equal(g.visualSteps.at(-1).visual.id,'ram');
+ assert.equal(g.visualSteps.at(-1).ranged,false);
+
+ // Enemy unarmed ram also hurts enemy itself
+ const enemyHpBefore=g.s.battle.enemies[0].hp;
+ g.enemyAction(g.s.battle.enemies[0]);
+ assert(g.s.battle.enemies[0].hp<enemyHpBefore,'Enemy unarmed ram should self-damage enemy vehicle');
+
+ // Equipped gun fires weapon (ranged) without self-ram damage, and enemy hit can strip weapon/armor/fuel
+ g.s.vehicle.mods.push('gun','armor');
+ g.s.resources.fuel=20;
+ const hpBeforeGun=g.s.vehicle.hp;
+ g.partyAction(g.driver(),{type:'attack',target:'e0'});
+ assert.equal(g.s.vehicle.hp,hpBeforeGun,'Armed fire should not self-ram');
+ assert.equal(g.visualSteps.at(-1).ranged,true);
+ g.roll=()=>1; // Trigger subsystem loss
+ const modsBefore=g.s.vehicle.mods.length,fuelBefore=g.availableFuel();
+ g.enemyAction(g.s.battle.enemies[0]);
+ assert(g.s.vehicle.mods.length<modsBefore||g.availableFuel()<fuelBefore,'Enemy hit should be able to destroy weapon, armor, or leak fuel');
+
+ // 3. Character battle escape & attempt_escape never silently end without explicit who-fled log
+ const gEsc=fresh(808);
+ gEsc.s.party.push(gEsc.person('human','scout'));
+ gEsc.s.mode='event';
+ gEsc.s.current={instance:1,event:{id:'R1',title:'伏擊',text:'伏兵衝出。',options:[{id:'run',label:'撤離',effects:[{op:'attempt_escape',mode:'character'}]}]},npc:null};
+ gEsc.roll=(s=100)=>s; // Fail pre-combat escape -> enters combat with CLEAN empty orders!
+ gEsc.effect({op:'attempt_escape',mode:'character'});
+ assert.equal(gEsc.s.mode,'combat');
+ assert.deepEqual(gEsc.s.battle.orders,{},'Failed attempt_escape must not leave hidden escape order on party[0]');
+
+ gEsc.roll=()=>1; // Succeed explicit player escape
+ gEsc.partyAction(gEsc.s.party[0],{type:'escape'});
+ assert.equal(gEsc.s.battle,null);
+ assert(gEsc.s.notice.includes('我方撤離'),`Expected explicit player escape notice, got: ${gEsc.s.notice}`);
+ assert(gEsc.s.logs.some(l=>l.title.includes('我方逃跑')),'Expected explicit escape log entry');
+});

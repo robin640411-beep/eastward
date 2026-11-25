@@ -178,8 +178,8 @@ function battleBackground(){const indoors=state.current?.inside||state.frames?.a
  }finally{ctx=main;}}
  ctx.drawImage(arenaCanvas,0,-stageTop);
 }
-const carAnchor={cx:70,cy:192};
-let formation;
+const carAnchor={cx:170,cy:196};
+let formation,liveVehicleAnchor={cx:170,cy:196},liveVehiclePoints=[];
 function battleFormation(b){
  if(formation?.enemies===b.enemies&&formation.mode===b.mode)return formation;
  const enemies=b.enemies,layout=enemyLayout(enemies.length,enemies);
@@ -196,6 +196,7 @@ function battleFormation(b){
  return formation;
 }
 function paintBattleBusts(age,layout,bottom){
+ if(state.battle?.mode==='vehicle')return;
  const foeId=beat.side==='party'?beat.target:beat.actor;
  const foe=layout[state.battle.enemies.findIndex(e=>e.id===foeId)];
  for(const p of state.party){
@@ -227,17 +228,87 @@ function paintBattleBusts(age,layout,bottom){
   ctx.restore();
  }
 }
+function vehicleChase(){
+ const b=state.battle,enemies=b.enemies,age=(performance.now()-beatAt)/1000,since=age*1000-IMPACT_MS;
+ const isRam=beat?.kind==='attack'&&(beat.visual?.id==='ram'||!beat.ranged);
+ const playerW=124,enemyW=enemies.length>1?108:136;
+ // Player cruises along foreground highway lane; enemies weave ahead and behind on the parallel chase lane!
+ const basePX=112+(reduced?0:Math.round(Math.sin(clock*1.15)*18)),basePY=168;
+ const enemyBases=enemies.map((e,i)=>({
+  x:126+(reduced?0:Math.round(Math.sin(clock*1.35+i*2.15)*92)),
+  y:112+(i%2)*8+(reduced?0:Math.round(Math.cos(clock*2.2+i)*2))
+ }));
+ let px=basePX,py=basePY;
+ const exs=enemyBases.map(p=>p.x),eys=enemyBases.map(p=>p.y);
+ // Ramming & weapon recoil choreography on live moving vehicles
+ if(beat&&!reduced&&age>=0&&age<=BEAT_MS/1000){
+  const lunge=clamp01(age/(IMPACT_MS/1000)),recoil=since>=0?1-clamp01(since/240):0;
+  if(beat.side==='party'&&beat.kind==='attack'){
+   const ti=Math.max(0,enemies.findIndex(e=>e.id===beat.target));
+   if(isRam){
+    const reach=since<0?lunge*lunge:recoil*0.35;
+    px=Math.round(basePX+(enemyBases[ti].x-basePX)*reach*0.72);
+    py=Math.round(basePY+(enemyBases[ti].y+18-basePY)*reach*0.85+(since>=0?recoil*8:0));
+    if(since>=0){exs[ti]+=Math.round((enemyBases[ti].x>=basePX?1:-1)*recoil*14);eys[ti]-=Math.round(recoil*10);}
+   }else{
+    // Weapon fire kickback
+    px=basePX-Math.round(recoil*4);
+    if(since>=0)exs[ti]+=Math.round(recoil*6);
+   }
+  }else if(beat.side==='enemies'&&beat.kind==='attack'){
+   const ai=Math.max(0,enemies.findIndex(e=>e.id===beat.actor));
+   if(isRam){
+    const reach=since<0?lunge*lunge:recoil*0.35;
+    exs[ai]=Math.round(enemyBases[ai].x+(basePX-enemyBases[ai].x)*reach*0.72);
+    eys[ai]=Math.round(enemyBases[ai].y+(basePY-18-enemyBases[ai].y)*reach*0.85-(since>=0?recoil*8:0));
+    if(since>=0){px+=Math.round((basePX>=enemyBases[ai].x?1:-1)*recoil*12);py+=Math.round(recoil*8);}
+   }else{
+    exs[ai]=enemyBases[ai].x-Math.round(recoil*4);
+    if(since>=0)py+=Math.round(recoil*4);
+   }
+  }
+ }
+ // Speed lines to emphasize continuous highway chase
+ if(!reduced){
+  ctx.globalAlpha=.2;
+  for(let i=0;i<6;i++){const sx=W-((roadTravel*2.4+i*73)%(W+48));rect(sx,108+i*18,22+(i%3)*10,1,'#e8dec2');}
+  ctx.globalAlpha=1;
+ }
+ liveVehiclePoints=[];
+ for(const [i,e] of enemies.entries()){
+  const struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
+  const knockout=e.hp<=0;
+  const ex=Math.max(6,Math.min(W-enemyW-6,exs[i])),ey=eys[i];
+  liveVehiclePoints.push({cx:Math.round(ex+enemyW/2),cy:Math.round(ey+enemyW*72/160*0.5)});
+  if(knockout&&(!struck||since>=420))continue;
+  ctx.save();
+  ctx.globalAlpha=knockout?1-clamp01((since-110)/310):1;
+  vehicle({model:e.vehicle||'armored',mods:e.hasWeapon?['gun']:[]},[],ex,ey,enemyW,true);
+  ctx.restore();
+ }
+ const finalPX=Math.max(8,Math.min(W-playerW-8,px));
+ liveVehicleAnchor={cx:Math.round(finalPX+playerW/2),cy:Math.round(py+playerW*72/160*0.5)};
+ vehicle(state.vehicle,state.party,finalPX,py,playerW,true);
+ // Extra metallic collision sparks right between colliding chassis during a ram impact
+ if(beat&&isRam&&since>=0&&since<280&&!reduced){
+  const u=since/280,ti=Math.max(0,enemies.findIndex(e=>e.id===(beat.side==='party'?beat.target:beat.actor)));
+  const ep=liveVehiclePoints[ti]||liveVehicleAnchor;
+  const mx=Math.round((liveVehicleAnchor.cx+ep.cx)/2),my=Math.round((liveVehicleAnchor.cy+ep.cy)/2);
+  for(let k=0;k<10;k++){const a=k*0.628+u*2,r=6+u*24;rect(mx+Math.cos(a)*r,my+Math.sin(a)*r,k%2?3:2,2,k%3?'#fff0cc':'#f0a050');}
+ }
+}
 function battle(){
  const b=state.battle;if(!b)return;
- const {enemies,layout,art}=battleFormation(b),vehicleFight=b.mode==='vehicle';
+ if(b.mode==='vehicle'){vehicleChase();return;}
+ const {enemies,layout,art}=battleFormation(b);
  const age=(performance.now()-beatAt)/1000,since=age*1000-IMPACT_MS;
- if(!vehicleFight)battleBackground();
+ battleBackground();
  for(const [i,e] of enemies.entries()){
   const l=layout[i],struck=beat?.effects.some(f=>f.side==='enemies'&&f.id===e.id&&f.amount<0);
   const knockout=e.hp<=0;
   if(knockout&&(!struck||since>=420))continue;
   const attacking=beat?.side==='enemies'&&beat.actor===e.id&&['attack','psi'].includes(beat.kind);
-  const victim=vehicleFight?carAnchor:partyAnchor(state.party,beat?.target);
+  const victim=partyAnchor(state.party,beat?.target);
   const direction=(victim?.cx??l.cx)>=l.cx?1:-1;
   const push=attacking&&!reduced?clamp01((age-.22)/.12)*(1-clamp01((age-.40)/.18)):0;
   const recoil=struck&&since>=0&&!reduced?1-clamp01((since-60)/160):0;
@@ -248,15 +319,9 @@ function battle(){
   ctx.save();
   ctx.globalAlpha=knockout?1-clamp01((since-110)/310):1;
   rect(l.cx-l.w*.36,l.cy+l.h/2+4,l.w*.72,4,'#101b2b88');
-  if(vehicleFight){
-   const width=enemies.length>1?106:175;
-   vehicle({model:e.vehicle||'armored',mods:[]},[],l.cx-width/2+dx,112+Math.round(push*6),width,true);
-  }else{
-   paintCombatant(art[i],l.cx-l.w/2-7+dx,y,l.w+14,l.h);
-  }
+  paintCombatant(art[i],l.cx-l.w/2-7+dx,y,l.w+14,l.h);
   ctx.restore();
  }
- if(vehicleFight)vehicle(state.vehicle,state.party,14,171,113,true);
 }
 function battleForeground(){
  if(!beat)return;
@@ -265,8 +330,9 @@ function battleForeground(){
  const b=state.battle,{enemies,layout,points}=battleFormation(b);
  const bottom=stageHeight-stageTop;
  paintBattleBusts(age,layout,bottom);
- const fromCar=b.mode==='vehicle'&&(beat.side==='enemies'||beat.actor===state.driver&&beat.kind==='attack');
- drawBattleEffects(ctx,{beat,age,enemies,layout:points,party:state.party,partyY:bottom-29,vehicleTarget:fromCar?carAnchor:null,soft:reduced});
+ const isVeh=b.mode==='vehicle';
+ const fromCar=isVeh&&(beat.side==='enemies'||beat.kind==='attack'||beat.kind==='defend'||beat.kind==='escape');
+ drawBattleEffects(ctx,{beat,age,enemies,layout:isVeh&&liveVehiclePoints.length?liveVehiclePoints:points,party:state.party,partyY:bottom-29,vehicleTarget:fromCar?(isVeh?liveVehicleAnchor:carAnchor):null,soft:reduced});
 }
 function encounterArt(current){
  if(!current?.event)return null;
@@ -295,7 +361,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  const s=state,titleDrive=!!s.titleDrive,driving=s.mode==='driving'||titleDrive,carFight=s.battle?.mode==='vehicle',u=titleDrive?.5:driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=!titleDrive&&(encounterCue?.inside??(s.current?.inside||s.frames?.at(-1)?.kind==='building'));
  // Both travelling and stopped use this camera, including the very last frame.
  const settle=1-Math.exp(-dt*8);viewZoom+=(pose.zoom-viewZoom)*settle;viewCarX+=(pose.carX-viewCarX)*settle;
- if(driving||carFight)roadTravel+=dt*(carFight?60:pose.speed)*speed;
+ if(driving||carFight)roadTravel+=dt*(carFight?88:pose.speed)*speed;
  const minute=titleDrive?(s.minutes+clock*12)%1440:s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
  const view=routeView(titleDrive?{...s,progress:1+(clock*.35)%98}:s,u),{from,to,blend}=view;ctx.clearRect(0,-stageTop,W,stageHeight);
  const outdoors=!(interior&&!driving)&&(!s.battle||carFight),currentWeather=driving?s.travel?.preview?.current:s.current;
@@ -318,7 +384,7 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  if(s.battle)battleForeground();
  const elapsed=clock-actionAt;if(elapsed<1.3)feedback.forEach((f,i)=>text(f.text,f.x,104+i*17-elapsed*20,f.color,13));
  if(encounterCue)drawEncounterCue(ctx,cueAnchor,{age:(performance.now()-cueStartedAt)/1000,soft:reduced,top:-stageTop,width:W});
- updateReadouts(minute,pose,view,driving);
+ updateReadouts(minute,carFight?{...pose,speed:Math.round(78+Math.sin(clock*1.4)*12)}:pose,view,driving||carFight);
 }
 requestAnimationFrame(frame);
 export function mountWorld(el,s,a,eventArt,{duration=12000,travelStart=performance.now(),travelSpeed=1,target=null,playback:playing=false,encounterCue:nextCue=null}={}){canvas=el;ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;state=s;assets=a;encounters=eventArt;tripDuration=duration;travelAt=travelStart;speed=travelSpeed;selectedTarget=target;playback=playing;displayMinute=-1;

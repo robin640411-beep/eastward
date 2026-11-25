@@ -30,7 +30,7 @@ test('every vehicle and seat upgrade anchors the selected driver to their actual
 test('driver changes follow the new portrait and unknown people do not borrow a seat',()=>{
  const state={vehicle:{model:'armored',mods:[]},party:roster,driver:'p0'},geo={x:24,y:140,width:190,ground:220,zoom:.84};
  const first=vehicleDriverAnchor(assets,state,geo);state.driver='p3';const last=vehicleDriverAnchor(assets,state,geo);
- assert(last.cx>first.cx+60);assert.equal(last.id,'p3');
+ assert(first.cx>last.cx+60);assert.equal(last.id,'p3');
  state.driver='missing';assert.equal(vehicleDriverAnchor(assets,state,geo),null);
  state.driver='p3';state.vehicle={model:'compact',mods:[]};assert.equal(vehicleDriverAnchor(assets,state,geo),null);
 });

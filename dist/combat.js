@@ -2,11 +2,35 @@ import {battleFrame,frameEffects} from './motion-model.js';
 import {actionVisual} from './battle-presentation.js';
 import {appendMessage} from './automatic-journey.js';
 import {rollBattleAuthorQuip} from './storybook.js';
-// Each awake traveller commits one command. Only then does initiative resolve.
+const hasVehicleWeapon=vStats=>!!(vStats?.weapon&&vStats.weapon.bonus>0&&vStats.weapon.style!=='ram');
+// Each awake traveller commits one command. In vehicle combat, the vehicle itself acts once per round.
 export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
+ const battleRoster=game=>game.s.battle?.mode==='vehicle'?(game.driver()?[game.driver().id]:game.alive().slice(0,1).map(p=>p.id)):game.alive().filter(p=>!p.asleep).map(p=>p.id);
  const begin=Game.prototype.beginCombat;
- Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id)}};
- Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=this.alive().filter(p=>!p.asleep).map(p=>p.id);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
+ Game.prototype.beginCombat=function(...args){begin.apply(this,args);if(this.s.battle){this.s.battle.orders={};this.s.battle.guardIds=[];this.s.battle.roster=battleRoster(this)}};
+ Game.prototype.commandActor=function(){const b=this.s.battle;if(!b)return null;b.orders??={};b.roster??=battleRoster(this);return this.alive().find(p=>b.roster.includes(p.id)&&!p.asleep&&!b.orders[p.id])};
+
+ Game.prototype.applyVehicleLoss=function(){
+  const v=this.s.vehicle,vStats=this.vehicleStats(),losses=[];
+  const gunIdx=v.mods.indexOf('gun');
+  if(gunIdx>=0||hasVehicleWeapon(vStats))losses.push('weapon');
+  const armorIdx=v.mods.indexOf('armor');
+  if(armorIdx>=0||vStats.armor>0)losses.push('armor');
+  if(this.availableFuel()>1)losses.push('fuel');
+  if(!losses.length||this.roll()>35)return '';
+  const pick=this.pick(losses);
+  if(pick==='weapon'){
+   if(gunIdx>=0){v.mods.splice(gunIdx,1);return ' 車載機槍被打飛了！';}
+   v.weaponDamaged=true;return ' 車載武器受損失效，只能改為車體衝撞！';
+  }
+  if(pick==='armor'){
+   if(armorIdx>=0){v.mods.splice(armorIdx,1);return ' 外掛裝甲板被轟落一塊！';}
+   v.armorDamaged=(v.armorDamaged||0)+1;return ' 車身裝甲凹陷剝落（裝甲 −1）！';
+  }
+  const leak=Math.min(this.availableFuel()-1,2+(this.roll(3)-1));
+  this.add('fuel',-leak);
+  return ` 油箱被擊穿，漏出 ${leak} 點汽油！`;
+ };
 
  Game.prototype.enemyAvailablePowers=function(e){
   const race=e?.npc?.race||e?.psiRace;
@@ -57,7 +81,23 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
  };
 
  Game.prototype.enemyAction=function(e){const b=this.s.battle;if(!b||e.hp<=0)return;if(e.stun>0){e.stun--;return;}
-  if(b.mode==='vehicle'){this.actionTarget='vehicle';const armor=this.vehicleStats().armor/2,mech=this.alive().some(q=>q.profession==='mechanic')?1:0;const damage=Math.max(1,e.attack-armor*2-mech-(b.guardIds.includes(this.driver()?.id)?3:0));this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);this.log('敵方攻擊',`車輛受到 ${damage} 傷害。`)}
+  if(b.mode==='vehicle'){
+   this.actionTarget='vehicle';
+   const vStats=this.vehicleStats(),armor=vStats.armor/2,mech=this.alive().some(q=>q.profession==='mechanic')?1:0;
+   const guarding=b.guardIds.includes(this.driver()?.id);
+   const eHasWeapon=e.hasWeapon??(['armored','bus','rover'].includes(e.vehicle));
+   e.attackStyle=eHasWeapon?(['armored','bus'].includes(e.vehicle)?'cannon':'burst_fire'):'ram';
+   const damage=Math.max(1,e.attack-Math.floor(armor*2)-mech-(guarding?3:0));
+   this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-damage);
+   const lossMsg=this.applyVehicleLoss();
+   if(eHasWeapon){
+    this.log(e.name,`以車載武器開火！我方${vStats.name}受到 ${damage} 傷害。${lossMsg}`);
+   }else{
+    const recoil=Math.max(1,2+Math.floor(vStats.armor/2));
+    e.hp=Math.max(0,e.hp-recoil);
+    this.log(e.name,`沒有武裝，直接加速猛撞我方車身！我方受到 ${damage} 傷害，敵車也因互撞自損 ${recoil} 點。${lossMsg}`);
+   }
+  }
   else {
    // Enemies & bosses in character battles can unleash psychic powers when roll > threshold
    if(!b.sleepAttack&&(e.esp||0)>=3){
@@ -70,7 +110,7 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
    }
    const target=this.pick(this.alive());if(!target)return;this.actionTarget=target.id;let attack=e.attack;if(e.npc){const n=e.npc,ranged=ITEMS[n.gear.武器]?.ranged;if(this.roll()>90-(ranged&&n.flaw==='unsteady'?10:0)){b.roundMissed=true;this.log(e.name,'攻擊落空。');return;}attack+=(n.profession==='soldier'?1:0)-(n.flaw==='weak_grip'&&!ranged?1:0)-(n.flaw==='timid'&&b.round===1?1:0);if(n.profession==='hunter'&&!e.hunterUsed&&target.race!=='synth'){attack+=2;e.hunterUsed=true;}}let damage=Math.max(1,attack-Math.floor(this.stat(target,'defense')/2)-(b.guardIds.includes(target.id)?2:0)-(b.shield||0));if(target.profession==='guard'&&b.watchId===target.id&&!target.asleep&&!b.guardUsed.includes(target.id)){damage=Math.max(0,damage-3);b.guardUsed.push(target.id)}if(target.profession==='scout'&&(b.ambush||b.sleepAttack)&&!target.asleep&&b.round===1)damage=Math.max(0,damage-2);this.hurt(target,damage,['physical','attack']);}this.checkAlive();
  };
- Game.prototype.enemyTurn=function(){const b=this.s.battle;if(!b)return;b.guardIds??=[];for(const e of b.enemies){this.enemyAction(e);if(this.s.mode==='ending')break;}if(this.s.battle){b.roster=this.alive().filter(p=>!p.asleep).map(p=>p.id);b.orders={};}};
+ Game.prototype.enemyTurn=function(){const b=this.s.battle;if(!b)return;b.guardIds??=[];for(const e of b.enemies){this.enemyAction(e);if(this.s.mode==='ending')break;}if(this.s.battle){b.roster=battleRoster(this);b.orders={};}};
  Game.prototype.combatRound=function(command){const b=this.s.battle;if(!b||this.s.mode!=='combat')return false;const p=this.commandActor();if(p){
   if(!['attack','defend','escape','medicine','psi'].includes(command.type))return false;
   if(command.type==='psi'){const pow=learned(p).find(x=>x.id===Number(command.power));if(!pow||p.esp<pow.cost)return false;}
@@ -88,7 +128,7 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
    const scav=this.alive().some(q=>q.profession==='scavenger')?1:0;
    const scrap=2+Math.floor(region/3)+scav;
    this.add('scrap',scrap);
-   let loot=`戰鬥勝利，取得 ${scrap} 份廢料。`;
+   let loot=`戰鬥勝利：我方擊敗了所有敵人，取得 ${scrap} 份廢料。`;
    const dropRoll=this.roll();
    if(dropRoll<=25){
     if(dropRoll<=10){this.add('medicine',1);loot+=' 另搜出 1 份藥品。';}
@@ -97,22 +137,30 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
    }
    const winQuip=rollBattleAuthorQuip(this.s,'win');
    if(winQuip)loot+=`\n${winQuip}`;
-   this.tell(loot);this.finishCombat(true);return true;
+   this.log('戰鬥結束（我方勝利）',loot);
+   this.s.notice=loot;
+   this.finishCombat(true);return true;
   }
-  if(b.mode==='vehicle'&&this.s.vehicle.hp<=0){this.tell('車輛失去行駛能力，敵人揚長而去。');this.finishCombat(false);return true;}
+  if(b.mode==='vehicle'&&this.s.vehicle.hp<=0){
+   const msg='車戰失利：我方車輛失去行駛能力，敵方車輛趁機揚長而去。';
+   this.log('戰鬥結束（車輛受損）',msg);
+   this.s.notice=msg;
+   this.finishCombat(false);return true;
+  }
  }
  this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');
  const lowHp=this.alive().some(q=>q.hp<=Math.max(6,Math.floor(q.maxHp*0.28)));
  const roundQuip=rollBattleAuthorQuip(this.s,'round',{enemyPsi:b.roundEnemyPsi,missed:b.roundMissed,lowHp});
  if(roundQuip)appendMessage(this.s,'作者吐槽',roundQuip);
  if(b.enemyShield>0)b.enemyShield--;
- if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=this.alive().filter(q=>!q.asleep).map(q=>q.id);return true;
+ if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=battleRoster(this);return true;
  };
  Game.prototype.partyAction=function(p,c){const b=this.s.battle;let e=b.enemies.find(e=>e.id===c.target&&e.hp>0)||b.enemies.find(e=>e.hp>0);if(!e)return;
+ const vStats=this.vehicleStats(),isVeh=b.mode==='vehicle',actorLabel=isVeh?vStats.name:display(p);
  const target=this.alive().find(q=>q.id===c.target)||this.alive().slice().sort((a,z)=>a.hp/a.maxHp-z.hp/z.maxHp)[0];this.actionTarget=(c.type==='medicine'||c.type==='psi'&&learned(p).find(x=>x.id===Number(c.power))?.type==='heal')?target?.id:e.id;
- if(c.type==='defend'){b.guardIds.push(p.id);this.log(display(p),'採取防禦姿態。');return;}
+ if(c.type==='defend'){b.guardIds.push(p.id);this.log(actorLabel,isVeh?'急打方向盤閃避甩尾，降低下一次受擊傷害。':'採取防禦姿態。');return;}
  const gearSum=key=>Object.values(p.gear||{}).reduce((s,id)=>s+(ITEMS[id]?.[key]||0),0);
- if(c.type==='escape'){const chance=clamp(45+this.stat(p,'speed')*2+(b.mode==='character'&&p.race==='mimic'?15:0)+(b.mode==='character'?gearSum('escapeBonus'):0)-(b.mode==='character'&&p.flaw==='noisy'?10:0),5,95);if(this.roll()<=chance){const escQuip=rollBattleAuthorQuip(this.s,'escape');this.tell('成功脫離戰鬥。'+(escQuip?'\n'+escQuip:''));this.finishCombat(false);}else this.log(display(p),'逃跑失敗。');return;}
+ if(c.type==='escape'){const chance=clamp(45+this.stat(p,'speed')*2+(b.mode==='character'&&p.race==='mimic'?15:0)+(b.mode==='character'?gearSum('escapeBonus'):0)-(b.mode==='character'&&p.flaw==='noisy'?10:0),5,95);if(this.roll()<=chance){const foes=b.enemies.filter(x=>x.hp>0).map(x=>x.name).join('、')||'敵人';const escQuip=rollBattleAuthorQuip(this.s,'escape');const msg=isVeh?`我方撤離：${vStats.name}猛踩油門甩開了${foes}，成功脫離追逐！`:`我方撤離：${display(p)}抓準空檔帶著隊伍成功逃離戰鬥，甩開了${foes}。`;this.log('戰鬥結束（我方逃跑）',msg);this.s.notice=msg+(escQuip?'\n'+escQuip:'');if(escQuip)appendMessage(this.s,'作者吐槽',escQuip);this.finishCombat(false);}else this.log(actorLabel,isVeh?'試圖加速甩開敵車，但被對方死死咬住（逃跑失敗）！':'試圖逃離戰鬥，但被敵人截住了退路（逃跑失敗）！');return;}
  if(c.type==='medicine'){if(this.s.resources.medicine<1)return;this.add('medicine',-1);target.hp=clamp(target.hp+8+(p.profession==='medic'?2:0)+(p.profession==='chemist'?1:0)+gearSum('healBonus')-(target.flaw==='slow_healing'?1:0),0,target.maxHp);this.log(display(p),`為${display(target)}使用藥品。`);return;}
  const shieldCut=b.enemyShield?1:0;
  if(c.type==='psi'){const power=learned(p).find(x=>x.id===Number(c.power));if(!power||p.esp<power.cost)return;p.esp-=power.cost;const psiBonus=p.profession==='researcher'?1:0;
@@ -120,20 +168,49 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
   else if(power.type==='shield'){b.shield=3;this.log(power.name,'展開隊伍屏障。');}
   else {for(const enemy of power.type==='burst'?b.enemies.filter(x=>x.hp>0):[e]){const d=Math.max(1,this.stat(p,'psyche')+(power.type==='burst'?3:2)+psiBonus-shieldCut);enemy.hp=Math.max(0,enemy.hp-d);if(power.type==='stun')enemy.stun=1;}this.log(power.name,'超能力擊中了敵人。');}return;
  }
- const vehicleWeapon=b.mode==='vehicle'&&p.id===this.driver()?.id;const ranged=vehicleWeapon||ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&!vehicleWeapon&&p.flaw==='unsteady'?10:0)){b.roundMissed=true;this.log(display(p),'攻擊落空。');return;}
+ // Vehicle combat: vehicle fires mounted weapon OR rams enemy car (trading armor/hull)!
+ if(isVeh){
+  const armed=hasVehicleWeapon(vStats);
+  if(armed){
+   if(this.roll()>92){b.roundMissed=true;this.log(vStats.name,`${vStats.weapon.name}開火落空！`);return;}
+   const dmg=Math.max(2,vStats.weapon.bonus+Math.floor(this.stat(p,'attack')/2)-Math.floor(e.defense/2));
+   e.hp=Math.max(0,e.hp-dmg);
+   let subMsg='';
+   if(e.hp>0&&this.roll()<=30){
+    if(e.hasWeapon){e.hasWeapon=false;e.attackStyle='ram';subMsg=' 擊毀了敵車武裝，對方只能改用衝撞！';}
+    else if(e.defense>0){e.defense=Math.max(0,e.defense-1);subMsg=' 打穿敵車裝甲！';}
+    else{e.hp=Math.max(0,e.hp-2);subMsg=' 擊中敵車油箱引發爆燃（額外 −2）！';}
+   }
+   this.log(vStats.name,`以${vStats.weapon.name}開火，對${e.name}造成 ${dmg} 傷害。${subMsg}`);
+  }else{
+   const dmg=Math.max(2,3+vStats.armor+Math.floor(this.stat(p,'attack')/3)-Math.floor(e.defense/2));
+   e.hp=Math.max(0,e.hp-dmg);
+   const selfDmg=Math.max(1,2+Math.floor((e.defense||1)/2)-Math.floor(vStats.armor/3));
+   this.s.vehicle.hp=Math.max(0,this.s.vehicle.hp-selfDmg);
+   let armorMsg='';
+   if(vStats.armor>0&&this.roll()<=30){
+    const idx=this.s.vehicle.mods.indexOf('armor');
+    if(idx>=0){this.s.vehicle.mods.splice(idx,1);armorMsg=' 互撞震落一塊外掛裝甲板！';}
+    else{this.s.vehicle.armorDamaged=(this.s.vehicle.armorDamaged||0)+1;armorMsg=' 互撞造成我方裝甲受損（裝甲 −1）！';}
+   }
+   this.log(vStats.name,`沒有車載武器，直接加速衝撞${e.name}！造成 ${dmg} 傷害，我方車體也因互撞受損 ${selfDmg} 點。${armorMsg}`);
+  }
+  return;
+ }
+ const ranged=!!ITEMS[p.gear.武器]?.ranged;if(this.roll()>90-(ranged&&p.flaw==='unsteady'?10:0)){b.roundMissed=true;this.log(display(p),'攻擊落空。');return;}
  const isMachine=!!(e.machine??this.d.assets.enemies[e.key]?.machine);
  const effDef=Math.max(0,e.defense-(p.profession==='demolition'&&(e.defense>=2||isMachine)?1:0));
- let damage=Math.max(1,this.stat(p,'attack')-effDef)+(p.profession==='soldier'&&(b.mode==='character'||p.id!==this.driver()?.id)?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(b.mode==='character'&&p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0)-shieldCut;p.startled=false;
+ let damage=Math.max(1,this.stat(p,'attack')-effDef)+(p.profession==='soldier'?1:0)-(p.flaw==='weak_grip'&&!ranged?1:0)-(p.flaw==='timid'&&b.round===1?1:0)-(p.startled?1:0)-shieldCut;p.startled=false;
  if(isMachine)damage+=gearSum('vsMachine')+({engineer:2,hacker:2,electrician:1}[p.profession]||0);
- if(b.mode==='character'&&p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!isMachine){damage+=2;b.usedHunter.push(p.id)}
- if(b.mode==='vehicle'&&p.id===this.driver()?.id)damage+=this.vehicleStats().weapon.bonus;
- if(e.npc?.race==='chitin'&&b.mode==='character')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
+ if(p.profession==='hunter'&&!b.usedHunter.includes(p.id)&&!isMachine){damage+=2;b.usedHunter.push(p.id)}
+ if(e.npc?.race==='chitin')damage--;e.hp=Math.max(0,e.hp-Math.max(0,damage));this.log(display(p),`對${e.name}造成 ${Math.max(0,damage)} 傷害。`);
  };
- // Record the actual initiative sequence for the view, including enemy psychic powers & lethal hits.
+ // Record the actual initiative sequence for the view, including enemy psychic powers & vehicle weapons/ramming.
  for(const [method,side] of [['partyAction','party'],['enemyAction','enemies']]){const action=Game.prototype[method];Game.prototype[method]=function(unit,command){
   if(!this.recordVisuals||!this.s.battle||unit.hp<=0)return action.call(this,unit,command);
   this.visualSteps??=[];if(!this.visualSteps.length)this.visualStart=structuredClone(this.s);
   const b=this.s.battle,before=battleFrame(this.s,b),lastLog=this.s.logs[0],stunned=side==='enemies'&&unit.stun>0;
+  const vStats=this.vehicleStats(),armedBefore=hasVehicleWeapon(vStats);
   const intended=command?.target||(side==='party'?b.enemies.find(e=>e.hp>0)?.id:null);
   this.actionTarget=null;if(side==='enemies')this.lastEnemyCommand=null;
   const result=action.call(this,unit,command),after=battleFrame(this.s,b),effects=frameEffects(before,after);
@@ -143,7 +220,9 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
   const kind=stunned?'stun':effCmd?.type||'attack';
   const visualUnit=effCmd?.psiRace?{...unit,race:effCmd.psiRace}:unit;
   const label=this.s.logs[0]!==lastLog?this.s.logs[0].text:stunned?'暫時無法行動。':'採取行動。';
-  this.visualSteps.push({side,actor:unit.id,name:side==='party'?display(unit):unit.name,kind,power:power?.type,powerName:power?.name,visual:actionVisual(visualUnit,effCmd,{...b,vehicleGun:this.s.vehicle.mods.includes('gun'),vehicleStyle:this.vehicleStats().weapon.style},side,this.s.driver),ranged:b.mode==='vehicle'||(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
+  const vehStyle=armedBefore?vStats.weapon.style:'ram';
+  const stepName=side==='party'?(b.mode==='vehicle'?vStats.name:display(unit)):unit.name;
+  this.visualSteps.push({side,actor:unit.id,name:stepName,kind,power:power?.type,powerName:power?.name,visual:actionVisual(visualUnit,effCmd,{...b,vehicleGun:armedBefore,vehicleStyle:vehStyle},side,this.s.driver),ranged:b.mode==='vehicle'?(side==='party'?armedBefore:unit.attackStyle!=='ram'):(side==='party'&&!!ITEMS[unit.gear.武器]?.ranged),target:this.actionTarget||intended,effects,after,label});
   return result;
  };}
  // Inventory changes cannot bypass the turn or move characters out of a moving car.
