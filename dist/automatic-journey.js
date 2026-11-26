@@ -2,6 +2,7 @@ import {npcDemeanor,concealAttitudeLabels} from './npc-presentation.js';
 import {journalEntry} from './journey-ui.js';
 import {personRaceName,personJobName} from './procedural-npc.js';
 import {companionWhisperEntry,authorAside,fillStory} from './storybook.js';
+import {shouldPromptMidnightRest,dayIndex} from './time-system.js';
 export function normalizeFlow(s){if(!s)return;s.journeyFlow??={declined:null,restSetup:false};s.messages??=[];s.messageSerial??=0;}
 export function appendMessage(s,title,text,personId=null,speakerKind=null){normalizeFlow(s);if(!text)return;const last=s.messages.at(-1);if(last?.text===text&&last.title===title)return;const message={id:++s.messageSerial,title,text,personId,speakerKind};s.messages.push(message);s.messages=s.messages.slice(-60);return message;}
 const restKey=g=>[g.s.stop,g.driver()?.id,g.driver()?.st].join(':');
@@ -14,6 +15,7 @@ export function automaticDecision(g){const s=g.s;if(!s||s.journeyFlow?.encounter
   if(g.availableFuel()<=0||s.vehicle.hp<=0)return 'stranded';
   const driver=g.driver();if(!driver||s.party.length>g.partyLimit())return 'blocked';
   if(driver.st<5&&(s.journeyFlow?.declined!==restKey(g)||!canContinueDriving(g)))return 'rest';
+  if(shouldPromptMidnightRest(s))return 'midnightRest';
   return canContinueDriving(g)?'drive':'rest';
  }
  const c=s.current;if(s.mode!=='event'||!c||c.resolved||c.finalGate||c.building||c.dialogue||c.service||s.offerVehicle||g.options().length)return 'wait';
@@ -21,6 +23,7 @@ export function automaticDecision(g){const s=g.s;if(!s||s.journeyFlow?.encounter
  return s.strandedSearch?'resolveSearch':'finish';
 }
 export function declineRest(g){if(automaticDecision(g)!=='rest'||!canContinueDriving(g))return false;normalizeFlow(g.s);g.s.journeyFlow.declined=restKey(g);return true;}
+export function declineMidnightRest(g){if(!g?.s)return false;normalizeFlow(g.s);g.s.journeyFlow.midnightDeclinedDay=dayIndex(g.s.minutes);return true;}
 export function automaticStep(g){const decision=automaticDecision(g);if(decision==='drive')return g.depart();if(decision==='finish'){g.finishEvent();return true;}if(decision==='resolveSearch'){g.resolveSearch();return true;}return false;}
 export function syncMessageContext(g,display){const s=g.s;if(!s)return;normalizeFlow(s);const c=s.current;
  if(c?.event){const key=[s.stop,c.instance,c.event.id,c.inside].join(':');if(s.journeyFlow.sceneKey!==key){s.journeyFlow.sceneKey=key;if(!c.rewardReceipt){
