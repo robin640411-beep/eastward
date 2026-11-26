@@ -11,6 +11,7 @@ import {installCombat} from './combat.js';
 import {fillStory,heroShortName,partyLabel,rollBattleAuthorQuip,rollMoralityAuthorQuip} from './storybook.js';
 import {installMorality,isSaint} from './morality-runtime.js';
 import {minutesForProgress,applyTimedRecovery,RECOVERY_RATES,DEFAULT_SLEEP_HOURS,dayIndex,sleepPreviewPercentages} from './time-system.js';
+import {CONSUMABLES,CONSUMABLE_IDS,starterConsumables} from './consumables-catalog.js';
 // 一路向東 — deterministic state machine. No network or AI in gameplay.
 export const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const clone=x=>JSON.parse(JSON.stringify(x));
@@ -18,24 +19,45 @@ export const phase=m=>{const h=Math.floor(m/60)%24;return h<5||h>=18?'night':h<8
 export const phaseName=m=>({night:'夜晚',dawn:'清晨',morning:'上午',afternoon:'下午'}[phase(m)]);
 export const display=p=>`「${p.nickname}」${p.name}`;
 export const ITEMS={
+ // 武器 (12)
  club:{name:'球棒',slot:'武器',attack:2,price:3},
+ crowbar:{name:'重型撬棍',slot:'武器',attack:3,defense:1,price:4},
  machete:{name:'鋼刃開山刀',slot:'武器',attack:4,speed:1,price:6},
  pistol:{name:'舊手槍',slot:'武器',attack:4,price:7,ranged:true},
+ crossbow:{name:'靜音複合弩',slot:'武器',attack:5,speed:2,price:9,ranged:true},
  arc_baton:{name:'電弧警棍',slot:'武器',attack:5,psyche:1,vsMachine:3,price:11},
  shotgun:{name:'廢土霰彈槍',slot:'武器',attack:6,defense:1,price:12,ranged:true},
+ plasma_cutter:{name:'工業電漿切割器',slot:'武器',attack:7,vsMachine:4,price:14},
  amber_rifle:{name:'琥珀脈衝槍',slot:'武器',attack:8,psyche:2,vsMachine:2,price:18,ranged:true},
+ vibro_blade:{name:'高頻震動長刀',slot:'武器',attack:8,speed:3,price:19},
+ rail_sniper:{name:'磁軌狙擊槍',slot:'武器',attack:9,speed:1,vsMachine:2,price:21,ranged:true},
+ star_cannon:{name:'星軌手提光砲',slot:'武器',attack:11,psyche:2,speed:-1,vsMachine:3,price:26,ranged:true},
+ // 防具 (12)
  coat:{name:'厚外套',slot:'防具',defense:1,price:3},
+ leather_jacket:{name:'公路防風皮衣',slot:'防具',defense:2,speed:1,price:5},
  vest:{name:'防護背心',slot:'防具',defense:3,price:8},
  hazmat:{name:'抗孢子防護衣',slot:'防具',defense:2,psyche:1,antiPollution:2,price:9},
+ nomad_mantle:{name:'沙海游牧斗篷',slot:'防具',defense:3,speed:2,escapeBonus:8,price:10},
+ riot_suit:{name:'舊警用鎮暴甲',slot:'防具',defense:4,antiPollution:1,price:11},
  stealth_cloak:{name:'光學迷彩披風',slot:'防具',defense:2,speed:3,escapeBonus:10,price:12},
  scrap_plate:{name:'焊鐵重甲',slot:'防具',defense:5,speed:-1,price:13},
+ exo_frame:{name:'輕型外骨骼護架',slot:'防具',defense:5,attack:2,speed:1,price:18},
  chitin_armor:{name:'鐮刀甲殼戰甲',slot:'防具',defense:6,attack:1,price:19},
+ aegis_coat:{name:'晶紋抗能大衣',slot:'防具',defense:5,psyche:3,antiPollution:2,price:20},
+ titan_plate:{name:'星門重裝動力甲',slot:'防具',defense:8,attack:2,speed:-1,antiPollution:3,price:28},
+ // 配件與飾品 (12)
  tools:{name:'工具組',slot:'配件',defense:1,price:4},
+ lucky_dice:{name:'褪色幸運骰',slot:'配件',speed:1,escapeBonus:12,price:5},
  charm:{name:'共鳴石',slot:'配件',psyche:2,price:6},
+ silver_locket:{name:'舊世界銀懷錶',slot:'配件',psyche:2,defense:1,price:7},
  booster_boots:{name:'強化助跑靴',slot:'配件',speed:3,price:7},
+ bandolier:{name:'戰術彈藥背帶',slot:'配件',attack:2,speed:1,price:8},
  med_scanner:{name:'戰地生命儀',slot:'配件',defense:1,psyche:1,healBonus:2,price:9},
  emp_module:{name:'電磁干擾模組',slot:'配件',attack:1,defense:1,vsMachine:2,price:10},
- amber_core:{name:'穩定琥珀晶核',slot:'配件',psyche:4,attack:1,price:16}
+ auto_injector:{name:'自動急救注射環',slot:'配件',defense:1,healBonus:4,price:14},
+ amber_core:{name:'穩定琥珀晶核',slot:'配件',psyche:4,attack:1,price:16},
+ psi_circlet:{name:'靈能增幅頭環',slot:'配件',psyche:5,speed:1,price:18},
+ chrono_compass:{name:'星軌校準羅盤',slot:'配件',attack:2,defense:2,speed:2,psyche:2,escapeBonus:10,price:24}
 };
 export const RACE_BONUSES={
  human:{},
@@ -79,7 +101,7 @@ export const POWERS={
  human:[['念力推擊','strike'],['心靈復原','heal'],['意志屏障','shield']],alien:[['星芒','strike'],['靜默波','stun'],['腦域風暴','burst']],mutant:[['異變衝擊','strike'],['再生','heal'],['畸變爆發','burst']],synth:[['脈衝','strike'],['反應護盾','shield'],['系統震盪','stun']],uplift:[['野性共鳴','strike'],['生命回聲','heal'],['心靈嚎叫','burst']],chitin:[['碎甲念波','strike'],['甲殼屏障','shield'],['鎮壓','stun']],mycelial:[['孢子念波','strike'],['菌網修復','heal'],['眠霧','stun']],crystal:[['晶芒','strike'],['折射屏障','shield'],['共振崩解','burst']],amphibian:[['潮汐衝擊','strike'],['潮生修復','heal'],['深水屏障','shield']],mimic:[['幻影刺擊','strike'],['感官錯置','stun'],['幻象屏障','shield']],symbiote:[['共生鞭擊','strike'],['生命縫合','heal'],['雙重意識','shield']],lumen:[['光束','strike'],['溫光','heal'],['極光爆發','burst']]};
 export function learned(p){return POWERS[p.race].map(([name,type],i)=>({id:i,name,type,level:[1,3,5][i],cost:[3,4,7][i]})).filter(x=>p.level>=x.level)}
 export class Game{
- constructor(data,state=null){this.d=data;this.s=state;if(state&&Array.isArray(state.inventory))state.inventory=state.inventory.filter(id=>ITEMS[id]);normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);
+ constructor(data,state=null){this.d=data;this.s=state;if(state){if(Array.isArray(state.inventory))state.inventory=state.inventory.filter(id=>ITEMS[id]);state.consumables??={};}normalizeJourney(state);normalizeRoute(state);normalizeProgression(state);normalizeFlow(state);normalizeVehicleState(state,data.assets);
   if(state?.mode==='event'&&state.current){
    const c=state.current,e=c.event;
    // A pending v24 choice is identifiable by its original option. An empty list
@@ -100,7 +122,7 @@ export class Game{
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
  person(race=null,job=null){const p={id:'p'+(++this.s.serial),name:this.oracle('npc_name').value,nickname:this.oracle('npc_nickname').value,race:race||this.oracle('npc_race').value,profession:job||this.oracle('npc_profession').value,attitude:this.oracle('npc_attitude').value,flaw:this.oracle('npc_flaw').value,level:1,xp:0,asleep:false,gear:{武器:'club',防具:'coat',配件:null}};const rb=RACE_BONUSES[p.race]||{},jb=JOB_BONUSES[p.profession]||{};p.maxHp=24+(rb.maxHp||0)+(jb.maxHp||0)+(p.flaw==='frail'?-2:0);p.maxSt=24+(rb.maxSt||0)+(jb.maxSt||0)+(p.flaw==='low_endurance'?-2:0);p.maxEsp=10+(rb.maxEsp||0)+(jb.maxEsp||0);p.hp=p.maxHp;p.st=p.maxSt;p.esp=p.maxEsp;return p;}
- start({seed=Date.now(),race='human',profession='driver',totalKm=1000}={}){this.s={version:1,rng:Number(seed)>>>0||1,seed:Number(seed),totalKm:normalizeDistanceKm(totalKm),serial:0,progress:1,minutes:480,stop:0,mode:'ready',party:[],driver:null,resources:{fuel:24,scrap:8,medicine:3},inventory:['pistol','tools'],vehicle:{model:'compact',hp:24,maxHp:24,mods:[]},departed:[],pending:[],frames:[],current:null,battle:null,logs:[],history:[],seen:[],dice:null,travel:null,notice:'故事從這裡翻開第一頁。車頭朝東，至於能不能活著看見綠洲，連寫這本書的我也不敢打包票。',end:null};const p=this.person(race,profession);p.attitude='友善';this.s.party=[p];this.s.driver=p.id;const hist=this.oracle('invasion_history').value;this.s.world={...hist,year:2070+this.roll(30),faction:this.pick(['先遣聯軍','軌道議會','遠征監督局','星門軍團']),archive:this.pick(['灰塔紀錄','最後的民防日誌','失落電台檔案','撤離列車手記'])};normalizeJourney(this.s);normalizeRoute(this.s);normalizeProgression(this.s);this.log('開始旅程',`${display(p)}踏上了往東的路。`);return this.s;}
+ start({seed=Date.now(),race='human',profession='driver',totalKm=1000}={}){this.s={version:1,rng:Number(seed)>>>0||1,seed:Number(seed),totalKm:normalizeDistanceKm(totalKm),serial:0,progress:1,minutes:480,stop:0,mode:'ready',party:[],driver:null,resources:{fuel:24,scrap:8,medicine:3},inventory:['pistol','tools'],consumables:starterConsumables(),vehicle:{model:'compact',hp:24,maxHp:24,mods:[]},departed:[],pending:[],frames:[],current:null,battle:null,logs:[],history:[],seen:[],dice:null,travel:null,notice:'故事從這裡翻開第一頁。車頭朝東，至於能不能活著看見綠洲，連寫這本書的我也不敢打包票。',end:null};const p=this.person(race,profession);p.attitude='友善';this.s.party=[p];this.s.driver=p.id;const hist=this.oracle('invasion_history').value;this.s.world={...hist,year:2070+this.roll(30),faction:this.pick(['先遣聯軍','軌道議會','遠征監督局','星門軍團']),archive:this.pick(['灰塔紀錄','最後的民防日誌','失落電台檔案','撤離列車手記'])};normalizeJourney(this.s);normalizeRoute(this.s);normalizeProgression(this.s);this.log('開始旅程',`${display(p)}踏上了往東的路。`);return this.s;}
  alive(){return this.s.party.filter(p=>p.hp>0)}
  actor(){return this.alive().find(p=>!p.asleep)||this.alive()[0]}
  driver(){return this.alive().find(p=>p.id===this.s.driver)||this.alive()[0]}
@@ -215,7 +237,16 @@ export class Game{
    return effects.length?effects.map(effect=>this.rewardResult(effect,recipient)).join(''):'衣櫃的鎖沒能打開，沒有取得物品。';
   }
   const row=this.oracle(f.table);
-  if(f.table==='supplies')return row.effects.map(effect=>this.rewardResult(effect,recipient)).join('');
+  if(f.table==='supplies'){
+   let txt=row.effects.map(effect=>this.rewardResult(effect,recipient)).join('');
+   if((this.s.totalKm||1000)>=3000){
+    const idx=Math.abs((this.s.seed|0)+(this.s.stop|0)*13+(this.s.serial|0)*7)%CONSUMABLE_IDS.length;
+    const cid=CONSUMABLE_IDS[idx];
+    this.addConsumable(cid,1);
+    txt+='並順手找到'+CONSUMABLES[cid].name+' ×1。';
+   }
+   return txt;
+  }
   if(f.table==='equipment'){
    const eqId=typeof row.value==='string'?row.value:row.value?.id;
    const item=ITEMS[eqId];
@@ -266,19 +297,39 @@ ${npcDemeanor(c.npc,{seed:this.s.seed})}`;}
  changeDriver(id){if(!['ready','event'].includes(this.s.mode)||this.s.battle)return false;const p=this.s.party.find(p=>p.id===id&&p.hp>0&&p.st>0);if(!p)return false;this.s.driver=id;this.tell(display(p)+'接手駕駛。');return true;}
  reveal(){const w=this.s.world;const texts=[`現在是 ${w.currentYear} 年，外星統治的第十年。${w.year} 年，${w.faction}出現在天空。${w.process}。`,w.trace,`《${w.archive}》記載：部分先遣族拒絕繼續執行佔領命令。`,`變種人最早出現在改造物質散布區。變異並不意味著效忠入侵者。`,`最後的廣播把東方的水源地稱為「末日綠洲」。`];const t=texts.find(x=>!this.s.history.includes(x));if(t){this.s.history.push(t);this.tell(t)}else this.tell('這段文字印證了你已知的歷史。');}
  useMedicine(id){const p=this.s.party.find(q=>q.id===id);if(!p||p.hp<=0||p.hp>=p.maxHp||this.s.resources.medicine<1)return false;this.add('medicine',-1);const actor=this.actor(),medic=actor?.profession==='medic',chem=actor?.profession==='chemist',gearBonus=Object.values(actor?.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.healBonus||0),0);p.hp=clamp(p.hp+8+(medic?2:0)+(chem?1:0)+gearBonus-(p.flaw==='slow_healing'?1:0),0,p.maxHp);this.tell(display(p)+'使用藥品恢復生命。');return true;}
+ addConsumable(id,n=1){if(!CONSUMABLES[id])return;this.s.consumables??={};this.s.consumables[id]=Math.max(0,(this.s.consumables[id]||0)+n);if(!this.s.consumables[id])delete this.s.consumables[id];}
+ useConsumable(personId,itemId){
+  const c=CONSUMABLES[itemId],p=this.s.party.find(q=>q.id===personId);
+  if(!c||!p||p.hp<=0||!(this.s.consumables?.[itemId]>0))return false;
+  const needHp=c.hp>0&&p.hp<p.maxHp,needSt=c.st>0&&p.st<p.maxSt,needEsp=c.esp>0&&p.esp<p.maxEsp;
+  if(!needHp&&!needSt&&!needEsp)return false;
+  this.addConsumable(itemId,-1);
+  const actor=this.actor(),medic=actor?.profession==='medic',chem=actor?.profession==='chemist',gearBonus=Object.values(actor?.gear||{}).reduce((s,g)=>s+(ITEMS[g]?.healBonus||0),0);
+  const gains=[];
+  if(c.hp>0){
+   const amt=Math.max(1,c.hp+(c.kind==='藥品'?(medic?2:0)+(chem?1:0)+gearBonus-(p.flaw==='slow_healing'?1:0):0));
+   const before=p.hp;p.hp=clamp(p.hp+amt,0,p.maxHp);
+   if(p.hp>before)gains.push(`生命 +${p.hp-before}`);
+  }
+  if(c.st>0){const before=p.st;p.st=clamp(p.st+c.st,0,p.maxSt);if(p.st>before)gains.push(`體力 +${p.st-before}`);}
+  if(c.esp>0){const before=p.esp;p.esp=clamp(p.esp+c.esp,0,p.maxEsp);if(p.esp>before)gains.push(`ESP +${p.esp-before}`);}
+  this.tell(`${display(p)}使用了${c.name}（${gains.join('、')||'狀態已滿'}）。`);
+  return true;
+ }
  equip(id,item){if(this.s.battle)return false;const p=this.s.party.find(q=>q.id===id),ix=this.s.inventory.indexOf(item),it=ITEMS[item];if(!p||!it||ix<0)return false;this.s.inventory.splice(ix,1);if(p.gear[it.slot])this.s.inventory.push(p.gear[it.slot]);p.gear[it.slot]=item;return true;}
  price(base){const p=this.actor();const disc=p?.profession==='merchant'?.1:p?.profession==='diplomat'?.05:0;return Math.max(1,Math.ceil(base*(1+(p?.flaw==='bad_bargain'?.1:0)-disc)))}
  buy(kind,id){const c=this.s.current;if(!c?.service||!c.dialogue||this.s.mode!=='event')return false;const shop=c.service;let price=0;
  if(kind==='fuel'&&['fuel_shop','general_shop'].includes(shop))price=this.price(3);
  if(kind==='medicine'&&['pharmacy','general_shop','clinic'].includes(shop))price=this.price(2);
  if(kind==='item'&&['equipment_shop','general_shop'].includes(shop)&&ITEMS[id])price=this.price(ITEMS[id].price);
+ if(kind==='consumable'&&['general_shop','pharmacy','clinic','npc_trade'].includes(shop)&&CONSUMABLES[id])price=this.price(CONSUMABLES[id].price);
  if(kind==='repair'&&shop==='garage')price=2;
  if(kind==='mod'&&shop==='garage'&&MODS[id]){if(id==='seat'&&this.seats()>=MAX_PARTY)return false;if(this.s.vehicle.mods.length>=this.d.assets.vehicles[this.s.vehicle.model].modSlots)return false;price=MODS[id].price;}
  if(kind==='heal'&&shop==='clinic')price=2;
  if(kind==='hotel'&&shop==='hotel')price=3;
  if(kind==='vehicle'&&shop==='vehicle_shop'&&this.d.assets.vehicles[id])price=this.price(10+this.d.assets.vehicles[id].seats*2);
  if(!price||this.s.resources.scrap<price)return false;this.add('scrap',-price);
- if(kind==='fuel')this.add('fuel',10);if(kind==='medicine')this.add('medicine',1);if(kind==='item')this.s.inventory.push(id);if(kind==='repair'){this.s.vehicle.hp=clamp(this.s.vehicle.hp+10+(this.actor()?.profession==='mechanic'?3:0),0,this.s.vehicle.maxHp);this.s.vehicle.weaponDamaged=false;this.s.vehicle.armorDamaged=0;}if(kind==='mod')this.s.vehicle.mods.push(id);if(kind==='heal')this.alive().forEach(p=>p.hp=clamp(p.hp+8,0,p.maxHp));if(kind==='hotel')this.sleep(null,true);if(kind==='vehicle'){const v=this.d.assets.vehicles[id];this.s.offerVehicle={model:id,hp:v.maxHealth,maxHp:v.maxHealth,mods:[],fuel:8};}this.tell('交易完成。');return true;}
+ if(kind==='fuel')this.add('fuel',10);if(kind==='medicine')this.add('medicine',1);if(kind==='item')this.s.inventory.push(id);if(kind==='consumable')this.addConsumable(id,1);if(kind==='repair'){this.s.vehicle.hp=clamp(this.s.vehicle.hp+10+(this.actor()?.profession==='mechanic'?3:0),0,this.s.vehicle.maxHp);this.s.vehicle.weaponDamaged=false;this.s.vehicle.armorDamaged=0;}if(kind==='mod')this.s.vehicle.mods.push(id);if(kind==='heal')this.alive().forEach(p=>p.hp=clamp(p.hp+8,0,p.maxHp));if(kind==='hotel')this.sleep(null,true);if(kind==='vehicle'){const v=this.d.assets.vehicles[id];this.s.offerVehicle={model:id,hp:v.maxHealth,maxHp:v.maxHealth,mods:[],fuel:8};}this.tell('交易完成。');return true;}
  replaceVehicle(){const offer=this.s.offerVehicle;if(!offer)return false;const seats=Math.min(MAX_PARTY,this.d.assets.vehicles[offer.model].seats);if(this.s.party.length>seats){this.tell(`新車只有 ${seats} 席，請先遣散多出的同伴。`);return false;}this.s.vehicle={model:offer.model,hp:offer.hp,maxHp:offer.maxHp,mods:[]};this.add('fuel',offer.fuel);this.s.offerVehicle=null;this.tell('換上新車。舊車的固定改裝留在原車上。');return true;}
  searchStranded(forced=false){if(this.s.mode!=='ready'||this.s.searched&&!forced)return false;if(!forced&&this.s.resources.fuel>0&&this.s.vehicle.hp>0)return false;this.s.searched=true;this.s.minutes+=60;const r=this.oracle('salvage');this.s.dice={kind:'求生 D100',value:r.roll};this.s.mode='event';this.s.current={event:{id:'stranded_search',title:'尋找出路',text:r.text,options:[]},resolved:false,npc:null};r.effects?.forEach(f=>this.effect(f));this.tell(r.text);this.s.strandedSearch=true;return true;}
  resolveSearch(){if(!this.s.strandedSearch)return;this.s.strandedSearch=false;if(this.s.resourceBlock){const original=this.s.resourceBlock;this.s.resourceBlock=null;this.s.current=original;if(original.event.options.some(o=>this.canChoose(o))){this.s.mode='event';this.tell(`剛搜刮來的物資剛好夠${partyLabel(this.s)}回頭處理眼前的路障。`);}else this.end(false,fillStory(this.oracle('stranded_ending').value,this.s,display));return;}this.s.current=null;if(this.s.resources.fuel<=0||this.s.vehicle.hp<=0)this.end(false,fillStory(this.oracle('stranded_ending').value,this.s,display));else this.s.mode='ready';}

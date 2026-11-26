@@ -739,93 +739,183 @@
       "rows": [
         {
           "min": 1,
-          "max": 10,
+          "max": 3,
           "value": "club"
         },
         {
-          "min": 11,
-          "max": 20,
-          "value": "coat"
+          "min": 4,
+          "max": 6,
+          "value": "crowbar"
         },
         {
-          "min": 21,
-          "max": 28,
-          "value": "tools"
-        },
-        {
-          "min": 29,
-          "max": 36,
+          "min": 7,
+          "max": 9,
           "value": "machete"
         },
         {
-          "min": 37,
-          "max": 44,
+          "min": 10,
+          "max": 12,
           "value": "pistol"
         },
         {
-          "min": 45,
-          "max": 52,
-          "value": "charm"
+          "min": 13,
+          "max": 15,
+          "value": "crossbow"
         },
         {
-          "min": 53,
-          "max": 59,
-          "value": "booster_boots"
-        },
-        {
-          "min": 60,
-          "max": 66,
-          "value": "vest"
-        },
-        {
-          "min": 67,
-          "max": 72,
-          "value": "hazmat"
-        },
-        {
-          "min": 73,
-          "max": 77,
-          "value": "med_scanner"
-        },
-        {
-          "min": 78,
-          "max": 82,
-          "value": "emp_module"
-        },
-        {
-          "min": 83,
-          "max": 86,
+          "min": 16,
+          "max": 18,
           "value": "arc_baton"
         },
         {
-          "min": 87,
-          "max": 90,
-          "value": "stealth_cloak"
-        },
-        {
-          "min": 91,
-          "max": 93,
+          "min": 19,
+          "max": 21,
           "value": "shotgun"
         },
         {
-          "min": 94,
-          "max": 96,
+          "min": 22,
+          "max": 24,
+          "value": "plasma_cutter"
+        },
+        {
+          "min": 25,
+          "max": 27,
+          "value": "amber_rifle"
+        },
+        {
+          "min": 28,
+          "max": 30,
+          "value": "vibro_blade"
+        },
+        {
+          "min": 31,
+          "max": 33,
+          "value": "rail_sniper"
+        },
+        {
+          "min": 34,
+          "max": 36,
+          "value": "star_cannon"
+        },
+        {
+          "min": 37,
+          "max": 39,
+          "value": "coat"
+        },
+        {
+          "min": 40,
+          "max": 42,
+          "value": "leather_jacket"
+        },
+        {
+          "min": 43,
+          "max": 45,
+          "value": "vest"
+        },
+        {
+          "min": 46,
+          "max": 48,
+          "value": "hazmat"
+        },
+        {
+          "min": 49,
+          "max": 51,
+          "value": "nomad_mantle"
+        },
+        {
+          "min": 52,
+          "max": 54,
+          "value": "riot_suit"
+        },
+        {
+          "min": 55,
+          "max": 57,
+          "value": "stealth_cloak"
+        },
+        {
+          "min": 58,
+          "max": 60,
           "value": "scrap_plate"
+        },
+        {
+          "min": 61,
+          "max": 63,
+          "value": "exo_frame"
+        },
+        {
+          "min": 64,
+          "max": 66,
+          "value": "chitin_armor"
+        },
+        {
+          "min": 67,
+          "max": 69,
+          "value": "aegis_coat"
+        },
+        {
+          "min": 70,
+          "max": 72,
+          "value": "titan_plate"
+        },
+        {
+          "min": 73,
+          "max": 75,
+          "value": "tools"
+        },
+        {
+          "min": 76,
+          "max": 78,
+          "value": "lucky_dice"
+        },
+        {
+          "min": 79,
+          "max": 81,
+          "value": "charm"
+        },
+        {
+          "min": 82,
+          "max": 84,
+          "value": "silver_locket"
+        },
+        {
+          "min": 85,
+          "max": 86,
+          "value": "booster_boots"
+        },
+        {
+          "min": 87,
+          "max": 88,
+          "value": "bandolier"
+        },
+        {
+          "min": 89,
+          "max": 90,
+          "value": "med_scanner"
+        },
+        {
+          "min": 91,
+          "max": 92,
+          "value": "emp_module"
+        },
+        {
+          "min": 93,
+          "max": 94,
+          "value": "auto_injector"
+        },
+        {
+          "min": 95,
+          "max": 96,
+          "value": "amber_core"
         },
         {
           "min": 97,
           "max": 98,
-          "value": "amber_core"
+          "value": "psi_circlet"
         },
         {
           "min": 99,
-          "max": 99,
-          "value": "amber_rifle"
-        },
-        {
-          "min": 100,
           "max": 100,
-          "value": "chitin_armor"
+          "value": "chrono_compass"
         }
       ]
     },
