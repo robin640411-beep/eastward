@@ -1,15 +1,29 @@
 import {PARTICLE_LIMITS,particlePool,lightningAt} from './weather-model.js';
 const pools=new Map(),wrap=(n,span)=>((n%span)+span)%span;
-const colors={leaf:['#a4ac72','#c3a16b','#7c9b77'],petal:['#e9c6c1','#efdbd0','#cfa9b8'],snow:['#e4e9e6','#c9d9df','#adbecb'],dust:['#bda77e','#c8b490','#9b9378'],ash:['#9a9c9b','#b4b4a8','#7d8991'],spore:['#9eafbc','#b6bc8e','#b5a2c7']};
+const colors={leaf:['#d49a52','#c46d4e','#7ca376'],petal:['#e9c6c1','#efdbd0','#cfa9b8'],snow:['#e4e9e6','#c9d9df','#adbecb'],dust:['#bda77e','#c8b490','#9b9378'],ash:['#9a9c9b','#b4b4a8','#7d8991'],spore:['#9eafbc','#b6bc8e','#b5a2c7']};
 const path=(ctx,points)=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(Math.round(x),Math.round(y)):ctx.moveTo(Math.round(x),Math.round(y)));};
 // Called in screen space, outside the event object's camera transform.
 export function drawWeatherSky(ctx,{seed,seconds,storm,soft=false}){if(storm<=.01)return;ctx.save();
- const cloud=ctx.createLinearGradient(0,0,0,170);cloud.addColorStop(0,`rgba(20,30,45,${.58*storm})`);cloud.addColorStop(.6,`rgba(34,47,62,${.23*storm})`);cloud.addColorStop(1,'rgba(34,47,62,0)');ctx.fillStyle=cloud;ctx.fillRect(0,0,384,170);
- const bolt=lightningAt(seed,seconds,soft);if(bolt){
-  if(bolt.glow){const [x]=bolt.main[0],glow=ctx.createRadialGradient(x,20,2,x,20,220);glow.addColorStop(0,`rgba(192,213,237,${bolt.glow*storm})`);glow.addColorStop(1,'rgba(192,213,237,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,384,174);}
+ const cloud=ctx.createLinearGradient(0,0,0,170);cloud.addColorStop(0,`rgba(16,24,38,${.68*storm})`);cloud.addColorStop(.55,`rgba(28,39,54,${.34*storm})`);cloud.addColorStop(1,'rgba(28,39,54,0)');ctx.fillStyle=cloud;ctx.fillRect(0,0,384,170);
+ // Billowing 16-bit pixel dark storm clouds drifting across the sky!
+ const bolt=lightningAt(seed,seconds,soft);
+ const flashBoost=bolt&&!soft?bolt.alpha*.35:0;
+ const drift=seconds*(soft?2.2:5.5);
+ for(let i=0;i<7;i++){
+  const cw=78+(i%3)*26,ch=18+(i%2)*8;
+  const cx=wrap(i*64-drift*(.7+(i%3)*.22),460)-76;
+  const cy=4+(i%3)*11;
+  ctx.fillStyle=flashBoost>.12?`rgba(96,118,144,${.78*storm})`:`rgba(26,35,48,${.82*storm})`;
+  ctx.fillRect(Math.round(cx),Math.round(cy+4),cw,ch);
+  ctx.fillRect(Math.round(cx+10),Math.round(cy),cw-20,6);
+  ctx.fillStyle=flashBoost>.12?`rgba(148,176,204,${.55*storm})`:`rgba(46,58,74,${.68*storm})`;
+  ctx.fillRect(Math.round(cx+6),Math.round(cy+ch),cw-12,4);
+ }
+ if(bolt){
+  if(bolt.glow){const [x]=bolt.main[0],glow=ctx.createRadialGradient(x,20,2,x,20,220);glow.addColorStop(0,`rgba(202,224,248,${bolt.glow*storm})`);glow.addColorStop(1,'rgba(202,224,248,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,384,174);}
   ctx.lineJoin='miter';ctx.globalAlpha=bolt.alpha*storm;
-  for(const [width,color] of [[6,'#a3bdd94d'],[3,'#afc7e7'],[1,'#f2f4e9']]){ctx.lineWidth=width;ctx.strokeStyle=color;path(ctx,bolt.main);ctx.stroke();}
-  ctx.lineWidth=1;ctx.strokeStyle='#bfd4eb';for(const fork of bolt.forks){path(ctx,fork);ctx.stroke();}
+  for(const [width,color] of [[6,'#a3bdd955'],[3,'#bed6f4'],[1,'#f8f9f0']]){ctx.lineWidth=width;ctx.strokeStyle=color;path(ctx,bolt.main);ctx.stroke();}
+  ctx.lineWidth=1;ctx.strokeStyle='#cfe2f7';for(const fork of bolt.forks){path(ctx,fork);ctx.stroke();}
  }ctx.restore();}
 export function drawWeatherParticles(ctx,{seed,seconds,travel=0,layers,soft=false,light=1}){
  if(!pools.has(seed)){if(pools.size>=8)pools.delete(pools.keys().next().value);pools.set(seed,particlePool(seed));}const pool=pools.get(seed),t=seconds*(soft?.65:1);

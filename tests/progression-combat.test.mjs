@@ -26,9 +26,9 @@ test('new recruits span protagonist plus-minus one, random equipment, and level 
 test('rejoining companion retains worn gear while level matches the current protagonist',()=>{
  const g=fresh();g.s.vehicle.model='van';const p=g.person();p.gear={武器:'pistol',防具:'vest',配件:'charm'};const gear=structuredClone(p.gear);setLevel(g.actor(),15);g.s.mode='event';p.attitude='友善';g.s.current={...event(),npc:p};assert(g.recruit());assert(p.level>=14&&p.level<=16);assert.deepEqual(p.gear,gear);
 });
-test('ten regions each expose five enemy types, one to three units, and increasing stats and sizes',()=>{
- let hp=0,scale=0;for(const region of GROWTH.regions){assert.equal(new Set(region.enemies).size,5);const seen=new Set(),counts=new Set();for(let seed=1;seed<=80;seed++){const g=fresh(seed);g.s.progress=region.start;g.beginCombat();counts.add(g.s.battle.enemies.length);for(const e of g.s.battle.enemies){assert(region.enemies.includes(e.key));seen.add(e.key);assert.equal(e.scale,region.body_scale);}}
- assert.equal(seen.size,5);assert.deepEqual([...counts].sort(),[1,2,3]);assert(region.health>hp);assert(region.body_scale>scale);hp=region.health;scale=region.body_scale;
+test('ten regions each expose five or more enemy types, one to three units, and increasing stats and sizes',()=>{
+ let hp=0,scale=0;for(const region of GROWTH.regions){assert(new Set(region.enemies).size>=5);const seen=new Set(),counts=new Set();for(let seed=1;seed<=120;seed++){const g=fresh(seed);g.s.progress=region.start;g.beginCombat();counts.add(g.s.battle.enemies.length);for(const e of g.s.battle.enemies){assert(region.enemies.includes(e.key));seen.add(e.key);assert.equal(e.scale,region.body_scale);}}
+ assert(seen.size>=5);assert.deepEqual([...counts].sort(),[1,2,3]);assert(region.health>hp);assert(region.body_scale>scale);hp=region.health;scale=region.body_scale;
  }const small=enemyLayout(3,[{scale:.68}])[0],large=enemyLayout(3,[{scale:1.175}])[0];assert(large.h>small.h);assert(large.cx-large.w/2>0);assert(large.cy+large.h/2<240);
 });
 test('NPC combat is separate from region monster pools and machine encounters remain machines',()=>{

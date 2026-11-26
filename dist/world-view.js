@@ -4,7 +4,7 @@ import {npcCombatArt,enemyCombatArt} from './combat-art.js';
 import {proceduralPortraitDataUri,proceduralCharacterDataUri} from './procedural-npc.js';
 import {BEAT_MS,IMPACT_MS,bustRole,bustPose,partyAnchor} from './battle-presentation.js';
 import {vehicleArt,vehicleStats} from './vehicle-runtime.js';
-import {weatherLayers} from './weather-model.js';
+import {weatherLayers,ambientStormAt} from './weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from './weather-art.js';
 import {drawBattleEffects} from './battle-effects.js';
 // Lightweight 384px stage: layered pixel art, no physics engine or continuous DOM writes.
@@ -447,8 +447,10 @@ function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||docum
  const minute=titleDrive?(s.minutes+clock*12)%1440:s.minutes+(driving?60*u:0);if(lightMinute===null||Math.abs(minute-lightMinute)>120)lightMinute=minute;else lightMinute+=(minute-lightMinute)*(1-Math.exp(-dt*5));const light=lightingAt(lightMinute);
  const view=routeView(titleDrive?{...s,progress:1+(clock*.35)%98}:s,u),{from,to,blend}=view;ctx.clearRect(0,-stageTop,W,stageHeight);
  const outdoors=!(interior&&!driving)&&(!s.battle||carFight),currentWeather=driving?s.travel?.preview?.current:s.current;
- const stormTarget=outdoors&&encounters[currentWeather?.event?.id]?.effect==='storm'?(driving?ease((u-.15)/.5):1):0;
- const weatherKey=s.seed+':'+(currentWeather?.instance??s.stop)+':storm';if(stormTarget>0&&weatherKey!==stormKey){stormKey=weatherKey;stormStarted=clock;}
+ const eventStorm=encounters[currentWeather?.event?.id]?.effect==='storm'?(driving?ease((u-.15)/.5):1):0;
+ const ambientStorm=outdoors?ambientStormAt({seed:s.seed,biomeId:from.id,progress:s.progress||1,seconds:clock}):0;
+ const stormTarget=outdoors?Math.max(eventStorm,ambientStorm):0;
+ const weatherKey=s.seed+':'+(eventStorm>0?(currentWeather?.instance??s.stop):from.id)+':storm';if(stormTarget>.12&&weatherKey!==stormKey){stormKey=weatherKey;stormStarted=clock;}
  stormStrength+=(stormTarget-stormStrength)*(1-Math.exp(-dt*2));
  const weather=outdoors?{seed:s.seed,seconds:clock,travel:roadTravel,layers:weatherLayers({seed:s.seed,from,to,blend,seconds:clock,storm:stormStrength}),soft:reduced,light:light.light}:null;
  if(!s.battle||carFight){if(interior&&!driving&&!s.battle)room(-stageTop,stageHeight);else road(from,to,blend,light);}

@@ -2,7 +2,7 @@ import json,xml.etree.ElementTree as ET,struct
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]/'dist/assets';m=json.loads((root/'manifest.json').read_text())
 assert len(m['characters'])==240 and len(m['portraits'])==12
-assert len(m['vehicles'])==8 and len(m['enemies'])==16
+assert len(m['vehicles'])==8 and len(m['enemies'])==26
 paths=[]
 for category,items in m.items():
  if not isinstance(items,dict):continue

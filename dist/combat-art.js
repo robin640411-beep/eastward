@@ -3,7 +3,7 @@
 export const COMBAT_RACES=Object.freeze(['human','alien','mutant','synth','uplift','chitin','mycelial','crystal','amphibian','mimic','symbiote','lumen']);
 export const COMBAT_JOBS=Object.freeze(['driver','mechanic','medic','soldier','scout','merchant','scavenger','engineer','researcher','hacker','hunter','guard','courier','diplomat','historian','locksmith','demolition','chemist','electrician','performer']);
 export const COMBAT_WEAPONS=Object.freeze(['none','club','pistol']);
-export const COMBAT_ENEMIES=Object.freeze(['raider','soldier','mutant','infected','crawler','hound','nest','swarm','drone','turret','worker','sentinel','lurker','brute','wing','parasite']);
+export const COMBAT_ENEMIES=Object.freeze(['raider','soldier','mutant','infected','crawler','hound','nest','swarm','drone','turret','worker','sentinel','lurker','brute','wing','parasite','sniper','pyro','mech_hound','spore_giant','crystal_golem','harvester','mire_toad','sand_worm','wraith','biker']);
 export const COMBAT_BOSSES=Object.freeze(['overseer','broodmother','zero_core','graft_colossus','fallen_angel']);
 export const COMBAT_BOSS_NAMES=Object.freeze({overseer:'星門監督官',broodmother:'孵界母體',zero_core:'歸零主機',graft_colossus:'接骨巨像',fallen_angel:'失落天使'});
 const descriptor=(kind,key,width,height,extra={})=>({image:`assets/combat/${kind}/${key}.png`,width,height,kind:kind==='npcs'?'npc':kind==='bosses'?'boss':'enemy',key,...extra});

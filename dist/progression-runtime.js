@@ -10,7 +10,10 @@ export const ENEMY_PSI_RACE={
  raider:'human',soldier:'alien',sentinel:'alien',mutant:'mutant',
  infected:'mycelial',nest:'mycelial',swarm:'chitin',brute:'chitin',
  crawler:'amphibian',hound:'uplift',lurker:'mimic',parasite:'symbiote',
- wing:'lumen',drone:'synth',turret:'synth',worker:'synth'
+ wing:'lumen',drone:'synth',turret:'synth',worker:'synth',
+ sniper:'human',pyro:'mutant',mech_hound:'synth',spore_giant:'mycelial',
+ crystal_golem:'crystal',harvester:'synth',mire_toad:'amphibian',
+ sand_worm:'chitin',wraith:'lumen',biker:'human'
 };
 export const BOSS_PSI_RACE={
  overseer:'alien',broodmother:'mycelial',zero_core:'synth',

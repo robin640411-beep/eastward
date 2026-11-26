@@ -11,7 +11,7 @@ export const ATTACK_STYLES={
  cross_slash:{name:'四臂斬擊',shape:'cross_slash',color:'#d9cfac'},swarm:{name:'蟲群湧出',shape:'swarm',color:'#b6b88a'},
  psychic:{name:'精神侵入',shape:'psychic',color:'#c5addf'}
 };
-export const ENEMY_ATTACKS={raider:'bullet',soldier:'burst_fire',mutant:'slam',infected:'claw',crawler:'acid',hound:'bite',nest:'acid',swarm:'spores',drone:'shock',turret:'cannon',worker:'saw',sentinel:'blade',lurker:'claw',brute:'slam',wing:'dive',parasite:'tentacle'};
+export const ENEMY_ATTACKS={raider:'bullet',soldier:'burst_fire',mutant:'slam',infected:'claw',crawler:'acid',hound:'bite',nest:'acid',swarm:'spores',drone:'shock',turret:'cannon',worker:'saw',sentinel:'blade',lurker:'claw',brute:'slam',wing:'dive',parasite:'tentacle',sniper:'bullet',pyro:'cannon',mech_hound:'shock',spore_giant:'spores',crystal_golem:'slam',harvester:'saw',mire_toad:'acid',sand_worm:'bite',wraith:'psychic',biker:'burst_fire'};
 export const BOSS_ATTACKS={overseer:'cross_slash',broodmother:'swarm',zero_core:'cannon',graft_colossus:'slam',fallen_angel:'psychic'};
 const fx=(name,shape,color,variant=0)=>({name,shape,color,variant});
 export const POWER_STYLES={

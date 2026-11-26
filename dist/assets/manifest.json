@@ -1408,6 +1408,56 @@
       "name": "寄生觸手",
       "image": "enemies/parasite.svg",
       "machine": false
+    },
+    "sniper": {
+      "name": "荒野狙擊手",
+      "image": "enemies/sniper.svg",
+      "machine": false
+    },
+    "pyro": {
+      "name": "焦土縱火狂",
+      "image": "enemies/pyro.svg",
+      "machine": false
+    },
+    "mech_hound": {
+      "name": "機械獵犬",
+      "image": "enemies/mech_hound.svg",
+      "machine": true
+    },
+    "spore_giant": {
+      "name": "孢子巨菇怪",
+      "image": "enemies/spore_giant.svg",
+      "machine": false
+    },
+    "crystal_golem": {
+      "name": "晶礦石魔",
+      "image": "enemies/crystal_golem.svg",
+      "machine": false
+    },
+    "harvester": {
+      "name": "收割機甲",
+      "image": "enemies/harvester.svg",
+      "machine": true
+    },
+    "mire_toad": {
+      "name": "沼澤酸蛙",
+      "image": "enemies/mire_toad.svg",
+      "machine": false
+    },
+    "sand_worm": {
+      "name": "沙丘潛蟲",
+      "image": "enemies/sand_worm.svg",
+      "machine": false
+    },
+    "wraith": {
+      "name": "星輝幽靈",
+      "image": "enemies/wraith.svg",
+      "machine": false
+    },
+    "biker": {
+      "name": "公路飆車匪",
+      "image": "enemies/biker.svg",
+      "machine": false
     }
   },
   "icons": {

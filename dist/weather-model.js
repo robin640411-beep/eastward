@@ -1,9 +1,15 @@
 // Visual-only weather. Never consumes the journey's random stream or changes rules.
 export const WEATHER_PROFILES={
- salt:{dust:.5},canyon:{dust:.6,leaf:.12},forest:{leaf:1,rain:.16},city:{rain:.5,leaf:.22},
- coast:{rain:.65},industrial:{ash:.7,rain:.18},marsh:{rain:.65,leaf:.45},desert:{dust:1},
- farmland:{leaf:.5,petal:.6},snow:{snow:1},alien:{spore:.8,ash:.2},oasis:{petal:1,leaf:.35}
+ salt:{dust:.55,rain:.14},canyon:{dust:.6,leaf:.28},forest:{leaf:1,rain:.36},city:{rain:.58,leaf:.36},
+ coast:{rain:.78,leaf:.12},industrial:{ash:.62,rain:.32},marsh:{rain:.72,leaf:.55},desert:{dust:1},
+ farmland:{leaf:.68,petal:.65,rain:.15},snow:{snow:1},alien:{spore:.8,ash:.2},oasis:{petal:1,leaf:.52}
 };
+export const STORM_BIAS={coast:.85,marsh:.8,industrial:.65,city:.6,forest:.55,alien:.5,farmland:.4,canyon:.28,snow:.35,salt:.2,desert:.15,oasis:.12};
+export function ambientStormAt({seed=0,biomeId='salt',progress=1,seconds=0}={}){
+ const bias=STORM_BIAS[biomeId]??.25;
+ const wave=.5+.5*Math.sin(seconds*.045+(visualHash(`storm-wave:${seed}:${biomeId}:${Math.floor(progress/5)}`)%628)/100);
+ return unit((wave-(1-bias))*1.8);
+}
 export const PARTICLE_LIMITS={rain:72,snow:64,leaf:24,petal:28,dust:22,ash:18,spore:18};
 export function visualHash(value){let n=2166136261;for(const ch of String(value))n=Math.imul(n^ch.charCodeAt(0),16777619);return n>>>0;}
 function randomStream(seed){let n=visualHash(seed)||1;return ()=>{n^=n<<13;n^=n>>>17;n^=n<<5;return (n>>>0)/4294967296;};}
