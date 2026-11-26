@@ -13,7 +13,7 @@ test('Every catalog race/job/equipment combination has a distinct native-size PN
  assert.deepEqual(COMBAT_RACES,catalog.races.map(r=>r.id));
  assert.deepEqual(COMBAT_JOBS,catalog.professions.map(p=>p.id));
  const descriptors=combatArtCatalog();
- assert.equal(descriptors.length,751);
+ assert.equal(descriptors.length,761);
  const digests=new Set();let bytes=0;
  for(const a of descriptors){
   assert.ok(existsSync(dist+a.image),a.image);
@@ -24,7 +24,7 @@ test('Every catalog race/job/equipment combination has a distinct native-size PN
   assert.equal(png[25],6,'RGBA image: '+a.image);
   digests.add(createHash('sha256').update(png).digest('hex'));
  }
- assert.equal(digests.size,751,'Every race, job, equipment and enemy/boss identity stays distinct');
+ assert.equal(digests.size,761,'Every race, job, equipment and enemy/boss identity stays distinct');
  assert.ok(bytes<2_000_000,'All optional combat assets should remain a small download');
 });
 
@@ -39,7 +39,8 @@ test('Hostile NPC art retains race, profession and the actually equipped weapon'
 });
 
 test('Every boss replaces its ordinary archetype and obsolete HD image path',()=>{
- assert.deepEqual(COMBAT_BOSSES,GROWTH.bosses.map(b=>b.id));
+ assert.deepEqual(COMBAT_BOSSES.slice(0,5),GROWTH.bosses.map(b=>b.id));
+ assert.equal(COMBAT_BOSSES.length,15);
  for(const boss of GROWTH.bosses){
   const art=enemyCombatArt({...boss,id:'e0',bossId:boss.id});
   assert.equal(art.kind,'boss');

@@ -421,7 +421,7 @@ function encounterArt(current){
  if(!a){
   if(id==='police_human')return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:'人類警察臨檢路障',interior:false,empty:false,creatures:['soldier','soldier']};
   if(id==='police_alien')return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:'外星執法巡邏攔檢',interior:false,empty:false,creatures:['sentinel','drone']};
-  if(id==='final_gate'||current.finalGate)return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:current.event.title||'樂園之前',interior:false,empty:false,creatures:[],bossId:state?.finalBoss?.id};
+  if(id==='final_gate'||current.finalGate||current.milestoneBossId)return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:current.event.title||'強敵攔路',interior:false,empty:false,creatures:[],bossId:current.milestoneBossId||state?.finalBoss?.id};
   if(id==='stranded_search'||current.event.title==='尋找出路')return {image:encounters.road_013?.image,kind:'toolbox',effect:'glint',title:'尋找出路',interior:false,empty:false,creatures:[]};
   return {image:encounters.road_011?.image,kind:'crate',effect:'motes',title:current.event.title||'路旁片刻',interior:false,empty:false,creatures:[]};
  }

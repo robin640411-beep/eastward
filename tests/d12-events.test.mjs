@@ -92,12 +92,10 @@ test('3000, 5000 and 10000 km journey options create scaled routes, enemy pacing
   assert.equal(g.s.route.regions.length,expectedRegions);
   assert.equal(routeView(g.s,0).remainingKm,km);
 
-  // Enemy pool scales from Tier 1 at start to Tier 10 near destination
+  // Enemy pool scales by actual kilometres travelled (+1 tier every 1000 km)
   assert.equal(regionEnemyPool(g.s).region,1);
-  g.s.progress=Math.floor(maxProg/2);
-  assert(regionEnemyPool(g.s).region>=4&&regionEnemyPool(g.s).region<=6);
   g.s.progress=maxProg-1;
-  assert.equal(regionEnemyPool(g.s).region,10);
+  assert.equal(regionEnemyPool(g.s).region,Math.min(10,Math.floor(((maxProg-2)*10)/1000)+1));
 
   // Arriving at maxProg triggers final boss gate
   g.s.mode='ready';
