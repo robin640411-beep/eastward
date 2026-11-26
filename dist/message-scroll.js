@@ -1,5 +1,5 @@
 // Single-event storybook page-flipping: shows one event at a time, scrolls long text, then flips to next event.
-let cursorId=0,lastSeenMaxId=0,nextId=null,oldTop=0,holdUntil=0,mounted=null,canContinue=false;
+let cursorId=0,lastSeenMaxId=0,nextId=null,revealedId=null,oldTop=0,holdUntil=0,mounted=null,canContinue=false;
 
 export function hasPendingNextMessage(){
  return nextId!==null;
@@ -18,8 +18,16 @@ export function syncOverflowCue(el=mounted){
  if(!el)return;
  const win=el.closest?.('.message-window');
  if(!win)return;
- const more=hasMessageOverflow(el);
+ const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
+ const pending=hasPendingNextMessage();
+ const overflow=isScrollOverflow(el);
+ // Once a final page has been read to the bottom (no overflow & no next page), lock choices revealed
+ // so showing the buttons can NEVER re-trigger overflow and deadlock the UI!
+ if(!pending&&!overflow)revealedId=curId;
+ const gateChoices=pending||(overflow&&revealedId!==curId);
+ const more=pending||overflow;
  win.classList.toggle('has-more-text',more);
+ win.classList.toggle('choices-gated',gateChoices);
  win.classList.toggle('can-continue',!more&&canContinue);
 }
 
@@ -95,7 +103,7 @@ export function stopMessageScroll(){
 }
 
 export function resetMessageScroll(){
- stopMessageScroll();cursorId=0;lastSeenMaxId=0;nextId=null;oldTop=0;holdUntil=0;canContinue=false;
+ stopMessageScroll();cursorId=0;lastSeenMaxId=0;nextId=null;revealedId=null;oldTop=0;holdUntil=0;canContinue=false;
 }
 
 export function focusMessagesAfter(serial=0){
@@ -103,6 +111,7 @@ export function focusMessagesAfter(serial=0){
  cursorId=0;
  lastSeenMaxId=Number(serial)||0;
  nextId=null;
+ revealedId=null;
  oldTop=0;
 }
 
@@ -120,9 +129,13 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
   el.scrollTop=Math.max(0,el.scrollHeight-el.clientHeight);
   oldTop=el.scrollTop;
   const win=el.closest?.('.message-window');
-  if(win){win.classList.toggle('has-more-text',false);win.classList.toggle('can-continue',false);}
+  if(win){win.classList.toggle('has-more-text',false);win.classList.toggle('choices-gated',false);win.classList.toggle('can-continue',false);}
   return;
  }
+ // Measure overflow cleanly with choices gated on first view of a new page to prevent layout-thrash deadlock.
+ const win=el.closest?.('.message-window');
+ const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
+ if(win&&revealedId!==curId)win.classList.toggle('choices-gated',true);
  el.scrollTop=Math.min(oldTop,Math.max(0,el.scrollHeight-el.clientHeight));
  oldTop=el.scrollTop;
  syncOverflowCue(el);

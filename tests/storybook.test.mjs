@@ -539,3 +539,23 @@ test('focusMessagesAfter jumps immediately to new messages after player chooses 
  assert.equal(selectVisibleMessage(msgs).current.id,2);
  resetMessageScroll();
 });
+
+test('choices-gated never deadlocks or re-hides buttons once a page finishes reading',async()=>{
+ const {mountMessageScroll,syncOverflowCue,resetMessageScroll}=await import('../dist/message-scroll.js');
+ resetMessageScroll();
+ const mockWin={classes:new Set(),classList:{toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
+ // Fits when buttons are hidden -> reveals buttons immediately
+ const el={
+  scrollTop:0,clientHeight:200,scrollHeight:160,isConnected:true,dataset:{},
+  querySelector:()=>({dataset:{messageId:'42'}}),
+  closest:()=>mockWin,
+  addEventListener:()=>{}
+ };
+ mountMessageScroll(el,{});
+ assert(!mockWin.classes.has('choices-gated'),'Buttons should be revealed when text fits');
+ // Simulate buttons appearing and shrinking clientHeight to 130 (creating 30px overflow) -> MUST NOT re-hide buttons!
+ el.clientHeight=130;
+ syncOverflowCue(el);
+ assert(!mockWin.classes.has('choices-gated'),'Revealed buttons must never oscillate back to hidden');
+ resetMessageScroll();
+});
