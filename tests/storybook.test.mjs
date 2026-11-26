@@ -580,3 +580,22 @@ test('advanceManualPage safety net unlocks stuck choices-gated state and keepRev
  assert(!mockWin.classes.has('choices-gated'));
  resetMessageScroll();
 });
+
+test('selecting an option hides choices during reply text and reveals them after tapping once',async()=>{
+ const {mountMessageScroll,focusMessagesAfter,advanceManualPage,resetMessageScroll}=await import('../dist/message-scroll.js');
+ resetMessageScroll();
+ const mockWin={classes:new Set(),classList:{contains:k=>mockWin.classes.has(k),toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
+ const el={
+  scrollTop:0,clientHeight:200,scrollHeight:120,isConnected:true,dataset:{},
+  querySelector:()=>({dataset:{messageId:'55'}}),
+  closest:()=>mockWin,
+  addEventListener:()=>{}
+ };
+ focusMessagesAfter(54,{waitForTap:true});
+ mountMessageScroll(el,{});
+ assert(mockWin.classes.has('choices-gated'),'Choices must stay hidden while reading an option reply');
+ assert(mockWin.classes.has('has-more-text'),'Corner arrow should indicate tap to continue');
+ assert.equal(advanceManualPage(el),'unlocked');
+ assert(!mockWin.classes.has('choices-gated'),'One tap after reading reply should reveal choices');
+ resetMessageScroll();
+});

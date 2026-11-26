@@ -531,8 +531,9 @@
   color: #677d85;
 }
 
-/* Hide event & combat choices only while choices-gated (unread pages or un-scrolled long text); never hide urgent system prompts (.message-actions) */
-.message-window.choices-gated .message-commands {
+/* Hide event & combat choices (and choice pagination) while choices-gated until the player finishes reading */
+.message-window.choices-gated .message-commands,
+.message-window.choices-gated .choice-pagination {
   display: none !important;
 }
 .in-combat .manual-continue-cue {

@@ -1,5 +1,5 @@
 // Single-event storybook page-flipping: shows one event at a time, scrolls long text, then flips to next event.
-let cursorId=0,lastSeenMaxId=0,nextId=null,revealedId=null,oldTop=0,holdUntil=0,mounted=null,canContinue=false;
+let cursorId=0,lastSeenMaxId=0,nextId=null,revealedId=null,awaitingTap=false,oldTop=0,holdUntil=0,mounted=null,canContinue=false;
 
 export function hasPendingNextMessage(){
  return nextId!==null;
@@ -11,7 +11,7 @@ export function isScrollOverflow(el=mounted){
 }
 
 export function hasMessageOverflow(el=mounted){
- return isScrollOverflow(el)||hasPendingNextMessage();
+ return isScrollOverflow(el)||hasPendingNextMessage()||awaitingTap;
 }
 
 export function syncOverflowCue(el=mounted){
@@ -21,11 +21,11 @@ export function syncOverflowCue(el=mounted){
  const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
  const pending=hasPendingNextMessage();
  const overflow=isScrollOverflow(el);
- // Once a final page has been read to the bottom (no overflow & no next page), lock choices revealed
- // so showing the buttons can NEVER re-trigger overflow and deadlock the UI!
- if(!pending&&!overflow)revealedId=curId;
- const gateChoices=pending||(overflow&&revealedId!==curId);
- const more=pending||overflow;
+ // Once a final page has been read to the bottom (no overflow, no next page, and not awaiting tap after an option),
+ // lock choices revealed so showing the buttons can NEVER re-trigger overflow and deadlock the UI!
+ if(!pending&&!overflow&&!awaitingTap)revealedId=curId;
+ const gateChoices=pending||awaitingTap||(overflow&&revealedId!==curId);
+ const more=pending||overflow||awaitingTap;
  win.classList.toggle('has-more-text',more);
  win.classList.toggle('choices-gated',gateChoices);
  win.classList.toggle('can-continue',!more&&canContinue);
@@ -95,6 +95,17 @@ export function advanceManualPage(el=mounted){
   holdUntil=performance.now()+900;
   return 'next';
  }
+ // When waiting for the player to finish reading an option's response text, one tap reveals the choices cleanly.
+ if(awaitingTap){
+  awaitingTap=false;
+  if(el){
+   const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
+   revealedId=curId;
+   syncOverflowCue(el);
+  }
+  holdUntil=performance.now()+900;
+  return 'unlocked';
+ }
  // Safety net: if the user taps when already at the bottom of the final page,
  // unconditionally unlock any gated choices so no browser rounding can ever deadlock.
  if(el){
@@ -116,15 +127,16 @@ export function stopMessageScroll(){
 }
 
 export function resetMessageScroll(){
- stopMessageScroll();cursorId=0;lastSeenMaxId=0;nextId=null;revealedId=null;oldTop=0;holdUntil=0;canContinue=false;
+ stopMessageScroll();cursorId=0;lastSeenMaxId=0;nextId=null;revealedId=null;awaitingTap=false;oldTop=0;holdUntil=0;canContinue=false;
 }
 
-export function focusMessagesAfter(serial=0){
+export function focusMessagesAfter(serial=0,{waitForTap=false}={}){
  stopMessageScroll();
  cursorId=0;
  lastSeenMaxId=Number(serial)||0;
  nextId=null;
  revealedId=null;
+ awaitingTap=!!waitForTap;
  oldTop=0;
 }
 
@@ -139,6 +151,7 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
  canContinue=battle?false:!!continuable;
  if(transient){
   nextId=null;
+  awaitingTap=false;
   el.scrollTop=Math.max(0,el.scrollHeight-el.clientHeight);
   oldTop=el.scrollTop;
   const win=el.closest?.('.message-window');
@@ -149,9 +162,10 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
  const win=el.closest?.('.message-window');
  const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
  if(keepRevealed){
+  awaitingTap=false;
   revealedId=curId;
   if(win)win.classList.toggle('choices-gated',false);
- }else if(win&&revealedId!==curId){
+ }else if(win&&(awaitingTap||revealedId!==curId)){
   win.classList.toggle('choices-gated',true);
  }
  el.scrollTop=Math.min(oldTop,Math.max(0,el.scrollHeight-el.clientHeight));
