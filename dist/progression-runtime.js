@@ -192,7 +192,7 @@ export function installProgression(Game,{display,learned}){
     this.s.notice=def.description;
    }
   }
-  const quip=rollBattleAuthorQuip(this.s,'start');if(quip)appendMessage(this.s,'作者吐槽',quip);
+  const quip=rollBattleAuthorQuip(this.s,'start');if(quip){this.s.notice=(this.s.notice?this.s.notice+'\n':'')+quip;appendMessage(this.s,'作者吐槽',quip);}
  };
 
  const choose=Game.prototype.choose;Game.prototype.choose=function(id){if(this.s.mode==='event'&&this.s.current?.finalGate&&id==='challenge'){this.beginFinale();return true;}return choose.call(this,id);};

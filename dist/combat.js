@@ -151,7 +151,7 @@ export function installCombat(Game,{learned,POWERS,ITEMS,clamp,display}) {
  this.s.notice=this.s.logs.slice(0,Math.min(turns.length,4)).reverse().map(l=>l.title+'：'+l.text).join('\n');
  const lowHp=this.alive().some(q=>q.hp<=Math.max(6,Math.floor(q.maxHp*0.28)));
  const roundQuip=rollBattleAuthorQuip(this.s,'round',{enemyPsi:b.roundEnemyPsi,missed:b.roundMissed,lowHp});
- if(roundQuip)appendMessage(this.s,'作者吐槽',roundQuip);
+ if(roundQuip){this.s.notice+=`\n${roundQuip}`;appendMessage(this.s,'作者吐槽',roundQuip);}
  if(b.enemyShield>0)b.enemyShield--;
  if(b.round%3===0)this.s.minutes+=5;b.round++;b.orders={};b.roster=battleRoster(this);return true;
  };

@@ -280,21 +280,48 @@ const WIPE_QUIPS=[
  hero=>`（就這樣團滅了？我的大綱才寫到一半耶！${hero}你這種隨便死在半路的敬業態度，會害我很難跟讀者交代的！）`
 ];
 
+const VEHICLE_START_QUIPS=[
+ (hero,foe)=>`（高速公路上拿破車跟${foe}對撞？${hero}，這本故事書可沒幫你保丙式車體險啊。）`,
+ (hero,foe)=>`（輪胎尖叫、引擎咆哮——${hero}這回把公路生存書硬生生開成了玩命關頭。）`,
+ (hero,foe)=>`（看著後照鏡裡逼近的${foe}，我開始替這輛車可憐的避震器默哀三秒鐘。）`
+];
+
+const VEHICLE_ROUND_QUIPS=[
+ hero=>`（車門又被刮掉一塊漆，修車廠老闆此刻一定在遠方感動得流淚。）`,
+ hero=>`（${hero}這手甩尾角度漂亮是漂亮，就是後座的物資大概全滾成一團了。）`,
+ hero=>`（鐵皮撞鐵皮的聲音聽得我都牙酸，拜託油箱別在這個時候漏油啊。）`,
+ hero=>`（高速追逐戰最可怕的不是敵人開火，而是油表指針掉得比血條還快。）`
+];
+
+const BOSS_ROUND_QUIPS=[
+ (hero,foe)=>`（跟${foe}打到這個回合還沒散架，${hero}的命硬程度已經超出我原本的大綱了。）`,
+ (hero,foe)=>`（${foe}這架勢簡直像最終章魔王，我手邊的稿紙都快被它的氣勢震飛了。）`,
+ (hero,foe)=>`（打這種級別的怪物還敢留手的話，下一頁大概就要直接印「全書完」三個字了。）`,
+ (hero,foe)=>`（提醒一下${hero}，藥品跟超能力是拿來保命的，帶進墳墓可不能折現。）`
+];
+
 export function rollBattleAuthorQuip(s,kind,ctx={}){
  if(!s)return '';
  const b=s.battle;
+ const isBoss=!!(b?.finalBoss||b?.milestoneBoss||b?.bossTier);
+ const isVeh=b?.mode==='vehicle';
  const tag=`battle:${kind}:${s.stop}:${b?.round||0}:${s.logs?.length||0}:${ctx.who||''}`;
  const roll=authorD100(s,tag);
  const hero=heroShortName(s);
+ const foe=b?.enemies?.[0]?.name||'敵人';
  const h=hash32(`bpick:${s.seed}:${tag}`);
  if(kind==='start'){
-  const isBoss=!!b?.finalBoss;
-  if(roll>(isBoss?75:38))return '';
-  const foe=b?.enemies?.[0]?.name||'敵人';
-  return isBoss?BOSS_START_QUIPS[h%BOSS_START_QUIPS.length](hero,foe):BATTLE_START_QUIPS[h%BATTLE_START_QUIPS.length](hero,foe);
+  const chance=isBoss?65:isVeh?50:40;
+  if(roll>chance)return '';
+  if(isBoss)return BOSS_START_QUIPS[h%BOSS_START_QUIPS.length](hero,foe);
+  if(isVeh)return VEHICLE_START_QUIPS[h%VEHICLE_START_QUIPS.length](hero,foe);
+  return BATTLE_START_QUIPS[h%BATTLE_START_QUIPS.length](hero,foe);
  }
  if(kind==='round'){
-  if(roll>35)return '';
+  const chance=isBoss?48:isVeh?44:38;
+  if(roll>chance)return '';
+  if(isBoss&&(h%2===0))return BOSS_ROUND_QUIPS[h%BOSS_ROUND_QUIPS.length](hero,foe);
+  if(isVeh)return VEHICLE_ROUND_QUIPS[h%VEHICLE_ROUND_QUIPS.length](hero);
   if(ctx.enemyPsi)return BATTLE_ROUND_ENEMY_PSI_QUIPS[h%BATTLE_ROUND_ENEMY_PSI_QUIPS.length](hero);
   if(ctx.missed)return BATTLE_ROUND_MISS_QUIPS[h%BATTLE_ROUND_MISS_QUIPS.length](hero);
   if(ctx.lowHp)return BATTLE_ROUND_LOWHP_QUIPS[h%BATTLE_ROUND_LOWHP_QUIPS.length](hero);
