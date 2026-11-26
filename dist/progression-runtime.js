@@ -9,17 +9,17 @@ export const MAX_LEVEL=18;
 export function bossDefinition(s){
  if(!s)return null;
  const plan=s.bossPlan;
- if(plan?.finaleTier==='mid'&&plan.finaleBossId){
-  const mid=tierBossDefinition(plan.finaleBossId);
-  if(mid){
+ if(['mini','mid'].includes(plan?.finaleTier)&&plan.finaleBossId){
+  const tierDef=tierBossDefinition(plan.finaleBossId);
+  if(tierDef){
    const sc=plan.finaleScale||1;
    return {
-    ...mid,
-    hp:Math.round(mid.hp*sc),
-    attack:Math.round(mid.attack*sc),
-    defense:Math.round(mid.defense*sc),
-    rumors:[`聽說在東方入口擋路的是一頭叫「${mid.name}」的狠角色，沒點裝備千萬別硬闖。`],
-    companion:[[`快到終點了，你聽過「${mid.name}」的名號嗎？`,'管他多硬，我們開了幾千公里可不是來掉頭的。']]
+    ...tierDef,
+    hp:Math.round(tierDef.hp*sc),
+    attack:Math.round(tierDef.attack*sc),
+    defense:Math.round(tierDef.defense*sc),
+    rumors:[`聽說在東方入口擋路的是一頭叫「${tierDef.name}」的狠角色，沒點裝備千萬別硬闖。`],
+    companion:[[`快到終點了，你聽過「${tierDef.name}」的名號嗎？`,'管他多硬，我們開了幾千公里可不是來掉頭的。']]
    };
   }
  }
@@ -169,7 +169,8 @@ export function installProgression(Game,{display,learned}){
  Game.prototype.beginFinale=function(){
   const boss=bossDefinition(this.s);
   this.s.finalBoss.encountered=true;
-  const gateTitle=this.s.bossPlan?.finaleTier==='mid'?`終點關卡（中 BOSS）· ${boss.name}`:`樂園之前（最終 BOSS）· ${boss.name}`;
+  const tierLabel=this.s.bossPlan?.finaleTier==='mini'?'終點關卡（小 BOSS）':this.s.bossPlan?.finaleTier==='mid'?'終點關卡（中 BOSS）':'樂園之前（最終 BOSS）';
+  const gateTitle=`${tierLabel} · ${boss.name}`;
   this.s.current={instance:++this.s.serial,finalGate:true,milestoneBossId:boss.id,event:{id:'final_gate',title:gateTitle,text:boss.description,options:[]},resolved:false};
   this.s.frames=[];this.s.mode='event';
   this.beginCombat('character','finalBoss');
@@ -205,7 +206,7 @@ export function installProgression(Game,{display,learned}){
     this.s.finalBoss.defeated=true;
     endCombat.call(this,win);
     if(this.s.mode!=='ending'){
-     if((this.s.totalKm||1000)>=3000)this.grantPartyXp(b.bossTier==='mid'?XP_REWARDS.midBoss:XP_REWARDS.finalBoss,'擊敗終點守門者');
+     if((this.s.totalKm||1000)>=3000)this.grantPartyXp(b.bossTier==='mini'?XP_REWARDS.miniBoss:b.bossTier==='mid'?XP_REWARDS.midBoss:XP_REWARDS.finalBoss,'擊敗終點守門者');
      this.completeStop('final');
      this.end(true,`${partyLabel(this.s)}越過了${bossDefinition(this.s).name}倒下的地方。道路盡頭，樹蔭與清水迎接著活下來的旅人，樂園終於不再只是傳聞。`);
     }

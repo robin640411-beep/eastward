@@ -124,30 +124,27 @@ export function milestoneBossPlan(totalKm=1000,seed=1){
  const km=Number(totalKm)||1000;
  if(km===3000){
   return {
-   milestones:[{progress:150,km:1500,tier:'mini',bossId:minis[0].id,scale:0.95}],
-   finaleTier:'mid',
-   finaleBossId:mids[0].id,
-   finaleScale:0.92
+   milestones:[],
+   finaleTier:'mini',
+   finaleBossId:minis[0].id,
+   finaleScale:1.0
   };
  }
  if(km===5000){
   return {
    milestones:[
-    {progress:150,km:1500,tier:'mini',bossId:minis[0].id,scale:0.95},
-    {progress:320,km:3200,tier:'mini',bossId:minis[1].id,scale:1.12}
+    {progress:300,km:3000,tier:'mini',bossId:minis[0].id,scale:1.0}
    ],
    finaleTier:'mid',
    finaleBossId:mids[0].id,
-   finaleScale:1.15
+   finaleScale:1.0
   };
  }
  if(km===10000){
   return {
    milestones:[
-    {progress:200,km:2000,tier:'mini',bossId:minis[0].id,scale:1.0},
-    {progress:400,km:4000,tier:'mini',bossId:minis[1].id,scale:1.18},
-    {progress:580,km:5800,tier:'mid',bossId:mids[0].id,scale:1.05},
-    {progress:800,km:8000,tier:'mid',bossId:mids[1].id,scale:1.22}
+    {progress:300,km:3000,tier:'mini',bossId:minis[0].id,scale:1.0},
+    {progress:500,km:5000,tier:'mid',bossId:mids[0].id,scale:1.0}
    ],
    finaleTier:'final',
    finaleBossId:null, // Uses the 5 Grand Final Bosses (overseer, broodmother, zero_core, graft_colossus, fallen_angel)

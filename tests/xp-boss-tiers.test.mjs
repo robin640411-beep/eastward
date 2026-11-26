@@ -55,32 +55,35 @@ test('XP curve reaches Lv.18 on 10000 km but never on 3000 km or 5000 km',()=>{
  assert.equal(lv10k,18,'10000 km should reach max Lv.18');
 });
 
-test('3000 km & 5000 km end with a Mid-Boss; only 10000 km faces a Grand Final Boss; mid-way milestones fire',()=>{
- // 3000 km
+test('3000 km ends with Mini-Boss; 5000 km has 3000km Mini + finale Mid; 10000 km has 3000km Mini + 5000km Mid + finale Final Boss',()=>{
+ // 3000 km: no mid-way milestones, finale is Mini-Boss
  const g3=new Game(data);
  g3.start({seed:301,totalKm:3000});
- assert.equal(g3.s.bossPlan.finaleTier,'mid');
- assert(MID_BOSSES.some(b=>b.id===bossDefinition(g3.s).id),'3000 km finale must be a Mid-Boss');
- // Mid-way Mini-Boss triggers at 1500 km (progress 150)
- g3.s.progress=150;
- g3.s.frames=[{kind:'road',count:0,scene:null}];
- g3.nextEvent();
- assert.equal(g3.s.battle?.bossTier,'mini');
- assert(MINI_BOSSES.some(b=>b.id===g3.s.battle.enemies[0].bossId));
+ assert.equal(g3.s.bossPlan.milestones.length,0);
+ assert.equal(g3.s.bossPlan.finaleTier,'mini');
+ assert(MINI_BOSSES.some(b=>b.id===bossDefinition(g3.s).id),'3000 km finale must be a Mini-Boss');
 
- // 5000 km
+ // 5000 km: Mini-Boss at 3000 km (progress 300), finale is Mid-Boss
  const g5=new Game(data);
  g5.start({seed:501,totalKm:5000});
+ assert.equal(g5.s.bossPlan.milestones.length,1);
+ assert.equal(g5.s.bossPlan.milestones[0].progress,300);
+ assert.equal(g5.s.bossPlan.milestones[0].tier,'mini');
  assert.equal(g5.s.bossPlan.finaleTier,'mid');
  assert(MID_BOSSES.some(b=>b.id===bossDefinition(g5.s).id),'5000 km finale must be a Mid-Boss');
- assert.equal(g5.s.bossPlan.milestones.length,2);
+ g5.s.progress=300;
+ g5.s.frames=[{kind:'road',count:0,scene:null}];
+ g5.nextEvent();
+ assert.equal(g5.s.battle?.bossTier,'mini');
+ assert(MINI_BOSSES.some(b=>b.id===g5.s.battle.enemies[0].bossId));
 
- // 10000 km
+ // 10000 km: Mini-Boss at 3000 km (300), Mid-Boss at 5000 km (500), finale is Grand Final Boss
  const g10=new Game(data);
  g10.start({seed:1001,totalKm:10000});
+ assert.equal(g10.s.bossPlan.milestones.length,2);
+ assert.deepEqual(g10.s.bossPlan.milestones.map(m=>[m.progress,m.tier]),[[300,'mini'],[500,'mid']]);
  assert.equal(g10.s.bossPlan.finaleTier,'final');
  assert(['overseer','broodmother','zero_core','graft_colossus','fallen_angel'].includes(bossDefinition(g10.s).id),'10000 km finale must be a Grand Final Boss');
- assert.equal(g10.s.bossPlan.milestones.length,4);
 
  // Enemy scaling: +1 tier every 1000 km on long journeys
  g10.s.progress=1;assert.equal(regionEnemyPool(g10.s).region,1);
