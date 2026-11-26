@@ -89,10 +89,23 @@ export function advanceManualPage(el=mounted){
   cursorId=nextId;
   lastSeenMaxId=Math.max(lastSeenMaxId,cursorId||0);
   nextId=null;
+  revealedId=null;
   oldTop=0;
   if(el)el.scrollTop=0;
   holdUntil=performance.now()+900;
   return 'next';
+ }
+ // Safety net: if the user taps when already at the bottom of the final page,
+ // unconditionally unlock any gated choices so no browser rounding can ever deadlock.
+ if(el){
+  const win=el.closest?.('.message-window');
+  const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
+  revealedId=curId;
+  if(win?.classList?.contains?.('choices-gated')){
+   win.classList.toggle('choices-gated',false);
+   win.classList.toggle('has-more-text',false);
+   return 'unlocked';
+  }
  }
  return false;
 }
@@ -119,7 +132,7 @@ export function isMessageReadingPaused(){
  return hasMessageOverflow()||performance.now()<holdUntil;
 }
 
-export function mountMessageScroll(el,{transient=false,continuable=false,battle=false}={}){
+export function mountMessageScroll(el,{transient=false,continuable=false,battle=false,keepRevealed=false}={}){
  if(!el)return;
  stopMessageScroll();
  mounted=el;
@@ -135,7 +148,12 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
  // Measure overflow cleanly with choices gated on first view of a new page to prevent layout-thrash deadlock.
  const win=el.closest?.('.message-window');
  const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
- if(win&&revealedId!==curId)win.classList.toggle('choices-gated',true);
+ if(keepRevealed){
+  revealedId=curId;
+  if(win)win.classList.toggle('choices-gated',false);
+ }else if(win&&revealedId!==curId){
+  win.classList.toggle('choices-gated',true);
+ }
  el.scrollTop=Math.min(oldTop,Math.max(0,el.scrollHeight-el.clientHeight));
  oldTop=el.scrollTop;
  syncOverflowCue(el);

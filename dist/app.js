@@ -195,8 +195,9 @@ function render(){if(!data)return;clearTimeout(automaticTimer);automaticTimer=nu
  if(previousCanvas)root.querySelector('#world-canvas')?.replaceWith(previousCanvas);
  const event=s.current;
  const focusTitle=focusEventMessage&&(event?.rewardReceipt?event.event.title:event?.place?.name||event?.event.title);
- const continuable=!presentation&&!currentCue()&&(s.mode==='prologue'||['drive','finish','resolveSearch'].includes(automaticDecision(g)));
- mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle,continuable,battle:!!s.battle});
+ const dec=automaticDecision(g),continuable=!presentation&&!currentCue()&&(s.mode==='prologue'||['drive','finish','resolveSearch'].includes(dec));
+ const keepRevealed=['rest','restSetup','stranded','vehicle','blocked'].includes(dec);
+ mountMessageScroll(root.querySelector('.message-scroll'),{transient:!!presentation,focusTitle,continuable,battle:!!s.battle,keepRevealed});
  focusEventMessage=false;
 
  restoreDialog(oldPanel,oldScroll);save();if(s.mode==='driving'&&!timer){travelStarted=performance.now();travelLength=tripDuration(s);const tryArrive=()=>{if(g.s?.mode!=='driving'){timer=null;return;}if(panel==='messages'||hasMessageOverflow()){travelLength=Math.max(travelLength,performance.now()-travelStarted+2200);extendTravelDuration(travelLength);timer=setTimeout(tryArrive,800);return;}timer=null;const before=structuredClone(g.s),prevSerial=g.s.messageSerial||0;resetVisuals();if(panel!=='messages')panel=null;g.arrive();focusMessagesAfter(prevSerial);presentChange(before,'arrive').catch(console.error)};timer=setTimeout(tryArrive,travelLength);}mountWorld(document.getElementById('world-canvas'),s,data.assets,data.encounters,{duration:travelLength,travelStart:travelStarted,target:selectedEnemy,playback:!!presentation,encounterCue:currentCue()?{key:currentCue().key,phase:currentCue().phase,inside:!!(s.current?.inside||s.frames?.at(-1)?.kind==='building')}:null});
@@ -274,7 +275,7 @@ async function playChange(steps,start,transition,acknowledging=false){
  }finally{presentation=null;playbackStep=null;playbackPhase=null;playbackController=null;clearBattleBeat();busy=false;render();}
 }
 function updateBattleControls(){
- stopMessageScroll();root.querySelector('.message-window').outerHTML=messageWindow();root.querySelector('.world-targets').innerHTML=enemyTargets();root.querySelector('.battle-party').outerHTML=partyStrip(true);mountMessageScroll(root.querySelector('.message-scroll'),{battle:true});
+ stopMessageScroll();root.querySelector('.message-window').outerHTML=messageWindow();root.querySelector('.world-targets').innerHTML=enemyTargets();root.querySelector('.battle-party').outerHTML=partyStrip(true);mountMessageScroll(root.querySelector('.message-scroll'),{battle:true,keepRevealed:true});
 }
 function browseCombat(action,args){if(!g.s?.battle||presentation||panel)return false;
  if(action==='combat'&&['attack','medicine'].includes(args))pendingCommand={type:args,allies:args==='medicine'};
@@ -289,8 +290,9 @@ function commitCommand(target){if(!pendingCommand)return;const {allies,...comman
 root.addEventListener('click',async e=>{if(e.target.classList.contains('panel-back')&&!busy){panel=null;ui.picker=null;render();return;}const b=e.target.closest('button[data-action]');if(!b){if(!panel&&!busy&&!presentation&&!e.target.closest('button,a,summary,input,select')){const copy=root.querySelector('.encounter-copy');const adv=advanceManualPage();if(adv){audio();if(adv==='next')render();else scheduleAutomatic(true);return;}if(copy&&advanceManualPage(copy)){audio();scheduleAutomatic(true);return;}if(g.s?.mode==='prologue'){audio();const before=structuredClone(g.s);resetVisuals();while(g.s.mode==='prologue')g.advancePrologue();resetMessageScroll();if(g.canDrive())g.depart();await presentChange(before,'depart');return;}const decision=automaticDecision(g);if(!currentCue()&&['drive','finish','resolveSearch'].includes(decision)){audio();await runAutomaticDecision(decision);return;}}return;}if(b.disabled)return;const {action:a,args:x}=b.dataset;if(a==='skipPlayback'){playbackController?.abort();return;}if(busy)return;
  if(currentCue()){
   const cue=currentCue();
-  if(a==='ackEncounter'&&cue.combat&&cue.phase==='reading'){
-   await playChange(cue.opening?.steps||[],cue.opening?.start,'battle',true);
+  if(a==='ackEncounter'&&cue.phase==='reading'){
+   if(cue.combat)await playChange(cue.opening?.steps||[],cue.opening?.start,'battle',true);
+   else {delete g.s.journeyFlow.encounterCue;render();}
   }
   return;
  }

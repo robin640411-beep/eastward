@@ -559,3 +559,24 @@ test('choices-gated never deadlocks or re-hides buttons once a page finishes rea
  assert(!mockWin.classes.has('choices-gated'),'Revealed buttons must never oscillate back to hidden');
  resetMessageScroll();
 });
+
+test('advanceManualPage safety net unlocks stuck choices-gated state and keepRevealed protects combat/system menus',async()=>{
+ const {mountMessageScroll,advanceManualPage,resetMessageScroll}=await import('../dist/message-scroll.js');
+ resetMessageScroll();
+ const mockWin={classes:new Set(['choices-gated']),classList:{contains:k=>mockWin.classes.has(k),toggle(k,v){v?mockWin.classes.add(k):mockWin.classes.delete(k);}}};
+ const el={
+  scrollTop:0,clientHeight:200,scrollHeight:180,isConnected:true,dataset:{},
+  querySelector:()=>({dataset:{messageId:'99'}}),
+  closest:()=>mockWin,
+  addEventListener:()=>{}
+ };
+ // Even if choices-gated were somehow stuck on a non-overflowing final page, one tap unlocks it immediately
+ assert.equal(advanceManualPage(el),'unlocked');
+ assert(!mockWin.classes.has('choices-gated'));
+
+ // keepRevealed keeps combat target-selection & rest/stranded/vehicle prompts unlocked immediately
+ const longEl={...el,scrollHeight:300};
+ mountMessageScroll(longEl,{battle:true,keepRevealed:true});
+ assert(!mockWin.classes.has('choices-gated'));
+ resetMessageScroll();
+});
