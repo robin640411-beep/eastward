@@ -2,22 +2,41 @@ import {PARTICLE_LIMITS,particlePool,lightningAt} from './weather-model.js';
 const pools=new Map(),wrap=(n,span)=>((n%span)+span)%span;
 const colors={leaf:['#d49a52','#c46d4e','#7ca376'],petal:['#e9c6c1','#efdbd0','#cfa9b8'],snow:['#e4e9e6','#c9d9df','#adbecb'],dust:['#bda77e','#c8b490','#9b9378'],ash:['#9a9c9b','#b4b4a8','#7d8991'],spore:['#9eafbc','#b6bc8e','#b5a2c7']};
 const path=(ctx,points)=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(Math.round(x),Math.round(y)):ctx.moveTo(Math.round(x),Math.round(y)));};
+function drawPixelPuff(ctx,cx,cy,rx,ry,color){
+ const rxi=Math.max(2,Math.round(rx)),ryi=Math.max(2,Math.round(ry));
+ ctx.fillStyle=color;
+ for(let dy=-ryi;dy<=ryi;dy+=2){
+  const span=Math.round(rxi*Math.sqrt(Math.max(0,1-(dy*dy)/(ryi*ryi))));
+  if(span>0)ctx.fillRect(Math.round(cx-span),Math.round(cy+dy),span*2,2);
+ }
+}
+function drawStormCloud(ctx,cx,cy,scale,storm,flash){
+ const s=scale,lit=flash>.12;
+ const rimCol=lit?`rgba(168,196,226,${.72*storm})`:`rgba(72,88,108,${.72*storm})`;
+ const midCol=lit?`rgba(98,122,150,${.86*storm})`:`rgba(38,50,67,${.88*storm})`;
+ const darkCol=lit?`rgba(62,78,100,${.88*storm})`:`rgba(22,31,45,${.9*storm})`;
+ // Sculpted multi-lobe cumulonimbus silhouette (5 overlapping billowing domes)
+ const lobes=[[-26,4,18,10],[-11,-3,22,13],[8,-5,24,14],[26,1,19,11],[38,6,13,7]];
+ // 1. Soft upper rim / lightning-lit tops
+ for(const [ox,oy,rx,ry] of lobes)drawPixelPuff(ctx,cx+ox*s,cy+(oy-1.5)*s,rx*s,ry*s,rimCol);
+ // 2. Dense storm cloud body
+ for(const [ox,oy,rx,ry] of lobes)drawPixelPuff(ctx,cx+ox*s,cy+(oy+1)*s,rx*s*.96,ry*s*.92,midCol);
+ // 3. Heavy dark rain-laden belly + wispy underside
+ drawPixelPuff(ctx,cx+4*s,cy+8*s,34*s,7*s,darkCol);
+ drawPixelPuff(ctx,cx-18*s,cy+9*s,20*s,5*s,darkCol);
+ drawPixelPuff(ctx,cx+26*s,cy+9*s,18*s,5*s,darkCol);
+}
 // Called in screen space, outside the event object's camera transform.
 export function drawWeatherSky(ctx,{seed,seconds,storm,soft=false}){if(storm<=.01)return;ctx.save();
- const cloud=ctx.createLinearGradient(0,0,0,170);cloud.addColorStop(0,`rgba(16,24,38,${.68*storm})`);cloud.addColorStop(.55,`rgba(28,39,54,${.34*storm})`);cloud.addColorStop(1,'rgba(28,39,54,0)');ctx.fillStyle=cloud;ctx.fillRect(0,0,384,170);
- // Billowing 16-bit pixel dark storm clouds drifting across the sky!
+ const cloud=ctx.createLinearGradient(0,0,0,170);cloud.addColorStop(0,`rgba(16,24,38,${.65*storm})`);cloud.addColorStop(.55,`rgba(28,39,54,${.3*storm})`);cloud.addColorStop(1,'rgba(28,39,54,0)');ctx.fillStyle=cloud;ctx.fillRect(0,0,384,170);
+ // Sculpted billowing 16-bit pixel storm clouds drifting across the upper sky
  const bolt=lightningAt(seed,seconds,soft);
  const flashBoost=bolt&&!soft?bolt.alpha*.35:0;
- const drift=seconds*(soft?2.2:5.5);
- for(let i=0;i<7;i++){
-  const cw=78+(i%3)*26,ch=18+(i%2)*8;
-  const cx=wrap(i*64-drift*(.7+(i%3)*.22),460)-76;
-  const cy=4+(i%3)*11;
-  ctx.fillStyle=flashBoost>.12?`rgba(96,118,144,${.78*storm})`:`rgba(26,35,48,${.82*storm})`;
-  ctx.fillRect(Math.round(cx),Math.round(cy+4),cw,ch);
-  ctx.fillRect(Math.round(cx+10),Math.round(cy),cw-20,6);
-  ctx.fillStyle=flashBoost>.12?`rgba(148,176,204,${.55*storm})`:`rgba(46,58,74,${.68*storm})`;
-  ctx.fillRect(Math.round(cx+6),Math.round(cy+ch),cw-12,4);
+ const drift=seconds*(soft?2:4.8);
+ const banks=[[0,14,1.15,.65],[92,22,.92,.85],[188,12,1.25,.6],[286,20,1.0,.78],[380,16,.88,.92]];
+ for(const [bx,by,sc,spd] of banks){
+  const cx=wrap(bx-drift*spd,500)-60;
+  drawStormCloud(ctx,cx,by,sc,storm,flashBoost);
  }
  if(bolt){
   if(bolt.glow){const [x]=bolt.main[0],glow=ctx.createRadialGradient(x,20,2,x,20,220);glow.addColorStop(0,`rgba(202,224,248,${bolt.glow*storm})`);glow.addColorStop(1,'rgba(202,224,248,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,384,174);}
