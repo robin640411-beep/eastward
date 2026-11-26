@@ -144,7 +144,7 @@ export function isMessageReadingPaused(){
  return hasMessageOverflow()||performance.now()<holdUntil;
 }
 
-export function mountMessageScroll(el,{transient=false,continuable=false,battle=false,keepRevealed=false}={}){
+export function mountMessageScroll(el,{transient=false,continuable=false,battle=false,keepRevealed=false,hasCommands=false}={}){
  if(!el)return;
  stopMessageScroll();
  mounted=el;
@@ -161,11 +161,13 @@ export function mountMessageScroll(el,{transient=false,continuable=false,battle=
  // Measure overflow cleanly with choices gated on first view of a new page to prevent layout-thrash deadlock.
  const win=el.closest?.('.message-window');
  const curId=Number(el.querySelector?.('[data-message-id]')?.dataset?.messageId)||cursorId||0;
- if(keepRevealed){
+ if(!hasCommands||keepRevealed){
   awaitingTap=false;
   revealedId=curId;
   if(win)win.classList.toggle('choices-gated',false);
  }else if(win&&(awaitingTap||revealedId!==curId)){
+  // New event/reply page with choices: always wait for the player to finish reading & tap before showing choices!
+  awaitingTap=true;
   win.classList.toggle('choices-gated',true);
  }
  el.scrollTop=Math.min(oldTop,Math.max(0,el.scrollHeight-el.clientHeight));

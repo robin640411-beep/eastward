@@ -592,7 +592,7 @@ test('selecting an option hides choices during reply text and reveals them after
   addEventListener:()=>{}
  };
  focusMessagesAfter(54,{waitForTap:true});
- mountMessageScroll(el,{});
+ mountMessageScroll(el,{hasCommands:true});
  assert(mockWin.classes.has('choices-gated'),'Choices must stay hidden while reading an option reply');
  assert(mockWin.classes.has('has-more-text'),'Corner arrow should indicate tap to continue');
  assert.equal(advanceManualPage(el),'unlocked');
