@@ -16,8 +16,8 @@ export function originPages(g){
 
 export function installOrigins(Game){
  const random=Game.prototype.startRandom;
- Game.prototype.startRandom=function(seed){
-  const s=random.call(this,seed),p=s.party[0],pastRoll=this.roll(100),motiveRoll=this.roll(100),vehicleRoll=this.roll(10);
+ Game.prototype.startRandom=function(seed,totalKm){
+  const s=random.call(this,seed,totalKm),p=s.party[0],pastRoll=this.roll(100),motiveRoll=this.roll(100),vehicleRoll=this.roll(10);
   const render=r=>({...r,text:r.text.replaceAll('{paradise}',destinationAt(s).name).replaceAll('{hero}',p.name)});
   p.origin={pastRoll,motiveRoll,past:render(ORIGINS.past.rows[pastRoll-1]),motive:render(ORIGINS.motive.rows[motiveRoll-1])};
   s.startingVehicleRoll=vehicleRoll;s.vehicle=starterVehicle(vehicleRoll);

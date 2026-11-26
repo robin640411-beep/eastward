@@ -3,7 +3,7 @@ import {VEHICLE_MODS,normalizeVehicleState,installVehicles} from './vehicle-runt
 import {installOrigins} from './origin-runtime.js';
 import { normalizeFlow,installAutomaticJourney,appendMessage } from './automatic-journey.js';
 import {normalizeProgression,installProgression,makeRegionalEnemies} from './progression-runtime.js';
-import {normalizeRoute,nameEncounter} from './route-runtime.js';
+import {normalizeRoute,nameEncounter,normalizeDistanceKm,totalProgressFor} from './route-runtime.js';
 import {MAX_PARTY,normalizeJourney,installDialogue} from './dialogue-runtime.js';
 import {installNpcs} from './npc-runtime.js';
 import {installTraits} from './traits-runtime.js';
@@ -99,7 +99,7 @@ export class Game{
  pick(arr){return arr[this.roll(arr.length)-1]}
  oracle(id){const t=this.d.oracles.tables.find(t=>t.id===id);if(!t)throw Error('Missing oracle '+id);const n=this.roll(Number(t.die?.slice(1))||100);const r=t.rows.find(r=>n>=r.min&&n<=r.max);return {...clone(r),roll:n}}
  person(race=null,job=null){const p={id:'p'+(++this.s.serial),name:this.oracle('npc_name').value,nickname:this.oracle('npc_nickname').value,race:race||this.oracle('npc_race').value,profession:job||this.oracle('npc_profession').value,attitude:this.oracle('npc_attitude').value,flaw:this.oracle('npc_flaw').value,level:1,xp:0,asleep:false,gear:{武器:'club',防具:'coat',配件:null}};const rb=RACE_BONUSES[p.race]||{},jb=JOB_BONUSES[p.profession]||{};p.maxHp=24+(rb.maxHp||0)+(jb.maxHp||0)+(p.flaw==='frail'?-2:0);p.maxSt=24+(rb.maxSt||0)+(jb.maxSt||0)+(p.flaw==='low_endurance'?-2:0);p.maxEsp=10+(rb.maxEsp||0)+(jb.maxEsp||0);p.hp=p.maxHp;p.st=p.maxSt;p.esp=p.maxEsp;return p;}
- start({seed=Date.now(),race='human',profession='driver'}={}){this.s={version:1,rng:Number(seed)>>>0||1,seed:Number(seed),serial:0,progress:1,minutes:480,stop:0,mode:'ready',party:[],driver:null,resources:{fuel:24,scrap:8,medicine:3},inventory:['pistol','tools'],vehicle:{model:'compact',hp:24,maxHp:24,mods:[]},departed:[],pending:[],frames:[],current:null,battle:null,logs:[],history:[],seen:[],dice:null,travel:null,notice:'故事從這裡翻開第一頁。車頭朝東，至於能不能活著看見綠洲，連寫這本書的我也不敢打包票。',end:null};const p=this.person(race,profession);p.attitude='友善';this.s.party=[p];this.s.driver=p.id;const hist=this.oracle('invasion_history').value;this.s.world={...hist,year:2070+this.roll(30),faction:this.pick(['先遣聯軍','軌道議會','遠征監督局','星門軍團']),archive:this.pick(['灰塔紀錄','最後的民防日誌','失落電台檔案','撤離列車手記'])};normalizeJourney(this.s);normalizeRoute(this.s);normalizeProgression(this.s);this.log('開始旅程',`${display(p)}踏上了往東的路。`);return this.s;}
+ start({seed=Date.now(),race='human',profession='driver',totalKm=1000}={}){this.s={version:1,rng:Number(seed)>>>0||1,seed:Number(seed),totalKm:normalizeDistanceKm(totalKm),serial:0,progress:1,minutes:480,stop:0,mode:'ready',party:[],driver:null,resources:{fuel:24,scrap:8,medicine:3},inventory:['pistol','tools'],vehicle:{model:'compact',hp:24,maxHp:24,mods:[]},departed:[],pending:[],frames:[],current:null,battle:null,logs:[],history:[],seen:[],dice:null,travel:null,notice:'故事從這裡翻開第一頁。車頭朝東，至於能不能活著看見綠洲，連寫這本書的我也不敢打包票。',end:null};const p=this.person(race,profession);p.attitude='友善';this.s.party=[p];this.s.driver=p.id;const hist=this.oracle('invasion_history').value;this.s.world={...hist,year:2070+this.roll(30),faction:this.pick(['先遣聯軍','軌道議會','遠征監督局','星門軍團']),archive:this.pick(['灰塔紀錄','最後的民防日誌','失落電台檔案','撤離列車手記'])};normalizeJourney(this.s);normalizeRoute(this.s);normalizeProgression(this.s);this.log('開始旅程',`${display(p)}踏上了往東的路。`);return this.s;}
  alive(){return this.s.party.filter(p=>p.hp>0)}
  actor(){return this.alive().find(p=>!p.asleep)||this.alive()[0]}
  driver(){return this.alive().find(p=>p.id===this.s.driver)||this.alive()[0]}
@@ -113,17 +113,28 @@ export class Game{
  add(key,n){this.s.resources[key]=Math.max(0,(this.s.resources[key]||0)+n)}
  travelCost(n,p=this.driver()){if(!n)return {fuel:0,st:0};let st=n*(phase(this.s.minutes)==='night'?2:1)+(p.flaw==='night_strain'&&phase(this.s.minutes)==='night'?1:0)+(p.flaw==='poor_driver'?1:0)-(p.profession==='driver'?1:0);return {fuel:n+(p.flaw==='wasteful_driver'?1:0),st:Math.max(1,st)}}
  canDrive(){const p=this.driver();return this.s.mode==='ready'&&p&&p.st>0&&this.s.resources.fuel>0&&this.s.vehicle.hp>0&&this.s.party.length<=this.partyLimit()}
- depart(){if(!this.canDrive())return false;const die=this.roll(10);let n=Math.min(die,100-this.s.progress);const p=this.driver();while(n>0){const c=this.travelCost(n,p);if(c.fuel<=this.s.resources.fuel&&c.st<=p.st)break;n--;}
+ depart(){if(!this.canDrive())return false;const die=this.roll(10);let n=Math.min(die,totalProgressFor(this.s)-this.s.progress);const p=this.driver();while(n>0){const c=this.travelCost(n,p);if(c.fuel<=this.s.resources.fuel&&c.st<=p.st)break;n--;}
  if(!n){this.tell('現有燃料或駕駛體力不足以再前進一步。');return false;}const cost=this.travelCost(n,p);this.s.travel={die,n,cost,driver:p.id};this.s.mode='driving';this.s.dice={kind:'D10',value:die};this.s.notice=this.ambient();return true;}
  previewArrival(){if(this.s.mode!=='driving')return null;const copy=clone(this.s);delete copy.travel.preview;const future=new Game(this.d,copy);future.arrive();return {current:clone(future.s.current),battle:clone(future.s.battle),ending:clone(future.s.end),progress:future.s.progress,minutes:future.s.minutes};}
- arrive(){if(this.s.mode!=='driving')return;const t=this.s.travel,p=this.s.party.find(p=>p.id===t.driver);this.add('fuel',-t.cost.fuel);p.st=Math.max(0,p.st-t.cost.st);this.s.party.forEach(q=>{if(q.id!==p.id&&q.hp>0)q.st=clamp(q.st+t.n,0,q.maxSt)});this.s.progress+=t.n;this.s.minutes+=60;this.s.travel=null;this.log('向東行駛',`又走過一段公路。汽油 −${t.cost.fuel}，駕駛體力 −${t.cost.st}。`);if(this.s.progress>=100){this.beginFinale();return;}this.s.stop++;this.s.usedStory=[];this.s.frames=[{kind:'road',count:0,scene:null}];this.nextEvent();}
+ arrive(){if(this.s.mode!=='driving')return;const t=this.s.travel,p=this.s.party.find(p=>p.id===t.driver);this.add('fuel',-t.cost.fuel);p.st=Math.max(0,p.st-t.cost.st);this.s.party.forEach(q=>{if(q.id!==p.id&&q.hp>0)q.st=clamp(q.st+t.n,0,q.maxSt)});this.s.progress+=t.n;this.s.minutes+=60;this.s.travel=null;this.log('向東行駛',`又走過一段公路。汽油 −${t.cost.fuel}，駕駛體力 −${t.cost.st}。`);if(this.s.progress>=totalProgressFor(this.s)){this.beginFinale();return;}this.s.stop++;this.s.usedStory=[];this.s.frames=[{kind:'road',count:0,scene:null}];this.nextEvent();}
  end(win,text){this.s.mode='ending';this.s.end={win,text};this.s.battle=null;this.log(win?'抵達綠洲':'旅程結束',text)}
- nextEvent(){const frame=this.s.frames.at(-1);if(!frame){this.s.mode='ready';this.s.current=null;this.s.searched=false;this.s.notice='整理好隊伍，準備繼續向東。';return;}frame.count++;const tab=frame.kind==='building'?'building_event':'road_event';const draw=this.oracle(tab);let e=clone((frame.kind==='building'?this.d.buildings:this.d.events).events.find(e=>e.id===draw.event));let npc=null;
+ nextEvent(){const frame=this.s.frames.at(-1);if(!frame){this.s.mode='ready';this.s.current=null;this.s.searched=false;this.s.notice='整理好隊伍，準備繼續向東。';return;}frame.count++;let e=null,diceInfo=null;
+ if(frame.kind==='road'&&this.d.d12Events?.categories?.length===12){
+  const d12=this.roll(12),cat=this.d.d12Events.categories[d12-1],d100=this.roll(100);
+  e=clone(cat.events[d100-1]);
+  diceInfo={kind:'D12+D100',d12,d100,category:cat.name,value:d100};
+ }else{
+  const tab=frame.kind==='building'?'building_event':'road_event';
+  const draw=this.oracle(tab);
+  e=clone((frame.kind==='building'?this.d.buildings:this.d.events).events.find(ev=>ev.id===draw.event));
+  diceInfo={kind:'D100',value:draw.roll};
+ }
+ let npc=null;
  if(frame.kind==='road'||frame.kind==='building'){
  const pending=this.s.pending.filter(x=>x.after<=this.s.stop&&!this.s.usedStory.includes(x.id));
  if(pending.length&&this.roll()<=15){const f=this.pick(pending);e={id:f.event,title:'再度相遇',text:`${display(f.actor)}在路邊認出了${heroShortName(this.s)}的車。${f.actor.memories?.at(-1)||'這位曾經同路的旅人還記得當初分別時的事。'}`,kind:'followup',options:[]};npc=clone(f.actor);npc.attitude=f.hostile?'敵對':'同情';this.s.usedStory.push(f.id);this.s.pending=this.s.pending.filter(x=>x.id!==f.id);}
  }
- if(!npc&&e.bindings?.npc)npc=this.person();const building=frame.kind==='road'&&BUILDING_ROADS.has(e.d100);this.s.current={instance:++this.s.serial,event:e,npc,resolved:false,building,entered:false,service:null,dialogue:e.kind==='followup'&&npc&&!['敵對','掠奪'].includes(npc.attitude),giftGiven:false,frame:frame.kind};nameEncounter(this.s);this.s.mode='event';this.s.dice={kind:'D100',value:draw.roll};this.s.seen.push(e.id);this.s.notice=fillStory(e.text,this.s,display);
+ if(!npc&&e.bindings?.npc)npc=this.person();const building=frame.kind==='road'&&(typeof e.building==='boolean'?e.building:BUILDING_ROADS.has(e.d100));this.s.current={instance:++this.s.serial,event:e,npc,resolved:false,building,entered:false,service:null,dialogue:e.kind==='followup'&&npc&&!['敵對','掠奪'].includes(npc.attitude),giftGiven:false,frame:frame.kind};nameEncounter(this.s);this.s.mode='event';this.s.dice=diceInfo;this.s.seen.push(e.id);this.s.notice=fillStory(e.text,this.s,display);
  if(npc&&!building&&['敵對','掠奪'].includes(npc.attitude)){
   if(isSaint(this.s)){
    npc.sparedByReputation=true;this.s.current.dialogue=true;this.s.current.service='npc_trade';
@@ -238,6 +249,7 @@ export class Game{
  case 'stamina_cost':p.st=Math.max(0,p.st-f.amount);break;
  case 'travel_cost':this.add('fuel',-f.fuel);this.tell('為了繞行消耗了額外汽油。');break;
  case 'schedule_followup':this.schedule(this.s.current.npc,false);break;
+ case 'morality':if(typeof this.changeMorality==='function')this.changeMorality(f.delta||0,'事件抉擇');else this.s.morality=clamp((this.s.morality||0)+(f.delta||0),-100,100);break;
  case 'event_check':{
   const {success,effects}=this.checkEffects(f);
   this.tell(success?'處理成功。':'處理失敗。');effects.forEach(effect=>this.effect(effect));break;

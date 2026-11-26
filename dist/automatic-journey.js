@@ -54,7 +54,7 @@ export function syncMessageContext(g,display){const s=g.s;if(!s)return;normalize
 }
 export function installAutomaticJourney(Game,{display}){
  const start=Game.prototype.start;Game.prototype.start=function(...args){const s=start.apply(this,args);normalizeFlow(s);return s;};
- Game.prototype.startRandom=function(seed=Date.now()){const s=this.start({seed,race:null,profession:null});return s;};
+ Game.prototype.startRandom=function(seed=Date.now(),totalKm=1000){const s=this.start({seed,race:null,profession:null,totalKm});return s;};
  const recruit=Game.prototype.recruit;Game.prototype.recruit=function(){const ok=recruit.call(this);if(ok&&!this.s.current?.npc)this.s.current.service=null;return ok;};
  const log=Game.prototype.log;Game.prototype.log=function(title,text){log.call(this,title,text);const entry=journalEntry({title,text});if(entry){const npc=this.s.current?.npc,npcDisp=npc?display(npc):'';if(entry.title==='旅途紀錄'&&npcDisp&&entry.text.startsWith(npcDisp)){const lines=entry.text.split('\n');const firstRest=lines[0].slice(npcDisp.length).replace(/^\s*[·：:]\s*/,'');const body=[firstRest,...lines.slice(1)].filter(Boolean).join('\n');appendMessage(this.s,npcDisp,body||entry.text,null,'npc');}else appendMessage(this.s,entry.title,entry.text);}};
  const ambient=Game.prototype.ambient;Game.prototype.ambient=function(){const text=ambient.call(this),v=this.s.travel?.voices;if(v)for(const line of v.lines)appendMessage(this.s,v.kind==='radio'?'電台 · '+line.speaker:line.speaker,line.text,line.personId);return text;};

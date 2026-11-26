@@ -1,5 +1,5 @@
 import {GROWTH} from './progression-catalog.js';
-import {regionIndex} from './route-runtime.js';
+import {regionIndex,totalProgressFor} from './route-runtime.js';
 import {enemyAttackStyle} from './battle-presentation.js';
 import {appendMessage} from './automatic-journey.js';
 import {partyLabel,rollBattleAuthorQuip} from './storybook.js';
@@ -54,7 +54,7 @@ export function installProgression(Game,{display,learned}){
   endCombat.call(this,win);if(gate&&this.s.mode!=='ending'){this.s.mode='event';this.s.current.resolved=false;this.s.current.event.options=[{id:'challenge',label:'重新迎戰 '+bossDefinition(this.s).name,requires:[],effects:[]}];this.s.notice=`${partyLabel(this.s)}暫時退回車旁喘口氣。入口仍被堵死，得先整理好裝備與隊伍再上。`;}
  };
 }
-export function regionEnemyPool(s){return GROWTH.regions[regionIndex(s.progress)];}
+export function regionEnemyPool(s){const maxProg=totalProgressFor(s),normProg=1+(Math.max(0,(s.progress||1)-1)/Math.max(1,maxProg-1))*99;return GROWTH.regions[regionIndex(normProg,GROWTH.regions.length)];}
 export function makeRegionalEnemies(game,mode,npc,helpers,category=null){const {clone,display}=helpers,region=regionEnemyPool(game.s),count=npc?1:game.oracle('enemy_group_size').value;
  const candidates=category==='machine'?region.enemies.filter(k=>game.d.assets.enemies[k].machine):region.enemies;const hour=Math.floor(game.s.minutes/60)%24,night=hour<5||hour>=18,preferred=night?['crawler','lurker','parasite','swarm','drone']:['soldier','worker','sentinel','hound','turret'];const pool=[...candidates,...candidates.filter(k=>preferred.includes(k))];
  return Array.from({length:count},(_,i)=>{const key=npc?'raider':game.pick(pool),art=game.d.assets.enemies[key],heavy=['brute','nest','sentinel'].includes(key),hp=region.health+(heavy?5:0);

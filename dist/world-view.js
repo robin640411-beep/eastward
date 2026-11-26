@@ -115,7 +115,7 @@ const roomForEvent={
  stall:'shop',market:'shop',shop:'shop',nest:'nest',eggs:'nest',spores:'nest',pit:'ruin',rocks:'ruin'
 };
 function room(top=0,height=H){
- const eventKind=encounters[state.current?.event?.id]?.kind;
+ const ev=state.current?.event,eventKind=(encounters[ev?.id]||(ev?.artRef&&encounters[ev.artRef]))?.kind;
  const frameKind=state.frames?.at(-1)?.scene;
  const kind=roomForEvent[eventKind]||roomForEvent[frameKind]||frameKind;
  const scene=assets.interiors[kind]?kind:'warehouse';
@@ -417,7 +417,7 @@ function battleForeground(){
 function encounterArt(current){
  if(!current?.event)return null;
  const id=current.event.id;
- let a=encounters[id];
+ let a=encounters[id]||(current.event.artRef&&encounters[current.event.artRef]);
  if(!a){
   if(id==='police_human')return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:'人類警察臨檢路障',interior:false,empty:false,creatures:['soldier','soldier']};
   if(id==='police_alien')return {image:encounters.road_072?.image,kind:'checkpoint',effect:'alert',title:'外星執法巡邏攔檢',interior:false,empty:false,creatures:['sentinel','drone']};
@@ -437,7 +437,7 @@ function drawEncounter(current,x,interior=false,preview=false){const a=encounter
  if(current.npc&&!(encounterCue&&current.npc.id===state.driver))person(current.npc,x+(interior?104:114),interior?147:153,interior?54:43);
  if(!preview&&!encounterCue&&(interior||current.dialogue)){const actor=state.party.find(p=>p.id===state.actorId&&p.hp>0)||state.party.find(p=>p.hp>0);if(actor)person(actor,interior?48:134,interior?157:166,interior?49:38,clock-eventAt<1.5)}
 }
-function updateReadouts(minutes,pose,view,driving){const biome=view.current;const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving+':'+view.remainingKm;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;const distance=document.getElementById('journey-distance'),progress=document.getElementById('journey-progress');if(distance)distance.textContent=view.remainingKm.toLocaleString('en-US');if(progress){progress.style.width=(100-view.remainingKm/10)+'%';progress.parentElement.setAttribute('aria-label','距離樂園還剩 '+view.remainingKm+' 公里');}}
+function updateReadouts(minutes,pose,view,driving){const biome=view.current;const minute=Math.floor(minutes),stamp=minute+':'+Math.round(pose.speed)+':'+biome.name+':'+driving+':'+view.remainingKm;if(stamp===displayMinute)return;displayMinute=stamp;const time=document.getElementById('journey-time'),speedEl=document.getElementById('journey-speed'),place=document.getElementById('journey-place');if(time)time.textContent=`第 ${Math.floor(minute/1440)+1} 天 · ${phaseName(minute)} ${String(Math.floor(minute/60)%24).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;if(speedEl)speedEl.textContent=driving?Math.round(pose.speed):0;if(place)place.textContent=biome.name;const distance=document.getElementById('journey-distance'),progress=document.getElementById('journey-progress');if(distance)distance.textContent=view.remainingKm.toLocaleString('en-US');if(progress){const totalKm=view.totalKm||state?.totalKm||1000;progress.style.width=((1-view.remainingKm/totalKm)*100)+'%';progress.parentElement.setAttribute('aria-label','距離樂園還剩 '+view.remainingKm+' 公里');}}
 function frame(time){requestAnimationFrame(frame);if(!canvas?.isConnected||document.hidden){lastTime=time;return}if(time-lastFrame<33)return;const dt=Math.min((time-lastTime)/1000,.08)||.033;lastTime=time;lastFrame=time;clock+=dt;reduced=reducedMotion();
  cueAnchor=null;
  const s=state,titleDrive=!!s.titleDrive,driving=s.mode==='driving'||titleDrive,carFight=s.battle?.mode==='vehicle',u=titleDrive?.5:driving?clamp01((time-travelAt)/tripDuration):1,pose=tripPose(u),interior=!titleDrive&&(encounterCue?.inside??(s.current?.inside||s.frames?.at(-1)?.kind==='building'));
