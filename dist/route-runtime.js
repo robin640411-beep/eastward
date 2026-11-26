@@ -13,7 +13,7 @@ export const remainingKm=(distance,totalKm=1000)=>{const km=normalizeDistanceKm(
 export const destinationAt=state=>state.route?.destination||createDestination(state.seed);
 export function createRoute(seed,roll=stream('eastward-route:'+seed),totalKm=1000){
  const km=normalizeDistanceKm(totalKm),count=regionCountFor(km);
- return {version:3,totalKm:km,destination:createDestination(seed),regions:Array.from({length:count},(_,index)=>{const terrainRoll=roll(12),nameRoll=roll(100),b=BIOMES[terrainRoll-1];return {index,start:index*10+1,end:(index+1)*10,terrainRoll,nameRoll,id:b.id,kind:b.name,name:PLACE_NAMES[nameRoll-1]+b.name};})};
+ return {version:3,totalKm:km,destination:createDestination(seed),regions:Array.from({length:count},(_,index)=>{const terrainRoll=roll(BIOMES.length),nameRoll=roll(100),b=BIOMES[terrainRoll-1];return {index,start:index*10+1,end:(index+1)*10,terrainRoll,nameRoll,id:b.id,kind:b.name,name:PLACE_NAMES[nameRoll-1]+b.name};})};
 }
 const cache=new Map();
 export function biomeAt(distance,seed=0,route=null){if(!route){if(!cache.has(seed)){if(cache.size>=32)cache.delete(cache.keys().next().value);cache.set(seed,createRoute(seed));}route=cache.get(seed);}return route.regions[regionIndex(distance,route.regions.length)];}

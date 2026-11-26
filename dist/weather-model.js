@@ -2,9 +2,12 @@
 export const WEATHER_PROFILES={
  salt:{dust:.55,rain:.14},canyon:{dust:.6,leaf:.28},forest:{leaf:1,rain:.36},city:{rain:.58,leaf:.36},
  coast:{rain:.78,leaf:.12},industrial:{ash:.62,rain:.32},marsh:{rain:.72,leaf:.55},desert:{dust:1},
- farmland:{leaf:.68,petal:.65,rain:.15},snow:{snow:1},alien:{spore:.8,ash:.2},oasis:{petal:1,leaf:.52}
+ farmland:{leaf:.68,petal:.65,rain:.15},snow:{snow:1},alien:{spore:.8,ash:.2},oasis:{petal:1,leaf:.52},
+ wasteland:{dust:.82,ash:.18},volcano:{ash:1,dust:.35},glacier:{snow:1,dust:.12},
+ suburb:{leaf:.72,rain:.42},quarry:{dust:.75,ash:.3},prairie:{leaf:.6,petal:.72,rain:.18},
+ harbor:{rain:.82,leaf:.22},crystal:{spore:.68,dust:.32}
 };
-export const STORM_BIAS={coast:.85,marsh:.8,industrial:.65,city:.6,forest:.55,alien:.5,farmland:.4,canyon:.28,snow:.35,salt:.2,desert:.15,oasis:.12};
+export const STORM_BIAS={coast:.85,marsh:.8,harbor:.82,industrial:.65,volcano:.68,city:.6,forest:.55,suburb:.52,alien:.5,crystal:.46,farmland:.4,prairie:.38,snow:.35,glacier:.42,canyon:.28,quarry:.32,wasteland:.24,salt:.2,desert:.15,oasis:.12};
 export function ambientStormAt({seed=0,biomeId='salt',progress=1,seconds=0}={}){
  const bias=STORM_BIAS[biomeId]??.25;
  const wave=.5+.5*Math.sin(seconds*.045+(visualHash(`storm-wave:${seed}:${biomeId}:${Math.floor(progress/5)}`)%628)/100);

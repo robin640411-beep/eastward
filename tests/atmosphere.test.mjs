@@ -16,7 +16,7 @@ test('sun rises in the east, sets in the west and yields to the moon without pop
  for(let m=-1440;m<4320;m+=11){const s=skyState({minutes:m,from:{id:'salt'}});for(const key of ['x','y','visibility','cloud','mist'])assert(Number.isFinite(s[key]));assert(s.visibility>=0&&s.visibility<=1);}
 });
 test('all biomes blend sky atmosphere smoothly, with heavy storm obscuring sunlight',()=>{
- assert.equal(Object.keys(SKY_PROFILES).length,12);
+ assert.equal(Object.keys(SKY_PROFILES).length,20);
  for(const from of BIOMES)for(const to of BIOMES){const opts={minutes:720,from,to};const a=skyState({...opts,blend:.5}),b=skyState({...opts,blend:.501});assert(Math.abs(a.cloud-b.cloud)<.001);assert(Math.abs(a.mist-b.mist)<.001);const storm=skyState({...opts,storm:1});assert.equal(storm.cloud,1);assert(storm.visibility<=.051);}
 });
 test('cloud drift is continuous and deterministic, bounded at long travel distances and quieter in soft mode',()=>{
@@ -31,7 +31,8 @@ test('the road and postcards share native square pixels and isolate each atlas c
  const assets=JSON.parse(readFileSync(new URL('../dist/assets/manifest.json',import.meta.url)));
  for(const [i,{id,name}] of BIOMES.entries()){
   const region=assets.worlds[id],sheet={},calls=[];
-  assert.deepEqual(region.rect,[(i%4)*256,Math.floor(i/4)*76,256,76]);
+  const localIdx=i<12?i:i-12;
+  assert.deepEqual(region.rect,[(localIdx%4)*256,Math.floor(localIdx/4)*76,256,76]);
   paintHorizon({drawImage:(...args)=>calls.push(args)},sheet,region,17.45,3.8,2);
   assert.deepEqual(calls,[[sheet,...region.rect,17,4,512,152]]);
   const picture=horizonPostcard(region,name);

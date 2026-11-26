@@ -1642,6 +1642,110 @@
         1024,
         228
       ]
+    },
+    "wasteland": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        0,
+        0,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "volcano": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        256,
+        0,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "glacier": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        512,
+        0,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "suburb": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        768,
+        0,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "quarry": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        0,
+        76,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "prairie": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        256,
+        76,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "harbor": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        512,
+        76,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
+    },
+    "crystal": {
+      "image": "scenes/pixel-horizons-ext.png",
+      "rect": [
+        768,
+        76,
+        256,
+        76
+      ],
+      "size": [
+        1024,
+        152
+      ]
     }
   },
   "facilities": {

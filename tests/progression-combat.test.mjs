@@ -4,9 +4,8 @@ const read=p=>JSON.parse(readFileSync(new URL('../dist/'+p,import.meta.url)));
 const d={assets:read('assets/manifest.json'),catalog:read('data/npc-catalog.json'),oracles:read('data/oracles.json'),events:read('data/events.json'),buildings:read('data/building-events.json'),traits:read('data/traits.json')};
 function fresh(seed=123){const g=new Game(d);g.start({seed});return g;}
 const event=()=>({resolved:false,event:{id:'road_011',title:'已搜索的箱子',text:'搜索結束。',options:[]}});
-test('four chained events grant exactly one party level only after the last event',()=>{
- const g=fresh();g.s.party.push(g.person());const before=g.s.party.map(p=>p.level);g.s.mode='event';g.s.stop=1;g.s.frames=[{kind:'road',count:1}];g.s.current=event();g.roll=()=>1;g.nextEvent=()=>{g.s.frames.at(-1).count++;g.s.current=event();};
- for(let i=0;i<3;i++){g.finishEvent();assert.deepEqual(g.s.party.map(p=>p.level),before);}
+test('finishing a road event never chains consecutive events and grants exactly one party level',()=>{
+ const g=fresh();g.s.party.push(g.person());const before=g.s.party.map(p=>p.level);g.s.mode='event';g.s.stop=1;g.s.frames=[{kind:'road',count:1}];g.s.current=event();g.roll=()=>1;
  g.finishEvent();assert.equal(g.s.mode,'ready');assert.deepEqual(g.s.party.map(p=>p.level),before.map(n=>n+1));g.finishEvent();assert.deepEqual(g.s.party.map(p=>p.level),before.map(n=>n+1));assert.equal(g.s.rewardedStops.length,1);
 });
 test('nested building exploration and services do not award separate levels',()=>{

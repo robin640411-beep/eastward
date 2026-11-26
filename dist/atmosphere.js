@@ -6,7 +6,10 @@ export const SKY_PROFILES={
  salt:{cloud:.48,mist:.20},canyon:{cloud:.34,mist:.16},forest:{cloud:.65,mist:.28},
  city:{cloud:.62,mist:.26},coast:{cloud:.64,mist:.25},industrial:{cloud:.78,mist:.32},
  marsh:{cloud:.72,mist:.34},desert:{cloud:.24,mist:.21},farmland:{cloud:.43,mist:.18},
- snow:{cloud:.72,mist:.32},alien:{cloud:.62,mist:.29},oasis:{cloud:.40,mist:.19}
+ snow:{cloud:.72,mist:.32},alien:{cloud:.62,mist:.29},oasis:{cloud:.40,mist:.19},
+ wasteland:{cloud:.36,mist:.22},volcano:{cloud:.82,mist:.38},glacier:{cloud:.68,mist:.30},
+ suburb:{cloud:.58,mist:.24},quarry:{cloud:.44,mist:.23},prairie:{cloud:.46,mist:.17},
+ harbor:{cloud:.70,mist:.31},crystal:{cloud:.52,mist:.27}
 };
 export function skyState({minutes,from,to=from,blend=0,storm=0}){
  const a=SKY_PROFILES[from.id]||SKY_PROFILES.salt,b=SKY_PROFILES[to.id]||a,t=clamp01(blend),s=clamp01(storm),hour=((minutes/60)%24+24)%24;

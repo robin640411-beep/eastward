@@ -14,7 +14,15 @@ export const ROADSIDE_PROFILES={
  farmland:profile(.97,'#7e8170','#b6b49a','#99775a','vine',['warehouse','shop'],['pickup','van'],[14,10,17,7,3,8,5,7,6,20]),
  snow:profile(.81,'#7d8c8e','#c5ceca','#919b87','snow',['motel','checkpoint'],['rover','ambulance'],[9,10,12,13,6,9,16,8,5,5]),
  alien:profile(.90,'#606e72','#93a29a','#9ca98e','alien',['checkpoint','warehouse'],['armored','rover'],[7,7,12,10,9,4,5,18,10,13]),
- oasis:profile(1.03,'#738778','#b0bd9e','#b1a270','vine',['shop','motel'],['compact','van','sedan'],[17,10,13,10,8,10,7,5,5,9])
+ oasis:profile(1.03,'#738778','#b0bd9e','#b1a270','vine',['shop','motel'],['compact','van','sedan'],[17,10,13,10,8,10,7,5,5,9]),
+ wasteland:profile(.78,'#857660','#b5a58b','#8a6e4b','dust',['gas','warehouse'],['rover','pickup'],[6,10,15,12,3,4,8,14,9,14]),
+ volcano:profile(.76,'#4d4649','#7c6e6d','#c2663c','rust',['checkpoint','garage'],['armored','rover'],[5,8,11,9,4,3,15,18,8,10]),
+ glacier:profile(.79,'#86a8ba','#d2e6ef','#7ea2b5','snow',['checkpoint','motel'],['rover','ambulance'],[8,9,11,12,6,8,17,9,6,6]),
+ suburb:profile(1.18,'#747f7a','#b3bcb0','#a88d67','vine',['shop','motel','clinic'],['sedan','van','compact'],[21,13,14,12,12,11,7,5,4,6]),
+ quarry:profile(.92,'#826654','#b39178','#a17c4c','dust',['garage','warehouse'],['pickup','armored','rover'],[9,10,13,9,5,3,14,15,14,11]),
+ prairie:profile(.88,'#868658','#bab784','#9e8554','vine',['warehouse','shop'],['pickup','van','compact'],[12,10,16,9,4,8,7,6,6,18]),
+ harbor:profile(1.16,'#677b82','#a9b6b3','#b85c48','rust',['warehouse','shop'],['van','pickup','armored'],[12,10,10,11,9,7,14,8,20,8]),
+ crystal:profile(.86,'#595370','#998eb8','#69b8cc','alien',['checkpoint','warehouse'],['armored','rover'],[6,8,12,10,9,4,7,17,9,13])
 };
 export function sceneryRandom(seed,index,salt=0){let n=(Math.imul(seed|0,374761393)+Math.imul(index|0,668265263)+Math.imul(salt+1,1442695041))|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296;}
 export function roadsideItems(seed,region,travel,width=384){const p=ROADSIDE_PROFILES[region.id]||ROADSIDE_PROFILES.salt,spacing=145/p.density,offset=travel*1.32,first=Math.floor(offset/spacing),worldSeed=seed+region.index*997,total=p.weights.reduce((a,b)=>a+b,0),items=[];

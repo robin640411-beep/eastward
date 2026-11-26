@@ -5,7 +5,7 @@
     "end": 100,
     "regions": 10,
     "region_length": 10,
-    "terrain_die": "D12",
+    "terrain_die": "D20",
     "replacement": true,
     "name_die": "D100",
     "hidden_until_approach": true,
@@ -55,8 +55,8 @@
     },
     {
       "id": "desert",
-      "name": "沙丘",
-      "description": "流沙緩慢吞下舊路，異星構造露出沙面的尖角。"
+      "name": "沙漠",
+      "description": "無邊沙海緩慢吞下舊路，異星構造露出沙面的尖角。"
     },
     {
       "id": "farmland",
@@ -77,6 +77,46 @@
       "id": "oasis",
       "name": "綠丘",
       "description": "溪水與綠色丘陵之間仍有佔領軍設施；這裡不是旅程終點。"
+    },
+    {
+      "id": "wasteland",
+      "name": "荒野",
+      "description": "龜裂乾地與枯灌木連綿不絕，傾倒的高壓鐵塔一路指向東方。"
+    },
+    {
+      "id": "volcano",
+      "name": "火山灰原",
+      "description": "焦黑玄武岩脊與滾燙裂縫冒著硫煙，灰燼在車燈前緩緩飄落。"
+    },
+    {
+      "id": "glacier",
+      "name": "冰原",
+      "description": "鋸齒狀冰山與凍結湖面映著寒光，遠方殘存廢棄極地雷達站。"
+    },
+    {
+      "id": "suburb",
+      "name": "廢棄市郊",
+      "description": "空無一人的紅頂民宅與傾斜水塔被野草吞沒，只剩風聲穿街。"
+    },
+    {
+      "id": "quarry",
+      "name": "礦坑",
+      "description": "層層開鑿的露天階梯岩壁與生鏽巨型吊臂聳立在公路兩側。"
+    },
+    {
+      "id": "prairie",
+      "name": "草原",
+      "description": "金黃荒草隨風起伏，斷葉風力發電機與老舊木穀倉點綴山丘。"
+    },
+    {
+      "id": "harbor",
+      "name": "廢港",
+      "description": "巨大紅色貨櫃吊車與擱淺貨輪靜靜鏽蝕在防波堤與燈塔之間。"
+    },
+    {
+      "id": "crystal",
+      "name": "晶礦谷",
+      "description": "高聳的紫藍異星晶柱刺破岩層，空氣裡迴盪著低沉能量共振。"
     }
   ],
   "name_oracle": {

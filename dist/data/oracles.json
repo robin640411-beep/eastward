@@ -2873,579 +2873,6 @@
       ]
     },
     {
-      "id": "route_terrain",
-      "die": "D12",
-      "rows": [
-        {
-          "min": 1,
-          "max": 1,
-          "value": "salt"
-        },
-        {
-          "min": 2,
-          "max": 2,
-          "value": "canyon"
-        },
-        {
-          "min": 3,
-          "max": 3,
-          "value": "forest"
-        },
-        {
-          "min": 4,
-          "max": 4,
-          "value": "city"
-        },
-        {
-          "min": 5,
-          "max": 5,
-          "value": "coast"
-        },
-        {
-          "min": 6,
-          "max": 6,
-          "value": "industrial"
-        },
-        {
-          "min": 7,
-          "max": 7,
-          "value": "marsh"
-        },
-        {
-          "min": 8,
-          "max": 8,
-          "value": "desert"
-        },
-        {
-          "min": 9,
-          "max": 9,
-          "value": "farmland"
-        },
-        {
-          "min": 10,
-          "max": 10,
-          "value": "snow"
-        },
-        {
-          "min": 11,
-          "max": 11,
-          "value": "alien"
-        },
-        {
-          "min": 12,
-          "max": 12,
-          "value": "oasis"
-        }
-      ]
-    },
-    {
-      "id": "location_name",
-      "die": "D100",
-      "rule": "名稱＋地貌／建築類型。例如：霧松森林、白榆加油站、遠燈旅館。",
-      "rows": [
-        {
-          "min": 1,
-          "max": 1,
-          "value": "焦鐵"
-        },
-        {
-          "min": 2,
-          "max": 2,
-          "value": "鏽鋼"
-        },
-        {
-          "min": 3,
-          "max": 3,
-          "value": "黑曜"
-        },
-        {
-          "min": 4,
-          "max": 4,
-          "value": "琥珀"
-        },
-        {
-          "min": 5,
-          "max": 5,
-          "value": "灰燼"
-        },
-        {
-          "min": 6,
-          "max": 6,
-          "value": "斷軌"
-        },
-        {
-          "min": 7,
-          "max": 7,
-          "value": "星落"
-        },
-        {
-          "min": 8,
-          "max": 8,
-          "value": "零號"
-        },
-        {
-          "min": 9,
-          "max": 9,
-          "value": "殘星"
-        },
-        {
-          "min": 10,
-          "max": 10,
-          "value": "赤蝕"
-        },
-        {
-          "min": 11,
-          "max": 11,
-          "value": "碎穹"
-        },
-        {
-          "min": 12,
-          "max": 12,
-          "value": "暗潮"
-        },
-        {
-          "min": 13,
-          "max": 13,
-          "value": "冷核"
-        },
-        {
-          "min": 14,
-          "max": 14,
-          "value": "白骨"
-        },
-        {
-          "min": 15,
-          "max": 15,
-          "value": "鐵幕"
-        },
-        {
-          "min": 16,
-          "max": 16,
-          "value": "裂谷"
-        },
-        {
-          "min": 17,
-          "max": 17,
-          "value": "輻塵"
-        },
-        {
-          "min": 18,
-          "max": 18,
-          "value": "深淵"
-        },
-        {
-          "min": 19,
-          "max": 19,
-          "value": "荒原"
-        },
-        {
-          "min": 20,
-          "max": 20,
-          "value": "空殼"
-        },
-        {
-          "min": 21,
-          "max": 21,
-          "value": "舊港"
-        },
-        {
-          "min": 22,
-          "max": 22,
-          "value": "廢爐"
-        },
-        {
-          "min": 23,
-          "max": 23,
-          "value": "幽光"
-        },
-        {
-          "min": 24,
-          "max": 24,
-          "value": "紫霧"
-        },
-        {
-          "min": 25,
-          "max": 25,
-          "value": "電弧"
-        },
-        {
-          "min": 26,
-          "max": 26,
-          "value": "晶脈"
-        },
-        {
-          "min": 27,
-          "max": 27,
-          "value": "孢原"
-        },
-        {
-          "min": 28,
-          "max": 28,
-          "value": "孤塔"
-        },
-        {
-          "min": 29,
-          "max": 29,
-          "value": "死寂"
-        },
-        {
-          "min": 30,
-          "max": 30,
-          "value": "霜鐵"
-        },
-        {
-          "min": 31,
-          "max": 31,
-          "value": "焚風"
-        },
-        {
-          "min": 32,
-          "max": 32,
-          "value": "哨站"
-        },
-        {
-          "min": 33,
-          "max": 33,
-          "value": "暗礁"
-        },
-        {
-          "min": 34,
-          "max": 34,
-          "value": "熔渣"
-        },
-        {
-          "min": 35,
-          "max": 35,
-          "value": "銀盾"
-        },
-        {
-          "min": 36,
-          "max": 36,
-          "value": "破曉"
-        },
-        {
-          "min": 37,
-          "max": 37,
-          "value": "曙光"
-        },
-        {
-          "min": 38,
-          "max": 38,
-          "value": "餘燼"
-        },
-        {
-          "min": 39,
-          "max": 39,
-          "value": "盲區"
-        },
-        {
-          "min": 40,
-          "max": 40,
-          "value": "逆流"
-        },
-        {
-          "min": 41,
-          "max": 41,
-          "value": "鐵錨"
-        },
-        {
-          "min": 42,
-          "max": 42,
-          "value": "風蝕"
-        },
-        {
-          "min": 43,
-          "max": 43,
-          "value": "鋼骨"
-        },
-        {
-          "min": 44,
-          "max": 44,
-          "value": "隕坑"
-        },
-        {
-          "min": 45,
-          "max": 45,
-          "value": "蒼穹"
-        },
-        {
-          "min": 46,
-          "max": 46,
-          "value": "夜巡"
-        },
-        {
-          "min": 47,
-          "max": 47,
-          "value": "血砂"
-        },
-        {
-          "min": 48,
-          "max": 48,
-          "value": "寒鋼"
-        },
-        {
-          "min": 49,
-          "max": 49,
-          "value": "斷橋"
-        },
-        {
-          "min": 50,
-          "max": 50,
-          "value": "焦土"
-        },
-        {
-          "min": 51,
-          "max": 51,
-          "value": "孤星"
-        },
-        {
-          "min": 52,
-          "max": 52,
-          "value": "雷鳴"
-        },
-        {
-          "min": 53,
-          "max": 53,
-          "value": "沉船"
-        },
-        {
-          "min": 54,
-          "max": 54,
-          "value": "毒澤"
-        },
-        {
-          "min": 55,
-          "max": 55,
-          "value": "重裝"
-        },
-        {
-          "min": 56,
-          "max": 56,
-          "value": "遠望"
-        },
-        {
-          "min": 57,
-          "max": 57,
-          "value": "邊界"
-        },
-        {
-          "min": 58,
-          "max": 58,
-          "value": "流亡"
-        },
-        {
-          "min": 59,
-          "max": 59,
-          "value": "殘響"
-        },
-        {
-          "min": 60,
-          "max": 60,
-          "value": "新星"
-        },
-        {
-          "min": 61,
-          "max": 61,
-          "value": "淨土"
-        },
-        {
-          "min": 62,
-          "max": 62,
-          "value": "歸途"
-        },
-        {
-          "min": 63,
-          "max": 63,
-          "value": "無聲"
-        },
-        {
-          "min": 64,
-          "max": 64,
-          "value": "赤鐵"
-        },
-        {
-          "min": 65,
-          "max": 65,
-          "value": "冰核"
-        },
-        {
-          "min": 66,
-          "max": 66,
-          "value": "暗星"
-        },
-        {
-          "min": 67,
-          "max": 67,
-          "value": "裂地"
-        },
-        {
-          "min": 68,
-          "max": 68,
-          "value": "黑潮"
-        },
-        {
-          "min": 69,
-          "max": 69,
-          "value": "白霜"
-        },
-        {
-          "min": 70,
-          "max": 70,
-          "value": "蒼藍"
-        },
-        {
-          "min": 71,
-          "max": 71,
-          "value": "金盾"
-        },
-        {
-          "min": 72,
-          "max": 72,
-          "value": "戰痕"
-        },
-        {
-          "min": 73,
-          "max": 73,
-          "value": "荒城"
-        },
-        {
-          "min": 74,
-          "max": 74,
-          "value": "舊軌"
-        },
-        {
-          "min": 75,
-          "max": 75,
-          "value": "死灣"
-        },
-        {
-          "min": 76,
-          "max": 76,
-          "value": "灰霧"
-        },
-        {
-          "min": 77,
-          "max": 77,
-          "value": "鐵壁"
-        },
-        {
-          "min": 78,
-          "max": 78,
-          "value": "星門"
-        },
-        {
-          "min": 79,
-          "max": 79,
-          "value": "孤火"
-        },
-        {
-          "min": 80,
-          "max": 80,
-          "value": "冷月"
-        },
-        {
-          "min": 81,
-          "max": 81,
-          "value": "末途"
-        },
-        {
-          "min": 82,
-          "max": 82,
-          "value": "重鑄"
-        },
-        {
-          "min": 83,
-          "max": 83,
-          "value": "碎鐵"
-        },
-        {
-          "min": 84,
-          "max": 84,
-          "value": "狂沙"
-        },
-        {
-          "min": 85,
-          "max": 85,
-          "value": "寂靜"
-        },
-        {
-          "min": 86,
-          "max": 86,
-          "value": "殘陽"
-        },
-        {
-          "min": 87,
-          "max": 87,
-          "value": "深坑"
-        },
-        {
-          "min": 88,
-          "max": 88,
-          "value": "藍弧"
-        },
-        {
-          "min": 89,
-          "max": 89,
-          "value": "紫晶"
-        },
-        {
-          "min": 90,
-          "max": 90,
-          "value": "古壘"
-        },
-        {
-          "min": 91,
-          "max": 91,
-          "value": "暗道"
-        },
-        {
-          "min": 92,
-          "max": 92,
-          "value": "絕壁"
-        },
-        {
-          "min": 93,
-          "max": 93,
-          "value": "荒嶺"
-        },
-        {
-          "min": 94,
-          "max": 94,
-          "value": "鐵門"
-        },
-        {
-          "min": 95,
-          "max": 95,
-          "value": "烽火"
-        },
-        {
-          "min": 96,
-          "max": 96,
-          "value": "晨星"
-        },
-        {
-          "min": 97,
-          "max": 97,
-          "value": "微光"
-        },
-        {
-          "min": 98,
-          "max": 98,
-          "value": "終點"
-        },
-        {
-          "min": 99,
-          "max": 99,
-          "value": "黎明"
-        },
-        {
-          "min": 100,
-          "max": 100,
-          "value": "希望"
-        }
-      ]
-    },
-    {
       "id": "companion_focus",
       "die": "D100",
       "rows": [
@@ -6262,6 +5689,619 @@
           "min": 3,
           "max": 3,
           "value": 3
+        }
+      ]
+    },
+    {
+      "id": "route_terrain",
+      "die": "D20",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "value": "salt"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "value": "canyon"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "value": "forest"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "value": "city"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "value": "coast"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "value": "industrial"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "value": "marsh"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "value": "desert"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "value": "farmland"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "value": "snow"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "value": "alien"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "value": "oasis"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "value": "wasteland"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "value": "volcano"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "value": "glacier"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "value": "suburb"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "value": "quarry"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "value": "prairie"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "value": "harbor"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "value": "crystal"
+        }
+      ]
+    },
+    {
+      "id": "location_name",
+      "die": "D100",
+      "rule": "名稱＋地貌／建築類型。例如：霧松森林、白榆加油站、遠燈旅館。",
+      "rows": [
+        {
+          "min": 1,
+          "max": 1,
+          "value": "焦鐵"
+        },
+        {
+          "min": 2,
+          "max": 2,
+          "value": "鏽鋼"
+        },
+        {
+          "min": 3,
+          "max": 3,
+          "value": "黑曜"
+        },
+        {
+          "min": 4,
+          "max": 4,
+          "value": "琥珀"
+        },
+        {
+          "min": 5,
+          "max": 5,
+          "value": "灰燼"
+        },
+        {
+          "min": 6,
+          "max": 6,
+          "value": "斷軌"
+        },
+        {
+          "min": 7,
+          "max": 7,
+          "value": "星落"
+        },
+        {
+          "min": 8,
+          "max": 8,
+          "value": "零號"
+        },
+        {
+          "min": 9,
+          "max": 9,
+          "value": "殘星"
+        },
+        {
+          "min": 10,
+          "max": 10,
+          "value": "赤蝕"
+        },
+        {
+          "min": 11,
+          "max": 11,
+          "value": "碎穹"
+        },
+        {
+          "min": 12,
+          "max": 12,
+          "value": "暗潮"
+        },
+        {
+          "min": 13,
+          "max": 13,
+          "value": "冷核"
+        },
+        {
+          "min": 14,
+          "max": 14,
+          "value": "白骨"
+        },
+        {
+          "min": 15,
+          "max": 15,
+          "value": "鐵幕"
+        },
+        {
+          "min": 16,
+          "max": 16,
+          "value": "裂谷"
+        },
+        {
+          "min": 17,
+          "max": 17,
+          "value": "輻塵"
+        },
+        {
+          "min": 18,
+          "max": 18,
+          "value": "深淵"
+        },
+        {
+          "min": 19,
+          "max": 19,
+          "value": "荒原"
+        },
+        {
+          "min": 20,
+          "max": 20,
+          "value": "空殼"
+        },
+        {
+          "min": 21,
+          "max": 21,
+          "value": "舊港"
+        },
+        {
+          "min": 22,
+          "max": 22,
+          "value": "廢爐"
+        },
+        {
+          "min": 23,
+          "max": 23,
+          "value": "幽光"
+        },
+        {
+          "min": 24,
+          "max": 24,
+          "value": "紫霧"
+        },
+        {
+          "min": 25,
+          "max": 25,
+          "value": "電弧"
+        },
+        {
+          "min": 26,
+          "max": 26,
+          "value": "晶脈"
+        },
+        {
+          "min": 27,
+          "max": 27,
+          "value": "孢原"
+        },
+        {
+          "min": 28,
+          "max": 28,
+          "value": "孤塔"
+        },
+        {
+          "min": 29,
+          "max": 29,
+          "value": "死寂"
+        },
+        {
+          "min": 30,
+          "max": 30,
+          "value": "霜鐵"
+        },
+        {
+          "min": 31,
+          "max": 31,
+          "value": "焚風"
+        },
+        {
+          "min": 32,
+          "max": 32,
+          "value": "哨站"
+        },
+        {
+          "min": 33,
+          "max": 33,
+          "value": "暗礁"
+        },
+        {
+          "min": 34,
+          "max": 34,
+          "value": "熔渣"
+        },
+        {
+          "min": 35,
+          "max": 35,
+          "value": "銀盾"
+        },
+        {
+          "min": 36,
+          "max": 36,
+          "value": "破曉"
+        },
+        {
+          "min": 37,
+          "max": 37,
+          "value": "曙光"
+        },
+        {
+          "min": 38,
+          "max": 38,
+          "value": "餘燼"
+        },
+        {
+          "min": 39,
+          "max": 39,
+          "value": "盲區"
+        },
+        {
+          "min": 40,
+          "max": 40,
+          "value": "逆流"
+        },
+        {
+          "min": 41,
+          "max": 41,
+          "value": "鐵錨"
+        },
+        {
+          "min": 42,
+          "max": 42,
+          "value": "風蝕"
+        },
+        {
+          "min": 43,
+          "max": 43,
+          "value": "鋼骨"
+        },
+        {
+          "min": 44,
+          "max": 44,
+          "value": "隕坑"
+        },
+        {
+          "min": 45,
+          "max": 45,
+          "value": "蒼穹"
+        },
+        {
+          "min": 46,
+          "max": 46,
+          "value": "夜巡"
+        },
+        {
+          "min": 47,
+          "max": 47,
+          "value": "血砂"
+        },
+        {
+          "min": 48,
+          "max": 48,
+          "value": "寒鋼"
+        },
+        {
+          "min": 49,
+          "max": 49,
+          "value": "斷橋"
+        },
+        {
+          "min": 50,
+          "max": 50,
+          "value": "焦土"
+        },
+        {
+          "min": 51,
+          "max": 51,
+          "value": "孤星"
+        },
+        {
+          "min": 52,
+          "max": 52,
+          "value": "雷鳴"
+        },
+        {
+          "min": 53,
+          "max": 53,
+          "value": "沉船"
+        },
+        {
+          "min": 54,
+          "max": 54,
+          "value": "毒澤"
+        },
+        {
+          "min": 55,
+          "max": 55,
+          "value": "重裝"
+        },
+        {
+          "min": 56,
+          "max": 56,
+          "value": "遠望"
+        },
+        {
+          "min": 57,
+          "max": 57,
+          "value": "邊界"
+        },
+        {
+          "min": 58,
+          "max": 58,
+          "value": "流亡"
+        },
+        {
+          "min": 59,
+          "max": 59,
+          "value": "殘響"
+        },
+        {
+          "min": 60,
+          "max": 60,
+          "value": "新星"
+        },
+        {
+          "min": 61,
+          "max": 61,
+          "value": "淨土"
+        },
+        {
+          "min": 62,
+          "max": 62,
+          "value": "歸途"
+        },
+        {
+          "min": 63,
+          "max": 63,
+          "value": "無聲"
+        },
+        {
+          "min": 64,
+          "max": 64,
+          "value": "赤鐵"
+        },
+        {
+          "min": 65,
+          "max": 65,
+          "value": "冰核"
+        },
+        {
+          "min": 66,
+          "max": 66,
+          "value": "暗星"
+        },
+        {
+          "min": 67,
+          "max": 67,
+          "value": "裂地"
+        },
+        {
+          "min": 68,
+          "max": 68,
+          "value": "黑潮"
+        },
+        {
+          "min": 69,
+          "max": 69,
+          "value": "白霜"
+        },
+        {
+          "min": 70,
+          "max": 70,
+          "value": "蒼藍"
+        },
+        {
+          "min": 71,
+          "max": 71,
+          "value": "金盾"
+        },
+        {
+          "min": 72,
+          "max": 72,
+          "value": "戰痕"
+        },
+        {
+          "min": 73,
+          "max": 73,
+          "value": "荒城"
+        },
+        {
+          "min": 74,
+          "max": 74,
+          "value": "舊軌"
+        },
+        {
+          "min": 75,
+          "max": 75,
+          "value": "死灣"
+        },
+        {
+          "min": 76,
+          "max": 76,
+          "value": "灰霧"
+        },
+        {
+          "min": 77,
+          "max": 77,
+          "value": "鐵壁"
+        },
+        {
+          "min": 78,
+          "max": 78,
+          "value": "星門"
+        },
+        {
+          "min": 79,
+          "max": 79,
+          "value": "孤火"
+        },
+        {
+          "min": 80,
+          "max": 80,
+          "value": "冷月"
+        },
+        {
+          "min": 81,
+          "max": 81,
+          "value": "末途"
+        },
+        {
+          "min": 82,
+          "max": 82,
+          "value": "重鑄"
+        },
+        {
+          "min": 83,
+          "max": 83,
+          "value": "碎鐵"
+        },
+        {
+          "min": 84,
+          "max": 84,
+          "value": "狂沙"
+        },
+        {
+          "min": 85,
+          "max": 85,
+          "value": "寂靜"
+        },
+        {
+          "min": 86,
+          "max": 86,
+          "value": "殘陽"
+        },
+        {
+          "min": 87,
+          "max": 87,
+          "value": "深坑"
+        },
+        {
+          "min": 88,
+          "max": 88,
+          "value": "藍弧"
+        },
+        {
+          "min": 89,
+          "max": 89,
+          "value": "紫晶"
+        },
+        {
+          "min": 90,
+          "max": 90,
+          "value": "古壘"
+        },
+        {
+          "min": 91,
+          "max": 91,
+          "value": "暗道"
+        },
+        {
+          "min": 92,
+          "max": 92,
+          "value": "絕壁"
+        },
+        {
+          "min": 93,
+          "max": 93,
+          "value": "荒嶺"
+        },
+        {
+          "min": 94,
+          "max": 94,
+          "value": "鐵門"
+        },
+        {
+          "min": 95,
+          "max": 95,
+          "value": "烽火"
+        },
+        {
+          "min": 96,
+          "max": 96,
+          "value": "晨星"
+        },
+        {
+          "min": 97,
+          "max": 97,
+          "value": "微光"
+        },
+        {
+          "min": 98,
+          "max": 98,
+          "value": "終點"
+        },
+        {
+          "min": 99,
+          "max": 99,
+          "value": "黎明"
+        },
+        {
+          "min": 100,
+          "max": 100,
+          "value": "希望"
         }
       ]
     }

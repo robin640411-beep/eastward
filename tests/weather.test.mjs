@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {BIOMES} from '../dist/route-catalog.js';
 import {WEATHER_PROFILES,PARTICLE_LIMITS,weatherLayers,particlePool,lightningGeometry,lightningAt} from '../dist/weather-model.js';
 import {drawWeatherSky,drawWeatherParticles} from '../dist/weather-art.js';
-test('all twelve biomes have bounded ambient weather, including leaves, petals and snow without an event',()=>{
- assert.equal(Object.keys(WEATHER_PROFILES).length,12);
+test('all twenty biomes have bounded ambient weather, including leaves, petals and snow without an event',()=>{
+ assert.equal(Object.keys(WEATHER_PROFILES).length,20);
  for(const region of BIOMES){const layers=weatherLayers({seed:445,from:region,seconds:20});assert(layers.length);assert(layers.every(l=>l.density>0&&l.density<=1));assert(layers.reduce((sum,l)=>sum+Math.ceil(PARTICLE_LIMITS[l.kind]*l.density),0)<=100);}
  for(const [id,kind] of [['forest','leaf'],['oasis','petal'],['snow','snow']])assert(weatherLayers({seed:1,from:{id}}).some(l=>l.kind===kind));
 });

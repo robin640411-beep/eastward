@@ -10,15 +10,15 @@ test('100 route positions belong to ten persistent ten-position regions',()=>{
  for(let i=1;i<=100;i++){const b=biomeAt(i,22,route);assert.equal(b.index,Math.floor((i-1)/10));assert(i>=b.start&&i<=b.end);assert.equal(b.name,PLACE_NAMES[b.nameRoll-1]+BIOMES[b.terrainRoll-1].name);}
  assert.deepEqual(createRoute(22),route);assert.notDeepEqual(createRoute(23),route);
 });
-test('D12 allows all terrains including consecutive repeats and a random final region',()=>{
+test('D20 allows all 20 terrains including consecutive repeats and a random final region',()=>{
  const ids=new Set(),last=new Set();let repeated=false;
- for(let seed=1;seed<=100;seed++){const {regions}=createRoute(seed);regions.forEach((r,i)=>{ids.add(r.id);if(i&&r.id===regions[i-1].id)repeated=true;});last.add(regions[9].id);}
- assert.equal(ids.size,12);assert.equal(last.size,12);assert(repeated);
- const repeats=createRoute(1,sides=>sides===12?3:7);assert(repeats.regions.every(r=>r.id==='forest'&&r.name==='星落森林'));
+ for(let seed=1;seed<=250;seed++){const {regions}=createRoute(seed);regions.forEach((r,i)=>{ids.add(r.id);if(i&&r.id===regions[i-1].id)repeated=true;});last.add(regions[9].id);}
+ assert.equal(ids.size,20);assert.equal(last.size,20);assert(repeated);
+ const repeats=createRoute(1,sides=>sides===20?3:7);assert(repeats.regions.every(r=>r.id==='forest'&&r.name==='星落森林'));
 });
-test('D100 names and D12 terrain tables have one valid outcome per die face',()=>{
- assert.equal(new Set(PLACE_NAMES).size,100);assert.equal(BIOMES.length,12);
- for(const [id,n] of [['location_name',100],['route_terrain',12]]){const table=d.oracles.tables.find(t=>t.id===id);assert.equal(table.rows.length,n);for(let face=1;face<=n;face++){assert.equal(table.rows.filter(r=>face>=r.min&&face<=r.max).length,1);const g=fresh();g.roll=sides=>{assert.equal(sides,n);return face;};assert.equal(g.oracle(id).value,table.rows[face-1].value);}}
+test('D100 names and D20 terrain tables have one valid outcome per die face',()=>{
+ assert.equal(new Set(PLACE_NAMES).size,100);assert.equal(BIOMES.length,20);
+ for(const [id,n] of [['location_name',100],['route_terrain',20]]){const table=d.oracles.tables.find(t=>t.id===id);assert.equal(table.rows.length,n);for(let face=1;face<=n;face++){assert.equal(table.rows.filter(r=>face>=r.min&&face<=r.max).length,1);const g=fresh();g.roll=sides=>{assert.equal(sides,n);return face;};assert.equal(g.oracle(id).value,table.rows[face-1].value);}}
 });
 test('region advances at actual distance boundaries, never per stop or per render',()=>{
  const g=fresh();g.s.progress=9;g.s.mode='driving';g.s.travel={n:8};const before=structuredClone(g.s);
