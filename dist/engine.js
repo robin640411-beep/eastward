@@ -12,6 +12,7 @@ import {fillStory,heroShortName,partyLabel,rollBattleAuthorQuip,rollMoralityAuth
 import {installMorality,isSaint} from './morality-runtime.js';
 import {minutesForProgress,applyTimedRecovery,RECOVERY_RATES,DEFAULT_SLEEP_HOURS,dayIndex,sleepPreviewPercentages} from './time-system.js';
 import {CONSUMABLES,CONSUMABLE_IDS,starterConsumables} from './consumables-catalog.js';
+import {COMBAT_BOSS_NAMES} from './combat-art.js';
 // 一路向東 — deterministic state machine. No network or AI in gameplay.
 export const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const clone=x=>JSON.parse(JSON.stringify(x));
@@ -137,13 +138,27 @@ export class Game{
  travelCost(n,p=this.driver()){if(!n)return {fuel:0,st:0};let st=n*(phase(this.s.minutes)==='night'?2:1)+(p.flaw==='night_strain'&&phase(this.s.minutes)==='night'?1:0)+(p.flaw==='poor_driver'?1:0)-(p.profession==='driver'?1:0);return {fuel:n+(p.flaw==='wasteful_driver'?1:0),st:Math.max(1,st)}}
  canDrive(){const p=this.driver();return this.s.mode==='ready'&&p&&p.st>0&&this.s.resources.fuel>0&&this.s.vehicle.hp>0&&this.s.party.length<=this.partyLimit()}
  depart(){if(!this.canDrive())return false;const die=this.roll(10);let n=Math.min(die,totalProgressFor(this.s)-this.s.progress);const p=this.driver();while(n>0){const c=this.travelCost(n,p);if(c.fuel<=this.s.resources.fuel&&c.st<=p.st)break;n--;}
- if(!n){this.tell('現有燃料或駕駛體力不足以再前進一步。');return false;}const cost=this.travelCost(n,p);this.s.travel={die,n,cost,driver:p.id};this.s.mode='driving';this.s.dice={kind:'D10',value:die};this.s.notice=this.ambient();return true;}
+ if(!n){this.tell('現有燃料或駕駛體力不足以再前進一步。');return false;}const cost=this.travelCost(n,p);const nextProg=this.s.progress+n;let upcomingEvent=null,upcomingBoss=null;
+ if(nextProg>=totalProgressFor(this.s)){
+  const finId=this.s.bossPlan?.finaleBossId||this.s.finalBoss?.id;
+  upcomingBoss={tier:this.s.bossPlan?.finaleTier||'final',name:COMBAT_BOSS_NAMES[finId]||'終點守門者',bossId:finId};
+ }else{
+  const nextM=this.s.bossPlan?.milestones?.find(m=>m.progress<=nextProg&&!(this.s.defeatedMilestones||[]).includes(`${m.tier}:${m.progress}`));
+  if(nextM){
+   upcomingBoss={tier:nextM.tier,name:COMBAT_BOSS_NAMES[nextM.bossId]||nextM.bossId,bossId:nextM.bossId};
+  }else if(this.d.d12Events?.categories?.length===12){
+   const d12=this.roll(12),cat=this.d.d12Events.categories[d12-1];
+   upcomingEvent={d12,categoryId:cat.id,categoryName:cat.name};
+  }
+ }
+ this.s.travel={die,n,cost,driver:p.id,upcomingEvent,upcomingBoss};this.s.mode='driving';this.s.dice={kind:'D10',value:die};this.s.notice=this.ambient();return true;}
  previewArrival(){if(this.s.mode!=='driving')return null;const copy=clone(this.s);delete copy.travel.preview;const future=new Game(this.d,copy);future.arrive();return {current:clone(future.s.current),battle:clone(future.s.battle),ending:clone(future.s.end),progress:future.s.progress,minutes:future.s.minutes};}
- arrive(){if(this.s.mode!=='driving')return;const t=this.s.travel,p=this.s.party.find(p=>p.id===t.driver),elapsedMin=minutesForProgress(t.n);this.add('fuel',-t.cost.fuel);p.st=Math.max(0,p.st-t.cost.st);this.s.party.forEach(q=>{if(q.id!==p.id&&q.hp>0)applyTimedRecovery(q,elapsedMin,RECOVERY_RATES.passenger,{clamp});});this.s.progress+=t.n;this.s.minutes+=elapsedMin;this.s.travel=null;this.log('向東行駛',`又走過 ${t.n*10} 公里（耗時 ${elapsedMin} 分鐘）。汽油 −${t.cost.fuel}，駕駛體力 −${t.cost.st}。`);if(this.s.progress>=totalProgressFor(this.s)){this.beginFinale();return;}this.s.stop++;this.s.usedStory=[];this.s.frames=[{kind:'road',count:0,scene:null}];this.nextEvent();}
+ arrive(){if(this.s.mode!=='driving')return;const t=this.s.travel,p=this.s.party.find(p=>p.id===t.driver),elapsedMin=minutesForProgress(t.n);this.add('fuel',-t.cost.fuel);p.st=Math.max(0,p.st-t.cost.st);this.s.party.forEach(q=>{if(q.id!==p.id&&q.hp>0)applyTimedRecovery(q,elapsedMin,RECOVERY_RATES.passenger,{clamp});});this.s.progress+=t.n;this.s.minutes+=elapsedMin;this.s.pendingEventRoll=t.upcomingEvent||null;this.s.travel=null;this.log('向東行駛',`又走過 ${t.n*10} 公里（耗時 ${elapsedMin} 分鐘）。汽油 −${t.cost.fuel}，駕駛體力 −${t.cost.st}。`);if(this.s.progress>=totalProgressFor(this.s)){this.s.pendingEventRoll=null;this.beginFinale();return;}this.s.stop++;this.s.usedStory=[];this.s.frames=[{kind:'road',count:0,scene:null}];this.nextEvent();}
  end(win,text){this.s.mode='ending';this.s.end={win,text};this.s.battle=null;this.log(win?'抵達綠洲':'旅程結束',text)}
  nextEvent(){const frame=this.s.frames.at(-1);if(!frame){this.s.mode='ready';this.s.current=null;this.s.searched=false;this.s.notice='整理好隊伍，準備繼續向東。';return;}frame.count++;let e=null,diceInfo=null;
  if(frame.kind==='road'&&this.d.d12Events?.categories?.length===12){
-  const d12=this.roll(12),cat=this.d.d12Events.categories[d12-1],d100=this.roll(100);
+  const pre=this.s.pendingEventRoll;this.s.pendingEventRoll=null;
+  const d12=pre?.d12||this.roll(12),cat=this.d.d12Events.categories[d12-1],d100=this.roll(100);
   e=clone(cat.events[d100-1]);
   diceInfo={kind:'D12+D100',d12,d100,category:cat.name,value:d100};
  }else{

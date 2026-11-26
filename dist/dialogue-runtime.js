@@ -1,5 +1,8 @@
 import {npcDemeanor} from './npc-presentation.js';
 import {companionExchange} from './companion-dialogue.js';
+import {radioEventForecast,radioExaggeratedItemAd,companionColdJokeExchange} from './radio-banter.js';
+import {ITEMS} from './engine.js';
+import {CONSUMABLES} from './consumables-catalog.js';
 export const MAX_PARTY=4;
 export function normalizeJourney(s){
  if(!s)return;
@@ -36,10 +39,24 @@ export function installDialogue(Game,{display}){
  };
  Game.prototype.ambient=function(){
   const channel=this.oracle('driving_channel').value,s=this.s,awake=this.alive().filter(p=>!p.asleep),driver=awake.find(p=>p.id===s.driver)||awake[0],lead=awake.find(p=>p.id===s.protagonistId)||driver,others=awake.filter(p=>p.id!==lead?.id);
+  const pickBucket=Math.abs(((s.seed|0)*31+(s.stop|0)*17+(s.minutes|0)*7))%100;
   let kind=channel,speaker='',lines=[],conversation={};
-  if(channel==='radio'){const r=this.oracle('driving_radio').value;speaker=r.station;lines=[{speaker:r.station,text:fillWorld(r.text,s.world)}];}
+  if(s.travel?.upcomingBoss&&channel==='radio'){
+   const fc=radioEventForecast(s,s.seed);
+   speaker=fc.station;lines=[{speaker:fc.station,text:fc.text}];
+  }else if(channel==='radio'){
+   const fc=(s.travel?.upcomingEvent&&pickBucket<50)?radioEventForecast(s,s.seed):null;
+   if(fc){speaker=fc.station;lines=[{speaker:fc.station,text:fc.text}];}
+   else if(s.travel?.die&&pickBucket<85){const ad=radioExaggeratedItemAd(ITEMS,CONSUMABLES,s.seed,s.stop);speaker=ad.station;lines=[{speaker:ad.station,text:ad.text}];}
+   else{const r=this.oracle('driving_radio').value;speaker=r.station;lines=[{speaker:r.station,text:fillWorld(r.text,s.world)}];}
+  }
   else if(channel==='quiet'||!lead){kind='quiet';speaker='車內';lines=[{speaker,text:this.oracle('driving_quiet').value}];}
-  else if(others.length){kind='companions';speaker='車內閒聊';const partner=this.pick(others);conversation=companionExchange(this,lead,partner,display);lines=conversation.lines;}
+  else if(others.length){
+   kind='companions';speaker='車內閒聊';const partner=this.pick(others);
+   if((s.stop||0)>=1&&pickBucket<35){conversation=companionColdJokeExchange(lead,partner,display,s.seed,s.stop);}
+   else{conversation=companionExchange(this,lead,partner,display);}
+   lines=conversation.lines;
+  }
   else{kind='solo';speaker='自言自語';lines=this.oracle('driving_solo').value.map(text=>({speaker:display(lead),personId:lead.id,text}));}
   if(s.travel)s.travel.voices={...conversation,kind,speaker,lines};return lines.map(l=>kind==='quiet'?l.text:`${l.speaker}：「${l.text}」`).join('\n');
  };
