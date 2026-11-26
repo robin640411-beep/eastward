@@ -1,6 +1,6 @@
 import {npcDemeanor} from './npc-presentation.js';
 import {companionExchange} from './companion-dialogue.js';
-import {radioEventForecast,radioExaggeratedItemAd,companionColdJokeExchange} from './radio-banter.js';
+import {radioEventForecast,radioExaggeratedItemAd,companionColdJokeExchange,rollRadioAuthorQuip} from './radio-banter.js';
 import {ITEMS} from './engine.js';
 import {CONSUMABLES} from './consumables-catalog.js';
 export const MAX_PARTY=4;
@@ -48,7 +48,7 @@ export function installDialogue(Game,{display}){
    const fc=(s.travel?.upcomingEvent&&pickBucket<50)?radioEventForecast(s,s.seed):null;
    if(fc){speaker=fc.station;lines=[{speaker:fc.station,text:fc.text}];}
    else if(s.travel?.die&&pickBucket<85){const ad=radioExaggeratedItemAd(ITEMS,CONSUMABLES,s.seed,s.stop);speaker=ad.station;lines=[{speaker:ad.station,text:ad.text}];}
-   else{const r=this.oracle('driving_radio').value;speaker=r.station;lines=[{speaker:r.station,text:fillWorld(r.text,s.world)}];}
+   else{const r=this.oracle('driving_radio').value,rq=s.travel?.die?rollRadioAuthorQuip('radio',s.seed,s.stop):'';speaker=r.station;lines=[{speaker:r.station,text:fillWorld(r.text,s.world)+(rq?'\n'+rq:'')}];}
   }
   else if(channel==='quiet'||!lead){kind='quiet';speaker='車內';lines=[{speaker,text:this.oracle('driving_quiet').value}];}
   else if(others.length){

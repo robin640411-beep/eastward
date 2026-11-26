@@ -58,20 +58,52 @@ const FORECASTS_BY_D12={
  ]
 };
 
+const RADIO_AUTHOR_QUIPS={
+ ad:[
+  '（聽聽就好，這家電台連過期十年的罐頭都能吹成米其林三星。）',
+  '（我敢打賭這段廣告詞，是某個存貨賣不出去的廢土商人自己錄的。）',
+  '（如果真像他說的那麼神，播音員自己怎麼不帶一件衝去樂園？）',
+  '（每次聽到這家電台，我都懷疑收音機其實連到了外星詐騙機房。）',
+  '（順帶一提，本故事書作者絕不替這家電台的誇大療效背書。）'
+ ],
+ forecast:[
+  '（這家電台的路況預報準歸準，問題是聽完你還是得往那裡開。）',
+  '（謝謝電台好心提醒，雖然現在踩煞車掉頭大概也來不及了。）',
+  '（真希望這家電台偶爾也能預告一下哪裡有免費熱水澡可以洗。）',
+  '（連播音員語氣都比車上所有人還緊張，看來前頭確實不太妙。）'
+ ],
+ radio:[
+  '（末日十年了，沒想到還能收到這麼多廢話連篇的廣播頻道。）',
+  '（外星人佔領了天空，卻沒人想過把這些吵人的電台一起關掉。）',
+  '（聽著沙沙的電流聲，我都忍不住想寫信去點一首老歌了。）'
+ ]
+};
+
+export function rollRadioAuthorQuip(kind='radio',seed=1,stop=0){
+ let h=2166136261;
+ for(const ch of `radio-quip:${kind}:${seed}:${stop}`)h=Math.imul(h^ch.charCodeAt(0),16777619);
+ const roll=(h>>>0)%100;
+ const chance=kind==='ad'?48:kind==='forecast'?42:35;
+ if(roll>=chance)return '';
+ const pool=RADIO_AUTHOR_QUIPS[kind]||RADIO_AUTHOR_QUIPS.radio;
+ return pool[((h>>>8)>>>0)%pool.length];
+}
+
 export function radioEventForecast(state,seed=1){
  const boss=state?.travel?.upcomingBoss;
+ const quip=rollRadioAuthorQuip('forecast',seed,state?.stop||0);
  if(boss){
   const tierText=boss.tier==='mini'?'高危小頭目':boss.tier==='mid'?'重裝中階強敵':'終極守門巨獸';
   return {
    station:'東行緊急警報 FM 104.7',
-   text:`全頻段最高警報！偵測到前方里程節點出現${tierText}「${boss.name}」的強烈熱源反應！請立刻檢查生命值、裝備與藥品，這場硬仗躲不掉了！`
+   text:`全頻段最高警報！偵測到前方里程節點出現${tierText}「${boss.name}」的強烈熱源反應！請立刻檢查生命值、裝備與藥品，這場硬仗躲不掉了！${quip?'\n'+quip:''}`
   };
  }
  const up=state?.travel?.upcomingEvent;
  if(!up||!FORECASTS_BY_D12[up.d12])return null;
  return {
   station:'東行路況預告 FM 98.5',
-  text:pickHash(FORECASTS_BY_D12[up.d12],seed,(state.stop||0)*17+up.d12)
+  text:pickHash(FORECASTS_BY_D12[up.d12],seed,(state.stop||0)*17+up.d12)+(quip?'\n'+quip:'')
  };
 }
 
@@ -81,6 +113,7 @@ export function radioExaggeratedItemAd(items,consumables,seed=1,stop=0){
  const pool=[...allGear,...allCons];
  if(!pool.length)return null;
  const pick=pickHash(pool,seed,stop*31+7);
+ const quip=rollRadioAuthorQuip('ad',seed,stop);
  if(pick.kind==='gear'){
   const {it}=pick;
   const pitch=it.slot==='武器'
@@ -88,7 +121,7 @@ export function radioExaggeratedItemAd(items,consumables,seed=1,stop=0){
    : it.slot==='防具'
     ? `怕被路邊劫匪打成蜂窩？穿上「${it.name}」（防禦 +${it.defense||0}${it.antiPollution?`、抗污染 -${it.antiPollution}`:''}）！據說連隕石砸頭都只會彈出清脆音效！只要 ${it.price} 份廢料，立刻升級成廢土移動堡壘！`
     : `旅途總是差臨門一腳？掛上「${it.name}」就對了！老司機一致見證戴上去瞬間氣場暴漲三百倍，連紅綠燈壞掉都會自動替你亮綠燈！超值價 ${it.price} 份廢料，各雜貨鋪熱賣中！`;
-  return {station:'廢土深夜購物台 AM 666',text:pitch};
+  return {station:'廢土深夜購物台 AM 666',text:pitch+(quip?'\n'+quip:'')};
  }
  const {c}=pick;
  const pitch=c.hp>0&&c.st===0
@@ -96,7 +129,7 @@ export function radioExaggeratedItemAd(items,consumables,seed=1,stop=0){
   : c.esp>0&&c.hp===0
    ? `超能力放不出來超尷尬？灌一瓶「${c.name}」（ESP +${c.esp}${c.st?`、體力 +${c.st}`:''}）！喝完不只大腦發光，據說晚上車頭燈壞了還能張嘴照路！特價 ${c.price} 份廢料！`
    : `餓到連方向盤都像甜甜圈？來一份「${c.name}」（體力 +${c.st}${c.hp?`、生命 +${c.hp}`:''}）！保存期限只是一個參考數字，打開沒爆炸就代表營養百分百鎖鮮！只要 ${c.price} 份廢料！`;
- return {station:'廢土深夜購物台 AM 666',text:pitch};
+ return {station:'廢土深夜購物台 AM 666',text:pitch+(quip?'\n'+quip:'')};
 }
 
 export const COLD_JOKES=[

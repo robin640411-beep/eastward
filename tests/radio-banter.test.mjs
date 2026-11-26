@@ -54,6 +54,13 @@ test('exaggerated radio ads cover real equipment and consumables, and companions
   }
  }
  assert(seenItems.size>=30,'Exaggerated radio ads should feature a wide variety of real gear and consumables');
+ // Radio ads and forecasts probabilistically include green author snarks
+ let adSnarks=0,adPlain=0;
+ for(let stop=0;stop<80;stop++){
+  const ad=radioExaggeratedItemAd(ITEMS,CONSUMABLES,77,stop);
+  if(ad.text.includes('\n（'))adSnarks++;else adPlain++;
+ }
+ assert(adSnarks>10&&adPlain>10,'Radio ads should include probabilistic author snarks');
 
  assert(COLD_JOKES.length>=16);
  const g=new Game(data);

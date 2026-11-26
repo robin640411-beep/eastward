@@ -127,9 +127,15 @@ test('third-person hero naming, first-person author voice, absurd radio commerci
  assert.equal(pages.length,3);
  for(const pg of pages){
   assert(pg.text.includes(hero.name));
-  assert(pg.text.includes('我'));
   assert(!pg.text.includes('{hero}')&&!pg.text.includes('{paradise}'));
  }
+ // Prologue author snark appears probabilistically (neither always on nor always off across seeds)
+ let withSnark=0,withoutSnark=0;
+ for(let seed=1;seed<=40;seed++){
+  const tg=new Game(d);tg.startRandom(seed);
+  for(const pg of originPages(tg)){if(pg.text.includes('\n\n（'))withSnark++;else withoutSnark++;}
+ }
+ assert(withSnark>10&&withoutSnark>10,'Prologue author snark must be probabilistic, not on every page');
  while(g.s.mode==='prologue')g.advancePrologue();
 
  let asides=0;
