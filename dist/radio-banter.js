@@ -151,8 +151,19 @@ export const COLD_JOKES=[
  ['欸，如果晶體怪獸感冒了會怎樣？','會碎掉嗎？','會變成「結」晶鼻涕，喔不，是「晶」神不濟！','前面要是有劫匪，我第一個把你交出去抵過路費。']
 ];
 
+const COLD_JOKE_AUTHOR_QUIPS=[
+ '（寫到這句的時候連我的筆尖都差點結霜了，各位讀者忍耐一下。）',
+ '（我發誓這個冷笑話是他們自己在車上講的，不是我江郎才盡。）',
+ '（外星人統治地球十年，都沒這句諧音梗對人類精神傷害來得大。）',
+ '（車內溫度瞬間驟降十度，連空調壓縮機都感動得想罷工。）',
+ '（如果這本書將來被給一星負評，兇手肯定就是剛才那句冷笑話。）'
+];
+
 export function companionColdJokeExchange(lead,partner,display,seed=1,stop=0){
  const [setup,reply,punch,groan]=pickHash(COLD_JOKES,seed,stop*23+11);
+ let h=2166136261;
+ for(const ch of `cold-joke-quip:${seed}:${stop}`)h=Math.imul(h^ch.charCodeAt(0),16777619);
+ const quip=((h>>>0)%100)<45?COLD_JOKE_AUTHOR_QUIPS[((h>>>8)>>>0)%COLD_JOKE_AUTHOR_QUIPS.length]:'';
  return {
   focus:'cold_joke',
   subject:partner.id,
@@ -160,7 +171,7 @@ export function companionColdJokeExchange(lead,partner,display,seed=1,stop=0){
    {speaker:display(partner),personId:partner.id,text:setup},
    {speaker:display(lead),personId:lead.id,text:reply},
    {speaker:display(partner),personId:partner.id,text:punch},
-   {speaker:display(lead),personId:lead.id,text:groan}
+   {speaker:display(lead),personId:lead.id,text:groan+(quip?'\n'+quip:'')}
   ]
  };
 }

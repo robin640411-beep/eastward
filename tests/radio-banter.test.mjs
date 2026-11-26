@@ -71,4 +71,10 @@ test('exaggerated radio ads cover real equipment and consumables, and companions
  assert.equal(joke.lines.length,4);
  assert.equal(joke.lines[0].personId,p2.id);
  assert.equal(joke.lines[1].personId,p1.id);
+ let jokeSnarks=0,jokePlain=0;
+ for(let stop=0;stop<60;stop++){
+  const j=companionColdJokeExchange(p1,p2,display,88,stop);
+  if(j.lines[3].text.includes('\n（'))jokeSnarks++;else jokePlain++;
+ }
+ assert(jokeSnarks>10&&jokePlain>10,'Companion cold jokes should probabilistically include author snarks');
 });
